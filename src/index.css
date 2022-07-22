@@ -1,0 +1,14 @@
+.mde-header .mde-tabs button {
+   padding: 0 10px;
+   border-radius: 5px;
+   font-size: 14px;
+}
+
+.mde-text,
+.mde-preview {
+   font-size: 1.1rem;
+}
+
+.mde-header .svg-icon {
+   font-size: 18px;
+}

@@ -1,0 +1,123 @@
+[
+   {
+      "id": 1,
+      "lang": "#javascript",
+      "color": "#F0DB4F"
+   },
+   {
+      "id": 2,
+      "lang": "#typescript",
+      "color": "#007ACC"
+   },
+   {
+      "id": 3,
+      "lang": "#react",
+      "color": "#9CE8FC"
+   },
+   {
+      "id": 4,
+      "lang": "#angular",
+      "color": "#C3002F"
+   },
+   {
+      "id": 5,
+      "lang": "#node",
+      "color": "#A2D95E"
+   },
+   {
+      "id": 6,
+      "lang": "#express",
+      "color": "#808080"
+   },
+   {
+      "id": 7,
+      "lang": "#mongodb",
+      "color": "#4AA73C"
+   },
+   {
+      "id": 8,
+      "lang": "#vue",
+      "color": "#41B883"
+   },
+   {
+      "id": 9,
+      "lang": "#svelte",
+      "color": "#FF3E00"
+   },
+   {
+      "id": 10,
+      "lang": "#c++",
+      "color": "#D26383"
+   },
+   {
+      "id": 11,
+      "lang": "#c",
+      "color": "#03599C"
+   },
+   {
+      "id": 12,
+      "lang": "#csharp",
+      "color": "#9B4F96"
+   },
+   {
+      "id": 13,
+      "lang": "#php",
+      "color": "#6181B6"
+   },
+
+   {
+      "id": 14,
+      "lang": "#python",
+      "color": "#FFDC52"
+   },
+   {
+      "id": 15,
+      "lang": "#graphql",
+      "color": "#E10098"
+   },
+   {
+      "id": 16,
+      "lang": "#flutter",
+      "color": "#46D1FD"
+   },
+   {
+      "id": 17,
+      "lang": "#postgresql",
+      "color": "#336791"
+   },
+   {
+      "id": 18,
+      "lang": "#firebase",
+      "color": "#FFCA28"
+   },
+   {
+      "id": 19,
+      "lang": "#laraval",
+      "color": "#FD4F31"
+   },
+   {
+      "id": 20,
+      "lang": "#next",
+      "color": "#000000"
+   },
+   {
+      "id": 21,
+      "lang": "#gatsby",
+      "color": "#663399"
+   },
+   {
+      "id": 22,
+      "lang": "#django",
+      "color": "#2BA977"
+   },
+   {
+      "id": 23,
+      "lang": "#electron",
+      "color": "#AEC9CE"
+   },
+   {
+      "id": 24,
+      "lang": "#git",
+      "color": "#F03C2E"
+   }
+]
