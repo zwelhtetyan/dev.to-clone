@@ -50,6 +50,7 @@ export const TagInput = styled.input`
    height: 35px;
    font-size: 1rem;
    margin-bottom: 0;
+   border-bottom: 1px solid #d6d6d7;
 
    &::placeholder {
       color: #525252;

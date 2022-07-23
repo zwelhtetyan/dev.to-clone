@@ -12,7 +12,7 @@ import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import { VscClose } from 'react-icons/vsc';
 import MDE from '../components/MDE';
 import { useNavigate } from 'react-router-dom';
-import AddLangTag from './AddLangTag';
+import AddLangTag from '../components/LangTag/AddLangTag';
 import { useSelector } from 'react-redux';
 
 const CreatePost = () => {

@@ -1,123 +1,137 @@
 [
    {
       "id": 1,
-      "lang": "#javascript",
+      "lang": "javascript",
       "color": "#F0DB4F"
    },
    {
       "id": 2,
-      "lang": "#typescript",
+      "lang": "typescript",
       "color": "#007ACC"
    },
    {
       "id": 3,
-      "lang": "#react",
+      "lang": "react",
       "color": "#9CE8FC"
    },
    {
       "id": 4,
-      "lang": "#angular",
+      "lang": "angularjs",
       "color": "#C3002F"
    },
    {
       "id": 5,
-      "lang": "#node",
+      "lang": "nodejs",
       "color": "#A2D95E"
    },
    {
       "id": 6,
-      "lang": "#express",
+      "lang": "express",
       "color": "#808080"
    },
    {
       "id": 7,
-      "lang": "#mongodb",
+      "lang": "mongodb",
       "color": "#4AA73C"
    },
    {
       "id": 8,
-      "lang": "#vue",
+      "lang": "vuejs",
       "color": "#41B883"
    },
    {
       "id": 9,
-      "lang": "#svelte",
+      "lang": "svelte",
       "color": "#FF3E00"
    },
    {
       "id": 10,
-      "lang": "#c++",
-      "color": "#D26383"
+      "lang": "go",
+      "color": "#6AD7E5"
    },
    {
       "id": 11,
-      "lang": "#c",
+      "lang": "c",
       "color": "#03599C"
    },
    {
       "id": 12,
-      "lang": "#csharp",
+      "lang": "csharp",
       "color": "#9B4F96"
    },
    {
       "id": 13,
-      "lang": "#php",
+      "lang": "php",
       "color": "#6181B6"
    },
 
    {
       "id": 14,
-      "lang": "#python",
+      "lang": "python",
       "color": "#FFDC52"
    },
    {
       "id": 15,
-      "lang": "#graphql",
-      "color": "#E10098"
+      "lang": "graphql",
+      "color": "#E10098",
+      "logo": "https://www.vectorlogo.zone/logos/graphql/graphql-icon.svg"
    },
    {
       "id": 16,
-      "lang": "#flutter",
+      "lang": "flutter",
       "color": "#46D1FD"
    },
    {
       "id": 17,
-      "lang": "#postgresql",
+      "lang": "postgresql",
       "color": "#336791"
    },
    {
       "id": 18,
-      "lang": "#firebase",
-      "color": "#FFCA28"
+      "lang": "firebase",
+      "color": "#FFCA28",
+      "logo": "https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg"
    },
    {
       "id": 19,
-      "lang": "#laraval",
-      "color": "#FD4F31"
+      "lang": "laraval",
+      "color": "#FD4F31",
+      "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-plain-wordmark.svg"
    },
    {
       "id": 20,
-      "lang": "#next",
+      "lang": "nextjs",
       "color": "#000000"
    },
    {
       "id": 21,
-      "lang": "#gatsby",
+      "lang": "gatsby",
       "color": "#663399"
    },
    {
       "id": 22,
-      "lang": "#django",
-      "color": "#2BA977"
+      "lang": "django",
+      "color": "#2BA977",
+      "logo": "https://cdn.worldvectorlogo.com/logos/django.svg"
    },
    {
       "id": 23,
-      "lang": "#electron",
+      "lang": "electron",
       "color": "#AEC9CE"
    },
    {
       "id": 24,
-      "lang": "#git",
+      "lang": "git",
       "color": "#F03C2E"
+   },
+   {
+      "id": 25,
+      "lang": "html5",
+      "color": "#F16529"
+   },
+   {
+      "id": 26,
+      "lang": "css3",
+      "color": "#1572B6"
    }
 ]

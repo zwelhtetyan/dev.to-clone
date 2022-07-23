@@ -6,9 +6,10 @@ import {
    SuggestionBox,
    TagContainer,
    TagInput,
-} from '../styles/AddLangTagStyle';
-import LangTag from '../utils/LangTag';
-import tagsData from '../components/LangTag/LangTagData.json';
+} from '../../styles/AddLangTagStyle';
+import LangTag from '../../utils/LangTag';
+import tagsData from './LangTagData.json';
+import { getLogo } from '../../helper/getLogo';
 
 const AddLangTag = () => {
    //states
@@ -40,6 +41,7 @@ const AddLangTag = () => {
       const tags = filteredTags.map((tag) => (
          <SingleTag key={tag.id}>
             <LangTag color={tag.color} m='0 0.8rem 0.5rem 0'>
+               <img src={getLogo(tag)} alt='logo' />
                {tag.lang}
             </LangTag>
             <div className='wrapper' onClick={() => handleDeleteTag(tag.id)}>
@@ -76,6 +78,7 @@ const AddLangTag = () => {
                key={tag.id}
                handleClickTag={() => handleAddLangTag(tag)}
             >
+               <img src={getLogo(tag)} alt='logo' />
                {tag.lang}
             </LangTag>
          ));

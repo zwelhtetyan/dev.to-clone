@@ -12,6 +12,7 @@ import {
 import logo from '../../assets/logo/logo.png';
 import LangTag from '../../utils/LangTag';
 import Reaction from './Reaction';
+import { getLogo } from '../../helper/getLogo';
 
 const PostItem = ({ coverImg }) => {
    return (
@@ -29,10 +30,22 @@ const PostItem = ({ coverImg }) => {
          <Body>
             <Title>Why REACT is the most popular library.</Title>
             <TagWrapper>
-               <LangTag color='#F0DB4F'>#Javascript</LangTag>
-               <LangTag color='lightblue'>#React</LangTag>
-               <LangTag color='green'>#Mongodb</LangTag>
-               <LangTag color='blue'>#Typescript</LangTag>
+               <LangTag color='gold'>
+                  <img src={getLogo({ lang: 'javascript' })} alt='logo' />
+                  Javascript
+               </LangTag>
+               <LangTag color='green'>
+                  <img src={getLogo({ lang: 'mongodb' })} alt='logo' />
+                  Mongodb
+               </LangTag>
+               <LangTag color='red'>
+                  <img src={getLogo({ lang: 'svelte' })} alt='logo' />
+                  Svelte
+               </LangTag>
+               <LangTag color='blue'>
+                  <img src={getLogo({ lang: 'typescript' })} alt='logo' />
+                  Typescript
+               </LangTag>
             </TagWrapper>
          </Body>
          <Footer>
