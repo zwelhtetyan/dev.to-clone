@@ -1,11 +1,5 @@
-import React from 'react';
-import {
-   Edior,
-   Footer,
-   Header,
-   ImgUpload,
-   Title,
-} from '../styles/CreatePostStyles';
+import React, { useRef } from 'react';
+import { Edior, Footer, Header, Title } from '../styles/CreatePostStyles';
 import MainContentWrapper from '../utils/MainContentWrapper';
 import logo from '../assets/logo/logo.png';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
@@ -14,20 +8,25 @@ import MDE from '../components/MDE';
 import { useNavigate } from 'react-router-dom';
 import AddLangTag from '../components/LangTag/AddLangTag';
 import { useSelector } from 'react-redux';
+import AddCvImg from '../components/AddCvImg';
 
 const CreatePost = () => {
    //scroll top
    window.scrollTo(0, 0);
 
-   //store
-   const publishPost = useSelector((state) => state.publishPost);
+   //redux store
+   const publicPost = useSelector((state) => state.publicPost);
 
-   //states
+   //state
+   const postTitleRef = useRef();
 
    const navigate = useNavigate();
 
    const publishPostHandler = () => {
-      console.log(publishPost.MDEValue);
+      console.log(publicPost.cvImgUrl);
+      console.log(postTitleRef.current.value);
+      console.log(publicPost.filteredTags);
+      console.log(publicPost.MDEValue);
    };
 
    return (
@@ -43,12 +42,9 @@ const CreatePost = () => {
          </Header>
 
          <Edior>
-            <ImgUpload>
-               <input type='file' />
-               Add a cover image
-            </ImgUpload>
+            <AddCvImg />
 
-            <Title placeholder='New post title here...' />
+            <Title placeholder='New post title here...' ref={postTitleRef} />
 
             <AddLangTag />
 

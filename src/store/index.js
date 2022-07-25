@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import publishPostReducer from './publishPost';
+import publicPostReducer from './publishPost';
 
 const store = configureStore({
    reducer: {
-      publishPost: publishPostReducer,
+      publicPost: publicPostReducer,
    },
 });
 

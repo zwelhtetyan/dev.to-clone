@@ -58,6 +58,11 @@ export const Body = styled.div`
 export const Title = styled.h1`
    margin-top: 10px;
    font-size: 1.5rem;
+   cursor: pointer;
+
+   &:hover {
+      color: rgb(47 58 178);
+   }
 
    @media screen and (max-width: 480px) {
       font-size: 1.3rem;

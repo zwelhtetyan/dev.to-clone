@@ -23,9 +23,9 @@ export const PrimaryBtn = styled.div`
 
 export const SecondaryBtn = styled(PrimaryBtn)`
    border: none;
-   color: black;
+   color: ${({ color }) => color || 'black'};
    &:hover {
-      color: rgb(47 58 178);
+      color: ${({ hoverColor }) => hoverColor || 'rgb(47 58 178)'};
       background-color: rgb(59 73 223 / 10%);
    }
 `;

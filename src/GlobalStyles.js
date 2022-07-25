@@ -14,7 +14,6 @@ const GlobalStyles = createGlobalStyle`
         }
 
         .app {
-            max-width: 1280px;
             margin: auto;
         }
 `;

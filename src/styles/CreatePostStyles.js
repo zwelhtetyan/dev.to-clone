@@ -27,7 +27,6 @@ export const Edior = styled.div`
    display: flex;
    flex-direction: column;
    max-height: 85vh;
-   position: relative;
 
    background-color: ${({ theme }) => theme.foreBg};
 
@@ -38,24 +37,6 @@ export const Edior = styled.div`
    @media screen and (max-width: 480px) {
       height: auto;
       max-height: unset;
-   }
-`;
-
-export const ImgUpload = styled.label`
-   max-width: 150px;
-   padding: 10px 0;
-   text-align: center;
-   border-radius: 5px;
-   margin-bottom: 1rem;
-   cursor: pointer;
-   border: 2px solid #d6d6d7;
-
-   &:hover {
-      background-color: #d6d6d77a;
-   }
-
-   input[type='file'] {
-      display: none;
    }
 `;
 

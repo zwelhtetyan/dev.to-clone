@@ -6,9 +6,21 @@
 
 .mde-text,
 .mde-preview {
-   font-size: 1.1rem;
+   font-size: 1rem;
 }
 
 .mde-header .svg-icon {
-   font-size: 18px;
+   font-size: 15px;
+}
+
+.mde-preview-content pre,
+.mde-preview-content p code {
+   background-color: black !important;
+   color: white;
+}
+
+.mde-preview-content img {
+   width: 250px;
+   height: 105px;
+   object-fit: scale-down;
 }
