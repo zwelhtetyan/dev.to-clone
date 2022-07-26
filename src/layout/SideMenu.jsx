@@ -1,43 +1,53 @@
 import React from 'react';
-import { VscClose } from 'react-icons/vsc';
-import Overlay from '../components/Overlay';
-import { ContentWrapper, Heading, SideMenuCon } from '../styles/SideMenuStyles';
-import BtnWrapper from '../utils/BtnWrapper';
+import {
+   Drawer,
+   DrawerBody,
+   DrawerCloseButton,
+   DrawerContent,
+   DrawerHeader,
+   DrawerOverlay,
+   useDisclosure,
+} from '@chakra-ui/react';
 import { SecondaryBtn } from '../utils/Buttons';
-import ReactDOM from 'react-dom';
+import { AiOutlineMenu } from 'react-icons/ai';
+import Hero from '../components/Hero';
 
-const SideMenuConntent = ({ onClose }) => (
-   <SideMenuCon>
-      <Heading>
-         <h3>DEV Community</h3>
-         <SecondaryBtn className='search-icon' onClick={onClose}>
-            <VscClose size={23} />
-         </SecondaryBtn>
-      </Heading>
-      <ContentWrapper>
-         <h2>
-            <span>DEV Community</span> is a community of 878,258 amazing
-            developers
-         </h2>
-         <p>
-            We're a place where coders share, stay up-to-date and grow their
-            careers.
-         </p>
-         <BtnWrapper w='150px' />
-      </ContentWrapper>
-   </SideMenuCon>
-);
+const SideMenu = () => {
+   const { isOpen, onOpen, onClose } = useDisclosure();
 
-const overlays = document.getElementById('overlays');
-
-const SideMenu = ({ onClose }) => {
    return (
       <>
-         {ReactDOM.createPortal(<Overlay onClose={onClose} />, overlays)}
-         {ReactDOM.createPortal(
-            <SideMenuConntent onClose={onClose} />,
-            overlays
-         )}
+         <SecondaryBtn
+            display={{ base: 'block', md: 'none' }}
+            onClick={isOpen ? onClose : onOpen}
+         >
+            <AiOutlineMenu size={25} />
+         </SecondaryBtn>
+
+         <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
+            <DrawerOverlay />
+            <DrawerContent maxW='270px' pt='60px'>
+               <DrawerHeader
+                  padding='.9rem .5rem 0'
+                  pb='0px'
+                  display='flex'
+                  justifyContent='space-between'
+               >
+                  Dev Community
+                  <DrawerCloseButton
+                     pos='static'
+                     _hover={{
+                        bg: 'rgb(59 73 223 / 10%)',
+                        color: 'rgb(47 58 178)',
+                     }}
+                  />
+               </DrawerHeader>
+
+               <DrawerBody p='0.5'>
+                  <Hero />
+               </DrawerBody>
+            </DrawerContent>
+         </Drawer>
       </>
    );
 };

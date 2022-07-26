@@ -6,6 +6,7 @@ import { setMDEValue } from '../store/publishPost';
 import { useDispatch } from 'react-redux';
 import { getDefaultToolbarCommands } from 'react-mde';
 import { FaFileCode } from 'react-icons/fa';
+import { Box } from '@chakra-ui/react';
 
 const converter = new Showdown.Converter({
    tables: true,
@@ -41,7 +42,12 @@ export default function MDE() {
    }, [value, dispatch]);
 
    return (
-      <div className='container'>
+      <Box
+         className='container'
+         w='100%'
+         mb='1rem !important'
+         mt='1.5rem !important'
+      >
          <ReactMde
             commands={{
                'code-block': codeBlock,
@@ -58,6 +64,6 @@ export default function MDE() {
                Promise.resolve(converter.makeHtml(markdown))
             }
          />
-      </div>
+      </Box>
    );
 }

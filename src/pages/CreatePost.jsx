@@ -1,6 +1,4 @@
 import React, { useRef } from 'react';
-import { Edior, Footer, Header, Title } from '../styles/CreatePostStyles';
-import MainContentWrapper from '../utils/MainContentWrapper';
 import logo from '../assets/logo/logo.png';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import { VscClose } from 'react-icons/vsc';
@@ -9,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import AddLangTag from '../components/LangTag/AddLangTag';
 import { useSelector } from 'react-redux';
 import AddCvImg from '../components/AddCvImg';
+import { Box, HStack, Image, Input, Text, VStack } from '@chakra-ui/react';
 
 const CreatePost = () => {
    //scroll top
@@ -30,41 +29,46 @@ const CreatePost = () => {
    };
 
    return (
-      <MainContentWrapper>
-         <Header>
-            <div>
-               <img src={logo} alt='' />
-               <h3>Create Post</h3>
-            </div>
-            <SecondaryBtn className='search-icon' onClick={() => navigate('/')}>
+      <Box maxW='768px' m='auto'>
+         <HStack justify='space-between'>
+            <HStack>
+               <Image src={logo} alt='logo' w='58px' h='40px' />
+               <Text fontSize='xl'>Create Post</Text>
+            </HStack>
+            <SecondaryBtn onClick={() => navigate('/')}>
                <VscClose size={23} />
             </SecondaryBtn>
-         </Header>
+         </HStack>
 
-         <Edior>
+         <VStack
+            align='start'
+            bg='white'
+            border='2px solid #e2e8f0'
+            borderRadius='5px'
+            mt='1rem'
+            p={{ base: '1.5rem 0.5rem', md: '2rem' }}
+         >
             <AddCvImg />
 
-            <Title placeholder='New post title here...' ref={postTitleRef} />
+            <Input
+               variant='unstyled'
+               placeholder='New post title here...'
+               fontSize='1.7rem'
+               fontWeight='700'
+               ref={postTitleRef}
+               _placeholder={{ color: '#525252' }}
+            />
 
             <AddLangTag />
 
             <MDE />
 
-            <Footer>
-               <SecondaryBtn w={'100px'} margin='0 0.5rem 0 0'>
-                  Save Draft
-               </SecondaryBtn>
-               <PrimaryBtn
-                  w={'100px'}
-                  bg='rgb(59 73 223)'
-                  color='#fff'
-                  onClick={publishPostHandler}
-               >
-                  Publish
-               </PrimaryBtn>
-            </Footer>
-         </Edior>
-      </MainContentWrapper>
+            <HStack justify='flex-end' w='100%'>
+               <SecondaryBtn>Save Draft</SecondaryBtn>
+               <PrimaryBtn onClick={publishPostHandler}>Publish</PrimaryBtn>
+            </HStack>
+         </VStack>
+      </Box>
    );
 };
 

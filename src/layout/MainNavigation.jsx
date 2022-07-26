@@ -1,70 +1,74 @@
 import React from 'react';
-import {
-   Header,
-   HeaderLeft,
-   HeaderRight,
-   Input,
-   Logo,
-   Wrapper,
-   InputWrapper,
-   ProfileAvatar,
-} from '../styles/HeaderStyles';
 import logo from '../assets/logo/logo.png';
-import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import { FiSearch } from 'react-icons/fi';
-import { AiOutlineMenu } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 import z from '../assets/images/z.jpeg';
+import {
+   Avatar,
+   Box,
+   HStack,
+   Image,
+   Input,
+   InputGroup,
+   InputRightElement,
+} from '@chakra-ui/react';
+import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
+import SideMenu from './SideMenu';
 
-const MainNavigation = ({ onToggle }) => {
+const MainNavigation = () => {
    const navigate = useNavigate();
 
    return (
-      <Header>
-         <Wrapper>
-            <HeaderLeft>
-               <SecondaryBtn
-                  margin='0 0.5rem 0 0 '
-                  className='menu-icon'
-                  onClick={onToggle}
+      <HStack
+         bg='white'
+         w='100%'
+         h='56px'
+         pos='fixed'
+         sx={{ p: ['.5rem', '0 2rem'] }}
+         boxShadow='md'
+         zIndex={10000}
+      >
+         <HStack justify='space-between' width='100%' maxW='1200px' m='auto'>
+            <Box display='flex' alignItems='center'>
+               <SideMenu />
+
+               <Image w='58px' h='40px' src={logo} alt='logo' ms='.5rem' />
+
+               <InputGroup
+                  h='39px'
+                  w='400px'
+                  ms='0.5rem'
+                  display={{ base: 'none', md: 'block' }}
                >
-                  <AiOutlineMenu size={23} />
-               </SecondaryBtn>
-               <Logo src={logo} />
-               <InputWrapper>
                   <Input placeholder='Search...' />
-                  <FiSearch
-                     size={23}
-                     color='gray'
-                     className='search-icon-inside-input'
+                  <InputRightElement
+                     children={<FiSearch size={23} color='gray' />}
                   />
-               </InputWrapper>
-            </HeaderLeft>
-            <HeaderRight>
-               <SecondaryBtn className='search-icon'>
+               </InputGroup>
+            </Box>
+
+            <HStack>
+               <SecondaryBtn display={{ base: 'block', md: 'none' }}>
                   <FiSearch size={23} />
                </SecondaryBtn>
-               {/* <SecondaryBtn className='login'>Log in</SecondaryBtn> */}
-               {/* <PrimaryBtn
-                  margin='0 0 0 0.5rem'
-                  w='128px'
-                  color='rgb(59 73 223)'
-               >
-                  Create Account
-               </PrimaryBtn> */}
+
+               {/* <SecondaryBtn display={{ base: 'none', md: 'block' }}>
+                  Log in
+               </SecondaryBtn>
+
+               <PrimaryBtn>Create Account</PrimaryBtn> */}
+
                <PrimaryBtn
-                  margin='0 0 0 0.5rem'
-                  w='128px'
-                  color='rgb(59 73 223)'
-                  className='create-post'
+                  display={{ base: 'none', md: 'block' }}
                   onClick={() => navigate('/create-post')}
                >
-                  Create Post
+                  Creart Post
                </PrimaryBtn>
-               <ProfileAvatar img={z} />
-            </HeaderRight>
-         </Wrapper>
-      </Header>
+
+               <Avatar name='Zwel' src={z} w='40px' h='40px' cursor='pointer' />
+            </HStack>
+         </HStack>
+      </HStack>
    );
 };
 

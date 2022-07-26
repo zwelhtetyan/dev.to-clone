@@ -1,57 +1,118 @@
 import React from 'react';
-import {
-   Avatar,
-   Body,
-   CoverPhoto,
-   Footer,
-   Header,
-   PostItemCon,
-   TagWrapper,
-   Title,
-} from '../../styles/PostItemStyels';
-import logo from '../../assets/logo/logo.png';
 import LangTag from '../../utils/LangTag';
-import Reaction from './Reaction';
-import { getLogo } from '../../helper/getLogo';
+import {
+   Box,
+   HStack,
+   Image,
+   Avatar,
+   Text,
+   VStack,
+   Heading,
+   Wrap,
+   WrapItem,
+   Button,
+} from '@chakra-ui/react';
+import heart from '../../assets/logo/heart.svg';
+import comment from '../../assets/logo/comment.svg';
+import z from '../../assets/images/z.jpeg';
+
+const ReactionButton = ({ img, text }) => {
+   return (
+      <Button
+         h='30px'
+         bg='white'
+         border='1px solid rgba(0, 0, 0, 0.04)'
+         _hover={{ bg: 'rgba(0, 0, 0, 0.04)' }}
+      >
+         <Image src={img} />
+         <Text
+            fontWeight={400}
+            fontSize='14px'
+            display={{ base: 'none', md: 'block' }}
+         >
+            {text}
+         </Text>
+      </Button>
+   );
+};
 
 const PostItem = ({ coverImg }) => {
    return (
-      <PostItemCon>
-         {coverImg && <CoverPhoto src={coverImg} alt='cover-photo' />}
-         <Header>
-            <Avatar>
-               <img src={logo} alt='' />
-            </Avatar>
-            <div>
-               <h4 className='user_name'>Zwel Htet Yan</h4>
-               <p className='createdAt'>1 hour ago</p>
-            </div>
-         </Header>
-         <Body>
-            <Title>Why REACT is the most popular library.</Title>
-            <TagWrapper>
-               <LangTag color='gold'>
-                  <img src={getLogo({ lang: 'javascript' })} alt='logo' />
-                  Javascript
-               </LangTag>
-               <LangTag color='green'>
-                  <img src={getLogo({ lang: 'mongodb' })} alt='logo' />
-                  Mongodb
-               </LangTag>
-               <LangTag color='red'>
-                  <img src={getLogo({ lang: 'svelte' })} alt='logo' />
-                  Svelte
-               </LangTag>
-               <LangTag color='blue'>
-                  <img src={getLogo({ lang: 'typescript' })} alt='logo' />
-                  Typescript
-               </LangTag>
-            </TagWrapper>
-         </Body>
-         <Footer>
-            <Reaction />
-         </Footer>
-      </PostItemCon>
+      <Box bg='white'>
+         {coverImg && (
+            <Image
+               src={coverImg}
+               w='100%'
+               mb='1rem'
+               borderTopLeftRadius='5px'
+               borderTopRightRadius='5px'
+               alt='cover_img'
+            />
+         )}
+         <Box p={{ base: '.5rem', md: '1.5rem' }} mb='.5rem' borderRadius='5px'>
+            <HStack>
+               <Avatar name='Zwel' src={z} w='40px' h='40px' />
+               <Box>
+                  <Text fontWeight={600} lineHeight={1}>
+                     Zwel Htet Yan
+                  </Text>
+                  <Text fontSize='13px' color='gray'>
+                     1 hour ago
+                  </Text>
+               </Box>
+            </HStack>
+
+            <VStack
+               align='flex-start'
+               ms={{ base: 'none', md: 'calc(40px + .5rem)' }}
+            >
+               <Heading
+                  cursor='pointer'
+                  mt={2}
+                  _hover={{ color: 'rgb(47 58 178)' }}
+                  fontSize={['1.2rem', '1.5rem']}
+               >
+                  Why REACT is the most popular library.
+               </Heading>
+
+               <Wrap spacing='.3rem'>
+                  <WrapItem>
+                     <LangTag
+                        tag={{ id: 5, lang: 'nodejs', color: '#A2D95E' }}
+                     />
+                  </WrapItem>
+                  <WrapItem>
+                     <LangTag tag={{ id: 5, lang: 'svelte', color: 'red' }} />
+                  </WrapItem>
+                  <WrapItem>
+                     <LangTag
+                        tag={{ id: 5, lang: 'typescript', color: 'blue' }}
+                     />
+                  </WrapItem>
+                  <WrapItem>
+                     <LangTag
+                        tag={{ id: 5, lang: 'javascript', color: 'gold' }}
+                     />
+                  </WrapItem>
+               </Wrap>
+
+               <HStack
+                  justify='space-between'
+                  w='100%'
+                  marginTop='15px !important'
+               >
+                  <HStack>
+                     <ReactionButton img={heart} text='Reactions' />
+                     <ReactionButton img={comment} text='Comments' />
+                  </HStack>
+
+                  <Text fontSize='14px' color='gray'>
+                     2 min read
+                  </Text>
+               </HStack>
+            </VStack>
+         </Box>
+      </Box>
    );
 };
 

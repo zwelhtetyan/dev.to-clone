@@ -1,28 +1,41 @@
 import React from 'react';
-import { ContentWrapper, HeroCon } from '../styles/HeroStyles';
 import logo from '../assets/logo/logo.png';
-import BtnWrapper from '../utils/BtnWrapper';
-import DividerElem from '../utils/Divider';
 
-const Hero = () => {
+import { Box, Heading, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
+
+const Hero = ({ display, isLogo }) => {
+   const fontSize = ['1.3rem', '1.3rem', '2rem'];
+
    return (
-      <HeroCon className='hero'>
-         <ContentWrapper>
-            <img src={logo} alt='' />
-            <div>
-               <h2>
-                  <span>DEV Community</span> is a community of 878,258 amazing
-                  developers
-               </h2>
-               <p>
+      <VStack maxW='590px' m='1rem auto' display={display}>
+         <HStack align='flex-start' mb={5}>
+            <Image
+               src={logo}
+               alt='logo'
+               w='60px'
+               transform='rotate(-17deg)'
+               mr={2}
+               display={isLogo ? 'block' : 'none'}
+            />
+            <Box>
+               <Heading fontSize={fontSize}>
+                  <Heading as='span' color='rgb(37 52 213)' fontSize={fontSize}>
+                     DEV Community
+                  </Heading>{' '}
+                  is a community of 878,258 amazing developers
+               </Heading>
+               <Text color='gray.600' pt={2}>
                   We're a place where coders share, stay up-to-date and grow
                   their careers.
-               </p>
-            </div>
-         </ContentWrapper>
-         <BtnWrapper w='200px' />
-         <DividerElem h='1px' bg='rgb(23 23 23 / 5%)' />
-      </HeroCon>
+               </Text>
+            </Box>
+         </HStack>
+         <VStack w='100%'>
+            <PrimaryBtn w='50%'>Create Account</PrimaryBtn>
+            <SecondaryBtn w='50%'>Log in</SecondaryBtn>
+         </VStack>
+      </VStack>
    );
 };
 

@@ -1,17 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
-import {
-   CircleClose,
-   SingleTag,
-   SuggestionBox,
-   TagContainer,
-   TagInput,
-} from '../../styles/AddLangTagStyle';
 import LangTag from '../../utils/LangTag';
 import tagsData from './LangTagData.json';
-import { getLogo } from '../../helper/getLogo';
 import { useDispatch } from 'react-redux';
 import { setFilteredTagsToStore } from '../../store/publishPost';
+import { Box, Circle, Input, Square, Wrap, WrapItem } from '@chakra-ui/react';
 
 const AddLangTag = () => {
    //states
@@ -47,23 +40,35 @@ const AddLangTag = () => {
       setTagData((prevArr) => prevArr.filter((item) => item.id !== tag.id));
    };
 
-   const filteredTagsToShow = useCallback(() => {
+   const filteredTagsToShow = () => {
       const tags = filteredTags.map((tag) => (
-         <SingleTag key={tag.id}>
-            <LangTag color={tag.color} m='none'>
-               <img src={getLogo(tag)} alt='logo' />
-               {tag.lang}
-            </LangTag>
-            <div className='wrapper' onClick={() => handleDeleteTag(tag)}>
-               <CircleClose>
+         <WrapItem key={tag.id} pos='relative' margin='.6rem .3rem !important'>
+            <LangTag key={tag.id} tag={tag} />
+            <Square
+               pos='absolute'
+               cursor='pointer'
+               w='25px'
+               h='25px'
+               top='-13'
+               right='-9px'
+               bg='transparent'
+               onClick={() => handleDeleteTag(tag)}
+            >
+               <Circle
+                  w='15px'
+                  h='15px'
+                  bg='black'
+                  color='white'
+                  _hover={{ bg: 'red' }}
+               >
                   <IoCloseOutline />
-               </CircleClose>
-            </div>
-         </SingleTag>
+               </Circle>
+            </Square>
+         </WrapItem>
       ));
 
       return tags;
-   }, [filteredTags]);
+   };
 
    const handleAddLangTag = (tag) => {
       addToFilteredTags(tag);
@@ -86,14 +91,12 @@ const AddLangTag = () => {
          return <p>No tag found !</p>;
       } else if (tagsToShow()) {
          return tagsToShow().map((tag) => (
-            <LangTag
-               color={tag.color}
-               key={tag.id}
-               handleClickTag={() => handleAddLangTag(tag)}
-            >
-               <img src={getLogo(tag)} alt='logo' />
-               {tag.lang}
-            </LangTag>
+            <WrapItem key={tag.id}>
+               <LangTag
+                  handleClickTag={() => handleAddLangTag(tag)}
+                  tag={tag}
+               />
+            </WrapItem>
          ));
       }
    };
@@ -119,24 +122,45 @@ const AddLangTag = () => {
 
    return (
       <>
-         <TagContainer>
-            {filteredTagsToShow()}
+         <Box mb={2}>
+            <Wrap overflow='visible'>
+               {filteredTagsToShow()}
 
-            {filteredTags.length !== 4 && (
-               <SingleTag>
-                  <TagInput
-                     className='tag-input'
-                     ref={inputTagRef}
-                     placeholder={tagInputPlaceHolder}
-                     value={filterTagName}
-                     onChange={({ target }) => setFilterTagName(target.value)}
-                  />
-               </SingleTag>
-            )}
-         </TagContainer>
-         <SuggestionBox d={showSuggestionBox} className='suggestion-box'>
+               {filteredTags.length !== 4 && (
+                  <WrapItem maxW='140px'>
+                     <Input
+                        h='34px'
+                        w='100%'
+                        variant='flushed'
+                        _focus={{ borderColor: '#e2e8f0', boxShadow: 'none' }}
+                        className='tag-input'
+                        ref={inputTagRef}
+                        placeholder={tagInputPlaceHolder}
+                        borderRadius='5px'
+                        _placeholder={{ color: '#525252' }}
+                        value={filterTagName}
+                        onChange={({ target }) =>
+                           setFilterTagName(target.value)
+                        }
+                     />
+                  </WrapItem>
+               )}
+            </Wrap>
+         </Box>
+
+         <Wrap
+            display={showSuggestionBox}
+            w='100%'
+            bg='white'
+            className='suggestion-box'
+            m='0 auto 1rem'
+            p={3}
+            overflow='visible'
+            border='1px solid rgb(214, 214, 215)'
+            borderRadius='5px'
+         >
             {suggestions()}
-         </SuggestionBox>
+         </Wrap>
       </>
    );
 };
