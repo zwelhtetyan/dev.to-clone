@@ -6,12 +6,14 @@ import { useDispatch } from 'react-redux';
 import { setFilteredTagsToStore } from '../../store/publishPost';
 import { Box, Circle, Input, Square, Wrap, WrapItem } from '@chakra-ui/react';
 
-const AddLangTag = () => {
+const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    //states
    const [tagData, setTagData] = useState(tagsData);
    const [filterTagName, setFilterTagName] = useState('');
    const [focusTagInput, setFocusTagInput] = useState(false);
-   const [filteredTags, setFilteredTags] = useState([]);
+   const [filteredTags, setFilteredTags] = useState(
+      filteredTagsFromLocalStorage || []
+   );
 
    const dispatch = useDispatch();
 
@@ -33,11 +35,6 @@ const AddLangTag = () => {
       );
 
       return filteredTags;
-   };
-
-   const addToFilteredTags = (tag) => {
-      setFilteredTags((prevArr) => [...prevArr, tag]);
-      setTagData((prevArr) => prevArr.filter((item) => item.id !== tag.id));
    };
 
    const filteredTagsToShow = () => {
@@ -68,6 +65,11 @@ const AddLangTag = () => {
       ));
 
       return tags;
+   };
+
+   const addToFilteredTags = (tag) => {
+      setFilteredTags((prevArr) => [...prevArr, tag]);
+      setTagData((prevArr) => prevArr.filter((item) => item.id !== tag.id));
    };
 
    const handleAddLangTag = (tag) => {
@@ -165,4 +167,4 @@ const AddLangTag = () => {
    );
 };
 
-export default AddLangTag;
+export default React.memo(AddLangTag);

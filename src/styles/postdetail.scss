@@ -1,0 +1,61 @@
+.display_MDEValue {
+   font-size: 19px;
+   letter-spacing: 0.5px;
+   word-spacing: 2px;
+
+   @media screen and (max-width: 480px) {
+      font-size: 17px;
+      letter-spacing: 0.3px;
+      word-spacing: 1px;
+   }
+
+   img {
+      max-height: 350px;
+      border-radius: 5px;
+      margin: 0.5rem 0;
+   }
+
+   p a {
+      text-decoration: underline;
+      color: rgb(45, 81, 245);
+   }
+
+   pre code,
+   p code {
+      display: block;
+      overflow-x: auto;
+      background-color: black;
+      color: white;
+      //   color: #2ceb2c;
+      border-radius: 5px;
+      padding: 0.5rem;
+      margin: 1rem 0;
+      font-size: 16px;
+   }
+
+   p code {
+      white-space: nowrap;
+   }
+
+   p strong {
+      font-size: 1.7rem;
+      display: inline-block;
+      margin-top: 0.7rem;
+
+      @media screen and (max-width: 768px) {
+         font-size: 1.5rem;
+      }
+   }
+
+   ul,
+   ol {
+      margin-left: 2rem;
+   }
+
+   h3 {
+      font-size: 2rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-top: 0.7rem;
+   }
+}

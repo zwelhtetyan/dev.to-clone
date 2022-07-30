@@ -6,62 +6,53 @@ import {
    Input,
    Spinner,
    Text,
+   Tooltip,
 } from '@chakra-ui/react';
-import {
-   deleteObject,
-   getDownloadURL,
-   ref,
-   uploadBytes,
-} from 'firebase/storage';
 import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { storage } from '../firebase';
-import { setCvImgUrl } from '../store/publishPost';
+import { removeImage, uploadImage } from '../lib/api';
+import { setCvImg as setCvImgToStore } from '../store/publishPost';
 import { SecondaryBtn } from '../utils/Buttons';
 
-const AddCvImg = () => {
-   //states
-   const [cvImg, setCvImg] = useState({
-      url: null,
-      path: null,
-   });
+const AddCvImg = ({ cvImgFromLocalStorage }) => {
+   const [cvImg, setCvImg] = useState(
+      cvImgFromLocalStorage || {
+         url: null,
+         path: null,
+      }
+   );
 
    const [uploading, setUploading] = useState(false);
 
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(setCvImgUrl(cvImg.url));
-   }, [cvImg.url, dispatch]);
+      dispatch(setCvImgToStore(cvImg));
+   }, [cvImg, dispatch]);
 
    const handleCVImageUpload = (e) => {
       const image = e.target.files[0];
       if (image) {
-         cvImg.path && handleCVImgRemove(cvImg.path);
-         const sendRequest = async () => {
-            setUploading(true);
-            const selectedImgPath = `images/${image.name}${nanoid()}`;
-            const cvImgRef = ref(storage, selectedImgPath);
-            await uploadBytes(cvImgRef, image);
+         cvImg.path && removeImage(cvImg.path);
 
-            const url = await getDownloadURL(cvImgRef);
-            setUploading(false);
-            setCvImg({ url, path: selectedImgPath });
-         };
+         const selectedImgPath = `images/${image.name}${nanoid()}`;
+         setUploading(true);
 
-         sendRequest().catch((err) => console.log(err));
+         uploadImage(image, selectedImgPath)
+            .then((url) => {
+               setUploading(false);
+               setCvImg({ url, path: selectedImgPath });
+            })
+            .catch((err) => console.log(err));
+
+         e.target.value = '';
       }
    };
 
    const handleCVImgRemove = (path) => {
       setCvImg({ url: null, path: null });
-      const desertRef = ref(storage, path);
-      deleteObject(desertRef)
-         .then((res) => {
-            console.log('removed');
-         })
-         .catch((err) => console.log(err));
+      removeImage(path).catch((err) => console.log(err));
    };
 
    return (
@@ -86,22 +77,30 @@ const AddCvImg = () => {
 
          {!uploading && (
             <HStack mt='3'>
-               <Button
-                  as='label'
-                  border='2px solid #d6d6d7'
-                  m='0'
-                  p={2}
-                  bg='#F5F5F5'
-                  fontWeight={400}
+               <Tooltip
+                  label='Use a ratio of 100:42 for best result.'
+                  aria-label='A tooltip'
+                  bg='black'
+                  borderRadius='3px'
                >
-                  <Input
-                     display='none'
-                     type='file'
-                     accept='image/jpeg, image/png, image/jpg , image/webp'
-                     onChange={handleCVImageUpload}
-                  />
-                  {cvImg.url ? 'change' : 'Add a cover image'}
-               </Button>
+                  <Button
+                     as='label'
+                     border='2px solid #d6d6d7'
+                     m='0'
+                     p={2}
+                     bg='#F5F5F5'
+                     fontWeight={400}
+                     cursor='pointer'
+                  >
+                     <Input
+                        display='none'
+                        type='file'
+                        accept='image/jpeg, image/png, image/jpg , image/webp img/gif'
+                        onChange={handleCVImageUpload}
+                     />
+                     {cvImg.url ? 'change' : 'Add a cover image'}
+                  </Button>
+               </Tooltip>
 
                {cvImg.url && (
                   <SecondaryBtn
@@ -118,4 +117,4 @@ const AddCvImg = () => {
    );
 };
 
-export default AddCvImg;
+export default React.memo(AddCvImg);

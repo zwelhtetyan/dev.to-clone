@@ -14,11 +14,12 @@ const Footer = () => {
    return (
       <VStack
          bg='rgb(229 229 229)'
-         p='2rem .5rem'
+         p='3rem .5rem'
          color='rgb(64 64 64)'
          fontSize='14px'
          fontWeight='300'
          textAlign='center'
+         id='footer'
       >
          <Text>
             <Links>DEV Community</Links> — A constructive and inclusive social

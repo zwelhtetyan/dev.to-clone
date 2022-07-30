@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-   MDEValue: '',
-   cvImgUrl: '',
+   MDEValue: { write: '', preview: '' },
+   cvImg: null,
    filteredTags: [],
 };
 
@@ -14,8 +14,8 @@ const PublicPostSlice = createSlice({
          state.MDEValue = action.payload;
       },
 
-      setCvImgUrl: (state, action) => {
-         state.cvImgUrl = action.payload;
+      setCvImg: (state, action) => {
+         state.cvImg = action.payload;
       },
 
       setFilteredTagsToStore: (state, action) => {
@@ -24,7 +24,7 @@ const PublicPostSlice = createSlice({
    },
 });
 
-export const { setMDEValue, setCvImgUrl, setFilteredTagsToStore } =
+export const { setMDEValue, setCvImg, setFilteredTagsToStore } =
    PublicPostSlice.actions;
 
 export default PublicPostSlice.reducer;

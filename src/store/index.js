@@ -3,7 +3,7 @@ import publicPostReducer from './publishPost';
 
 const store = configureStore({
    reducer: {
-      publicPost: publicPostReducer,
+      postToPublish: publicPostReducer,
    },
 });
 

@@ -1,6 +1,6 @@
 import { Button } from '@chakra-ui/react';
 
-export const PrimaryBtn = ({ children, w, display, m, onClick }) => {
+export const PrimaryBtn = ({ children, w, display, m, onClick, type }) => {
    return (
       <Button
          variant='outline'
@@ -8,6 +8,7 @@ export const PrimaryBtn = ({ children, w, display, m, onClick }) => {
          fontWeight='400'
          borderColor='rgb(59 73 223)'
          w={w}
+         type={type}
          display={display}
          m={m}
          _hover={{
@@ -28,6 +29,7 @@ export const SecondaryBtn = ({ children, w, display, onClick, color }) => {
          variant='ghost'
          fontWeight='400'
          color={color}
+         type='button'
          _hover={{
             bg: 'rgb(59 73 223 / 10%)',
             color: `${color || 'rgb(47 58 178)'}`,

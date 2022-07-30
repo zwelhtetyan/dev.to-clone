@@ -1,0 +1,51 @@
+.react-mde {
+   border: none;
+
+   .mde-header {
+      border: none;
+
+      ul.mde-header-group li.mde-header-item {
+         display: flex;
+
+         button {
+            padding: 0 4px;
+            font-weight: 900;
+         }
+      }
+
+      .svg-icon {
+         font-size: 15px;
+      }
+
+      .mde-tabs button {
+         padding: 0 10px;
+         border-radius: 5px;
+         font-size: 14px;
+      }
+   }
+
+   .mde-textarea-wrapper textarea.mde-text {
+      border: 1px solid #e2e8f0;
+      &:focus {
+         outline: none;
+      }
+   }
+
+   .mde-text,
+   .mde-preview {
+      font-size: 1rem;
+   }
+
+   .mde-preview-content {
+      pre,
+      p code {
+         background-color: black !important;
+         color: white;
+      }
+
+      img {
+         max-width: 100%;
+         border-radius: 5px;
+      }
+   }
+}

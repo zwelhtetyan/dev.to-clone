@@ -27,6 +27,7 @@ const MainNavigation = () => {
          sx={{ p: ['.5rem', '0 2rem'] }}
          boxShadow='md'
          zIndex={10000}
+         id='main_nav'
       >
          <HStack justify='space-between' width='100%' maxW='1200px' m='auto'>
             <Box display='flex' alignItems='center'>
@@ -39,6 +40,7 @@ const MainNavigation = () => {
                   w='400px'
                   ms='0.5rem'
                   display={{ base: 'none', md: 'block' }}
+                  borderColor='#00000033'
                >
                   <Input placeholder='Search...' />
                   <InputRightElement

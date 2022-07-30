@@ -15,6 +15,9 @@ import {
 import heart from '../../assets/logo/heart.svg';
 import comment from '../../assets/logo/comment.svg';
 import z from '../../assets/images/z.jpeg';
+import Moment from 'react-moment';
+import { useNavigate } from 'react-router-dom';
+import { calTimeStamp } from '../../helper/calcTimestamp';
 
 const ReactionButton = ({ img, text }) => {
    return (
@@ -24,7 +27,7 @@ const ReactionButton = ({ img, text }) => {
          border='1px solid rgba(0, 0, 0, 0.04)'
          _hover={{ bg: 'rgba(0, 0, 0, 0.04)' }}
       >
-         <Image src={img} />
+         <Image src={img} mr={1} />
          <Text
             fontWeight={400}
             fontSize='14px'
@@ -36,9 +39,23 @@ const ReactionButton = ({ img, text }) => {
    );
 };
 
-const PostItem = ({ coverImg }) => {
+const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
+   const navigate = useNavigate();
+
+   const handleNavigate = (e) => {
+      e.stopPropagation();
+      navigate(`/details/${id}`);
+   };
+
    return (
-      <Box bg='white'>
+      <Box
+         bg='white'
+         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+         _hover={{ boxShadow: '0 0 0 1.5px rgb(23 23 23 / 10%)' }}
+         borderRadius='5px'
+         cursor='pointer'
+         onClick={handleNavigate}
+      >
          {coverImg && (
             <Image
                src={coverImg}
@@ -49,7 +66,7 @@ const PostItem = ({ coverImg }) => {
                alt='cover_img'
             />
          )}
-         <Box p={{ base: '.5rem', md: '1.5rem' }} mb='.5rem' borderRadius='5px'>
+         <Box p={{ base: '.5rem', md: '1.5rem' }} mb='.5rem'>
             <HStack>
                <Avatar name='Zwel' src={z} w='40px' h='40px' />
                <Box>
@@ -57,7 +74,7 @@ const PostItem = ({ coverImg }) => {
                      Zwel Htet Yan
                   </Text>
                   <Text fontSize='13px' color='gray'>
-                     1 hour ago
+                     <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
                   </Text>
                </Box>
             </HStack>
@@ -72,28 +89,15 @@ const PostItem = ({ coverImg }) => {
                   _hover={{ color: 'rgb(47 58 178)' }}
                   fontSize={['1.2rem', '1.5rem']}
                >
-                  Why REACT is the most popular library.
+                  {title}
                </Heading>
 
-               <Wrap spacing='.3rem'>
-                  <WrapItem>
-                     <LangTag
-                        tag={{ id: 5, lang: 'nodejs', color: '#A2D95E' }}
-                     />
-                  </WrapItem>
-                  <WrapItem>
-                     <LangTag tag={{ id: 5, lang: 'svelte', color: 'red' }} />
-                  </WrapItem>
-                  <WrapItem>
-                     <LangTag
-                        tag={{ id: 5, lang: 'typescript', color: 'blue' }}
-                     />
-                  </WrapItem>
-                  <WrapItem>
-                     <LangTag
-                        tag={{ id: 5, lang: 'javascript', color: 'gold' }}
-                     />
-                  </WrapItem>
+               <Wrap spacing='.3rem' py='.5rem' mt='0 !important'>
+                  {tags?.map((tag) => (
+                     <WrapItem key={tag.id}>
+                        <LangTag tag={tag} />
+                     </WrapItem>
+                  ))}
                </Wrap>
 
                <HStack
