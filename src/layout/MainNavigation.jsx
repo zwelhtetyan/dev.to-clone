@@ -4,7 +4,6 @@ import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import z from '../assets/images/z.jpeg';
 import {
-   Avatar,
    Box,
    HStack,
    Image,
@@ -14,9 +13,15 @@ import {
 } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import SideMenu from './SideMenu';
+import CustomAvatar from '../utils/Avatar';
 
 const MainNavigation = () => {
    const navigate = useNavigate();
+
+   const backToHome = () => {
+      navigate('/');
+      window.scrollTo(0, 0);
+   };
 
    return (
       <HStack
@@ -33,7 +38,15 @@ const MainNavigation = () => {
             <Box display='flex' alignItems='center'>
                <SideMenu />
 
-               <Image w='58px' h='40px' src={logo} alt='logo' ms='.5rem' />
+               <Image
+                  w='58px'
+                  h='40px'
+                  src={logo}
+                  alt='logo'
+                  ms='.5rem'
+                  onClick={backToHome}
+                  cursor='pointer'
+               />
 
                <InputGroup
                   h='39px'
@@ -67,7 +80,7 @@ const MainNavigation = () => {
                   Creart Post
                </PrimaryBtn>
 
-               <Avatar name='Zwel' src={z} w='40px' h='40px' cursor='pointer' />
+               <CustomAvatar name='Zwel' src={z} size='40px' />
             </HStack>
          </HStack>
       </HStack>

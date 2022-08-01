@@ -59,3 +59,22 @@
       margin-top: 0.7rem;
    }
 }
+
+.comments.display_MDEValue {
+   font-size: 17px;
+
+   h3 {
+      font-size: 1.3rem;
+   }
+
+   p strong {
+      font-size: 1.1rem;
+   }
+
+   pre code,
+   p code {
+      font-size: 14px;
+      margin: 0;
+      margin-bottom: 0.5rem;
+   }
+}

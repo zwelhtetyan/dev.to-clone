@@ -14,6 +14,7 @@ import {
    saveToLocalStorage,
 } from '../helper/localStorage';
 import '../styles/markdown.scss';
+import { setCommentVal } from '../store/comment';
 
 const converter = new Showdown.Converter({
    tables: true,
@@ -36,8 +37,8 @@ const codeBlock = {
    },
 };
 
-const MDE = ({ MDEValue, isPublishing }) => {
-   const [value, setValue] = React.useState(MDEValue.write || '');
+const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
+   const [value, setValue] = React.useState(MDEValue?.write || '');
    const [selectedTab, setSelectedTab] = React.useState('write');
    const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
       JSON.parse(localStorage.getItem('uploadedMDEImg')) || []
@@ -46,25 +47,27 @@ const MDE = ({ MDEValue, isPublishing }) => {
    const dispatch = useDispatch();
 
    React.useEffect(() => {
-      dispatch(
-         setMDEValue({
-            write: value,
-            preview: converter.makeHtml(value),
-         })
-      );
-   }, [value, dispatch]);
+      if (where === 'CREATE_POST') {
+         dispatch(
+            setMDEValue({
+               write: value,
+               preview: converter.makeHtml(value),
+            })
+         );
+      } else if (where === 'DISCUSSION') {
+         dispatch(setCommentVal(converter.makeHtml(value)));
+      }
+   }, [value, dispatch, where]);
 
    React.useEffect(() => {
       saveToLocalStorage('uploadedMDEImg', JSON.stringify(uploadedMDEImg));
    }, [uploadedMDEImg]);
 
-   if (isPublishing) {
-      console.log('publishing');
-
+   if (isSubmitting) {
       // eslint-disable-next-line array-callback-return
       uploadedMDEImg.map((img) => {
          console.log('map render');
-         if (!MDEValue.write.includes(img.url)) {
+         if (!MDEValue?.write.includes(img.url)) {
             removeImage(img.path).catch((err) => console.log(err));
          }
       });
@@ -76,6 +79,7 @@ const MDE = ({ MDEValue, isPublishing }) => {
       const image = e.target.files[0];
       if (image) {
          document.querySelector('.mde-text').disabled = true;
+         setUploadingMDEImg(true);
          setValue((prevVal) => prevVal + 'loading...');
 
          const selectedImgPath = `images/${img.name}${nanoid()}`;
@@ -90,6 +94,7 @@ const MDE = ({ MDEValue, isPublishing }) => {
                   ...prevArr,
                   { url: `![](${url})`, path: selectedImgPath },
                ]);
+               setUploadingMDEImg(false);
             })
             .catch((err) => console.log(err));
 
@@ -116,12 +121,7 @@ const MDE = ({ MDEValue, isPublishing }) => {
    };
 
    return (
-      <Box
-         className='container'
-         w='100%'
-         mb='1rem !important'
-         mt='1.5rem !important'
-      >
+      <Box className='container' w='100%'>
          <ReactMde
             commands={{
                'code-block': codeBlock,
@@ -132,9 +132,9 @@ const MDE = ({ MDEValue, isPublishing }) => {
             onChange={setValue}
             selectedTab={selectedTab}
             onTabChange={setSelectedTab}
-            minEditorHeight={250}
+            minEditorHeight={height}
             loadingPreview='loading...'
-            minPreviewHeight={240}
+            minPreviewHeight={height - 10}
             generateMarkdownPreview={(markdown) =>
                Promise.resolve(converter.makeHtml(markdown))
             }

@@ -4,13 +4,11 @@ import {
    Box,
    HStack,
    Image,
-   Avatar,
    Text,
    VStack,
    Heading,
    Wrap,
    WrapItem,
-   Button,
 } from '@chakra-ui/react';
 import heart from '../../assets/logo/heart.svg';
 import comment from '../../assets/logo/comment.svg';
@@ -18,26 +16,8 @@ import z from '../../assets/images/z.jpeg';
 import Moment from 'react-moment';
 import { useNavigate } from 'react-router-dom';
 import { calTimeStamp } from '../../helper/calcTimestamp';
-
-const ReactionButton = ({ img, text }) => {
-   return (
-      <Button
-         h='30px'
-         bg='white'
-         border='1px solid rgba(0, 0, 0, 0.04)'
-         _hover={{ bg: 'rgba(0, 0, 0, 0.04)' }}
-      >
-         <Image src={img} mr={1} />
-         <Text
-            fontWeight={400}
-            fontSize='14px'
-            display={{ base: 'none', md: 'block' }}
-         >
-            {text}
-         </Text>
-      </Button>
-   );
-};
+import { ReactionButton } from '../../utils/Buttons';
+import CustomAvatar from '../../utils/Avatar';
 
 const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
    const navigate = useNavigate();
@@ -47,6 +27,10 @@ const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
       navigate(`/details/${id}`);
    };
 
+   const handleViewProfile = (e) => {
+      e.stopPropagation();
+   };
+
    return (
       <Box
          bg='white'
@@ -54,6 +38,7 @@ const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
          _hover={{ boxShadow: '0 0 0 1.5px rgb(23 23 23 / 10%)' }}
          borderRadius='5px'
          cursor='pointer'
+         mb='.5rem'
          onClick={handleNavigate}
       >
          {coverImg && (
@@ -66,11 +51,22 @@ const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
                alt='cover_img'
             />
          )}
-         <Box p={{ base: '.5rem', md: '1.5rem' }} mb='.5rem'>
+         <Box p={{ base: '.5rem', md: '1.5rem' }}>
             <HStack>
-               <Avatar name='Zwel' src={z} w='40px' h='40px' />
+               <CustomAvatar
+                  name='Zwel'
+                  src={z}
+                  size='40px'
+                  onClick={handleViewProfile}
+               />
                <Box>
-                  <Text fontWeight={600} lineHeight={1}>
+                  <Text
+                     fontWeight={600}
+                     lineHeight={1}
+                     _hover={{ opacity: '.8' }}
+                     onClick={handleViewProfile}
+                     fontSize={{ base: '15px', md: '16px' }}
+                  >
                      Zwel Htet Yan
                   </Text>
                   <Text fontSize='13px' color='gray'>
@@ -92,25 +88,26 @@ const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
                   {title}
                </Heading>
 
-               <Wrap spacing='.3rem' py='.5rem' mt='0 !important'>
-                  {tags?.map((tag) => (
-                     <WrapItem key={tag.id}>
-                        <LangTag tag={tag} />
-                     </WrapItem>
-                  ))}
-               </Wrap>
+               {tags.length !== 0 && (
+                  <Wrap spacing='.3rem' py='.5rem' mt='0 !important'>
+                     {tags?.map((tag) => (
+                        <WrapItem
+                           key={tag.id}
+                           onClick={(e) => e.stopPropagation()}
+                        >
+                           <LangTag tag={tag} />
+                        </WrapItem>
+                     ))}
+                  </Wrap>
+               )}
 
-               <HStack
-                  justify='space-between'
-                  w='100%'
-                  marginTop='15px !important'
-               >
+               <HStack justify='space-between' w='100%'>
                   <HStack>
-                     <ReactionButton img={heart} text='Reactions' />
-                     <ReactionButton img={comment} text='Comments' />
+                     <ReactionButton icon={heart} text='Reactions' />
+                     <ReactionButton icon={comment} text='Comments' />
                   </HStack>
 
-                  <Text fontSize='14px' color='gray'>
+                  <Text fontSize='13px' color='gray'>
                      2 min read
                   </Text>
                </HStack>

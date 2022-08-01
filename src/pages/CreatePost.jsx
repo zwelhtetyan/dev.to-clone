@@ -46,6 +46,7 @@ const CreatePost = () => {
    );
    const [title, setTitle] = useState(postData.title || '');
    const [publishing, setPublishing] = useState(false);
+   const [uploadingMDEImg, setUploadingMDEImg] = useState(false);
 
    useEffect(() => {
       const newData = {
@@ -56,7 +57,12 @@ const CreatePost = () => {
       };
 
       setPostData(newData);
-      saveToLocalStorage('postData', JSON.stringify(newData));
+      const saveToLS = setTimeout(
+         () => saveToLocalStorage('postData', JSON.stringify(newData)),
+         1000
+      );
+
+      return () => clearTimeout(saveToLS);
    }, [postToPublish, title]);
 
    const publishPostHandler = async (e) => {
@@ -68,6 +74,7 @@ const CreatePost = () => {
          MDEValue: postData.MDEValue.preview,
          cvImg: postData.cvImg.url,
          createdAt: serverTimestamp(),
+         comments: [],
       });
       navigate('/');
       setPublishing(false);
@@ -103,7 +110,7 @@ const CreatePost = () => {
             <Input
                variant='unstyled'
                placeholder='New post title here...'
-               fontSize='1.7rem'
+               fontSize='2.5rem'
                fontWeight='700'
                value={title}
                required
@@ -113,11 +120,19 @@ const CreatePost = () => {
 
             <AddLangTag filteredTagsFromLocalStorage={postData.filteredTags} />
 
-            <MDE MDEValue={postData.MDEValue} isPublishing={publishing} />
+            <Box mt='1.5rem !important' w='100%' mb='1rem !important'>
+               <MDE
+                  MDEValue={postData.MDEValue}
+                  isSubmitting={publishing}
+                  height={250}
+                  where='CREATE_POST'
+                  setUploadingMDEImg={setUploadingMDEImg}
+               />
+            </Box>
 
             <HStack justify='flex-end' w='100%'>
                <SecondaryBtn>Save Draft</SecondaryBtn>
-               <PrimaryBtn type='submit'>
+               <PrimaryBtn type='submit' disabled={uploadingMDEImg}>
                   {publishing ? (
                      <>
                         <Spinner size='sm' mr='1' /> Publishing

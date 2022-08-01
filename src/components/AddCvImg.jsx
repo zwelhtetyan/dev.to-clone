@@ -95,7 +95,7 @@ const AddCvImg = ({ cvImgFromLocalStorage }) => {
                      <Input
                         display='none'
                         type='file'
-                        accept='image/jpeg, image/png, image/jpg , image/webp img/gif'
+                        accept='image/jpeg, image/png, image/jpg , image/webp, image/gif'
                         onChange={handleCVImageUpload}
                      />
                      {cvImg.url ? 'change' : 'Add a cover image'}

@@ -1,11 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import {
-   collection,
-   getDocs,
-   onSnapshot,
-   orderBy,
-   query,
-} from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { db } from '../../firebase';
 import AllPostSkeletons from '../skeletons/AllPostSkeletons';
@@ -17,34 +11,20 @@ const AllPost = () => {
    const getAllPosts = () => {
       const colRef = collection(db, 'posts');
       const q = query(colRef, orderBy('createdAt', 'desc'));
-      onSnapshot(q, (snapshot) => {
-         const newData = [];
-         snapshot.docs.forEach((doc) => {
-            newData.push({ ...doc.data(), id: doc.id });
-         });
-         setAllPostData(newData);
+      onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
+         if (!snapshot.metadata.hasPendingWrites) {
+            const newData = [];
+            snapshot.docs.forEach((doc) => {
+               newData.push({ ...doc.data(), id: doc.id });
+            });
+            setAllPostData(newData);
+         }
       });
    };
 
    useEffect(() => {
       getAllPosts();
    }, []);
-
-   // const getAllPosts = async () => {
-   //    const colRef = collection(db, 'posts');
-   //    const q = query(colRef, orderBy('createdAt', 'desc'));
-   //    const snapshot = await getDocs(q);
-
-   //    const newData = [];
-   //    snapshot.docs.forEach((doc) => {
-   //       newData.push({ ...doc.data(), id: doc.id });
-   //    });
-   //    setAllPostData(newData);
-   // };
-
-   // useEffect(() => {
-   //    getAllPosts().catch((err) => console.log(err));
-   // }, []);
 
    console.log('all post run');
 

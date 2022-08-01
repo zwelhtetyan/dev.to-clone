@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 import SideReactionBar from '../components/SideReactionBar';
-import PostDetails from './PostDetails';
+import PostDetails from '../components/post/PostDetails';
 
 const ViewPost = () => {
    return (

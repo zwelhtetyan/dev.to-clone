@@ -32,8 +32,7 @@ const Footer = () => {
             communities.
          </Text>
          <Text>
-            Made with love and <Links>Ruby on Rails</Links>. DEV Community ©
-            2016 - 2022.
+            Made with love by <Links>Zwel</Links>. DEV Community © 2016 - 2022.
          </Text>
          <Image src={footerLogo} alt='logo' />
       </VStack>

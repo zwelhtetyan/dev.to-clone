@@ -1,6 +1,7 @@
 import {
    Avatar,
    Box,
+   Divider,
    Heading,
    HStack,
    Image,
@@ -8,17 +9,20 @@ import {
    Wrap,
    WrapItem,
 } from '@chakra-ui/react';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import Moment from 'react-moment';
 import { useParams } from 'react-router-dom';
-import { db } from '../firebase';
-import LangTag from '../utils/LangTag';
-import z from '../assets/images/z.jpeg';
-import { calTimeStamp } from '../helper/calcTimestamp';
-import { htmlToJsx } from '../helper/htmlToJsx';
-import '../styles/postdetail.scss';
-import DetailSkeleton from '../components/skeletons/DetailSkeleton';
+import { db } from '../../firebase';
+import LangTag from '../../utils/LangTag';
+import z from '../../assets/images/z.jpeg';
+import { calTimeStamp } from '../../helper/calcTimestamp';
+import { htmlToJsx } from '../../helper/htmlToJsx';
+import '../../styles/postdetail.scss';
+import DetailSkeleton from '../skeletons/DetailSkeleton';
+import Discussion from '../discussion/Discussion';
+import { nanoid } from 'nanoid';
+import CommentItem from '../CommentItem';
 
 const PostDetails = () => {
    const { id } = useParams();
@@ -28,7 +32,14 @@ const PostDetails = () => {
 
    useEffect(() => {
       const docRef = doc(db, 'posts', id);
-      getDoc(docRef).then((snapshot) => setPostDetail(snapshot.data()));
+
+      onSnapshot(docRef, { includeMetadataChanges: true }, (snapshot) => {
+         if (!snapshot.metadata.hasPendingWrites) {
+            setPostDetail(snapshot.data());
+         }
+      });
+
+      //onshapshot fire before submitting is finished , that's a reason to add => { includeMetadataChanges: true }
    }, [id]);
 
    console.log('post detail run');
@@ -84,6 +95,16 @@ const PostDetails = () => {
                   <Text as='div' className='display_MDEValue'>
                      {htmlToJsx(postDetail.MDEValue)}
                   </Text>
+
+                  <Divider mt={5} w='90%' mx='auto' />
+
+                  <Discussion id={id} />
+
+                  <Box mt='2rem'>
+                     {postDetail.comments.map((cmt) => (
+                        <CommentItem key={nanoid()} text={htmlToJsx(cmt)} />
+                     ))}
+                  </Box>
                </Box>
             )}
          </Box>
