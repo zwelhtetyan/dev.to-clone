@@ -1,12 +1,10 @@
 import * as React from 'react';
 import ReactMde from 'react-mde';
-import * as Showdown from 'showdown';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 import { setMDEValue } from '../store/publishPost';
 import { useDispatch } from 'react-redux';
 import { getDefaultToolbarCommands } from 'react-mde';
-import { FaImage } from 'react-icons/fa';
-import { Box, Input } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { removeImage, uploadImage } from '../lib/api';
 import {
@@ -15,13 +13,8 @@ import {
 } from '../helper/localStorage';
 import '../styles/markdown.scss';
 import { setCommentVal } from '../store/comment';
-
-const converter = new Showdown.Converter({
-   tables: true,
-   simplifiedAutoLink: true,
-   strikethrough: true,
-   tasklists: true,
-});
+import converter from '../helper/converter';
+import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -38,7 +31,7 @@ const codeBlock = {
 };
 
 const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
-   const [value, setValue] = React.useState(MDEValue?.write || '');
+   const [value, setValue] = React.useState(MDEValue || '');
    const [selectedTab, setSelectedTab] = React.useState('write');
    const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
       JSON.parse(localStorage.getItem('uploadedMDEImg')) || []
@@ -48,14 +41,9 @@ const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
 
    React.useEffect(() => {
       if (where === 'CREATE_POST') {
-         dispatch(
-            setMDEValue({
-               write: value,
-               preview: converter.makeHtml(value),
-            })
-         );
+         dispatch(setMDEValue(value));
       } else if (where === 'DISCUSSION') {
-         dispatch(setCommentVal(converter.makeHtml(value)));
+         dispatch(setCommentVal(value));
       }
    }, [value, dispatch, where]);
 
@@ -63,15 +51,20 @@ const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
       saveToLocalStorage('uploadedMDEImg', JSON.stringify(uploadedMDEImg));
    }, [uploadedMDEImg]);
 
-   if (isSubmitting) {
+   React.useEffect(() => {
+      setValue(MDEValue);
+   }, [MDEValue]);
+
+   if (isSubmitting && uploadedMDEImg.length !== 0) {
       // eslint-disable-next-line array-callback-return
       uploadedMDEImg.map((img) => {
          console.log('map render');
-         if (!MDEValue?.write.includes(img.url)) {
+         if (!MDEValue?.includes(img.url)) {
             removeImage(img.path).catch((err) => console.log(err));
          }
       });
 
+      setUploadedMdeImg([]);
       removeFromLocalStorage('uploadedMDEImg');
    }
 
@@ -80,7 +73,7 @@ const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
       if (image) {
          document.querySelector('.mde-text').disabled = true;
          setUploadingMDEImg(true);
-         setValue((prevVal) => prevVal + 'loading...');
+         setValue((prevVal) => prevVal.replace('🌌img_url', 'uploading...'));
 
          const selectedImgPath = `images/${img.name}${nanoid()}`;
 
@@ -88,7 +81,7 @@ const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
             .then((url) => {
                document.querySelector('.mde-text').disabled = false;
                setValue((prevVal) =>
-                  prevVal.replace('loading...', `\n![](${url})`)
+                  prevVal.replace('uploading...', `![](${url})`)
                );
                setUploadedMdeImg((prevArr) => [
                   ...prevArr,
@@ -103,20 +96,10 @@ const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
    };
 
    const img = {
-      name: 'image-url',
-      icon: () => (
-         <Box as='label' m='0' cursor='pointer' pt='1' display='block'>
-            <Input
-               display='none'
-               type='file'
-               accept='image/jpeg, image/png, image/jpg , image/webp, image/gif'
-               onChange={mdeImgUploadHandler}
-            />
-            <FaImage size={17} />
-         </Box>
-      ),
+      name: 'image_url',
+      icon: () => <MDEToolbarImgIcon onChange={mdeImgUploadHandler} />,
       execute: (opts) => {
-         opts.textApi.replaceSelection('');
+         opts.textApi.replaceSelection('🌌img_url');
       },
    };
 
@@ -136,7 +119,7 @@ const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
             loadingPreview='loading...'
             minPreviewHeight={height - 10}
             generateMarkdownPreview={(markdown) =>
-               Promise.resolve(converter.makeHtml(markdown))
+               Promise.resolve(converter().makeHtml(markdown))
             }
          />
       </Box>

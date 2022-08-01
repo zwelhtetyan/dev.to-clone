@@ -7,8 +7,10 @@ import PostItem from './PostItem';
 
 const AllPost = () => {
    const [allPostData, setAllPostData] = useState([]);
+   const [loading, setLoading] = useState(false);
 
    const getAllPosts = () => {
+      setLoading(true);
       const colRef = collection(db, 'posts');
       const q = query(colRef, orderBy('createdAt', 'desc'));
       onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
@@ -18,6 +20,7 @@ const AllPost = () => {
                newData.push({ ...doc.data(), id: doc.id });
             });
             setAllPostData(newData);
+            setLoading(false);
          }
       });
    };
@@ -30,7 +33,16 @@ const AllPost = () => {
 
    return (
       <Box mt={{ base: '0', md: '2rem' }}>
-         {allPostData.length !== 0 ? (
+         {loading && (
+            <>
+               <AllPostSkeletons />
+               <AllPostSkeletons />
+               <AllPostSkeletons />
+            </>
+         )}
+
+         {allPostData.length !== 0 &&
+            !loading &&
             allPostData.map((postData) => (
                <PostItem
                   key={postData.id}
@@ -39,14 +51,7 @@ const AllPost = () => {
                   title={postData.title}
                   tags={postData.filteredTags}
                />
-            ))
-         ) : (
-            <>
-               <AllPostSkeletons />
-               <AllPostSkeletons />
-               <AllPostSkeletons />
-            </>
-         )}
+            ))}
       </Box>
    );
 };

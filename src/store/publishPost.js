@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-   MDEValue: { write: '', preview: '' },
+   MDEValue: '',
    cvImg: null,
    filteredTags: [],
 };

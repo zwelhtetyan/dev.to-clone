@@ -1,8 +1,10 @@
 import { HStack, Spinner, VStack } from '@chakra-ui/react';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../firebase';
+import converter from '../../helper/converter';
+import { setCommentVal } from '../../store/comment';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
 
@@ -12,12 +14,11 @@ const DiscussionBox = ({ id }) => {
    const [uploadingMDEImg, setUploadingMDEImg] = useState(false);
 
    const commentVal = useSelector((state) => state.comment.commentVal);
-
-   const value = document.querySelector('.mde-text')?.value;
+   const dispatch = useDispatch();
 
    useEffect(() => {
-      setHasValue(value?.trim().length !== 0);
-   }, [value]);
+      setHasValue(commentVal?.trim().length !== 0);
+   }, [commentVal]);
 
    const handleSubmit = (e) => {
       e.preventDefault();
@@ -27,14 +28,11 @@ const DiscussionBox = ({ id }) => {
 
       const updateComments = async () => {
          await updateDoc(docRef, {
-            comments: arrayUnion(commentVal),
+            comments: arrayUnion(converter().makeHtml(commentVal)),
          });
 
          setSubmitting(false);
-         // console.log(commentVal);
-
-         document.querySelector('.mde-text').value = '';
-         console.log(document.querySelector('.mde-text').value);
+         dispatch(setCommentVal(''));
       };
 
       updateComments().catch((err) => {
@@ -52,12 +50,12 @@ const DiscussionBox = ({ id }) => {
          overflow='hidden'
       >
          <MDE
-            MDEValue={null}
+            MDEValue={commentVal}
             where='DISCUSSION'
             height={150}
             setHasValue={setHasValue}
-            setUploadingMDEImg={setUploadingMDEImg}
             isSubmitting={submitting}
+            setUploadingMDEImg={setUploadingMDEImg}
          />
          <HStack
             justify='flex-end'

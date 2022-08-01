@@ -22,6 +22,7 @@ import ModalAlert from '../components/Modla';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import converter from '../helper/converter';
 
 const CreatePost = () => {
    //scroll top
@@ -44,9 +45,9 @@ const CreatePost = () => {
             MDEValue: '',
          }
    );
-   const [title, setTitle] = useState(postData.title || '');
    const [publishing, setPublishing] = useState(false);
    const [uploadingMDEImg, setUploadingMDEImg] = useState(false);
+   const [title, setTitle] = useState(postData.title || '');
 
    useEffect(() => {
       const newData = {
@@ -59,7 +60,7 @@ const CreatePost = () => {
       setPostData(newData);
       const saveToLS = setTimeout(
          () => saveToLocalStorage('postData', JSON.stringify(newData)),
-         1000
+         500
       );
 
       return () => clearTimeout(saveToLS);
@@ -71,7 +72,7 @@ const CreatePost = () => {
       setPublishing(true);
       await addDoc(collection(db, 'posts'), {
          ...postData,
-         MDEValue: postData.MDEValue.preview,
+         MDEValue: converter().makeHtml(postData.MDEValue),
          cvImg: postData.cvImg.url,
          createdAt: serverTimestamp(),
          comments: [],
@@ -123,9 +124,9 @@ const CreatePost = () => {
             <Box mt='1.5rem !important' w='100%' mb='1rem !important'>
                <MDE
                   MDEValue={postData.MDEValue}
-                  isSubmitting={publishing}
                   height={250}
                   where='CREATE_POST'
+                  isSubmitting={publishing}
                   setUploadingMDEImg={setUploadingMDEImg}
                />
             </Box>
