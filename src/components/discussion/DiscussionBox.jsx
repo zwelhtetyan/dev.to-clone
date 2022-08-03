@@ -1,5 +1,11 @@
 import { HStack, Spinner, VStack } from '@chakra-ui/react';
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import {
+   arrayUnion,
+   doc,
+   serverTimestamp,
+   Timestamp,
+   updateDoc,
+} from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../firebase';
@@ -8,7 +14,7 @@ import { setCommentVal } from '../../store/comment';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
 
-const DiscussionBox = ({ id }) => {
+const DiscussionBox = ({ id, comments }) => {
    const [submitting, setSubmitting] = useState(false);
    const [hasValue, setHasValue] = useState(false);
    const [uploadingMDEImg, setUploadingMDEImg] = useState(false);
@@ -27,8 +33,15 @@ const DiscussionBox = ({ id }) => {
       const docRef = doc(db, 'posts', id);
 
       const updateComments = async () => {
+         const createdAt = Timestamp.now();
          await updateDoc(docRef, {
-            comments: arrayUnion(converter().makeHtml(commentVal)),
+            comments: [
+               ...comments,
+               {
+                  value: converter().makeHtml(commentVal),
+                  createdAt,
+               },
+            ],
          });
 
          setSubmitting(false);

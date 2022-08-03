@@ -4,7 +4,7 @@ import logo from '../assets/logo/logo.png';
 import { Box, Heading, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 
-const Hero = ({ display, isLogo }) => {
+const Hero = ({ display, isLogo, w }) => {
    const fontSize = ['1.3rem', '1.3rem', '2rem'];
 
    return (
@@ -32,8 +32,8 @@ const Hero = ({ display, isLogo }) => {
             </Box>
          </HStack>
          <VStack w='100%'>
-            <PrimaryBtn w='50%'>Create Account</PrimaryBtn>
-            <SecondaryBtn w='50%'>Log in</SecondaryBtn>
+            <PrimaryBtn w={w || '50%'}>Create Account</PrimaryBtn>
+            <SecondaryBtn w={w || '50%'}>Log in</SecondaryBtn>
          </VStack>
       </VStack>
    );

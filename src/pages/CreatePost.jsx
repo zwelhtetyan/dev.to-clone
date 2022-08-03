@@ -76,6 +76,9 @@ const CreatePost = () => {
          cvImg: postData.cvImg.url,
          createdAt: serverTimestamp(),
          comments: [],
+         readTime: Math.ceil(
+            converter().makeHtml(postData.MDEValue).split(' ').length / 200
+         ),
       });
       navigate('/');
       setPublishing(false);
@@ -111,7 +114,7 @@ const CreatePost = () => {
             <Input
                variant='unstyled'
                placeholder='New post title here...'
-               fontSize='2.5rem'
+               fontSize={{ base: '2rem', md: '2.5rem' }}
                fontWeight='700'
                value={title}
                required
@@ -133,7 +136,10 @@ const CreatePost = () => {
 
             <HStack justify='flex-end' w='100%'>
                <SecondaryBtn>Save Draft</SecondaryBtn>
-               <PrimaryBtn type='submit' disabled={uploadingMDEImg}>
+               <PrimaryBtn
+                  type='submit'
+                  disabled={uploadingMDEImg || publishing}
+               >
                   {publishing ? (
                      <>
                         <Spinner size='sm' mr='1' /> Publishing

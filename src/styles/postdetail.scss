@@ -1,10 +1,10 @@
 .display_MDEValue {
-   font-size: 19px;
+   font-size: 18px;
    letter-spacing: 0.5px;
    word-spacing: 2px;
 
    @media screen and (max-width: 480px) {
-      font-size: 17px;
+      font-size: 16px;
       letter-spacing: 0.3px;
       word-spacing: 1px;
    }
@@ -26,11 +26,14 @@
       overflow-x: auto;
       background-color: black;
       color: white;
-      //   color: #2ceb2c;
       border-radius: 5px;
       padding: 0.5rem;
       margin: 1rem 0;
-      font-size: 16px;
+      font-size: 15px;
+
+      @media screen and (max-width: 480px) {
+         font-size: 14px;
+      }
    }
 
    p code {
@@ -38,12 +41,13 @@
    }
 
    p strong {
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       display: inline-block;
       margin-top: 0.7rem;
+      line-height: 2rem;
 
       @media screen and (max-width: 768px) {
-         font-size: 1.5rem;
+         font-size: 1.3rem;
       }
    }
 
@@ -53,10 +57,11 @@
    }
 
    h3 {
-      font-size: 2rem;
+      font-size: 1.7rem;
       font-weight: 900;
       line-height: 1;
       margin-top: 0.7rem;
+      margin-bottom: 0.3rem;
    }
 }
 

@@ -1,13 +1,16 @@
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
-import { RiMoreLine } from 'react-icons/ri';
 import CustomAvatar from '../utils/Avatar';
 import { ReactionButton } from '../utils/Buttons';
 import z from '../assets/images/z.jpeg';
 import heart from '../assets/logo/heart.svg';
+import red_heart from '../assets/logo/red_heart.svg';
 import comment from '../assets/logo/comment.svg';
+import Moment from 'react-moment';
+import { calTimeStamp } from '../helper/calcTimestamp';
+import OptionBtn from '../utils/OptionBtn';
 
-const CommentItem = ({ text }) => {
+const CommentItem = ({ text, createdAt }) => {
    return (
       <VStack mb='1rem'>
          <HStack align='flex-start' w='100%'>
@@ -34,21 +37,18 @@ const CommentItem = ({ text }) => {
                         color='gray'
                         fontSize='12px'
                      >
-                        a few second ago
-                        {/* <Moment></Moment> */}
+                        <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
                      </Text>
                   </Text>
 
-                  <Box cursor='pointer'>
-                     <RiMoreLine size={19} color='gray' />
-                  </Box>
+                  <OptionBtn size={19} />
                </HStack>
                <Box fontSize={{ base: '15px', sm: '16px' }}>{text}</Box>
             </Box>
          </HStack>
          <HStack justify='flex-start' w='100%' ps='43px'>
-            <ReactionButton icon={heart} text='11 likes' />
-            <ReactionButton icon={comment} text='11 likes' />
+            <ReactionButton icon={heart} value={11} text='like' />
+            <ReactionButton icon={comment} value={1} text='reply' />
          </HStack>
       </VStack>
    );

@@ -14,7 +14,7 @@ const Layout = ({ children }) => {
       const mainNav = document.getElementById('main_nav');
       const footer = document.getElementById('footer');
 
-      if (pathname === '/create-post') {
+      if (pathname === '/create-post' || pathname.includes('/preview/')) {
          mainNav.style.display = 'none';
          footer.style.display = 'none';
       } else if (pathname.includes('/details/')) {

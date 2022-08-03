@@ -26,7 +26,7 @@ const SideMenu = () => {
 
          <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
             <DrawerOverlay />
-            <DrawerContent maxW='270px' pt='60px'>
+            <DrawerContent maxW='260px' pt='60px'>
                <DrawerHeader
                   padding='.9rem .5rem 0'
                   pb='0px'
@@ -44,7 +44,7 @@ const SideMenu = () => {
                </DrawerHeader>
 
                <DrawerBody p='0.5'>
-                  <Hero />
+                  <Hero w='80%' />
                </DrawerBody>
             </DrawerContent>
          </Drawer>

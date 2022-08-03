@@ -34,12 +34,22 @@ export const PrimaryBtn = ({
    );
 };
 
-export const SecondaryBtn = ({ children, w, display, onClick, color }) => {
+export const SecondaryBtn = ({
+   children,
+   w,
+   display,
+   onClick,
+   color,
+   size,
+   m,
+}) => {
    return (
       <Button
          variant='ghost'
          fontWeight='400'
          color={color}
+         m={m}
+         size={size}
          type='button'
          _hover={{
             bg: 'rgb(59 73 223 / 10%)',
@@ -55,7 +65,7 @@ export const SecondaryBtn = ({ children, w, display, onClick, color }) => {
    );
 };
 
-export const ReactionButton = ({ icon, text }) => {
+export const ReactionButton = ({ icon, value, text }) => {
    return (
       <Button
          h='30px'
@@ -65,13 +75,16 @@ export const ReactionButton = ({ icon, text }) => {
          _hover={{ bg: 'rgb(0 0 0 / 4%)' }}
          _active={{ bg: 'rgb(0 0 0 / 4%)' }}
       >
-         <Image src={icon} mr={{ base: 'none', md: '4px' }} />
-         <Text
-            fontWeight={400}
-            fontSize='14px'
-            display={{ base: 'none', md: 'block' }}
-         >
-            {text}
+         <Image src={icon} mr={1} />
+         <Text fontWeight={400} fontSize='14px'>
+            {value}{' '}
+            <Text as='span' display={{ base: 'none', md: 'inline-block' }}>
+               {value > 1
+                  ? text.substr(text.length - 1, text.length) === 'y'
+                     ? text.replace('y', 'ies')
+                     : text + 's'
+                  : text}
+            </Text>
          </Text>
       </Button>
    );

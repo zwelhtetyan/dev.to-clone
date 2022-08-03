@@ -10,16 +10,26 @@ import {
    Input,
    InputGroup,
    InputRightElement,
+   Menu,
+   MenuButton,
+   MenuDivider,
+   MenuList,
 } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import SideMenu from './SideMenu';
 import CustomAvatar from '../utils/Avatar';
+import CustomMenuItem from '../utils/CustomMenuItem';
 
 const MainNavigation = () => {
    const navigate = useNavigate();
 
    const backToHome = () => {
       navigate('/');
+      window.scrollTo(0, 0);
+   };
+
+   const goToCreatePost = () => {
+      navigate('/create-post');
       window.scrollTo(0, 0);
    };
 
@@ -75,12 +85,34 @@ const MainNavigation = () => {
 
                <PrimaryBtn
                   display={{ base: 'none', md: 'block' }}
-                  onClick={() => navigate('/create-post')}
+                  onClick={goToCreatePost}
                >
                   Creart Post
                </PrimaryBtn>
 
-               <CustomAvatar name='Zwel' src={z} size='40px' />
+               <Menu autoSelect={false}>
+                  <MenuButton
+                     _hover={{
+                        filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))',
+                     }}
+                     transition='.1s'
+                  >
+                     <CustomAvatar name='Zwel' src={z} size='40px' />
+                  </MenuButton>
+
+                  <MenuList p='.5rem'>
+                     <CustomMenuItem>Zwel Htet Yan</CustomMenuItem>
+                     <MenuDivider />
+                     <CustomMenuItem>Dashboard</CustomMenuItem>
+                     <CustomMenuItem onClick={goToCreatePost}>
+                        Create Post
+                     </CustomMenuItem>
+                     <CustomMenuItem>Reading List</CustomMenuItem>
+                     <CustomMenuItem>Setting</CustomMenuItem>
+                     <MenuDivider />
+                     <CustomMenuItem>Sign Out</CustomMenuItem>
+                  </MenuList>
+               </Menu>
             </HStack>
          </HStack>
       </HStack>

@@ -19,7 +19,7 @@ import { calTimeStamp } from '../../helper/calcTimestamp';
 import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/Avatar';
 
-const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
+const PostItem = ({ coverImg, createdAt, title, tags, id, readTime }) => {
    const navigate = useNavigate();
 
    const handleNavigate = (e) => {
@@ -52,27 +52,29 @@ const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
             />
          )}
          <Box p={{ base: '.5rem', md: '1.5rem' }}>
-            <HStack>
-               <CustomAvatar
-                  name='Zwel'
-                  src={z}
-                  size='40px'
-                  onClick={handleViewProfile}
-               />
-               <Box>
-                  <Text
-                     fontWeight={600}
-                     lineHeight={1}
-                     _hover={{ opacity: '.8' }}
+            <HStack align='flex-start'>
+               <HStack>
+                  <CustomAvatar
+                     name='Zwel'
+                     src={z}
+                     size='40px'
                      onClick={handleViewProfile}
-                     fontSize={{ base: '15px', md: '16px' }}
-                  >
-                     Zwel Htet Yan
-                  </Text>
-                  <Text fontSize='13px' color='gray'>
-                     <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
-                  </Text>
-               </Box>
+                  />
+                  <Box>
+                     <Text
+                        fontWeight={600}
+                        lineHeight={1}
+                        _hover={{ opacity: '.8' }}
+                        onClick={handleViewProfile}
+                        fontSize={{ base: '15px', md: '16px' }}
+                     >
+                        Zwel Htet Yan
+                     </Text>
+                     <Text fontSize='13px' color='gray'>
+                        <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
+                     </Text>
+                  </Box>
+               </HStack>
             </HStack>
 
             <VStack
@@ -103,12 +105,12 @@ const PostItem = ({ coverImg, createdAt, title, tags, id }) => {
 
                <HStack justify='space-between' w='100%'>
                   <HStack>
-                     <ReactionButton icon={heart} text='Reactions' />
-                     <ReactionButton icon={comment} text='Comments' />
+                     <ReactionButton icon={heart} value={11} text='Reaction' />
+                     <ReactionButton icon={comment} value={11} text='Comment' />
                   </HStack>
 
                   <Text fontSize='13px' color='gray'>
-                     2 min read
+                     {readTime} min read
                   </Text>
                </HStack>
             </VStack>

@@ -50,6 +50,7 @@ const AllPost = () => {
                   createdAt={postData.createdAt}
                   title={postData.title}
                   tags={postData.filteredTags}
+                  readTime={postData.readTime}
                />
             ))}
       </Box>

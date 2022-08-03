@@ -2,13 +2,13 @@ import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
 import DiscussionBox from './DiscussionBox';
 
-const Discussion = ({ id }) => {
+const Discussion = ({ id, comments }) => {
    return (
-      <Box mt='1.5rem' className='discussion'>
+      <Box mt='1.5rem'>
          <Heading fontSize={{ base: '1.7rem', md: '2rem' }} mb={3}>
-            Discussion
+            Discussion ( {comments.length} )
          </Heading>
-         <DiscussionBox id={id} />
+         <DiscussionBox id={id} comments={comments} />
       </Box>
    );
 };
