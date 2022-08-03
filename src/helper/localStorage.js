@@ -7,5 +7,5 @@ export const removeFromLocalStorage = (key) => {
 };
 
 export const getItemFromLocalStorage = (key) => {
-   return localStorage.getItem(key);
+   return JSON.parse(localStorage.getItem(key));
 };

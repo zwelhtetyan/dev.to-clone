@@ -14,7 +14,7 @@ const Footer = () => {
    return (
       <VStack
          bg='rgb(229 229 229)'
-         p='3rem .5rem'
+         p={{ base: '2rem .5rem', md: '3rem .5rem' }}
          color='rgb(64 64 64)'
          fontSize='14px'
          fontWeight='300'

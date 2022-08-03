@@ -1,11 +1,5 @@
 import { HStack, Spinner, VStack } from '@chakra-ui/react';
-import {
-   arrayUnion,
-   doc,
-   serverTimestamp,
-   Timestamp,
-   updateDoc,
-} from 'firebase/firestore';
+import { doc, Timestamp, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../firebase';

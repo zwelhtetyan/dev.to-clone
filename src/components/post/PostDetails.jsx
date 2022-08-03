@@ -24,10 +24,13 @@ import { nanoid } from 'nanoid';
 import CommentItem from '../CommentItem';
 import '../../styles/postdetail.scss';
 import ManangePost from '../ManangePost';
+import { useDispatch } from 'react-redux';
+import { setCurrentPostData } from '../../store/currentPost';
 
 const PostDetails = () => {
    const { id } = useParams();
    const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    //states
    const [postDetail, setPostDetail] = useState(null);
@@ -45,12 +48,22 @@ const PostDetails = () => {
                setErr(true);
                return;
             }
-            setPostDetail(snapshot.data());
+            const data = snapshot.data();
+            setPostDetail(data);
+            dispatch(
+               setCurrentPostData({
+                  cvImg: data.cvImg,
+                  title: data.title,
+                  filteredTags: data.filteredTags,
+                  MDEValue: data.MDEValue,
+                  id,
+               })
+            );
          }
       });
 
       //onshapshot fire before submitting is finished , that's a reason to add => { includeMetadataChanges: true }
-   }, [id]);
+   }, [id, dispatch]);
 
    console.log('post detail run');
 
@@ -111,10 +124,10 @@ const PostDetails = () => {
                         </Box>
                      </HStack>
 
-                     <ManangePost postId={id} />
+                     <ManangePost />
                   </HStack>
 
-                  <Heading my={2}>{postDetail.title}</Heading>
+                  <Heading mt={2}>{postDetail.title}</Heading>
 
                   <Wrap py={2} spacing={2}>
                      {postDetail.filteredTags.map((tag) => (

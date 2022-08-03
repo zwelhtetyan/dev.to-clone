@@ -8,6 +8,7 @@ import { Box } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import { removeImage, uploadImage } from '../lib/api';
 import {
+   getItemFromLocalStorage,
    removeFromLocalStorage,
    saveToLocalStorage,
 } from '../helper/localStorage';
@@ -34,7 +35,7 @@ const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
    const [value, setValue] = React.useState(MDEValue || '');
    const [selectedTab, setSelectedTab] = React.useState('write');
    const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
-      JSON.parse(localStorage.getItem('uploadedMDEImg')) || []
+      getItemFromLocalStorage('uploadedMDEImg') || []
    );
 
    const dispatch = useDispatch();

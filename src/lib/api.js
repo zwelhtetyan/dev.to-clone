@@ -25,6 +25,6 @@ export const deletePost = async (id) => {
    const docRef = doc(db, 'posts', id);
 
    deleteDoc(docRef)
-      .then((res) => console.log('deleted post successfully'))
+      .then((_) => console.log('deleted post successfully'))
       .catch((err) => console.log(err));
 };
