@@ -8,20 +8,19 @@ import Option from '../assets/logo/Option';
 const SideReactionBar = () => {
    return (
       <Flex
-         bg={{ base: 'white', md: 'transparent' }}
-         borderRight={{ base: 'none', md: '1px solid #E5E5E5' }}
+         bg={{ base: 'white', md: '#f5f5f5' }}
          boxShadow={{ base: '0 -1px 5px rgba(0,0,0,0.2)', md: 'none' }}
          height={{ base: '3.5rem', md: '100vh' }}
-         width={{ base: '100vw', md: '5rem' }}
-         position='fixed'
-         top={{ base: 'unset', md: '0' }}
+         width={{ base: '100vw', md: '50px' }}
+         position={{ base: 'fixed', md: 'sticky' }}
          bottom={{ base: '0', md: 'unset' }}
-         left={{ base: 0, md: 'unset' }}
-         zIndex='1'
+         left='0'
+         top={{ base: 'unset', md: '4rem' }}
+         pt={{ base: '0', md: '2rem' }}
+         zIndex='2'
          direction={{ base: 'row', md: 'column' }}
          align='center'
          justify={{ base: 'space-around', md: 'flex-start' }}
-         pt={{ base: '0', md: '5rem' }}
          gap='1rem'
       >
          <Flex direction={{ base: 'row', md: 'column' }} align='center'>

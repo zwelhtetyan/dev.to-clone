@@ -1,7 +1,7 @@
 import { Box } from '@chakra-ui/react';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
-import { db } from '../../firebase';
+import { db } from '../../config/firebase';
 import AllPostSkeletons from '../skeletons/AllPostSkeletons';
 import PostItem from './PostItem';
 

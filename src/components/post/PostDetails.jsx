@@ -2,6 +2,7 @@ import {
    Avatar,
    Box,
    Divider,
+   Flex,
    Heading,
    HStack,
    Image,
@@ -13,7 +14,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import Moment from 'react-moment';
 import { useNavigate, useParams } from 'react-router-dom';
-import { db } from '../../firebase';
+import { db } from '../../config/firebase';
 import LangTag from '../../utils/LangTag';
 import z from '../../assets/images/z.jpeg';
 import { calTimeStamp } from '../../helper/calcTimestamp';
@@ -26,6 +27,8 @@ import '../../styles/postdetail.scss';
 import ManangePost from '../ManangePost';
 import { useDispatch } from 'react-redux';
 import { setCurrentPostData } from '../../store/currentPost';
+import SideReactionBar from '../SideReactionBar';
+import converter from '../../helper/converter';
 
 const PostDetails = () => {
    const { id } = useParams();
@@ -37,6 +40,7 @@ const PostDetails = () => {
    const [loading, setLoading] = useState(false);
    const [err, setErr] = useState(false);
 
+   //get single document
    useEffect(() => {
       const docRef = doc(db, 'posts', id);
 
@@ -49,13 +53,14 @@ const PostDetails = () => {
                return;
             }
             const data = snapshot.data();
+            setErr(true);
+
             setPostDetail(data);
             dispatch(
                setCurrentPostData({
-                  cvImg: data.cvImg,
-                  title: data.title,
-                  filteredTags: data.filteredTags,
-                  MDEValue: data.MDEValue,
+                  ...data,
+                  createdAt: null,
+                  comments: [],
                   id,
                })
             );
@@ -85,79 +90,88 @@ const PostDetails = () => {
    }, [postDetail, navigate, id]);
 
    return (
-      <Box
-         maxW='650px'
-         m='auto'
-         bg='white'
-         border={{ base: 'none', md: '1px solid #E5E5E5' }}
-         borderRadius='5px'
-      >
-         {postDetail?.cvImg && (
-            <Image
-               src={postDetail.cvImg}
-               alt='cover_image'
-               maxH='300px'
-               width='100%'
-               borderTopLeftRadius='5px'
-               borderTopRightRadius='5px'
-               objectFit='cover'
-            />
-         )}
+      <Flex align='flex-start'>
+         {postDetail && <SideReactionBar />}
 
-         <Box px={{ base: '.5rem', md: '2.5rem' }} pb='2rem'>
-            {!postDetail && loading && <DetailSkeleton />}
-            {!loading && err && <h1>Error</h1>}
-            {postDetail && (
-               <Box>
-                  <HStack justify='space-between'>
-                     <HStack pt={3}>
-                        <Avatar name='Zwel' src={z} w='40px' h='40px' />
-                        <Box>
-                           <Text fontWeight={600} lineHeight={1}>
-                              Zwel Htet Yan
-                           </Text>
-                           <Text fontSize='13px' color='gray'>
-                              <Moment fromNow>
-                                 {calTimeStamp(postDetail.createdAt)}
-                              </Moment>
-                           </Text>
-                        </Box>
+         <Box
+            maxW='650px'
+            w='100%'
+            margin='0 auto !important'
+            bg='white'
+            border={{ base: 'none', md: '1px solid #E5E5E5' }}
+            borderRadius='5px'
+         >
+            {/* coverImgae */}
+            {postDetail?.cvImg.url && (
+               <Image
+                  src={postDetail.cvImg.url}
+                  alt='cover_image'
+                  maxH='300px'
+                  width='100%'
+                  borderTopLeftRadius='5px'
+                  borderTopRightRadius='5px'
+                  objectFit='cover'
+               />
+            )}
+
+            {/* content */}
+            <Box px={{ base: '.5rem', md: '2.5rem' }} pb='2rem'>
+               {!postDetail && loading && <DetailSkeleton />}
+
+               {!loading && err && <h1>Error</h1>}
+
+               {postDetail && (
+                  <Box>
+                     <HStack justify='space-between'>
+                        <HStack pt={3}>
+                           <Avatar name='Zwel' src={z} w='40px' h='40px' />
+                           <Box>
+                              <Text fontWeight={600} lineHeight={1}>
+                                 Zwel Htet Yan
+                              </Text>
+                              <Text fontSize='13px' color='gray'>
+                                 <Moment fromNow>
+                                    {calTimeStamp(postDetail.createdAt)}
+                                 </Moment>
+                              </Text>
+                           </Box>
+                        </HStack>
+
+                        <ManangePost />
                      </HStack>
 
-                     <ManangePost />
-                  </HStack>
+                     <Heading mt={2}>{postDetail.title}</Heading>
 
-                  <Heading mt={2}>{postDetail.title}</Heading>
+                     <Wrap py={2} spacing={2}>
+                        {postDetail.filteredTags.map((tag) => (
+                           <WrapItem key={tag.id}>
+                              <LangTag tag={tag} />
+                           </WrapItem>
+                        ))}
+                     </Wrap>
 
-                  <Wrap py={2} spacing={2}>
-                     {postDetail.filteredTags.map((tag) => (
-                        <WrapItem key={tag.id}>
-                           <LangTag tag={tag} />
-                        </WrapItem>
-                     ))}
-                  </Wrap>
+                     <Text as='div' className='display_MDEValue'>
+                        {htmlToJsx(converter().makeHtml(postDetail.MDEValue))}
+                     </Text>
 
-                  <Text as='div' className='display_MDEValue'>
-                     {htmlToJsx(postDetail.MDEValue)}
-                  </Text>
+                     <Divider mt={5} w='90%' mx='auto' />
 
-                  <Divider mt={5} w='90%' mx='auto' />
+                     <Discussion id={id} comments={postDetail.comments} />
 
-                  <Discussion id={id} comments={postDetail.comments} />
-
-                  <Box mt='2rem' className='comments_container'>
-                     {postDetail.comments.map((cmt) => (
-                        <CommentItem
-                           key={nanoid()}
-                           text={htmlToJsx(cmt.value)}
-                           createdAt={cmt.createdAt}
-                        />
-                     ))}
+                     <Box mt='2rem' className='comments_container'>
+                        {postDetail.comments.map((cmt) => (
+                           <CommentItem
+                              key={nanoid()}
+                              text={htmlToJsx(cmt.value)}
+                              createdAt={cmt.createdAt}
+                           />
+                        ))}
+                     </Box>
                   </Box>
-               </Box>
-            )}
+               )}
+            </Box>
          </Box>
-      </Box>
+      </Flex>
    );
 };
 

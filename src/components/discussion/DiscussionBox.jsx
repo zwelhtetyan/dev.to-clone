@@ -2,7 +2,7 @@ import { HStack, Spinner, VStack } from '@chakra-ui/react';
 import { doc, Timestamp, updateDoc } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { db } from '../../firebase';
+import { db } from '../../config/firebase';
 import converter from '../../helper/converter';
 import { setCommentVal } from '../../store/comment';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
@@ -73,7 +73,7 @@ const DiscussionBox = ({ id, comments }) => {
             <PrimaryBtn
                type='submit'
                bg='rgb(59 73 223)'
-               disabled={!hasValue || uploadingMDEImg}
+               disabled={!hasValue || uploadingMDEImg || submitting}
             >
                {submitting ? (
                   <>

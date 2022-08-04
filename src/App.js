@@ -6,6 +6,7 @@ import { Box } from '@chakra-ui/react';
 import ViewPost from './pages/ViewPost';
 import PreviewImg from './pages/PreviewImg';
 import DeleteConfirm from './components/DeleteConfirm';
+import EditPost from './pages/EditPost';
 
 const App = () => {
    return (
@@ -14,8 +15,9 @@ const App = () => {
             <Routes>
                <Route path='/' element={<Home />} />
                <Route path='create-post' element={<CreatePost />} />
+               <Route path='edit-post' element={<EditPost />} />
                <Route path='details/:id' element={<ViewPost />} />
-               <Route path='/delete_confirm' element={<DeleteConfirm />} />
+               <Route path='delete_confirm' element={<DeleteConfirm />} />
                <Route path='preview/:url' element={<PreviewImg />} />
                <Route path='*' element={<h1>Page not found!</h1>} />
             </Routes>

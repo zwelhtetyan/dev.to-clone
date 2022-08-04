@@ -53,7 +53,7 @@ const MainNavigation = () => {
                   h='40px'
                   src={logo}
                   alt='logo'
-                  ms='.5rem'
+                  ms={{ base: '.5rem', md: '0' }}
                   onClick={backToHome}
                   cursor='pointer'
                />

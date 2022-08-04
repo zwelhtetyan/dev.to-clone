@@ -5,8 +5,9 @@ import tagsData from './LangTagData.json';
 import { useDispatch } from 'react-redux';
 import { setFilteredTagsToStore } from '../../store/publishPost';
 import { Box, Circle, Input, Square, Wrap, WrapItem } from '@chakra-ui/react';
+import { setFilteredTagsToStoreToEdit } from '../../store/editPost';
 
-const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
+const AddLangTag = ({ filteredTagsFromLocalStorage, toEdit }) => {
    //states
    const [tagData, setTagData] = useState(tagsData);
    const [filterTagName, setFilterTagName] = useState('');
@@ -18,8 +19,12 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(setFilteredTagsToStore(filteredTags));
-   }, [filteredTags, dispatch]);
+      if (toEdit) {
+         dispatch(setFilteredTagsToStoreToEdit(filteredTags));
+      } else {
+         dispatch(setFilteredTagsToStore(filteredTags));
+      }
+   }, [filteredTags, dispatch, toEdit]);
 
    //refs
    const inputTagRef = useRef();

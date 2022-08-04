@@ -1,7 +1,6 @@
 import * as React from 'react';
 import ReactMde from 'react-mde';
 import 'react-mde/lib/styles/css/react-mde-all.css';
-import { setMDEValue } from '../store/publishPost';
 import { useDispatch } from 'react-redux';
 import { getDefaultToolbarCommands } from 'react-mde';
 import { Box } from '@chakra-ui/react';
@@ -16,6 +15,8 @@ import '../styles/markdown.scss';
 import { setCommentVal } from '../store/comment';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
+import { setMDEValue } from '../store/publishPost';
+import { setMDEValueToEdit } from '../store/editPost';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -31,7 +32,14 @@ const codeBlock = {
    },
 };
 
-const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
+const MDE = ({
+   MDEValue,
+   where,
+   isSubmitting,
+   height,
+   setUploadingMDEImg,
+   toEdit,
+}) => {
    const [value, setValue] = React.useState(MDEValue || '');
    const [selectedTab, setSelectedTab] = React.useState('write');
    const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
@@ -42,11 +50,17 @@ const MDE = ({ MDEValue, where, isSubmitting, height, setUploadingMDEImg }) => {
 
    React.useEffect(() => {
       if (where === 'CREATE_POST') {
-         dispatch(setMDEValue(value));
+         if (toEdit) {
+            dispatch(setMDEValueToEdit(value));
+            console.log('to edit');
+         } else {
+            dispatch(setMDEValue(value));
+            console.log('to public');
+         }
       } else if (where === 'DISCUSSION') {
          dispatch(setCommentVal(value));
       }
-   }, [value, dispatch, where]);
+   }, [value, dispatch, where, toEdit]);
 
    React.useEffect(() => {
       saveToLocalStorage('uploadedMDEImg', JSON.stringify(uploadedMDEImg));

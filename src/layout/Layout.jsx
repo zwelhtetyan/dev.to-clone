@@ -14,7 +14,11 @@ const Layout = ({ children }) => {
       const mainNav = document.getElementById('main_nav');
       const footer = document.getElementById('footer');
 
-      if (pathname === '/create-post' || pathname.includes('/preview/')) {
+      if (
+         pathname === '/create-post' ||
+         pathname.includes('/preview/') ||
+         pathname === '/edit-post'
+      ) {
          mainNav.style.display = 'none';
          footer.style.display = 'none';
       } else if (pathname.includes('/details/')) {
@@ -30,7 +34,7 @@ const Layout = ({ children }) => {
       <>
          <MainNavigation />
 
-         <Box as='main' p={{ base: '1rem 0.5rem 3rem ', md: '1rem 2rem 5rem' }}>
+         <Box as='main' p={{ base: '1rem 0.5rem 3rem ', md: '1rem 1rem 5rem' }}>
             {children}
          </Box>
 

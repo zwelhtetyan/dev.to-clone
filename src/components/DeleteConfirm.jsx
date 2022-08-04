@@ -1,11 +1,8 @@
 import { Box, Button, HStack, Text, VStack } from '@chakra-ui/react';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {
-   removeFromLocalStorage,
-   saveToLocalStorage,
-} from '../helper/localStorage';
+
 import { deletePost } from '../lib/api';
 
 const DeleteConfirm = () => {
@@ -15,20 +12,14 @@ const DeleteConfirm = () => {
       (state) => state.currentPost.currentPostData
    );
 
-   useEffect(() => {
-      saveToLocalStorage('currentPostData', JSON.stringify(currentPostData));
-   }, [currentPostData]);
-
    const onDelete = () => {
       deletePost(currentPostData.id).then(() => {
          navigate('/');
-         removeFromLocalStorage('currentPostData');
       });
    };
 
    const handleDismiss = () => {
       navigate(-1);
-      removeFromLocalStorage('currentPostData');
    };
 
    return (

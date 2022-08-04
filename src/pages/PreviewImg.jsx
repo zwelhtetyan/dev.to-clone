@@ -16,7 +16,7 @@ const PreviewImg = () => {
          top='0'
          left='0'
       >
-         <Image src={url} maxW='1000px' />
+         <Image src={url} />
       </VStack>
    );
 };
