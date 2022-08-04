@@ -51,6 +51,7 @@ const AllPost = () => {
                   title={postData.title}
                   tags={postData.filteredTags}
                   readTime={postData.readTime}
+                  isUpdated={postData?.isUpdated}
                />
             ))}
       </Box>

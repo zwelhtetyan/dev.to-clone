@@ -19,7 +19,15 @@ import { calTimeStamp } from '../../helper/calcTimestamp';
 import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/Avatar';
 
-const PostItem = ({ coverImg, createdAt, title, tags, id, readTime }) => {
+const PostItem = ({
+   coverImg,
+   createdAt,
+   title,
+   tags,
+   id,
+   readTime,
+   isUpdated,
+}) => {
    const navigate = useNavigate();
 
    const handleNavigate = (e) => {
@@ -61,16 +69,27 @@ const PostItem = ({ coverImg, createdAt, title, tags, id, readTime }) => {
                      onClick={handleViewProfile}
                   />
                   <Box>
+                     <HStack>
+                        <Text
+                           fontWeight={600}
+                           lineHeight={1}
+                           _hover={{ opacity: '.8' }}
+                           onClick={handleViewProfile}
+                           fontSize={{ base: '15px', md: '16px' }}
+                        >
+                           Zwel Htet Yan
+                        </Text>
+                        {isUpdated && (
+                           <Text fontSize='11px' color='gray'>
+                              (updated)
+                           </Text>
+                        )}
+                     </HStack>
                      <Text
-                        fontWeight={600}
-                        lineHeight={1}
-                        _hover={{ opacity: '.8' }}
-                        onClick={handleViewProfile}
-                        fontSize={{ base: '15px', md: '16px' }}
+                        fontSize='13px'
+                        color='gray'
+                        mt={isUpdated ? '-1.5' : '-0.5'}
                      >
-                        Zwel Htet Yan
-                     </Text>
-                     <Text fontSize='13px' color='gray'>
                         <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
                      </Text>
                   </Box>

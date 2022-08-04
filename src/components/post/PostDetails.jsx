@@ -122,14 +122,21 @@ const PostDetails = () => {
 
                {postDetail && (
                   <Box>
-                     <HStack justify='space-between'>
+                     <HStack justify='space-between' wrap='wrap'>
                         <HStack pt={3}>
                            <Avatar name='Zwel' src={z} w='40px' h='40px' />
                            <Box>
-                              <Text fontWeight={600} lineHeight={1}>
-                                 Zwel Htet Yan
-                              </Text>
-                              <Text fontSize='13px' color='gray'>
+                              <HStack>
+                                 <Text fontWeight={600} lineHeight={1}>
+                                    Zwel Htet Yan
+                                 </Text>
+                                 {postDetail.isUpdated && (
+                                    <Text fontSize='11px' color='gray'>
+                                       (updated)
+                                    </Text>
+                                 )}
+                              </HStack>
+                              <Text fontSize='13px' color='gray' mt='-1'>
                                  <Moment fromNow>
                                     {calTimeStamp(postDetail.createdAt)}
                                  </Moment>
