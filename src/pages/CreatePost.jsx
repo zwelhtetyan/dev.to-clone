@@ -8,8 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { createPost, editPost } from '../lib/api';
 import CreatePostFrom from '../components/CreatePostFrom';
 import { getItemFromLocalStorage } from '../helper/localStorage';
-import { setTitleToStoreToEdit } from '../store/editPost';
-import { setTitleToStoreToPublish } from '../store/publishPost';
+import { setTitleToStoreToEdit } from '../store/post/editPost';
+import { setTitleToStoreToPublish } from '../store/post/publishPost';
 
 const CreatePost = ({ currentPostDataToEdit }) => {
    //scroll top
@@ -43,9 +43,9 @@ const CreatePost = ({ currentPostDataToEdit }) => {
    const [titleToEdit, setTitleToEdit] = useState(postDataToEdit?.title || '');
 
    const [publishing, setPublishing] = useState(false);
-   const [uploadingMDEImg, setUploadingMDEImg] = useState(false);
+   const [uploadingImg, setUploadingImg] = useState(false);
 
-   ////////////////////////////////_________________//////////////////////////////
+   /////////////////////////////////////////////////////////////////////////
 
    //update title to redux store
    useEffect(() => {
@@ -76,21 +76,24 @@ const CreatePost = ({ currentPostDataToEdit }) => {
 
    //to public
    useEffect(() => {
-      const newData = {
-         cvImg: postToPublish.cvImg,
-         title: postToPublish.title,
-         filteredTags: postToPublish.filteredTags,
-         MDEValue: postToPublish.MDEValue,
-      };
+      if (!currentPostDataToEdit) {
+         const newData = {
+            cvImg: postToPublish.cvImg,
+            title: postToPublish.title,
+            filteredTags: postToPublish.filteredTags,
+            MDEValue: postToPublish.MDEValue,
+         };
 
-      setPostDataToPublish(newData);
-      const saveToLS = setTimeout(
-         () => saveToLocalStorage('postDataToPublish', JSON.stringify(newData)),
-         500
-      );
+         setPostDataToPublish(newData);
+         const saveToLS = setTimeout(
+            () =>
+               saveToLocalStorage('postDataToPublish', JSON.stringify(newData)),
+            500
+         );
 
-      return () => clearTimeout(saveToLS);
-   }, [postToPublish]);
+         return () => clearTimeout(saveToLS);
+      }
+   }, [postToPublish, currentPostDataToEdit]);
 
    //publish post
    const publishPostHandler = (e) => {
@@ -137,8 +140,8 @@ const CreatePost = ({ currentPostDataToEdit }) => {
          postData={currentPostDataToEdit ? postDataToEdit : postDataToPublish}
          pageTitle={currentPostDataToEdit ? 'Edit' : 'Create'}
          publishing={publishing}
-         uploadingMDEImg={uploadingMDEImg}
-         setUploadingMDEImg={setUploadingMDEImg}
+         uploadingImg={uploadingImg}
+         setUploadingImg={setUploadingImg}
          toEdit={currentPostDataToEdit ? true : false}
       />
    );

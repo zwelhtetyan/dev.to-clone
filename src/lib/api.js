@@ -4,7 +4,7 @@ import {
    deleteDoc,
    doc,
    serverTimestamp,
-   setDoc,
+   updateDoc,
 } from 'firebase/firestore';
 import {
    deleteObject,
@@ -52,11 +52,11 @@ export const deletePost = async (postId) => {
       .catch((err) => console.log(err));
 };
 
-//edit post => replace the whole document
+//edit post => update document without overwriting
 export const editPost = async (postData, postId) => {
    const docRef = doc(db, 'posts', postId);
 
-   await setDoc(docRef, {
+   await updateDoc(docRef, {
       ...postData,
       createdAt: serverTimestamp(),
       readTime: Math.ceil(

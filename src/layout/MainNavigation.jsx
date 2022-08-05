@@ -42,14 +42,15 @@ const MainNavigation = () => {
          sx={{ p: ['.5rem', '0 2rem'] }}
          boxShadow='md'
          zIndex={10000}
-         id='main_nav'
+         top='0'
+         left='0'
       >
          <HStack justify='space-between' width='100%' maxW='1200px' m='auto'>
             <Box display='flex' alignItems='center'>
                <SideMenu />
 
                <Image
-                  w='58px'
+                  w='50px'
                   h='40px'
                   src={logo}
                   alt='logo'

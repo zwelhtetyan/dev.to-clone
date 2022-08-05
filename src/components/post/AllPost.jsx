@@ -1,39 +1,20 @@
+import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
-import { db } from '../../config/firebase';
 import AllPostSkeletons from '../skeletons/AllPostSkeletons';
 import PostItem from './PostItem';
+import { useSelector } from 'react-redux';
 
+// { allPostData, loading, err }
 const AllPost = () => {
-   const [allPostData, setAllPostData] = useState([]);
-   const [loading, setLoading] = useState(false);
-
-   const getAllPosts = () => {
-      setLoading(true);
-      const colRef = collection(db, 'posts');
-      const q = query(colRef, orderBy('createdAt', 'desc'));
-      onSnapshot(q, { includeMetadataChanges: true }, (snapshot) => {
-         if (!snapshot.metadata.hasPendingWrites) {
-            const newData = [];
-            snapshot.docs.forEach((doc) => {
-               newData.push({ ...doc.data(), id: doc.id });
-            });
-            setAllPostData(newData);
-            setLoading(false);
-         }
-      });
-   };
-
-   useEffect(() => {
-      getAllPosts();
-   }, []);
-
-   console.log('all post run');
+   const { allPostData, loading, err } = useSelector(
+      (state) => state.allPostData
+   );
 
    return (
       <Box mt={{ base: '0', md: '2rem' }}>
-         {loading && (
+         {err && <h1>error</h1>}
+
+         {loading && !err && (
             <>
                <AllPostSkeletons />
                <AllPostSkeletons />
@@ -41,8 +22,9 @@ const AllPost = () => {
             </>
          )}
 
-         {allPostData.length !== 0 &&
+         {allPostData &&
             !loading &&
+            !err &&
             allPostData.map((postData) => (
                <PostItem
                   key={postData.id}

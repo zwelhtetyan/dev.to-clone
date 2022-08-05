@@ -15,8 +15,8 @@ import '../styles/markdown.scss';
 import { setCommentVal } from '../store/comment';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
-import { setMDEValue } from '../store/publishPost';
-import { setMDEValueToEdit } from '../store/editPost';
+import { setMDEValue } from '../store/post/publishPost';
+import { setMDEValueToEdit } from '../store/post/editPost';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -35,9 +35,9 @@ const codeBlock = {
 const MDE = ({
    MDEValue,
    where,
-   isSubmitting,
    height,
-   setUploadingMDEImg,
+   isSubmitting,
+   setUploadingImg,
    toEdit,
 }) => {
    const [value, setValue] = React.useState(MDEValue || '');
@@ -87,7 +87,7 @@ const MDE = ({
       const image = e.target.files[0];
       if (image) {
          document.querySelector('.mde-text').disabled = true;
-         setUploadingMDEImg(true);
+         setUploadingImg(true);
          setValue((prevVal) => prevVal.replace('🌌img_url', 'uploading...'));
 
          const selectedImgPath = `images/${img.name}${nanoid()}`;
@@ -102,7 +102,7 @@ const MDE = ({
                   ...prevArr,
                   { url: `![](${url})`, path: selectedImgPath },
                ]);
-               setUploadingMDEImg(false);
+               setUploadingImg(false);
             })
             .catch((err) => console.log(err));
 

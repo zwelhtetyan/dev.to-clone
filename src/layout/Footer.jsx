@@ -13,13 +13,14 @@ const Links = ({ children }) => {
 const Footer = () => {
    return (
       <VStack
-         bg='rgb(229 229 229)'
+         bg='#E5E5E5'
          p={{ base: '2rem .5rem', md: '3rem .5rem' }}
          color='rgb(64 64 64)'
          fontSize='14px'
          fontWeight='300'
          textAlign='center'
-         id='footer'
+         mt={5}
+         as='footer'
       >
          <Text>
             <Links>DEV Community</Links> — A constructive and inclusive social

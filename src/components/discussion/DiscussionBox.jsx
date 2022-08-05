@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../config/firebase';
 import converter from '../../helper/converter';
 import { setCommentVal } from '../../store/comment';
-import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
+import { PrimaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
 
 const DiscussionBox = ({ id, comments }) => {
    const [submitting, setSubmitting] = useState(false);
    const [hasValue, setHasValue] = useState(false);
-   const [uploadingMDEImg, setUploadingMDEImg] = useState(false);
+   const [uploadingImg, setUploadingImg] = useState(false);
 
    const commentVal = useSelector((state) => state.comment.commentVal);
    const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const DiscussionBox = ({ id, comments }) => {
             height={150}
             setHasValue={setHasValue}
             isSubmitting={submitting}
-            setUploadingMDEImg={setUploadingMDEImg}
+            setUploadingImg={setUploadingImg}
          />
          <HStack
             justify='flex-end'
@@ -73,7 +73,7 @@ const DiscussionBox = ({ id, comments }) => {
             <PrimaryBtn
                type='submit'
                bg='rgb(59 73 223)'
-               disabled={!hasValue || uploadingMDEImg || submitting}
+               disabled={!hasValue || uploadingImg || submitting}
             >
                {submitting ? (
                   <>

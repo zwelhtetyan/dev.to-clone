@@ -12,11 +12,11 @@ import { nanoid } from 'nanoid';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeImage, uploadImage } from '../lib/api';
-import { setCvImgToEdit } from '../store/editPost';
-import { setCvImg as setCvImgToStore } from '../store/publishPost';
+import { setCvImgToEdit } from '../store/post/editPost';
+import { setCvImg as setCvImgToStore } from '../store/post/publishPost';
 import { SecondaryBtn } from '../utils/Buttons';
 
-const AddCvImg = ({ cvImgFromLocalStorage, toEdit }) => {
+const AddCvImg = ({ cvImgFromLocalStorage, toEdit, setUploadingImg }) => {
    const [cvImg, setCvImg] = useState(
       cvImgFromLocalStorage || {
          url: null,
@@ -43,10 +43,12 @@ const AddCvImg = ({ cvImgFromLocalStorage, toEdit }) => {
 
          const selectedImgPath = `images/${image.name}${nanoid()}`;
          setUploading(true);
+         setUploadingImg(true);
 
          uploadImage(image, selectedImgPath)
             .then((url) => {
                setUploading(false);
+               setUploadingImg(false);
                setCvImg({ url, path: selectedImgPath });
             })
             .catch((err) => console.log(err));

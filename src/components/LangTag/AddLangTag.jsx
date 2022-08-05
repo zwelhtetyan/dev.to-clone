@@ -3,9 +3,9 @@ import { IoCloseOutline } from 'react-icons/io5';
 import LangTag from '../../utils/LangTag';
 import tagsData from './LangTagData.json';
 import { useDispatch } from 'react-redux';
-import { setFilteredTagsToStore } from '../../store/publishPost';
+import { setFilteredTagsToStore } from '../../store/post/publishPost';
 import { Box, Circle, Input, Square, Wrap, WrapItem } from '@chakra-ui/react';
-import { setFilteredTagsToStoreToEdit } from '../../store/editPost';
+import { setFilteredTagsToStoreToEdit } from '../../store/post/editPost';
 
 const AddLangTag = ({ filteredTagsFromLocalStorage, toEdit }) => {
    //states
