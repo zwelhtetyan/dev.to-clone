@@ -25,6 +25,7 @@ const CreatePostFrom = ({
    uploadingImg,
    setUploadingImg,
    toEdit,
+   postTitle,
 }) => {
    const naviagte = useNavigate();
    return (
@@ -68,7 +69,7 @@ const CreatePostFrom = ({
                   placeholder='New post title here...'
                   fontSize={{ base: '2rem', md: '2.5rem' }}
                   fontWeight='700'
-                  value={postData.title}
+                  value={postTitle}
                   height='60px'
                   m='0'
                   required

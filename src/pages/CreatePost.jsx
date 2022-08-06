@@ -137,6 +137,7 @@ const CreatePost = ({ currentPostDataToEdit }) => {
          setPostTitle={
             currentPostDataToEdit ? setTitleToEdit : setTitleToPublish
          }
+         postTitle={currentPostDataToEdit ? titleToEdit : titleToPublish}
          postData={currentPostDataToEdit ? postDataToEdit : postDataToPublish}
          pageTitle={currentPostDataToEdit ? 'Edit' : 'Create'}
          publishing={publishing}

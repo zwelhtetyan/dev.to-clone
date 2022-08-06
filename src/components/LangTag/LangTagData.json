@@ -133,5 +133,89 @@
       "id": 26,
       "lang": "css3",
       "color": "#1572B6"
+   },
+   {
+      "id": 27,
+      "lang": "swift",
+      "color": "#F05138"
+   },
+   {
+      "id": 28,
+      "lang": "ruby",
+      "color": "#B44239"
+   },
+   {
+      "id": 29,
+      "lang": "bootstrap",
+      "color": "#7952B3"
+   },
+   {
+      "id": 30,
+      "lang": "tailwind",
+      "color": "#44A8B3",
+      "logo": "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg"
+   },
+   {
+      "id": 31,
+      "lang": "redux",
+      "color": "#764ABC"
+   },
+
+   {
+      "id": 32,
+      "lang": "kotlin",
+      "color": "#FC8707"
+   },
+   {
+      "id": 33,
+      "lang": "dart",
+      "color": "#00C4B3"
+   },
+   {
+      "id": 34,
+      "lang": "mysql",
+      "color": "#3F88A7"
+   },
+   {
+      "id": 35,
+      "lang": "redis",
+      "color": "#B72317"
+   },
+
+   {
+      "id": 36,
+      "lang": "sqlite",
+      "color": "#45A3DC"
+   },
+   {
+      "id": 37,
+      "lang": "docker",
+      "color": "#019BC6"
+   },
+   {
+      "id": 38,
+      "lang": "dotnet",
+      "color": "#42B0E6",
+      "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg"
+   },
+   {
+      "id": 39,
+      "lang": "figma",
+      "color": "#A259FF"
+   },
+   {
+      "id": 40,
+      "lang": "nuxtjs",
+      "color": "#00C492"
+   },
+   {
+      "id": 41,
+      "lang": "unity",
+      "color": "#596068"
+   },
+   {
+      "id": 42,
+      "lang": "linux",
+      "color": "#FFD133"
    }
 ]

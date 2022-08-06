@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { IoCloseOutline } from 'react-icons/io5';
 import LangTag from '../../utils/LangTag';
-import tagsData from './LangTagData.json';
 import { useDispatch } from 'react-redux';
 import { setFilteredTagsToStore } from '../../store/post/publishPost';
 import { Box, Circle, Input, Square, Wrap, WrapItem } from '@chakra-ui/react';
 import { setFilteredTagsToStoreToEdit } from '../../store/post/editPost';
+import tagsData from './LangTagData.json';
 
 const AddLangTag = ({ filteredTagsFromLocalStorage, toEdit }) => {
    //states
@@ -162,9 +162,10 @@ const AddLangTag = ({ filteredTagsFromLocalStorage, toEdit }) => {
             className='suggestion-box'
             m='0 auto 1rem'
             p={3}
-            overflow='visible'
+            overflow='auto'
             border='1px solid rgb(214, 214, 215)'
             borderRadius='5px'
+            maxH='7.9rem'
          >
             {suggestions()}
          </Wrap>

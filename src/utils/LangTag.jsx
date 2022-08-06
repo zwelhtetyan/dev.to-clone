@@ -18,7 +18,7 @@ const LangTag = ({ tag, handleClickTag }) => {
          }}
          borderRadius='5px'
       >
-         <Image src={getLogo(tag)} alt='logo' w='15px' mr='5px' />
+         <Image src={getLogo(tag)} w='15px' mr='5px' />
          <Text fontSize='13px' fontWeight='400' textTransform='capitalize'>
             {tag.lang}
          </Text>
