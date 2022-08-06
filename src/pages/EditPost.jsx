@@ -9,7 +9,7 @@ const EditPost = () => {
    );
 
    const currentPost =
-      currentPostData || getItemFromLocalStorage('postDataToEdit'); // which is stored form <CreatePost /> => line 73;
+      currentPostData || getItemFromLocalStorage('postDataToEdit');
 
    return <CreatePost currentPostDataToEdit={currentPost} />;
 };

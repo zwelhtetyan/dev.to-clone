@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import publicPostReducer from './post/publishPost';
 import commentReducer from './comment';
 import currentPostReducer from './post/currentPost';
-import editPostReducer from './post/editPost';
 import allPostDataSliceReducer from './post/allPostData';
+import PostDataSliceReducer from './post/postData';
 
 const store = configureStore({
    middleware: (getDefaultMiddleware) =>
@@ -12,11 +11,10 @@ const store = configureStore({
       }),
 
    reducer: {
-      postToPublish: publicPostReducer,
-      comment: commentReducer,
-      currentPost: currentPostReducer,
-      postToEdit: editPostReducer,
       allPostData: allPostDataSliceReducer,
+      postData: PostDataSliceReducer,
+      currentPost: currentPostReducer,
+      comment: commentReducer,
    },
 });
 

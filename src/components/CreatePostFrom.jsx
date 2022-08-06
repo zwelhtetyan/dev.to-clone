@@ -24,8 +24,8 @@ const CreatePostFrom = ({
    publishing,
    uploadingImg,
    setUploadingImg,
-   toEdit,
    postTitle,
+   toEdit,
 }) => {
    const naviagte = useNavigate();
    return (
@@ -60,7 +60,6 @@ const CreatePostFrom = ({
             >
                <AddCvImg
                   cvImgFromLocalStorage={postData?.cvImg}
-                  toEdit={toEdit}
                   setUploadingImg={setUploadingImg}
                />
 
@@ -79,7 +78,6 @@ const CreatePostFrom = ({
 
                <AddLangTag
                   filteredTagsFromLocalStorage={postData?.filteredTags}
-                  toEdit={toEdit}
                />
 
                <Box mt='1.5rem !important' w='100%' mb='1rem !important'>
@@ -89,7 +87,6 @@ const CreatePostFrom = ({
                      where='CREATE_POST'
                      isSubmitting={publishing}
                      setUploadingImg={setUploadingImg}
-                     toEdit={toEdit}
                   />
                </Box>
 

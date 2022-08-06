@@ -15,8 +15,7 @@ import '../styles/markdown.scss';
 import { setCommentVal } from '../store/comment';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
-import { setMDEValue } from '../store/post/publishPost';
-import { setMDEValueToEdit } from '../store/post/editPost';
+import { setMDEValueToStore } from '../store/post/postData';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -32,14 +31,7 @@ const codeBlock = {
    },
 };
 
-const MDE = ({
-   MDEValue,
-   where,
-   height,
-   isSubmitting,
-   setUploadingImg,
-   toEdit,
-}) => {
+const MDE = ({ MDEValue, where, height, isSubmitting, setUploadingImg }) => {
    const [value, setValue] = React.useState(MDEValue || '');
    const [selectedTab, setSelectedTab] = React.useState('write');
    const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
@@ -50,17 +42,11 @@ const MDE = ({
 
    React.useEffect(() => {
       if (where === 'CREATE_POST') {
-         if (toEdit) {
-            dispatch(setMDEValueToEdit(value));
-            console.log('to edit');
-         } else {
-            dispatch(setMDEValue(value));
-            console.log('to public');
-         }
+         dispatch(setMDEValueToStore(value));
       } else if (where === 'DISCUSSION') {
          dispatch(setCommentVal(value));
       }
-   }, [value, dispatch, where, toEdit]);
+   }, [value, dispatch, where]);
 
    React.useEffect(() => {
       saveToLocalStorage('uploadedMDEImg', JSON.stringify(uploadedMDEImg));
