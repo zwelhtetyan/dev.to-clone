@@ -18,6 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { calTimeStamp } from '../../helper/calcTimestamp';
 import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/Avatar';
+import { nanoid } from 'nanoid';
 
 const PostItem = ({
    coverImg,
@@ -113,7 +114,7 @@ const PostItem = ({
                   <Wrap spacing='.3rem' py='.5rem' mt='0 !important'>
                      {tags?.map((tag) => (
                         <WrapItem
-                           key={tag.id}
+                           key={nanoid()}
                            onClick={(e) => e.stopPropagation()}
                         >
                            <LangTag tag={tag} />

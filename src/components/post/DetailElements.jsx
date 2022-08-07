@@ -24,6 +24,7 @@ import ManangePost from '../../components/ManangePost';
 import SideReactionBar from '../../components/SideReactionBar';
 import converter from '../../helper/converter';
 import '../../styles/postdetail.scss';
+import ErrorMessage from '../../utils/ErrorMessage';
 
 const DetailElements = ({ postDetail, loading, err, id }) => {
    //scroll to top
@@ -64,7 +65,7 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
                >
                   {!postDetail && loading && <DetailSkeleton />}
 
-                  {!loading && err && <h1>Error</h1>}
+                  {!loading && err && <ErrorMessage />}
 
                   {postDetail && (
                      <Box>
@@ -97,7 +98,7 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
 
                         <Wrap py={2} spacing={2}>
                            {postDetail.filteredTags.map((tag) => (
-                              <WrapItem key={tag.id}>
+                              <WrapItem key={nanoid()}>
                                  <LangTag tag={tag} />
                               </WrapItem>
                            ))}

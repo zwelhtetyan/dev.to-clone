@@ -1,221 +1,179 @@
 [
    {
-      "id": 1,
-      "lang": "javascript",
+      "topic": "javascript",
       "color": "#F0DB4F"
    },
    {
-      "id": 2,
-      "lang": "typescript",
+      "topic": "typescript",
       "color": "#007ACC"
    },
    {
-      "id": 3,
-      "lang": "react",
+      "topic": "react",
       "color": "#9CE8FC"
    },
    {
-      "id": 4,
-      "lang": "angularjs",
+      "topic": "angularjs",
       "color": "#C3002F"
    },
    {
-      "id": 5,
-      "lang": "nodejs",
+      "topic": "nodejs",
       "color": "#A2D95E"
    },
    {
-      "id": 6,
-      "lang": "express",
+      "topic": "express",
       "color": "#808080"
    },
    {
-      "id": 7,
-      "lang": "mongodb",
+      "topic": "mongodb",
       "color": "#4AA73C"
    },
    {
-      "id": 8,
-      "lang": "vuejs",
+      "topic": "vuejs",
       "color": "#41B883"
    },
    {
-      "id": 9,
-      "lang": "svelte",
+      "topic": "svelte",
       "color": "#FF3E00"
    },
    {
-      "id": 10,
-      "lang": "go",
+      "topic": "go",
       "color": "#6AD7E5"
    },
    {
-      "id": 11,
-      "lang": "c",
+      "topic": "c",
       "color": "#03599C"
    },
    {
-      "id": 12,
-      "lang": "csharp",
+      "topic": "csharp",
       "color": "#9B4F96"
    },
    {
-      "id": 13,
-      "lang": "php",
+      "topic": "php",
       "color": "#6181B6"
    },
 
    {
-      "id": 14,
-      "lang": "python",
+      "topic": "python",
       "color": "#FFDC52"
    },
    {
-      "id": 15,
-      "lang": "graphql",
+      "topic": "graphql",
       "color": "#E10098",
       "logo": "https://www.vectorlogo.zone/logos/graphql/graphql-icon.svg"
    },
    {
-      "id": 16,
-      "lang": "flutter",
+      "topic": "flutter",
       "color": "#46D1FD"
    },
    {
-      "id": 17,
-      "lang": "postgresql",
+      "topic": "postgresql",
       "color": "#336791"
    },
    {
-      "id": 18,
-      "lang": "firebase",
+      "topic": "firebase",
       "color": "#FFCA28",
       "logo": "https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg"
    },
    {
-      "id": 19,
-      "lang": "laraval",
+      "topic": "laraval",
       "color": "#FD4F31",
       "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-plain-wordmark.svg"
    },
    {
-      "id": 20,
-      "lang": "nextjs",
+      "topic": "nextjs",
       "color": "#000000"
    },
    {
-      "id": 21,
-      "lang": "gatsby",
+      "topic": "gatsby",
       "color": "#663399"
    },
    {
-      "id": 22,
-      "lang": "django",
+      "topic": "django",
       "color": "#2BA977",
       "logo": "https://cdn.worldvectorlogo.com/logos/django.svg"
    },
    {
-      "id": 23,
-      "lang": "electron",
+      "topic": "electron",
       "color": "#AEC9CE"
    },
    {
-      "id": 24,
-      "lang": "git",
+      "topic": "git",
       "color": "#F03C2E"
    },
    {
-      "id": 25,
-      "lang": "html5",
+      "topic": "html5",
       "color": "#F16529"
    },
    {
-      "id": 26,
-      "lang": "css3",
+      "topic": "css3",
       "color": "#1572B6"
    },
    {
-      "id": 27,
-      "lang": "swift",
+      "topic": "swift",
       "color": "#F05138"
    },
    {
-      "id": 28,
-      "lang": "ruby",
+      "topic": "ruby",
       "color": "#B44239"
    },
    {
-      "id": 29,
-      "lang": "bootstrap",
+      "topic": "bootstrap",
       "color": "#7952B3"
    },
    {
-      "id": 30,
-      "lang": "tailwind",
+      "topic": "tailwind",
       "color": "#44A8B3",
       "logo": "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg"
    },
    {
-      "id": 31,
-      "lang": "redux",
+      "topic": "redux",
       "color": "#764ABC"
    },
 
    {
-      "id": 32,
-      "lang": "kotlin",
+      "topic": "kotlin",
       "color": "#FC8707"
    },
    {
-      "id": 33,
-      "lang": "dart",
+      "topic": "dart",
       "color": "#00C4B3"
    },
    {
-      "id": 34,
-      "lang": "mysql",
+      "topic": "mysql",
       "color": "#3F88A7"
    },
    {
-      "id": 35,
-      "lang": "redis",
+      "topic": "redis",
       "color": "#B72317"
    },
 
    {
-      "id": 36,
-      "lang": "sqlite",
+      "topic": "sqlite",
       "color": "#45A3DC"
    },
    {
-      "id": 37,
-      "lang": "docker",
+      "topic": "docker",
       "color": "#019BC6"
    },
    {
-      "id": 38,
-      "lang": "dotnet",
+      "topic": "dotnet",
       "color": "#42B0E6",
       "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg"
    },
    {
-      "id": 39,
-      "lang": "figma",
+      "topic": "figma",
       "color": "#A259FF"
    },
    {
-      "id": 40,
-      "lang": "nuxtjs",
+      "topic": "nuxtjs",
       "color": "#00C492"
    },
    {
-      "id": 41,
-      "lang": "unity",
+      "topic": "unity",
       "color": "#596068"
    },
    {
-      "id": 42,
-      "lang": "linux",
+      "topic": "linux",
       "color": "#FFD133"
    }
 ]

@@ -28,6 +28,7 @@ const CreatePostFrom = ({
    toEdit,
 }) => {
    const naviagte = useNavigate();
+
    return (
       <Box p={{ base: '1rem 0.5rem', md: '1rem' }}>
          <Box maxW='768px' m='auto'>

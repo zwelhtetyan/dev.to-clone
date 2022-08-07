@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Box, Circle, Input, Square, Wrap, WrapItem } from '@chakra-ui/react';
 import tagsData from './LangTagData.json';
 import { setFilteredTagsToStore } from '../../store/post/postData';
+import { nanoid } from 'nanoid';
 
 const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    //states
@@ -31,7 +32,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
       }
 
       const filteredTags = tagData.filter((tag) =>
-         tag.lang.toLowerCase().includes(filterTagName.toLowerCase())
+         tag.topic.toLowerCase().includes(filterTagName.toLowerCase())
       );
 
       return filteredTags;
@@ -39,8 +40,12 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
 
    const filteredTagsToShow = () => {
       const tags = filteredTags.map((tag) => (
-         <WrapItem key={tag.id} pos='relative' margin='.6rem .3rem !important'>
-            <LangTag key={tag.id} tag={tag} />
+         <WrapItem
+            key={nanoid()}
+            pos='relative'
+            margin='.6rem .3rem !important'
+         >
+            <LangTag tag={tag} />
             <Square
                pos='absolute'
                cursor='pointer'
@@ -69,7 +74,9 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
 
    const addToFilteredTags = (tag) => {
       setFilteredTags((prevArr) => [...prevArr, tag]);
-      setTagData((prevArr) => prevArr.filter((item) => item.id !== tag.id));
+      setTagData((prevArr) =>
+         prevArr.filter((item) => item.topic !== tag.topic)
+      );
    };
 
    const handleAddLangTag = (tag) => {
@@ -90,10 +97,19 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    // generating tag pill icon
    const suggestions = () => {
       if (!tagsToShow() || tagsToShow().length === 0) {
-         return <p>No tag found !</p>;
+         // return <p>No tag found !</p>;
+         const customTag = { topic: filterTagName, isCustomTag: true };
+         return (
+            <WrapItem>
+               <LangTag
+                  handleClickTag={() => handleAddLangTag(customTag)}
+                  tag={customTag}
+               />
+            </WrapItem>
+         );
       } else if (tagsToShow()) {
          return tagsToShow().map((tag) => (
-            <WrapItem key={tag.id}>
+            <WrapItem key={nanoid()}>
                <LangTag
                   handleClickTag={() => handleAddLangTag(tag)}
                   tag={tag}
