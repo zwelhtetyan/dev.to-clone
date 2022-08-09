@@ -66,8 +66,6 @@ const useCreatePost = (currentPostDataToEdit) => {
 
    //publish post
    const publishPostHandler = (e) => {
-      e.preventDefault();
-
       setPublishing(true);
 
       createPost(postData)
@@ -83,8 +81,6 @@ const useCreatePost = (currentPostDataToEdit) => {
 
    //Edit post
    const eidtPostHandler = async (e) => {
-      e.preventDefault();
-
       setPublishing(true);
 
       editPost(postData, postData.id)

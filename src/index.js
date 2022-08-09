@@ -8,15 +8,19 @@ import { ChakraProvider } from '@chakra-ui/react';
 import theme from './theme/theme';
 import './index.scss';
 
+import AuthContextProvider from './context/auth';
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
    <React.StrictMode>
-      <ChakraProvider theme={theme}>
-         <BrowserRouter>
-            <Provider store={store}>
-               <App />
-            </Provider>
-         </BrowserRouter>
-      </ChakraProvider>
+      <AuthContextProvider>
+         <ChakraProvider theme={theme}>
+            <BrowserRouter>
+               <Provider store={store}>
+                  <App />
+               </Provider>
+            </BrowserRouter>
+         </ChakraProvider>
+      </AuthContextProvider>
    </React.StrictMode>
 );

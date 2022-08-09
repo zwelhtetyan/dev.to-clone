@@ -15,7 +15,7 @@ import comment from '../../assets/logo/comment.svg';
 import z from '../../assets/images/z.jpeg';
 import Moment from 'react-moment';
 import { useNavigate } from 'react-router-dom';
-import { calTimeStamp } from '../../helper/calcTimestamp';
+import { calTimeStamp, dateFormat } from '../../helper/calcTimestamp';
 import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/Avatar';
 import { nanoid } from 'nanoid';
@@ -81,17 +81,18 @@ const PostItem = ({
                            Zwel Htet Yan
                         </Text>
                         {isUpdated && (
-                           <Text fontSize='11px' color='gray'>
+                           <Text fontSize='11px' color='#717171'>
                               (updated)
                            </Text>
                         )}
                      </HStack>
                      <Text
-                        fontSize='13px'
-                        color='gray'
-                        mt={isUpdated ? '-1.5' : '-0.5'}
+                        fontSize='12px'
+                        color='#717171'
+                        mt={isUpdated ? '-.8' : '-0.5'}
                      >
-                        <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
+                        {dateFormat(createdAt)} (
+                        <Moment fromNow>{calTimeStamp(createdAt)}</Moment>)
                      </Text>
                   </Box>
                </HStack>
@@ -129,7 +130,7 @@ const PostItem = ({
                      <ReactionButton icon={comment} value={11} text='Comment' />
                   </HStack>
 
-                  <Text fontSize='13px' color='gray'>
+                  <Text fontSize='13px' color='#717171'>
                      {readTime} min read
                   </Text>
                </HStack>

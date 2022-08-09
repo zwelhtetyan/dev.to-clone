@@ -84,13 +84,18 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
       setFilterTagName('');
       inputTagRef.current.focus();
 
-      setTimeout(() => setFocusTagInput(true), 100); // this action and (line-99's action) trigger once, always false and can't show suggestion box again;
+      setTimeout(() => setFocusTagInput(true), 100); // this action and (line-140's action) trigger once, always false and can't show suggestion box again;
    };
 
    const handleDeleteTag = (tag) => {
       setFilteredTags((prevArr) =>
-         prevArr.filter((item) => item.id !== tag.id)
+         prevArr.filter((item) => item.topic !== tag.topic)
       );
+
+      if (tag.isCustomTag) {
+         return;
+      }
+
       setTagData((prevArr) => [...prevArr, tag]);
    };
 

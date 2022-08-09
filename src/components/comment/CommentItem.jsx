@@ -1,14 +1,13 @@
 import { Box, HStack, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
-import CustomAvatar from '../utils/Avatar';
-import { ReactionButton } from '../utils/Buttons';
-import z from '../assets/images/z.jpeg';
-import heart from '../assets/logo/heart.svg';
-import red_heart from '../assets/logo/red_heart.svg';
-import comment from '../assets/logo/comment.svg';
-import Moment from 'react-moment';
-import { calTimeStamp } from '../helper/calcTimestamp';
-import OptionBtn from '../utils/OptionBtn';
+import CustomAvatar from '../../utils/Avatar';
+import { ReactionButton } from '../../utils/Buttons';
+import z from '../../assets/images/z.jpeg';
+import heart from '../../assets/logo/heart.svg';
+import red_heart from '../../assets/logo/red_heart.svg';
+import comment from '../../assets/logo/comment.svg';
+import OptionBtn from '../../utils/OptionBtn';
+import { dateFormat } from '../../helper/calcTimestamp';
 
 const CommentItem = ({ text, createdAt }) => {
    return (
@@ -37,7 +36,8 @@ const CommentItem = ({ text, createdAt }) => {
                         color='gray'
                         fontSize='12px'
                      >
-                        <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
+                        {dateFormat(createdAt)}
+                        {/* <Moment fromNow>{calTimeStamp(createdAt)}</Moment> */}
                      </Text>
                   </Text>
 

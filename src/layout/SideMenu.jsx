@@ -44,7 +44,7 @@ const SideMenu = () => {
                </DrawerHeader>
 
                <DrawerBody p='0.5'>
-                  <Hero w='80%' />
+                  <Hero w='80%' onClose={onClose} />
                </DrawerBody>
             </DrawerContent>
          </Drawer>

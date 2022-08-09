@@ -11,7 +11,7 @@ const AllPost = () => {
    );
 
    return (
-      <Box mt={{ base: '0', md: '2rem' }}>
+      <Box>
          {err && <ErrorMessage />}
 
          {loading && !err && (

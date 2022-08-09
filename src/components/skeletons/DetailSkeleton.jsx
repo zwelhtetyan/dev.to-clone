@@ -9,7 +9,7 @@ import React from 'react';
 
 const DetailSkeleton = () => {
    return (
-      <Box bg='transparent' pt={5}>
+      <Box bg='transparent' pt={5} my='3rem' mx='.5rem'>
          <HStack>
             <SkeletonCircle size='10' />
             <SkeletonText mt='4' noOfLines={2} spacing='2' w='30%' />

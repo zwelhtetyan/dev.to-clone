@@ -27,7 +27,7 @@ const ManangePost = () => {
             <CustomMenuItem onClick={() => navigate('/edit-post')}>
                Edit
             </CustomMenuItem>
-            <CustomMenuItem onClick={() => navigate(`/delete_confirm`)}>
+            <CustomMenuItem onClick={() => navigate(`/delete-confirm`)}>
                Delete
             </CustomMenuItem>
          </MenuList>

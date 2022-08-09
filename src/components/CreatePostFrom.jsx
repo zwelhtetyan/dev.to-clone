@@ -7,7 +7,7 @@ import {
    Text,
    VStack,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import AddCvImg from './AddCvImg';
 import AddLangTag from './LangTag/AddLangTag';
@@ -29,10 +29,12 @@ const CreatePostFrom = ({
 }) => {
    const naviagte = useNavigate();
 
+   const [touch, setTouch] = useState(false);
+
    return (
-      <Box p={{ base: '1rem 0.5rem', md: '1rem' }}>
+      <Box mt='-3.5rem' mb='1rem'>
          <Box maxW='768px' m='auto'>
-            <Box display='flex'>
+            <Box display='flex' mx={{ base: '.5rem', lg: '0rem' }}>
                <Box display='flex' alignItems='center' mr='auto'>
                   <Image
                      src={logo}
@@ -50,14 +52,13 @@ const CreatePostFrom = ({
             </Box>
 
             <VStack
-               onSubmit={handleSubmit}
                as='form'
                align='start'
                bg='white'
-               border='2px solid #e2e8f0'
+               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                borderRadius='5px'
                mt='1rem'
-               p={{ base: '1.5rem 0.5rem', md: '1rem 2rem' }}
+               p={{ base: '1rem 0.5rem', md: '1rem 2rem' }}
             >
                <AddCvImg
                   cvImgFromLocalStorage={postData?.cvImg}
@@ -76,15 +77,26 @@ const CreatePostFrom = ({
                   onChange={({ target }) => setPostTitle(target.value)}
                   _placeholder={{ color: '#525252' }}
                />
+               {touch && !postTitle && (
+                  <Text
+                     px='.5rem'
+                     borderRadius='3px'
+                     fontSize='15px'
+                     letterSpacing='.5px'
+                     background='#FBE9E9'
+                     color='red'
+                  >
+                     Title can't be blank!
+                  </Text>
+               )}
 
                <AddLangTag
                   filteredTagsFromLocalStorage={postData?.filteredTags}
                />
 
-               <Box mt='1.5rem !important' w='100%' mb='1rem !important'>
+               <Box mt='1.5rem !important' w='100%' mb='.5rem !important'>
                   <MDE
                      MDEValue={postData?.MDEValue}
-                     height={250}
                      where='CREATE_POST'
                      isSubmitting={publishing}
                      setUploadingImg={setUploadingImg}
@@ -94,8 +106,10 @@ const CreatePostFrom = ({
                <HStack justify='flex-end' w='100%'>
                   {!toEdit && <SecondaryBtn>Save Draft</SecondaryBtn>}
                   <PrimaryBtn
-                     type='submit'
+                     bg='rgb(59 73 223)'
+                     type='button'
                      disabled={uploadingImg || publishing}
+                     onClick={postTitle ? handleSubmit : () => setTouch(true)}
                   >
                      {publishing ? (
                         <>

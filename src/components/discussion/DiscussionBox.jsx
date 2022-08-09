@@ -55,11 +55,11 @@ const DiscussionBox = ({ id, comments }) => {
          border='1px solid rgb(59 73 223)'
          borderRadius='5px'
          overflow='hidden'
+         className='disucssion-box'
       >
          <MDE
             MDEValue={commentVal}
             where='DISCUSSION'
-            height={150}
             setHasValue={setHasValue}
             isSubmitting={submitting}
             setUploadingImg={setUploadingImg}

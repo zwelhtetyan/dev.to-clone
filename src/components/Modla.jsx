@@ -41,11 +41,7 @@ const ModalAlert = () => {
                </ModalBody>
 
                <ModalFooter>
-                  <Button
-                     colorScheme='red'
-                     mr={3}
-                     onClick={() => navigate('/')}
-                  >
+                  <Button colorScheme='red' mr={3} onClick={() => navigate(-1)}>
                      Leave the page
                   </Button>
                   <Button onClick={onClose}>Keep editing</Button>

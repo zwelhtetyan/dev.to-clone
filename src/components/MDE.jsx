@@ -31,7 +31,7 @@ const codeBlock = {
    },
 };
 
-const MDE = ({ MDEValue, where, height, isSubmitting, setUploadingImg }) => {
+const MDE = ({ MDEValue, where, isSubmitting, setUploadingImg }) => {
    const [value, setValue] = React.useState(MDEValue || '');
    const [selectedTab, setSelectedTab] = React.useState('write');
    const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
@@ -39,6 +39,11 @@ const MDE = ({ MDEValue, where, height, isSubmitting, setUploadingImg }) => {
    );
 
    const dispatch = useDispatch();
+
+   React.useEffect(() => {
+      const textBox = document.querySelector('.mde-text');
+      textBox.placeholder = 'Write your post content here...';
+   }, []);
 
    React.useEffect(() => {
       if (where === 'CREATE_POST') {
@@ -116,9 +121,6 @@ const MDE = ({ MDEValue, where, height, isSubmitting, setUploadingImg }) => {
             onChange={setValue}
             selectedTab={selectedTab}
             onTabChange={setSelectedTab}
-            minEditorHeight={height}
-            loadingPreview='loading...'
-            minPreviewHeight={height - 10}
             generateMarkdownPreview={(markdown) =>
                Promise.resolve(converter().makeHtml(markdown))
             }

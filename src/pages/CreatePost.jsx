@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import CreatePostFrom from '../components/CreatePostFrom';
+import { useAuth } from '../context/auth';
 import useCreatePost from '../hooks/useCreatePost';
 
 const CreatePost = ({ currentPostDataToEdit }) => {
    //scroll top
-   useEffect(() => {
-      window.scrollTo(0, 0);
-   }, []);
+   useEffect(() => window.scrollTo(0, 0), []);
+
+   const user = useAuth();
 
    const {
       publishPostHandler,
@@ -18,6 +20,10 @@ const CreatePost = ({ currentPostDataToEdit }) => {
       uploadingImg,
       setUploadingImg,
    } = useCreatePost(currentPostDataToEdit);
+
+   if (!user) {
+      return <Navigate to='/login' />;
+   }
 
    return (
       <CreatePostFrom

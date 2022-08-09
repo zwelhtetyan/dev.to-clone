@@ -9,7 +9,7 @@ const Layout = () => {
       <>
          <MainNavigation />
 
-         <Box as='main' p={{ base: '1rem 0.5rem', md: '1rem' }}>
+         <Box as='main'>
             <Outlet />
          </Box>
 

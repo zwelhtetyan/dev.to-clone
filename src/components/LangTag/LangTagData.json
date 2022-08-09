@@ -1,179 +1,137 @@
 [
    {
-      "topic": "javascript",
-      "color": "#F0DB4F"
+      "topic": "javascript"
    },
    {
-      "topic": "typescript",
-      "color": "#007ACC"
+      "topic": "typescript"
    },
    {
-      "topic": "react",
-      "color": "#9CE8FC"
+      "topic": "react"
    },
    {
-      "topic": "angularjs",
-      "color": "#C3002F"
+      "topic": "angularjs"
    },
    {
-      "topic": "nodejs",
-      "color": "#A2D95E"
+      "topic": "nodejs"
    },
    {
-      "topic": "express",
-      "color": "#808080"
+      "topic": "express"
    },
    {
-      "topic": "mongodb",
-      "color": "#4AA73C"
+      "topic": "mongodb"
    },
    {
-      "topic": "vuejs",
-      "color": "#41B883"
+      "topic": "vuejs"
    },
    {
-      "topic": "svelte",
-      "color": "#FF3E00"
+      "topic": "svelte"
    },
    {
-      "topic": "go",
-      "color": "#6AD7E5"
+      "topic": "go"
    },
    {
-      "topic": "c",
-      "color": "#03599C"
+      "topic": "c"
    },
    {
-      "topic": "csharp",
-      "color": "#9B4F96"
+      "topic": "csharp"
    },
    {
-      "topic": "php",
-      "color": "#6181B6"
+      "topic": "php"
    },
 
    {
-      "topic": "python",
-      "color": "#FFDC52"
+      "topic": "python"
    },
    {
       "topic": "graphql",
-      "color": "#E10098",
       "logo": "https://www.vectorlogo.zone/logos/graphql/graphql-icon.svg"
    },
    {
-      "topic": "flutter",
-      "color": "#46D1FD"
+      "topic": "flutter"
    },
    {
-      "topic": "postgresql",
-      "color": "#336791"
+      "topic": "postgresql"
    },
    {
       "topic": "firebase",
-      "color": "#FFCA28",
       "logo": "https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg"
    },
    {
       "topic": "laraval",
-      "color": "#FD4F31",
       "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-plain-wordmark.svg"
    },
    {
-      "topic": "nextjs",
-      "color": "#000000"
+      "topic": "nextjs"
    },
    {
-      "topic": "gatsby",
-      "color": "#663399"
+      "topic": "gatsby"
    },
    {
       "topic": "django",
-      "color": "#2BA977",
       "logo": "https://cdn.worldvectorlogo.com/logos/django.svg"
    },
    {
-      "topic": "electron",
-      "color": "#AEC9CE"
+      "topic": "electron"
    },
    {
-      "topic": "git",
-      "color": "#F03C2E"
+      "topic": "git"
    },
    {
-      "topic": "html5",
-      "color": "#F16529"
+      "topic": "html5"
    },
    {
-      "topic": "css3",
-      "color": "#1572B6"
+      "topic": "css3"
    },
    {
-      "topic": "swift",
-      "color": "#F05138"
+      "topic": "swift"
    },
    {
-      "topic": "ruby",
-      "color": "#B44239"
+      "topic": "ruby"
    },
    {
-      "topic": "bootstrap",
-      "color": "#7952B3"
+      "topic": "bootstrap"
    },
    {
       "topic": "tailwind",
-      "color": "#44A8B3",
       "logo": "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg"
    },
    {
-      "topic": "redux",
-      "color": "#764ABC"
+      "topic": "redux"
    },
 
    {
-      "topic": "kotlin",
-      "color": "#FC8707"
+      "topic": "kotlin"
    },
    {
-      "topic": "dart",
-      "color": "#00C4B3"
+      "topic": "dart"
    },
    {
-      "topic": "mysql",
-      "color": "#3F88A7"
+      "topic": "mysql"
    },
    {
-      "topic": "redis",
-      "color": "#B72317"
+      "topic": "redis"
    },
 
    {
-      "topic": "sqlite",
-      "color": "#45A3DC"
+      "topic": "sqlite"
    },
    {
-      "topic": "docker",
-      "color": "#019BC6"
+      "topic": "docker"
    },
    {
       "topic": "dotnet",
-      "color": "#42B0E6",
       "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg"
    },
    {
-      "topic": "figma",
-      "color": "#A259FF"
+      "topic": "figma"
    },
    {
-      "topic": "nuxtjs",
-      "color": "#00C492"
+      "topic": "nuxtjs"
    },
    {
-      "topic": "unity",
-      "color": "#596068"
+      "topic": "unity"
    },
    {
-      "topic": "linux",
-      "color": "#FFD133"
+      "topic": "linux"
    }
 ]

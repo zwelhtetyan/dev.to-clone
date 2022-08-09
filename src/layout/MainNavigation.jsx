@@ -2,39 +2,28 @@ import React from 'react';
 import logo from '../assets/logo/logo.png';
 import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import z from '../assets/images/z.jpeg';
 import {
    Box,
+   Flex,
    HStack,
    Image,
    Input,
    InputGroup,
    InputRightElement,
-   Menu,
-   MenuButton,
-   MenuDivider,
-   MenuList,
 } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import SideMenu from './SideMenu';
-import CustomAvatar from '../utils/Avatar';
-import CustomMenuItem from '../utils/CustomMenuItem';
+import { useAuth } from '../context/auth';
+import MainMenu from '../components/MainMenu';
 
 const MainNavigation = () => {
    const navigate = useNavigate();
 
-   const backToHome = () => {
-      navigate('/');
-      window.scrollTo(0, 0);
-   };
-
-   const goToCreatePost = () => {
-      navigate('/create-post');
-      window.scrollTo(0, 0);
-   };
+   const user = useAuth();
 
    return (
       <HStack
+         as='header'
          bg='white'
          w='100%'
          h='56px'
@@ -55,7 +44,7 @@ const MainNavigation = () => {
                   src={logo}
                   alt='logo'
                   ms={{ base: '.5rem', md: '0' }}
-                  onClick={backToHome}
+                  onClick={() => navigate('/')}
                   cursor='pointer'
                />
 
@@ -73,48 +62,43 @@ const MainNavigation = () => {
                </InputGroup>
             </Box>
 
-            <HStack>
-               <SecondaryBtn display={{ base: 'block', md: 'none' }}>
+            <Flex>
+               <SecondaryBtn
+                  display={{ base: 'block', md: 'none' }}
+                  m='0 .5rem 0 0'
+               >
                   <FiSearch size={23} />
                </SecondaryBtn>
 
-               {/* <SecondaryBtn display={{ base: 'none', md: 'block' }}>
-                  Log in
-               </SecondaryBtn>
+               {!user && (
+                  <>
+                     <SecondaryBtn
+                        display={{ base: 'none', md: 'block' }}
+                        onClick={() => navigate('/login')}
+                        m='0 .5rem 0 0'
+                     >
+                        Log in
+                     </SecondaryBtn>
+                     <PrimaryBtn onClick={() => navigate('/create-account')}>
+                        Create Account
+                     </PrimaryBtn>{' '}
+                  </>
+               )}
 
-               <PrimaryBtn>Create Account</PrimaryBtn> */}
+               {user && (
+                  <>
+                     <PrimaryBtn
+                        display={{ base: 'none', md: 'block' }}
+                        onClick={() => navigate('/create-post')}
+                        m='0 .5rem 0 0'
+                     >
+                        Creart Post
+                     </PrimaryBtn>
 
-               <PrimaryBtn
-                  display={{ base: 'none', md: 'block' }}
-                  onClick={goToCreatePost}
-               >
-                  Creart Post
-               </PrimaryBtn>
-
-               <Menu autoSelect={false}>
-                  <MenuButton
-                     _hover={{
-                        filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))',
-                     }}
-                     transition='.1s'
-                  >
-                     <CustomAvatar name='Zwel' src={z} size='40px' />
-                  </MenuButton>
-
-                  <MenuList p='.5rem'>
-                     <CustomMenuItem>Zwel Htet Yan</CustomMenuItem>
-                     <MenuDivider />
-                     <CustomMenuItem>Dashboard</CustomMenuItem>
-                     <CustomMenuItem onClick={goToCreatePost}>
-                        Create Post
-                     </CustomMenuItem>
-                     <CustomMenuItem>Reading List</CustomMenuItem>
-                     <CustomMenuItem>Setting</CustomMenuItem>
-                     <MenuDivider />
-                     <CustomMenuItem>Sign Out</CustomMenuItem>
-                  </MenuList>
-               </Menu>
-            </HStack>
+                     <MainMenu />
+                  </>
+               )}
+            </Flex>
          </HStack>
       </HStack>
    );

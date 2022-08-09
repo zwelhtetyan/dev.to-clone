@@ -14,12 +14,12 @@ import {
 import Moment from 'react-moment';
 import LangTag from '../../utils/LangTag';
 import z from '../../assets/images/z.jpeg';
-import { calTimeStamp } from '../../helper/calcTimestamp';
+import { calTimeStamp, dateFormat } from '../../helper/calcTimestamp';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import DetailSkeleton from '../../components/skeletons/DetailSkeleton';
 import Discussion from '../../components/discussion/Discussion';
 import { nanoid } from 'nanoid';
-import CommentItem from '../../components/CommentItem';
+import CommentItem from '../../components/comment/CommentItem';
 import ManangePost from '../../components/ManangePost';
 import SideReactionBar from '../../components/SideReactionBar';
 import converter from '../../helper/converter';
@@ -27,22 +27,26 @@ import '../../styles/postdetail.scss';
 import ErrorMessage from '../../utils/ErrorMessage';
 
 const DetailElements = ({ postDetail, loading, err, id }) => {
-   //scroll to top
-   useEffect(() => {
-      window.scrollTo(0, 0);
-   }, []);
+   //scroll top
+   useEffect(() => window.scrollTo(0, 0), []);
 
    return (
-      <Box mt='3rem !important' maxW='1200px' mx='auto'>
+      <Box
+         maxW='1200px'
+         mx='auto'
+         py='0'
+         px={{ base: '0', md: '1rem' }}
+         mt={{ base: '-.5rem !important', md: '0 !important' }}
+         h={{ xl: loading && '50vh' }}
+      >
          <Flex align='flex-start'>
             {postDetail && <SideReactionBar />}
 
             <Box
-               maxW='650px'
-               w='100%'
+               w={{ base: '100%', md: '650px' }}
                margin='0 auto !important'
                bg='white'
-               border={{ base: 'none', md: '1px solid #E5E5E5' }}
+               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                borderRadius='5px'
             >
                {/* coverImgae */}
@@ -52,15 +56,15 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
                      alt='cover_image'
                      maxH='300px'
                      width='100%'
-                     borderTopLeftRadius='5px'
-                     borderTopRightRadius='5px'
+                     borderTopLeftRadius={{ base: 'none', md: '5px' }}
+                     borderTopRightRadius={{ base: 'none', md: '5px' }}
                      objectFit='cover'
                   />
                )}
 
                {/* content */}
                <Box
-                  px={{ base: '.5rem', md: '2.5rem' }}
+                  px={{ base: '.7rem', md: '2.5rem' }}
                   pb={{ base: '3rem', md: '1rem' }}
                >
                   {!postDetail && loading && <DetailSkeleton />}
@@ -78,15 +82,17 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
                                        Zwel Htet Yan
                                     </Text>
                                     {postDetail.isUpdated && (
-                                       <Text fontSize='11px' color='gray'>
+                                       <Text fontSize='11px' color='#717171'>
                                           (updated)
                                        </Text>
                                     )}
                                  </HStack>
-                                 <Text fontSize='13px' color='gray' mt='-1'>
+                                 <Text fontSize='12px' color='#717171' mt='-.8'>
+                                    {dateFormat(postDetail.createdAt)} (
                                     <Moment fromNow>
                                        {calTimeStamp(postDetail.createdAt)}
                                     </Moment>
+                                    )
                                  </Text>
                               </Box>
                            </HStack>

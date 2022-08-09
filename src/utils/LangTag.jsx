@@ -13,7 +13,6 @@ const LangTag = ({ tag, handleClickTag }) => {
          _hover={{
             transform: 'translateY(-1px)',
             borderColor: 'rgb(0 0 0 / 14%)',
-            borderBottomColor: `${tag?.color}`,
          }}
          borderRadius='5px'
       >

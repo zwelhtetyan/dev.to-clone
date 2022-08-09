@@ -27,14 +27,28 @@
 
    .mde-textarea-wrapper textarea.mde-text {
       border: 1px solid #e2e8f0;
+      height: calc(100vh - 420px) !important;
       &:focus {
          outline: none;
+      }
+      &::placeholder {
+         letter-spacing: 1px;
+         font-size: 18px;
+         color: #525252;
+
+         @media screen and (max-width: 480px) {
+            font-size: 16px;
+         }
       }
    }
 
    .mde-text,
    .mde-preview {
-      font-size: 1rem;
+      font-size: 1.1rem;
+
+      @media screen and (max-width: 480px) {
+         font-size: 1rem;
+      }
    }
 
    .mde-preview-content {
@@ -49,4 +63,8 @@
          border-radius: 5px;
       }
    }
+}
+
+.disucssion-box .react-mde .mde-textarea-wrapper textarea.mde-text {
+   height: 150px !important;
 }
