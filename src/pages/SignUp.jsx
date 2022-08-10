@@ -7,15 +7,12 @@ import { signInWithPopup } from 'firebase/auth';
 import { useAuth } from '../context/auth';
 import { auth } from '../config/firebase';
 import { createUser } from '../lib/api';
-import { useDispatch } from 'react-redux';
-import { getUserData } from '../store/user/getUserData';
 
 const SignUp = ({ type }) => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
 
    const navigate = useNavigate();
-   const dispatch = useDispatch();
 
    const user = useAuth();
 
@@ -34,7 +31,6 @@ const SignUp = ({ type }) => {
 
             createUser(userId, userData).then((_) => {
                navigate('/');
-               dispatch(getUserData());
                console.log('created user successfully');
             });
          })

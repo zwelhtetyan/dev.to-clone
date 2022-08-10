@@ -10,19 +10,17 @@ import Error from './pages/Error';
 import PostDetails from './pages/PostDetails';
 import { useDispatch } from 'react-redux';
 import React, { useEffect } from 'react';
-import { getAllPost } from './store/post/getAllPost';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import SignOutConfirm from './components/SignOutConfirm';
-import { getUserData } from './store/user/getUserData';
+import { getData } from './store/getData/getData';
 
 const App = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(getAllPost());
-      dispatch(getUserData());
+      dispatch(getData());
    }, [dispatch]);
 
    console.log('app render');

@@ -67,7 +67,7 @@ const Profile = () => {
                      color='#717171'
                      fontSize='15px'
                   >
-                     <Image src={joinOn} />
+                     <Image src={joinOn} alt='icon' />
                      <Text>Joined on {joinOnDate}</Text>
                   </HStack>
                </Box>

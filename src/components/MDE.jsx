@@ -12,7 +12,7 @@ import {
    saveToLocalStorage,
 } from '../helper/localStorage';
 import '../styles/markdown.scss';
-import { setCommentVal } from '../store/comment';
+import { setCommentVal } from '../store/comment/comment';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
 import { setMDEValueToStore } from '../store/post/postData';

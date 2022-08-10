@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
    userData: null,
-   loading: false,
+   userStatus: {
+      loading: false,
+      err: false,
+   },
 };
 
 const userDataSlice = createSlice({
@@ -13,12 +16,12 @@ const userDataSlice = createSlice({
          state.userData = action.payload;
       },
 
-      setLoading: (state, action) => {
-         state.status = action.payload;
+      setUserStatus: (state, action) => {
+         state.userStatus = action.payload;
       },
    },
 });
 
-export const { setUserData, setLoading } = userDataSlice.actions;
+export const { setUserData, setUserStatus } = userDataSlice.actions;
 
 export default userDataSlice.reducer;

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { db } from '../../config/firebase';
 import converter from '../../helper/converter';
-import { setCommentVal } from '../../store/comment';
+import { setCommentVal } from '../../store/comment/comment';
 import { PrimaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
 

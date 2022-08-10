@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import commentReducer from './comment';
+import commentReducer from './comment/comment';
 import currentPostReducer from './post/currentPost';
 import allPostDataSliceReducer from './post/allPostData';
 import postDataSliceReducer from './post/postData';

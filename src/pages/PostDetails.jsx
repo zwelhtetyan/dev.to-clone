@@ -10,7 +10,7 @@ const PostDetails = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
-   const { allPostData, loading, err } = useSelector(
+   const { allPostData, postStatus } = useSelector(
       (state) => state.allPostData
    );
 
@@ -52,8 +52,8 @@ const PostDetails = () => {
    return (
       <DetailElements
          postDetail={postDetail}
-         loading={loading}
-         err={err}
+         loading={postStatus.loading}
+         err={postStatus.err}
          id={id}
       />
    );

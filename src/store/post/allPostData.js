@@ -2,29 +2,26 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
    allPostData: null,
-   loading: false,
-   err: false,
+   postStatus: {
+      loading: false,
+      err: false,
+   },
 };
 
 const allPostDataSlice = createSlice({
    name: 'allPostData',
    initialState,
    reducers: {
-      setAllPostDataToStore: (state, action) => {
+      setAllPostData: (state, action) => {
          state.allPostData = action.payload;
       },
 
-      setLoading: (state, action) => {
-         state.loading = action.payload;
-      },
-
-      setErr: (state, action) => {
-         state.err = action.payload;
+      setPostStatus: (state, action) => {
+         state.postStatus = action.payload;
       },
    },
 });
 
-export const { setAllPostDataToStore, setLoading, setErr } =
-   allPostDataSlice.actions;
+export const { setAllPostData, setPostStatus } = allPostDataSlice.actions;
 
 export default allPostDataSlice.reducer;
