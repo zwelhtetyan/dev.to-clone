@@ -22,7 +22,7 @@ const MainMenu = () => {
             _hover={{
                filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))',
             }}
-            transition='.1s'
+            transition='.3s'
          >
             <CustomAvatar name={user.name} src={user.photoURL} size='40px' />
          </MenuButton>

@@ -5,8 +5,9 @@ import { PrimaryBtn } from './Buttons';
 
 const ErrorMessage = () => {
    const reload = () => window.location.reload();
+
    return (
-      <VStack mt={5}>
+      <VStack my='8rem'>
          <HStack m='auto'>
             <TbWifiOff size={23} />
             <Text fontSize='17px' letterSpacing='1px'>

@@ -17,7 +17,7 @@ const PreviewImg = () => {
             top='0'
             left='0'
          >
-            <Image src={url} />
+            <Image src={url} w='auto' h='auto' alt='preview_img' />
          </VStack>
       </Box>
    );

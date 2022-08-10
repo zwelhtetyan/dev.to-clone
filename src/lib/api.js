@@ -4,6 +4,7 @@ import {
    deleteDoc,
    doc,
    serverTimestamp,
+   setDoc,
    updateDoc,
 } from 'firebase/firestore';
 import {
@@ -29,6 +30,11 @@ export const removeImage = async (path) => {
    const desertRef = ref(storage, path);
    await deleteObject(desertRef);
    console.log('removed image');
+};
+
+//cretae user
+export const createUser = async (userId, userData) => {
+   await setDoc(doc(db, 'users', userId), userData);
 };
 
 //create post

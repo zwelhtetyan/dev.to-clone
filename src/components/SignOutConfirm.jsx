@@ -1,12 +1,15 @@
 import { Heading, VStack } from '@chakra-ui/react';
 import { signOut } from 'firebase/auth';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../config/firebase';
 import { removeFromLocalStorage } from '../helper/localStorage';
 import { PrimaryBtn } from '../utils/Buttons';
 
 const SignOutConfirm = () => {
+   //scroll top
+   useEffect(() => window.scrollTo(0, 0), []);
+
    const navigate = useNavigate();
 
    const handleSignOut = () =>
@@ -15,6 +18,7 @@ const SignOutConfirm = () => {
          removeFromLocalStorage('user');
          console.log('signed out');
       });
+
    return (
       <VStack
          h={{ base: '50vh', md: '85vh' }}

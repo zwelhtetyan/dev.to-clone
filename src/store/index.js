@@ -2,7 +2,8 @@ import { configureStore } from '@reduxjs/toolkit';
 import commentReducer from './comment';
 import currentPostReducer from './post/currentPost';
 import allPostDataSliceReducer from './post/allPostData';
-import PostDataSliceReducer from './post/postData';
+import postDataSliceReducer from './post/postData';
+import userDataReducer from './user/userData';
 
 const store = configureStore({
    middleware: (getDefaultMiddleware) =>
@@ -11,9 +12,10 @@ const store = configureStore({
       }),
 
    reducer: {
-      allPostData: allPostDataSliceReducer,
-      postData: PostDataSliceReducer,
-      currentPost: currentPostReducer,
+      allPostData: allPostDataSliceReducer, // hold all post data on globalStore
+      postData: postDataSliceReducer, // data before publish
+      currentPost: currentPostReducer, //data to edit or delete => (get id from it)
+      userData: userDataReducer,
       comment: commentReducer,
    },
 });

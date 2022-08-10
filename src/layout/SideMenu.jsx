@@ -11,9 +11,12 @@ import {
 import { SecondaryBtn } from '../utils/Buttons';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Hero from '../components/Hero';
+import { useAuth } from '../context/auth';
 
 const SideMenu = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
+
+   const user = useAuth();
 
    return (
       <>
@@ -44,7 +47,7 @@ const SideMenu = () => {
                </DrawerHeader>
 
                <DrawerBody p='0.5'>
-                  <Hero w='80%' onClose={onClose} />
+                  {!user && <Hero w='80%' onClose={onClose} />}
                </DrawerBody>
             </DrawerContent>
          </Drawer>

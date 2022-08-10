@@ -3,6 +3,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../config/firebase';
 import {
    getItemFromLocalStorage,
+   removeFromLocalStorage,
    saveToLocalStorage,
 } from '../helper/localStorage';
 
@@ -18,15 +19,19 @@ const AuthContextProvider = ({ children }) => {
          if (user !== null) {
             const newUser = {
                name: user.displayName,
-               uid: user.uid,
+               userId: user.uid,
                photoURL: user.providerData[0].photoURL,
                createdAt: user.metadata.createdAt,
             };
+
             setUser(newUser);
+
             saveToLocalStorage('user', JSON.stringify(newUser));
+
             return;
          }
          setUser(null);
+         removeFromLocalStorage('user');
       });
    }, []);
 

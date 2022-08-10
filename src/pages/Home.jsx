@@ -8,7 +8,7 @@ const Home = () => {
    const user = useAuth();
 
    return (
-      <Box minH={{ xl: '60vh' }}>
+      <Box>
          <Box px={{ base: '.5rem', md: '1rem' }} maxW='768px' m='auto'>
             {!user && (
                <Hero display={{ base: 'none', md: 'flex' }} isLogo={true} />

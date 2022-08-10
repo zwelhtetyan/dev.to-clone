@@ -37,7 +37,7 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
          py='0'
          px={{ base: '0', md: '1rem' }}
          mt={{ base: '-.5rem !important', md: '0 !important' }}
-         h={{ xl: loading && '50vh' }}
+         h={{ base: (loading || err) && '50vh' }}
       >
          <Flex align='flex-start'>
             {postDetail && <SideReactionBar />}
@@ -73,7 +73,11 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
 
                   {postDetail && (
                      <Box>
-                        <HStack justify='space-between' wrap='wrap'>
+                        <Flex
+                           align='center'
+                           justify='space-between'
+                           wrap='wrap'
+                        >
                            <HStack pt={3}>
                               <Avatar name='Zwel' src={z} w='40px' h='40px' />
                               <Box>
@@ -87,7 +91,7 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
                                        </Text>
                                     )}
                                  </HStack>
-                                 <Text fontSize='12px' color='#717171' mt='-.8'>
+                                 <Text fontSize='12px' color='#717171'>
                                     {dateFormat(postDetail.createdAt)} (
                                     <Moment fromNow>
                                        {calTimeStamp(postDetail.createdAt)}
@@ -98,7 +102,7 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
                            </HStack>
 
                            <ManangePost />
-                        </HStack>
+                        </Flex>
 
                         <Heading mt={2}>{postDetail.title}</Heading>
 
@@ -120,7 +124,7 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
 
                         <Discussion id={id} comments={postDetail.comments} />
 
-                        <Box mt='2rem' className='comments_container'>
+                        <Box mt='2rem'>
                            {postDetail.comments.map((cmt) => (
                               <CommentItem
                                  key={nanoid()}

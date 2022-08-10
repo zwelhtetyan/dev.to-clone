@@ -13,36 +13,29 @@ import React, { useEffect } from 'react';
 import { getAllPost } from './store/post/getAllPost';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-
-import { useAuth } from './context/auth';
 import Profile from './pages/Profile';
 import SignOutConfirm from './components/SignOutConfirm';
+import { getUserData } from './store/user/getUserData';
 
 const App = () => {
    const dispatch = useDispatch();
 
    useEffect(() => {
       dispatch(getAllPost());
+      dispatch(getUserData());
    }, [dispatch]);
 
-   const user = useAuth();
+   console.log('app render');
 
    return (
       <Box>
          <Routes>
             <Route path='/' element={<Layout />}>
                <Route index element={<Home />} />
-               <Route path='details/:id' element={<PostDetails />} />
                <Route path='profile' element={<Profile />} />
-               {user && (
-                  <>
-                     <Route path='delete-confirm' element={<DeleteConfirm />} />
-                     <Route
-                        path='signout-confirm'
-                        element={<SignOutConfirm />}
-                     />
-                  </>
-               )}
+               <Route path='details/:id' element={<PostDetails />} />
+               <Route path='delete-confirm' element={<DeleteConfirm />} />
+               <Route path='signout-confirm' element={<SignOutConfirm />} />
                <Route path='create-account' element={<SignUp />} />
                <Route path='login' element={<Login />} />
             </Route>

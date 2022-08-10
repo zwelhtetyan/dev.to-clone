@@ -6,11 +6,16 @@ import { signUpBtnDesigns } from '../components/signUpBtnDesign';
 import { signInWithPopup } from 'firebase/auth';
 import { useAuth } from '../context/auth';
 import { auth } from '../config/firebase';
+import { createUser } from '../lib/api';
+import { useDispatch } from 'react-redux';
+import { getUserData } from '../store/user/getUserData';
 
 const SignUp = ({ type }) => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
+
    const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    const user = useAuth();
 
@@ -20,7 +25,19 @@ const SignUp = ({ type }) => {
 
    const signin = (provider) =>
       signInWithPopup(auth, provider)
-         .then((_) => navigate('/'))
+         .then((res) => {
+            const userId = res.user.uid;
+            const userData = {
+               name: res.user.displayName,
+               porfile: res.user.photoURL,
+            };
+
+            createUser(userId, userData).then((_) => {
+               navigate('/');
+               dispatch(getUserData());
+               console.log('created user successfully');
+            });
+         })
          .catch((err) => console.log(err.message));
 
    return (

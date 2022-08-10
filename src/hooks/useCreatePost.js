@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/auth';
 import {
    getItemFromLocalStorage,
    removeFromLocalStorage,
@@ -12,6 +13,8 @@ import { setTitleToStore } from '../store/post/postData';
 const useCreatePost = (currentPostDataToEdit) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
+
+   const user = useAuth();
 
    //value from redux store
    const postDataFromStore = useSelector((state) => state.postData);
@@ -65,10 +68,12 @@ const useCreatePost = (currentPostDataToEdit) => {
    }, [postData, currentPostDataToEdit]);
 
    //publish post
-   const publishPostHandler = (e) => {
+   const publishPostHandler = () => {
       setPublishing(true);
 
-      createPost(postData)
+      const newData = { ...postData, userId: user.userId };
+
+      createPost(newData)
          .then((_) => {
             navigate('/');
             setPublishing(false);
@@ -80,7 +85,7 @@ const useCreatePost = (currentPostDataToEdit) => {
    };
 
    //Edit post
-   const eidtPostHandler = async (e) => {
+   const eidtPostHandler = () => {
       setPublishing(true);
 
       editPost(postData, postData.id)

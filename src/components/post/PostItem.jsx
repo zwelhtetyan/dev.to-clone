@@ -12,7 +12,6 @@ import {
 } from '@chakra-ui/react';
 import heart from '../../assets/logo/heart.svg';
 import comment from '../../assets/logo/comment.svg';
-import z from '../../assets/images/z.jpeg';
 import Moment from 'react-moment';
 import { useNavigate } from 'react-router-dom';
 import { calTimeStamp, dateFormat } from '../../helper/calcTimestamp';
@@ -21,6 +20,8 @@ import CustomAvatar from '../../utils/Avatar';
 import { nanoid } from 'nanoid';
 
 const PostItem = ({
+   name,
+   profile,
    coverImg,
    createdAt,
    title,
@@ -64,8 +65,8 @@ const PostItem = ({
             <HStack align='flex-start'>
                <HStack>
                   <CustomAvatar
-                     name='Zwel'
-                     src={z}
+                     name={name}
+                     src={profile}
                      size='40px'
                      onClick={handleViewProfile}
                   />
@@ -78,7 +79,7 @@ const PostItem = ({
                            onClick={handleViewProfile}
                            fontSize={{ base: '15px', md: '16px' }}
                         >
-                           Zwel Htet Yan
+                           {name}
                         </Text>
                         {isUpdated && (
                            <Text fontSize='11px' color='#717171'>
@@ -86,11 +87,7 @@ const PostItem = ({
                            </Text>
                         )}
                      </HStack>
-                     <Text
-                        fontSize='12px'
-                        color='#717171'
-                        mt={isUpdated ? '-.8' : '-0.5'}
-                     >
+                     <Text fontSize='12px' color='#717171'>
                         {dateFormat(createdAt)} (
                         <Moment fromNow>{calTimeStamp(createdAt)}</Moment>)
                      </Text>
@@ -140,4 +137,4 @@ const PostItem = ({
    );
 };
 
-export default PostItem;
+export default React.memo(PostItem);

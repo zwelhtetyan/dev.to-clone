@@ -1,16 +1,22 @@
 import { Box, Button, HStack, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-
+import { Navigate, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/auth';
 import { deletePost } from '../lib/api';
 
 const DeleteConfirm = () => {
    const navigate = useNavigate();
 
+   const user = useAuth();
+
    const currentPostData = useSelector(
       (state) => state.currentPost.currentPostData
    );
+
+   if (!user || !currentPostData) {
+      return <Navigate to='/' />;
+   }
 
    const onDelete = () => {
       deletePost(currentPostData.id).then(() => {
