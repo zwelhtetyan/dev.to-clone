@@ -1,44 +1,44 @@
-import { onSnapshot } from 'firebase/firestore';
-import { setAllPostData, setPostStatus } from '../store/post/allPostData';
-import { setUserData, setUserStatus } from '../store/user/userData';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { db } from '../config/firebase';
 
-const useGetData = (colRef, dispatch, colName) => {
-   const pending = { loading: true, err: false };
-   const error = { loading: false, err: true };
-   const success = { loading: false, err: false };
+const useGetData = (colName) => {
+   const [data, setData] = useState(null);
+   const [loading, setloading] = useState(true);
+   const [err, setErr] = useState(false);
 
-   //helper
-   const setStatusFunc = (status) => {
+   useEffect(() => {
+      let colRef;
+
       if (colName === 'posts') {
-         dispatch(setPostStatus(status));
+         const postRef = collection(db, 'posts');
+         colRef = query(postRef, orderBy('createdAt', 'desc'));
       } else if (colName === 'users') {
-         dispatch(setUserStatus(status));
+         colRef = collection(db, 'users');
       }
-   };
 
-   setStatusFunc(pending);
+      onSnapshot(colRef, { includeMetadataChanges: true }, (snapshot) => {
+         if (!snapshot.metadata.hasPendingWrites) {
+            if (snapshot.docs.length === 0) {
+               setloading(false);
+               setErr(true);
+               return;
+            }
 
-   onSnapshot(colRef, { includeMetadataChanges: true }, (snapshot) => {
-      if (!snapshot.metadata.hasPendingWrites) {
-         if (snapshot.docs.length === 0) {
-            setStatusFunc(error);
-            return;
+            setloading(false);
+            setErr(false);
+
+            const newData = [];
+            snapshot.docs.forEach((doc) => {
+               newData.push({ ...doc.data(), id: doc.id });
+            });
+
+            setData(newData);
          }
+      });
+   }, [colName]);
 
-         setStatusFunc(success);
-
-         const newData = [];
-         snapshot.docs.forEach((doc) => {
-            newData.push({ ...doc.data(), id: doc.id });
-         });
-
-         if (colName === 'posts') {
-            dispatch(setAllPostData(newData));
-         } else if (colName === 'users') {
-            dispatch(setUserData(newData));
-         }
-      }
-   });
+   return { data, loading, err };
 };
 
 export default useGetData;

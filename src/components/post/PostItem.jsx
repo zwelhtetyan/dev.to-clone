@@ -75,7 +75,6 @@ const PostItem = ({
                         <Text
                            fontWeight={600}
                            lineHeight={1}
-                           _hover={{ opacity: '.8' }}
                            onClick={handleViewProfile}
                            fontSize={{ base: '15px', md: '16px' }}
                         >
@@ -102,6 +101,7 @@ const PostItem = ({
                <Heading
                   cursor='pointer'
                   mt={2}
+                  w='100%'
                   _hover={{ color: 'rgb(47 58 178)' }}
                   fontSize={['1.2rem', '1.5rem']}
                >

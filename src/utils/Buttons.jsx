@@ -42,9 +42,11 @@ export const SecondaryBtn = ({
    color,
    size,
    m,
+   name,
 }) => {
    return (
       <Button
+         name={name}
          variant='ghost'
          fontWeight='400'
          color={color}

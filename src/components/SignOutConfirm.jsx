@@ -12,12 +12,13 @@ const SignOutConfirm = () => {
 
    const navigate = useNavigate();
 
-   const handleSignOut = () =>
+   const handleSignOut = () => {
       signOut(auth).then((_) => {
          navigate('/');
          removeFromLocalStorage('user');
          console.log('signed out');
       });
+   };
 
    return (
       <VStack
@@ -26,7 +27,7 @@ const SignOutConfirm = () => {
          p='0 .5rem'
          textAlign='center'
       >
-         <Heading fontSize={{ base: '1.5rem', md: '1.7rem' }}>
+         <Heading fontSize={{ base: '1.3rem', md: '1.5rem' }}>
             Are you sure you want to sign out?
          </Heading>
          <PrimaryBtn bg='rgb(59 73 223)' onClick={handleSignOut}>

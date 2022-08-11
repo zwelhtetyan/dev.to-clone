@@ -34,16 +34,21 @@ const Profile = () => {
                   p={{ base: '.5rem .5rem 2rem', md: '1rem 1rem 2rem' }}
                   textAlign={{ base: 'start', md: 'center' }}
                >
-                  <Image
-                     src={user?.photoURL}
-                     alt='user_profile'
+                  <Box
                      boxSize={{ base: '60px', md: '120px' }}
                      pos='absolute'
                      top={{ base: '-30px', md: '-60px' }}
                      left={{ base: '2.5rem', md: '50%' }}
                      transform='translateX(-50%)'
-                     border={{ base: '4px solid black', md: '7px solid black' }}
+                     border={{
+                        base: '4px solid black',
+                        md: '7px solid black',
+                     }}
                      rounded='full'
+                     backgroundImage={`url(${user?.photoURL})`}
+                     backgroundPosition='center'
+                     backgroundRepeat='no-repeat'
+                     backgroundSize='cover'
                   />
 
                   <HStack justify='flex-end' mb={['1rem', '1rem', '2rem']}>

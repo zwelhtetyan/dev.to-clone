@@ -10,11 +10,13 @@ const PostDetails = () => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
-   const { allPostData, postStatus } = useSelector(
-      (state) => state.allPostData
-   );
+   const {
+      transformedData,
+      transfromedDataLoading: loading,
+      transformedDataErr: err,
+   } = useSelector((state) => state.transformedData);
 
-   const postDetail = allPostData?.find((item) => item.id === id);
+   const postDetail = transformedData?.find((item) => item.id === id);
 
    useEffect(() => {
       if (postDetail) {
@@ -52,9 +54,9 @@ const PostDetails = () => {
    return (
       <DetailElements
          postDetail={postDetail}
-         loading={postStatus.loading}
-         err={postStatus.err}
-         id={id}
+         loading={loading}
+         err={err}
+         pramId={id}
       />
    );
 };

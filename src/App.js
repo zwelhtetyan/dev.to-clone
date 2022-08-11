@@ -14,14 +14,52 @@ import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import SignOutConfirm from './components/SignOutConfirm';
-import { getData } from './store/getData/getData';
+import useGetData from './hooks/useGetData';
+import {
+   setTransformData,
+   setTransformedDataErr,
+   setTransformedDataLoading,
+} from './store/data/transformedData';
 
 const App = () => {
    const dispatch = useDispatch();
 
+   const {
+      data: allPostData,
+      loading: postLoading,
+      err: postErr,
+   } = useGetData('posts');
+
+   const {
+      data: userData,
+      loading: userLoading,
+      err: userErr,
+   } = useGetData('users');
+
+   const loading = postLoading || userLoading;
+   const err = postErr || userErr;
+
+   let modifiedPostData = null;
+
+   if (allPostData && userData && !loading && !err) {
+      const changedPostData = allPostData.map((postData) => {
+         const userInfo = userData.find((data) => data.id === postData.userId);
+
+         return {
+            ...postData,
+            name: userInfo.name,
+            profile: userInfo.porfile,
+         };
+      });
+
+      modifiedPostData = changedPostData;
+   }
+
    useEffect(() => {
-      dispatch(getData());
-   }, [dispatch]);
+      dispatch(setTransformData(modifiedPostData));
+      dispatch(setTransformedDataLoading(loading));
+      dispatch(setTransformedDataErr(err));
+   }, [dispatch, err, loading, modifiedPostData]);
 
    console.log('app render');
 

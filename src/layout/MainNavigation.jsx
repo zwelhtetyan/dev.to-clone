@@ -64,6 +64,7 @@ const MainNavigation = () => {
 
             <Flex>
                <SecondaryBtn
+                  name='search_icon'
                   display={{ base: 'block', md: 'none' }}
                   m='0 .5rem 0 0'
                >

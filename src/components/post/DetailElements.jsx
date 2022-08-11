@@ -13,7 +13,6 @@ import {
 } from '@chakra-ui/react';
 import Moment from 'react-moment';
 import LangTag from '../../utils/LangTag';
-import z from '../../assets/images/z.jpeg';
 import { calTimeStamp, dateFormat } from '../../helper/calcTimestamp';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import DetailSkeleton from '../../components/skeletons/DetailSkeleton';
@@ -25,10 +24,15 @@ import SideReactionBar from '../../components/SideReactionBar';
 import converter from '../../helper/converter';
 import '../../styles/postdetail.scss';
 import ErrorMessage from '../../utils/ErrorMessage';
+import { useAuth } from '../../context/auth';
 
-const DetailElements = ({ postDetail, loading, err, id }) => {
+const DetailElements = ({ postDetail, loading, err, pramId }) => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
+
+   const user = useAuth();
+
+   const isAuthor = user?.userId === postDetail.userId;
 
    return (
       <Box
@@ -79,11 +83,16 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
                            wrap='wrap'
                         >
                            <HStack pt={3}>
-                              <Avatar name='Zwel' src={z} w='40px' h='40px' />
+                              <Avatar
+                                 name='Zwel'
+                                 src={postDetail.profile}
+                                 w='40px'
+                                 h='40px'
+                              />
                               <Box>
                                  <HStack>
                                     <Text fontWeight={600} lineHeight={1}>
-                                       Zwel Htet Yan
+                                       {postDetail.name}
                                     </Text>
                                     {postDetail.isUpdated && (
                                        <Text fontSize='11px' color='#717171'>
@@ -101,7 +110,7 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
                               </Box>
                            </HStack>
 
-                           <ManangePost />
+                           {isAuthor && <ManangePost />}
                         </Flex>
 
                         <Heading mt={2}>{postDetail.title}</Heading>
@@ -122,7 +131,10 @@ const DetailElements = ({ postDetail, loading, err, id }) => {
 
                         <Divider mt={5} w='90%' mx='auto' />
 
-                        <Discussion id={id} comments={postDetail.comments} />
+                        <Discussion
+                           id={pramId}
+                           comments={postDetail.comments}
+                        />
 
                         <Box mt='2rem'>
                            {postDetail.comments.map((cmt) => (

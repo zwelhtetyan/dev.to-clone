@@ -6,32 +6,13 @@ import { useSelector } from 'react-redux';
 import ErrorMessage from '../../utils/ErrorMessage';
 
 const AllPost = () => {
-   const { allPostData, postStatus } = useSelector(
-      (state) => state.allPostData
-   );
+   const {
+      transformedData,
+      transfromedDataLoading: loading,
+      transformedDataErr: err,
+   } = useSelector((state) => state.transformedData);
 
-   const { userData, userStatus } = useSelector((state) => state.userData);
-
-   const loading = postStatus.loading || userStatus.loading;
-   const err = postStatus.err || userStatus.err;
-
-   // modified data logic start
-   let modifiedPostData = null;
-
-   if (userData && allPostData && !loading && !err) {
-      const changedPostData = allPostData.map((postData) => {
-         const userInfo = userData.find((data) => data.id === postData.userId);
-
-         return {
-            ...postData,
-            name: userInfo.name,
-            profile: userInfo.porfile,
-         };
-      });
-
-      modifiedPostData = changedPostData;
-   }
-   //modified data logic end
+   console.log('all post render');
 
    return (
       <Box h={err ? '50vh' : 'auto'}>
@@ -45,10 +26,10 @@ const AllPost = () => {
             </>
          )}
 
-         {modifiedPostData &&
+         {transformedData &&
             !loading &&
             !err &&
-            modifiedPostData.map((postData) => (
+            transformedData.map((postData) => (
                <PostItem
                   key={postData.id}
                   name={postData.name}

@@ -21,6 +21,7 @@ const SideMenu = () => {
    return (
       <>
          <SecondaryBtn
+            name='menu_icon'
             display={{ base: 'block', md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
          >
