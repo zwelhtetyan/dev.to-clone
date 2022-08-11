@@ -39,6 +39,7 @@ const App = () => {
    const loading = postLoading || userLoading;
    const err = postErr || userErr;
 
+   // transform data logic
    let modifiedPostData = null;
 
    if (allPostData && userData && !loading && !err) {
@@ -54,6 +55,7 @@ const App = () => {
 
       modifiedPostData = changedPostData;
    }
+   // transform data logic end
 
    useEffect(() => {
       dispatch(setTransformData(modifiedPostData));

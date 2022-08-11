@@ -6,10 +6,19 @@ import joinOn from '../assets/logo/joinOn.svg';
 import doc from '../assets/logo/doc.svg';
 import commentLg from '../assets/logo/commentLg.svg';
 import { Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import PostItem from '../components/post/PostItem';
+import AllPostSkeletons from '../components/skeletons/AllPostSkeletons';
 
 const Profile = () => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
+
+   const {
+      transformedData,
+      transfromedDataLoading: loading,
+      transformedDataErr: err,
+   } = useSelector((state) => state.transformedData);
 
    const user = useAuth();
 
@@ -19,6 +28,13 @@ const Profile = () => {
 
    const date = new Date(+user.createdAt).toDateString().split(' ').slice(1, 4);
    const joinOnDate = [date[0], +date[1] + ',', date[2]].join(' ');
+
+   let publishedPosts = null;
+   if (transformedData && !loading && !err) {
+      publishedPosts = transformedData.filter(
+         (postData) => postData.userId === user?.userId
+      );
+   }
 
    return (
       <Box mt='-.5rem !important' h={{ xl: '60vh' }}>
@@ -94,7 +110,9 @@ const Profile = () => {
                   >
                      <HStack mb='.7rem'>
                         <Image src={doc} alt='doc_logo' />
-                        <Text>0 post published</Text>
+                        <Text>
+                           {publishedPosts?.length || 0} post published
+                        </Text>
                      </HStack>
                      <HStack>
                         <Image src={commentLg} alt='comment_logo' />
@@ -106,8 +124,25 @@ const Profile = () => {
                      flex={{ base: 'unset', md: '2' }}
                      borderRadius='5px'
                      w={{ base: '100%' }}
+                     px={{ base: '.5rem', md: 'unset' }}
                   >
-                     <Box>{/* published post here */}</Box>
+                     <Box>
+                        {loading && <AllPostSkeletons />}
+                        {publishedPosts &&
+                           publishedPosts.map((postData) => (
+                              <PostItem
+                                 key={postData.id}
+                                 name={postData.name}
+                                 profile={postData.profile}
+                                 id={postData.id}
+                                 createdAt={postData.createdAt}
+                                 title={postData.title}
+                                 tags={postData.filteredTags}
+                                 readTime={postData.readTime}
+                                 isUpdated={postData?.isUpdated}
+                              />
+                           ))}
+                     </Box>
                   </Box>
                </Flex>
             </Box>

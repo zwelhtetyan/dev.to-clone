@@ -14,7 +14,11 @@ import heart from '../../assets/logo/heart.svg';
 import comment from '../../assets/logo/comment.svg';
 import Moment from 'react-moment';
 import { useNavigate } from 'react-router-dom';
-import { calTimeStamp, dateFormat } from '../../helper/calcTimestamp';
+import {
+   calTimeStamp,
+   dateFormat,
+   isLimitedDate,
+} from '../../helper/calcTimestamp';
 import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/Avatar';
 import { nanoid } from 'nanoid';
@@ -86,9 +90,20 @@ const PostItem = ({
                            </Text>
                         )}
                      </HStack>
+
                      <Text fontSize='12px' color='#717171'>
-                        {dateFormat(createdAt)} (
-                        <Moment fromNow>{calTimeStamp(createdAt)}</Moment>)
+                        {dateFormat(createdAt)}{' '}
+                        {!isLimitedDate(createdAt) && (
+                           <Text as='span'>
+                              (
+                              {
+                                 <Moment fromNow>
+                                    {calTimeStamp(createdAt)}
+                                 </Moment>
+                              }
+                              )
+                           </Text>
+                        )}
                      </Text>
                   </Box>
                </HStack>

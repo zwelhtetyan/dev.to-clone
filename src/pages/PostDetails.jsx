@@ -18,6 +18,8 @@ const PostDetails = () => {
 
    const postDetail = transformedData?.find((item) => item.id === id);
 
+   console.log(postDetail);
+
    useEffect(() => {
       if (postDetail) {
          dispatch(

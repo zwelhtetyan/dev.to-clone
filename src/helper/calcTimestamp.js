@@ -10,3 +10,11 @@ export const dateFormat = (timeStamp) => {
    const dateFormat = [date[0], +date[1]].join(' ');
    return dateFormat;
 };
+
+export const isLimitedDate = (createdAt) => {
+   const createdDate = createdAt.seconds;
+   const currentDate = Math.floor(new Date().getTime() / 1000);
+   const limitedDate = currentDate - createdDate;
+
+   return limitedDate > 432000;
+};

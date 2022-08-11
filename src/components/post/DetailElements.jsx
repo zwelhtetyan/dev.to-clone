@@ -32,7 +32,7 @@ const DetailElements = ({ postDetail, loading, err, pramId }) => {
 
    const user = useAuth();
 
-   const isAuthor = user?.userId === postDetail.userId;
+   const isAuthor = user?.userId === postDetail?.userId;
 
    return (
       <Box
@@ -72,6 +72,17 @@ const DetailElements = ({ postDetail, loading, err, pramId }) => {
                   pb={{ base: '3rem', md: '1rem' }}
                >
                   {!postDetail && loading && <DetailSkeleton />}
+
+                  {!postDetail && !loading && !err && (
+                     <Text
+                        textAlign='center'
+                        my='2rem'
+                        fontSize='17px'
+                        letterSpacing='1px'
+                     >
+                        wrong url 😟!
+                     </Text>
+                  )}
 
                   {!loading && err && <ErrorMessage />}
 
