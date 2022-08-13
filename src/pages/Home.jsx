@@ -9,7 +9,7 @@ const Home = () => {
 
    return (
       <Box>
-         <Box px={{ base: '.5rem', md: '1rem' }} maxW='768px' m='auto'>
+         <Box px={{ base: '.5rem', md: '1rem' }} maxW='650px' m='auto'>
             {!user && (
                <Hero display={{ base: 'none', md: 'flex' }} isLogo={true} />
             )}

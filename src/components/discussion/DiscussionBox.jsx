@@ -7,6 +7,7 @@ import converter from '../../helper/converter';
 import { setCommentVal } from '../../store/comment/comment';
 import { PrimaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
+import '../../styles/markdown.scss';
 
 const DiscussionBox = ({ id, comments }) => {
    const [submitting, setSubmitting] = useState(false);
@@ -55,7 +56,7 @@ const DiscussionBox = ({ id, comments }) => {
          border='1px solid rgb(59 73 223)'
          borderRadius='5px'
          overflow='hidden'
-         className='disucssion-box'
+         className='discussion-box'
       >
          <MDE
             MDEValue={commentVal}

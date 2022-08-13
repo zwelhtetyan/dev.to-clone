@@ -65,12 +65,11 @@ const PostItem = ({
                alt='cover_img'
             />
          )}
-         <Box p={{ base: '.5rem', md: '1.5rem' }}>
+         <Box p={{ base: '.5rem', sm: '1.5rem' }}>
             <HStack align='flex-start'>
                <HStack>
                   <CustomAvatar
-                     name={name}
-                     src={profile}
+                     profile={profile}
                      size='40px'
                      onClick={handleViewProfile}
                   />

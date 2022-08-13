@@ -31,13 +31,13 @@ const DeleteConfirm = () => {
    return (
       <Box p={{ base: '1rem 0.5rem', md: '1rem' }}>
          <VStack
-            mt={{ base: '3rem !important', md: '5rem !important' }}
+            mt='3rem !important'
             p={{ base: '2rem .5rem', md: '2rem 1rem' }}
             maxW='900px'
             w='100%'
             m='auto'
             bg='white'
-            border={{ base: 'none', md: '1px solid #E5E5E5' }}
+            boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
             borderRadius='5px'
          >
             <Text
@@ -48,11 +48,12 @@ const DeleteConfirm = () => {
                {currentPostData?.title}
             </Text>
             <Box
-               border='1px solid #E5E5E5'
+               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                my='1.5rem !important'
                width={{ base: '100%', md: '500px' }}
                p={{ base: '1rem .5rem', md: '1rem' }}
                borderRadius='5px'
+               bg='#FAFAFA'
             >
                <Text
                   fontSize={{ base: '1.1rem', md: '1.3rem' }}

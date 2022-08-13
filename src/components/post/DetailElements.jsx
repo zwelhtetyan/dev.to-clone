@@ -22,9 +22,11 @@ import CommentItem from '../../components/comment/CommentItem';
 import ManangePost from '../../components/ManangePost';
 import SideReactionBar from '../../components/SideReactionBar';
 import converter from '../../helper/converter';
-import '../../styles/postdetail.scss';
 import ErrorMessage from '../../utils/ErrorMessage';
 import { useAuth } from '../../context/auth';
+import 'react-mde/lib/styles/css/react-mde-all.css';
+import '../../styles/postdetail.scss';
+import CustomAvatar from '../../utils/Avatar';
 
 const DetailElements = ({ postDetail, loading, err, pramId }) => {
    //scroll top
@@ -87,18 +89,17 @@ const DetailElements = ({ postDetail, loading, err, pramId }) => {
                   {!loading && err && <ErrorMessage />}
 
                   {postDetail && (
-                     <Box>
+                     <Box className='mde-preview'>
                         <Flex
                            align='center'
                            justify='space-between'
                            wrap='wrap'
+                           gap='.5rem'
                         >
                            <HStack pt={3}>
-                              <Avatar
-                                 name='Zwel'
-                                 src={postDetail.profile}
-                                 w='40px'
-                                 h='40px'
+                              <CustomAvatar
+                                 profile={postDetail.profile}
+                                 size='40px'
                               />
                               <Box>
                                  <HStack>
@@ -134,13 +135,22 @@ const DetailElements = ({ postDetail, loading, err, pramId }) => {
                            ))}
                         </Wrap>
 
-                        <Text as='div' className='display_MDEValue'>
+                        <Box
+                           className='mde-preview-content'
+                           fontSize={['16px', '17px', '19px']}
+                        >
                            {htmlToJsx(
                               converter().makeHtml(postDetail.MDEValue)
                            )}
-                        </Text>
+                        </Box>
 
-                        <Divider mt={5} w='90%' mx='auto' />
+                        <Divider
+                           mt={7}
+                           w='95%'
+                           h='1px'
+                           background='#7a7a7a'
+                           mx='auto'
+                        />
 
                         <Discussion
                            id={pramId}
@@ -151,7 +161,7 @@ const DetailElements = ({ postDetail, loading, err, pramId }) => {
                            {postDetail.comments.map((cmt) => (
                               <CommentItem
                                  key={nanoid()}
-                                 text={htmlToJsx(cmt.value)}
+                                 text={cmt.value}
                                  createdAt={cmt.createdAt}
                               />
                            ))}

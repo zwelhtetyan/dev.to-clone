@@ -18,8 +18,6 @@ const PostDetails = () => {
 
    const postDetail = transformedData?.find((item) => item.id === id);
 
-   console.log(postDetail);
-
    useEffect(() => {
       if (postDetail) {
          dispatch(
@@ -38,7 +36,7 @@ const PostDetails = () => {
    useEffect(() => {
       if (postDetail) {
          const imgTags = [
-            ...document.querySelectorAll('.display_MDEValue p img'),
+            ...document.querySelectorAll('.mde-preview-content p img'),
          ];
 
          imgTags.forEach((img) => {

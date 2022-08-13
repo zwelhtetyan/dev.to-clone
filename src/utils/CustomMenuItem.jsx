@@ -1,10 +1,11 @@
 import React from 'react';
 import { MenuItem } from '@chakra-ui/react';
 
-const CustomMenuItem = ({ children, onClick }) => {
+const CustomMenuItem = ({ children, onClick, py }) => {
    return (
       <MenuItem
-         py='.5rem'
+         py={py || '.5rem'}
+         pos='relative'
          borderRadius='5px'
          _hover={{
             bg: 'rgb(59 73 223 / 10%)',

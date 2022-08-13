@@ -20,9 +20,13 @@ import {
    setTransformedDataErr,
    setTransformedDataLoading,
 } from './store/data/transformedData';
+import CustomizeProfile from './pages/CustomizeProfile';
+import { getProfileData } from './store/user/getProfiledata';
+import { useAuth } from './context/auth';
 
 const App = () => {
    const dispatch = useDispatch();
+   const user = useAuth();
 
    const {
       data: allPostData,
@@ -48,8 +52,8 @@ const App = () => {
 
          return {
             ...postData,
-            name: userInfo.name,
-            profile: userInfo.porfile,
+            name: userInfo?.name,
+            profile: userInfo?.profile,
          };
       });
 
@@ -62,6 +66,13 @@ const App = () => {
       dispatch(setTransformedDataLoading(loading));
       dispatch(setTransformedDataErr(err));
    }, [dispatch, err, loading, modifiedPostData]);
+
+   //fetch profile data
+   useEffect(() => {
+      if (user) {
+         dispatch(getProfileData(user.userId));
+      }
+   }, [user, dispatch]);
 
    console.log('app render');
 
@@ -76,6 +87,7 @@ const App = () => {
                <Route path='signout-confirm' element={<SignOutConfirm />} />
                <Route path='create-account' element={<SignUp />} />
                <Route path='login' element={<Login />} />
+               <Route path='customize-profile' element={<CustomizeProfile />} />
             </Route>
 
             <Route path='edit-post' element={<EditPost />} />

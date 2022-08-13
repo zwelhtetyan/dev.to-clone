@@ -18,9 +18,7 @@ const AuthContextProvider = ({ children }) => {
       onAuthStateChanged(auth, (user) => {
          if (user !== null) {
             const newUser = {
-               name: user.displayName,
                userId: user.uid,
-               photoURL: user.providerData[0].photoURL,
                createdAt: user.metadata.createdAt,
             };
 

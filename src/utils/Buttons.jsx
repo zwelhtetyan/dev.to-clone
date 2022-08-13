@@ -72,7 +72,7 @@ export const ReactionButton = ({ icon, value, text }) => {
       <Button
          h='30px'
          bg='white'
-         px={2}
+         px={1}
          border='1px solid transparent'
          _hover={{ bg: 'rgb(0 0 0 / 4%)' }}
          _active={{ bg: 'rgb(0 0 0 / 4%)' }}

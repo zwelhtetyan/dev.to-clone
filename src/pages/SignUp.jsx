@@ -26,7 +26,7 @@ const SignUp = ({ type }) => {
             const userId = res.user.uid;
             const userData = {
                name: res.user.displayName,
-               porfile: res.user.photoURL,
+               profile: res.user.photoURL,
             };
 
             createUser(userId, userData).then((_) => {

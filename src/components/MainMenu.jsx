@@ -7,14 +7,15 @@ import {
    VStack,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/auth';
 import CustomAvatar from '../utils/Avatar';
 import CustomMenuItem from '../utils/CustomMenuItem';
 
 const MainMenu = () => {
-   const user = useAuth();
    const navigate = useNavigate();
+
+   const profileData = useSelector((state) => state.profileData.profileData);
 
    return (
       <Menu autoSelect={false}>
@@ -24,7 +25,7 @@ const MainMenu = () => {
             }}
             transition='.3s'
          >
-            <CustomAvatar name={user.name} src={user.photoURL} size='40px' />
+            <CustomAvatar profile={profileData?.profile} size='40px' />
          </MenuButton>
 
          <MenuList
@@ -36,10 +37,7 @@ const MainMenu = () => {
          >
             <CustomMenuItem onClick={() => navigate('/profile')}>
                <VStack>
-                  <Text>{user.name}</Text>
-                  <Text fontSize='13px' mt='-.2rem !important'>
-                     @{user.name}
-                  </Text>
+                  <Text>{profileData?.name}</Text>
                </VStack>
             </CustomMenuItem>
 
@@ -49,7 +47,9 @@ const MainMenu = () => {
                Create Post
             </CustomMenuItem>
             <CustomMenuItem>Reading List</CustomMenuItem>
-            <CustomMenuItem>Setting</CustomMenuItem>
+            <CustomMenuItem onClick={() => navigate('/apperance')}>
+               Apperance
+            </CustomMenuItem>
             <MenuDivider h='1px' bg='#d6d6d7' />
 
             <CustomMenuItem onClick={() => navigate('/signout-confirm')}>

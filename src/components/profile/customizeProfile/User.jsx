@@ -1,0 +1,134 @@
+import React, { useState } from 'react';
+import {
+   Box,
+   Flex,
+   FormControl,
+   HStack,
+   Input,
+   Menu,
+   MenuButton,
+   MenuList,
+   Text,
+} from '@chakra-ui/react';
+import {
+   formControlStyles,
+   InputborderColor,
+   labelStyles,
+   titleStyles,
+   whiteBoxStyles,
+} from '../../../utils/CustomizeProfileStyles';
+import defaultProfile from '../../../assets/images/defaultProfile.jpg';
+import { FaRegEdit } from 'react-icons/fa';
+import CustomMenuItem from '../../../utils/CustomMenuItem';
+
+const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
+   const [previewImg, setPreviewImg] = useState('');
+
+   const imagePreviewHandler = (e) => {
+      const image = e.target.files[0];
+
+      const reader = new FileReader();
+
+      reader.addEventListener(
+         'load',
+         () => {
+            setPreviewImg(reader.result);
+         },
+         false
+      );
+
+      if (image) {
+         reader.readAsDataURL(image);
+      }
+   };
+
+   return (
+      <Box {...whiteBoxStyles}>
+         <Text {...titleStyles}>User</Text>
+
+         <FormControl {...formControlStyles}>
+            <Flex justify='center'>
+               <Flex flexDirection='column' justifyContent='center'>
+                  <Text textAlign='center' mb={3}>
+                     Profile Image
+                  </Text>
+
+                  <Menu>
+                     <MenuButton type='button' display='block'>
+                        <Box
+                           boxSize='100px'
+                           borderRadius='full'
+                           backgroundImage={
+                              previewImg ||
+                              profileData?.profile ||
+                              defaultProfile
+                           }
+                           backgroundPosition='center'
+                           backgroundRepeat='no-repeat'
+                           backgroundSize='cover'
+                           pos='relative'
+                           title={previewImg}
+                           ref={previewImgRef}
+                        >
+                           <HStack
+                              pos='absolute'
+                              background='#000000a3'
+                              bottom='-2px'
+                              color='white'
+                              px='.5rem'
+                              borderRadius='5px'
+                              fontSize='14px'
+                              left='-6px'
+                           >
+                              <FaRegEdit /> <Text>Edit</Text>
+                           </HStack>
+                        </Box>
+                     </MenuButton>
+                     <MenuList
+                        mx='auto !imporant'
+                        minW='0 !important'
+                        w='100px'
+                     >
+                        <CustomMenuItem py='0'>
+                           <label style={{ width: '100%', padding: '8px 0' }}>
+                              <Input
+                                 type='file'
+                                 display='none'
+                                 onChange={imagePreviewHandler}
+                              />{' '}
+                              Edit
+                           </label>
+                        </CustomMenuItem>
+                        <CustomMenuItem>Delete</CustomMenuItem>
+                     </MenuList>
+                  </Menu>
+               </Flex>
+            </Flex>
+
+            <Box>
+               <label style={labelStyles}>Name</label>
+               <Input
+                  defaultValue={profileData?.name}
+                  placeholder='First name'
+                  type='text'
+                  {...InputborderColor}
+                  ref={nameRef}
+               />
+            </Box>
+
+            <Box>
+               <label style={labelStyles}>Email address</label>
+               <Input
+                  defaultValue={profileData?.email}
+                  placeholder='example@gmail.com'
+                  type='email'
+                  {...InputborderColor}
+                  ref={emailRef}
+               />
+            </Box>
+         </FormControl>
+      </Box>
+   );
+};
+
+export default User;

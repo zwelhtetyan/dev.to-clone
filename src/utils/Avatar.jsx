@@ -1,13 +1,16 @@
 import React from 'react';
-import { Avatar } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import defaultProfile from '../assets/images/defaultProfile.jpg';
 
-const CustomAvatar = ({ name, src, size, onClick }) => {
+const CustomAvatar = ({ profile, size, onClick }) => {
    return (
-      <Avatar
-         name={name}
-         src={src}
-         w={size}
-         h={size}
+      <Box
+         boxSize={size}
+         backgroundImage={profile || defaultProfile}
+         borderRadius='full'
+         backgroundPosition='center'
+         backgroundSize='cover'
+         backgroundRepeat='no-repeat'
          cursor='pointer'
          transition='.3s'
          _hover={{ filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))' }}

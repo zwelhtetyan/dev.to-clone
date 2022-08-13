@@ -1,6 +1,5 @@
 import * as React from 'react';
 import ReactMde from 'react-mde';
-import 'react-mde/lib/styles/css/react-mde-all.css';
 import { useDispatch } from 'react-redux';
 import { getDefaultToolbarCommands } from 'react-mde';
 import { Box } from '@chakra-ui/react';
@@ -16,6 +15,7 @@ import { setCommentVal } from '../store/comment/comment';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
 import { setMDEValueToStore } from '../store/post/postData';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -110,7 +110,7 @@ const MDE = ({ MDEValue, where, isSubmitting, setUploadingImg }) => {
    };
 
    return (
-      <Box className='container' w='100%'>
+      <Box w='100%' fontFamily='monospace'>
          <ReactMde
             commands={{
                'code-block': codeBlock,

@@ -99,7 +99,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
       setTagData((prevArr) => [...prevArr, tag]);
    };
 
-   // generating tag pill icon
+   // generating tag icon
    const suggestions = () => {
       if (!tagsToShow() || tagsToShow().length === 0) {
          // return <p>No tag found !</p>;
