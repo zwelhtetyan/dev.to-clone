@@ -41,7 +41,7 @@ const MainMenu = () => {
                </VStack>
             </CustomMenuItem>
 
-            <MenuDivider h='1px' bg='#d6d6d7' />
+            <MenuDivider h='.5px' bg='#d6d6d7' />
             <CustomMenuItem>Dashboard</CustomMenuItem>
             <CustomMenuItem onClick={() => navigate('/create-post')}>
                Create Post
@@ -50,7 +50,7 @@ const MainMenu = () => {
             <CustomMenuItem onClick={() => navigate('/apperance')}>
                Apperance
             </CustomMenuItem>
-            <MenuDivider h='1px' bg='#d6d6d7' />
+            <MenuDivider h='.5px' bg='#d6d6d7' />
 
             <CustomMenuItem onClick={() => navigate('/signout-confirm')}>
                Sign Out

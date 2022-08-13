@@ -10,7 +10,7 @@ const TechStack = ({ title, text }) => {
          bg='#FAFAFA'
          p={{ base: '1rem .5rem', md: '1rem' }}
          borderRadius='5px'
-         mb={3}
+         mb={{ base: 1, md: 3 }}
       >
          <Text fontWeight={700} fontSize='18px'>
             {title}

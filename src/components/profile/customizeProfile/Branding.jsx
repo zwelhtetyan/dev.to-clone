@@ -1,7 +1,6 @@
-import { Box, FormControl, Input, Text } from '@chakra-ui/react';
+import { Box, Input, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import {
-   formControlStyles,
    InputborderColor,
    smallLabelStyles,
    titleStyles,
@@ -17,13 +16,13 @@ const Branding = ({ backgroundRef, profileData }) => {
       <Box {...whiteBoxStyles}>
          <Text {...titleStyles}>Branding</Text>
 
-         <FormControl {...formControlStyles}>
+         <Box>
             <Box>
                <label>Brand color</label>
                <Text {...smallLabelStyles}>
                   Used for backgrounds, borders etc.
                </Text>
-               <Box w='50%' pos='relative'>
+               <Box w='100%' pos='relative'>
                   <Input
                      pos='absolute'
                      top='0'
@@ -47,7 +46,7 @@ const Branding = ({ backgroundRef, profileData }) => {
                   />
                </Box>
             </Box>
-         </FormControl>
+         </Box>
       </Box>
    );
 };

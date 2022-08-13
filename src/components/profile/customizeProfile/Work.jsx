@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, FormControl, Input, Text } from '@chakra-ui/react';
+import { Box, Input, Text, VStack } from '@chakra-ui/react';
 import {
-   formControlStyles,
    InputborderColor,
    labelStyles,
    titleStyles,
@@ -13,8 +12,8 @@ const Work = ({ workRef, educationRef, profileData }) => {
       <Box {...whiteBoxStyles}>
          <Text {...titleStyles}>Work</Text>
 
-         <FormControl {...formControlStyles}>
-            <Box>
+         <VStack spacing={3}>
+            <Box w='100%'>
                <label style={labelStyles}>Work</label>
                <Input
                   defaultValue={profileData?.work}
@@ -25,7 +24,7 @@ const Work = ({ workRef, educationRef, profileData }) => {
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label style={labelStyles}>Education</label>
                <Input
                   defaultValue={profileData?.education}
@@ -35,7 +34,7 @@ const Work = ({ workRef, educationRef, profileData }) => {
                   ref={educationRef}
                />
             </Box>
-         </FormControl>
+         </VStack>
       </Box>
    );
 };

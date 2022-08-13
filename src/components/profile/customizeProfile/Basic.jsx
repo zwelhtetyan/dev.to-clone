@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, FormControl, Input, Text, Textarea } from '@chakra-ui/react';
+import { Box, Input, Text, Textarea, VStack } from '@chakra-ui/react';
 import {
-   formControlStyles,
    InputborderColor,
    labelStyles,
    titleStyles,
@@ -20,8 +19,8 @@ const Basic = ({
       <Box {...whiteBoxStyles}>
          <Text {...titleStyles}>Basic</Text>
 
-         <FormControl {...formControlStyles}>
-            <Box>
+         <VStack spacing={3}>
+            <Box w='100%'>
                <label style={labelStyles}>Website URL</label>
                <Input
                   defaultValue={profileData?.website}
@@ -32,7 +31,7 @@ const Basic = ({
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label style={labelStyles}>Github</label>
                <Input
                   defaultValue={profileData?.github}
@@ -43,7 +42,7 @@ const Basic = ({
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label style={labelStyles}>Twitter</label>
                <Input
                   defaultValue={profileData?.twitter}
@@ -54,7 +53,7 @@ const Basic = ({
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label style={labelStyles}>Location</label>
                <Input
                   defaultValue={profileData?.location}
@@ -65,7 +64,7 @@ const Basic = ({
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label style={labelStyles}>Bio</label>
 
                <Textarea
@@ -75,7 +74,7 @@ const Basic = ({
                   ref={bioRef}
                />
             </Box>
-         </FormControl>
+         </VStack>
       </Box>
    );
 };

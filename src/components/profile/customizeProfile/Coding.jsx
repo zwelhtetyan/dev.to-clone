@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, FormControl, Text, Textarea } from '@chakra-ui/react';
+import { Box, Text, Textarea, VStack } from '@chakra-ui/react';
 import {
-   formControlStyles,
    InputborderColor,
    smallLabelStyles,
    titleStyles,
@@ -19,8 +18,8 @@ const Coding = ({
       <Box {...whiteBoxStyles}>
          <Text {...titleStyles}>Coding</Text>
 
-         <FormControl {...formControlStyles}>
-            <Box>
+         <VStack spacing={3}>
+            <Box w='100%'>
                <label>Currently learning</label>
                <Text {...smallLabelStyles}>
                   What are you learning right now? What are the new tools and
@@ -33,7 +32,7 @@ const Coding = ({
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label>Skill / language</label>
                <Text {...smallLabelStyles}>
                   What tools and languages are you most experienced with? Are
@@ -47,7 +46,7 @@ const Coding = ({
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label>Currently hacking on</label>
                <Text {...smallLabelStyles}>
                   What projects are currently occupying most of your time?
@@ -59,7 +58,7 @@ const Coding = ({
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label>Available for</label>
                <Text {...smallLabelStyles}>
                   What kinds of collaborations or discussions are you available
@@ -71,7 +70,7 @@ const Coding = ({
                   defaultValue={profileData?.avaliable}
                />
             </Box>
-         </FormControl>
+         </VStack>
       </Box>
    );
 };

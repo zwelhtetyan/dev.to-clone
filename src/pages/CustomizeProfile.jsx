@@ -125,7 +125,7 @@ const CustomizeProfile = () => {
          <Heading fontSize={{ base: '1.3rem', md: '1.5rem' }}>
             Profile for{' '}
             <Text color='rgb(59 73 223)' as='span'>
-               @{user.name} 😎
+               @{profileData?.name} 😎
             </Text>
          </Heading>
 

@@ -17,12 +17,6 @@ export const titleStyles = {
    mb: 3,
 };
 
-export const formControlStyles = {
-   gap: 5,
-   display: 'flex',
-   flexDirection: 'column',
-};
-
 export const labelStyles = { marginBottom: '.3rem', display: 'block' };
 
 export const smallLabelStyles = {

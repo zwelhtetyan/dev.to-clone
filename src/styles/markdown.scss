@@ -27,6 +27,10 @@
 
    .mde-text {
       height: calc(100vh - 420px) !important;
+
+      @media screen and (max-width: 480px) {
+         height: 240px !important;
+      }
       &:focus {
          outline: none;
       }

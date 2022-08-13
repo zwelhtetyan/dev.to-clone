@@ -8,6 +8,7 @@ import {
    Image,
    Link,
    Text,
+   Wrap,
 } from '@chakra-ui/react';
 import { BsGithub, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
@@ -104,13 +105,13 @@ const TopLayer = ({ profileData }) => {
             {profileData?.bio || '404 bio not found'}
          </Text>
 
-         <Flex
+         <Wrap
+            display='flex'
             justifyContent={{ base: 'flex-start', md: 'center' }}
             mt='1rem'
             color='#717171'
             fontSize='15px'
-            gap={3}
-            wrap='wrap'
+            spacing={3}
          >
             <HStack>
                <Image src={joinOn} alt='icon' />
@@ -157,7 +158,7 @@ const TopLayer = ({ profileData }) => {
                   <MdEmail size={23} title='Email' />
                </LinkIcon>
             )}
-         </Flex>
+         </Wrap>
 
          <Divider mt='2rem' mb={3} />
 

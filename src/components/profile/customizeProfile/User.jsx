@@ -2,16 +2,15 @@ import React, { useState } from 'react';
 import {
    Box,
    Flex,
-   FormControl,
    HStack,
    Input,
    Menu,
    MenuButton,
    MenuList,
    Text,
+   VStack,
 } from '@chakra-ui/react';
 import {
-   formControlStyles,
    InputborderColor,
    labelStyles,
    titleStyles,
@@ -46,7 +45,7 @@ const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
       <Box {...whiteBoxStyles}>
          <Text {...titleStyles}>User</Text>
 
-         <FormControl {...formControlStyles}>
+         <VStack spacing={3}>
             <Flex justify='center'>
                <Flex flexDirection='column' justifyContent='center'>
                   <Text textAlign='center' mb={3}>
@@ -105,7 +104,7 @@ const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
                </Flex>
             </Flex>
 
-            <Box>
+            <Box w='100%'>
                <label style={labelStyles}>Name</label>
                <Input
                   defaultValue={profileData?.name}
@@ -116,7 +115,7 @@ const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
                />
             </Box>
 
-            <Box>
+            <Box w='100%'>
                <label style={labelStyles}>Email address</label>
                <Input
                   defaultValue={profileData?.email}
@@ -126,7 +125,7 @@ const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
                   ref={emailRef}
                />
             </Box>
-         </FormControl>
+         </VStack>
       </Box>
    );
 };
