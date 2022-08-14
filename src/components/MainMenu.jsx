@@ -31,7 +31,7 @@ const MainMenu = () => {
          <MenuList
             p='.5rem'
             minW={{ base: '0 !important' }}
-            w='270px'
+            w='250px'
             boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'
             bg='white'
          >
@@ -42,7 +42,10 @@ const MainMenu = () => {
             </CustomMenuItem>
 
             <MenuDivider h='.5px' bg='#d6d6d7' />
-            <CustomMenuItem>Dashboard</CustomMenuItem>
+
+            <CustomMenuItem onClick={() => navigate('/dashboard')}>
+               Dashboard
+            </CustomMenuItem>
             <CustomMenuItem onClick={() => navigate('/create-post')}>
                Create Post
             </CustomMenuItem>
@@ -50,6 +53,7 @@ const MainMenu = () => {
             <CustomMenuItem onClick={() => navigate('/apperance')}>
                Apperance
             </CustomMenuItem>
+
             <MenuDivider h='.5px' bg='#d6d6d7' />
 
             <CustomMenuItem onClick={() => navigate('/signout-confirm')}>

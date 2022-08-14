@@ -13,6 +13,7 @@ const Home = () => {
             {!user && (
                <Hero display={{ base: 'none', md: 'flex' }} isLogo={true} />
             )}
+
             <AllPost />
          </Box>
       </Box>

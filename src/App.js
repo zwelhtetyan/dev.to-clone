@@ -23,6 +23,7 @@ import {
 import CustomizeProfile from './pages/CustomizeProfile';
 import { getProfileData } from './store/user/getProfiledata';
 import { useAuth } from './context/auth';
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
    const dispatch = useDispatch();
@@ -88,6 +89,7 @@ const App = () => {
                <Route path='create-account' element={<SignUp />} />
                <Route path='login' element={<Login />} />
                <Route path='customize-profile' element={<CustomizeProfile />} />
+               <Route path='dashboard' element={<Dashboard />} />
             </Route>
 
             <Route path='edit-post' element={<EditPost />} />

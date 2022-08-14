@@ -22,14 +22,24 @@ const CreatePostFrom = ({
    pageTitle,
    setPostTitle,
    publishing,
+   savingDraft,
    uploadingImg,
    setUploadingImg,
    postTitle,
    toEdit,
+   isDraftPost,
 }) => {
    const naviagte = useNavigate();
 
    const [touch, setTouch] = useState(false);
+
+   const submit = (publishingType) => {
+      if (postTitle) {
+         handleSubmit(publishingType);
+         return;
+      }
+      setTouch(true);
+   };
 
    return (
       <Box mt='-3.5rem' mb='1rem'>
@@ -103,13 +113,21 @@ const CreatePostFrom = ({
                   />
                </Box>
 
+               {/* buttons container */}
                <HStack justify='flex-end' w='100%'>
-                  {!toEdit && <SecondaryBtn>Save Draft</SecondaryBtn>}
+                  {!toEdit && (
+                     <SecondaryBtn
+                        disabled={uploadingImg || publishing || savingDraft}
+                        onClick={() => submit('draft')}
+                     >
+                        {savingDraft ? 'Saving Draft' : 'Save Draft'}
+                     </SecondaryBtn>
+                  )}
+
                   <PrimaryBtn
                      bg='rgb(59 73 223)'
-                     type='button'
-                     disabled={uploadingImg || publishing}
-                     onClick={postTitle ? handleSubmit : () => setTouch(true)}
+                     disabled={uploadingImg || publishing || savingDraft}
+                     onClick={() => submit('publish')}
                   >
                      {publishing ? (
                         <>

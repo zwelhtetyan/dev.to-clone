@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import {
-   Avatar,
    Box,
    Divider,
    Flex,
@@ -28,7 +27,7 @@ import 'react-mde/lib/styles/css/react-mde-all.css';
 import '../../styles/postdetail.scss';
 import CustomAvatar from '../../utils/Avatar';
 
-const DetailElements = ({ postDetail, loading, err, pramId }) => {
+const DetailElements = ({ postDetail, loading, err, postId }) => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
 
@@ -122,7 +121,12 @@ const DetailElements = ({ postDetail, loading, err, pramId }) => {
                               </Box>
                            </HStack>
 
-                           {isAuthor && <ManangePost />}
+                           {isAuthor && postDetail && (
+                              <ManangePost
+                                 // postDetail={postDetail}
+                                 postId={postId}
+                              />
+                           )}
                         </Flex>
 
                         <Heading mt={2}>{postDetail.title}</Heading>
@@ -153,7 +157,7 @@ const DetailElements = ({ postDetail, loading, err, pramId }) => {
                         />
 
                         <Discussion
-                           id={pramId}
+                           id={postId}
                            comments={postDetail.comments}
                         />
 

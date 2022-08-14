@@ -138,26 +138,28 @@ const TopLayer = ({ profileData }) => {
                </HStack>
             )}
 
-            {profileData?.github && (
-               <LinkIcon href={profileData.github} hoverColor='black'>
-                  <BsGithub size={22} title='Github' />
-               </LinkIcon>
-            )}
+            <HStack>
+               {profileData?.github && (
+                  <LinkIcon href={profileData.github} hoverColor='black'>
+                     <BsGithub size={22} title='Github' />
+                  </LinkIcon>
+               )}
 
-            {profileData?.twitter && (
-               <LinkIcon href={profileData.twitter} hoverColor='#1da1f2'>
-                  <BsTwitter size={23} title='Twitter' />
-               </LinkIcon>
-            )}
+               {profileData?.twitter && (
+                  <LinkIcon href={profileData.twitter} hoverColor='#1da1f2'>
+                     <BsTwitter size={23} title='Twitter' />
+                  </LinkIcon>
+               )}
 
-            {profileData?.email && (
-               <LinkIcon
-                  hoverColor='black'
-                  onClick={() => window.open(`mailto:${profileData.email}`)}
-               >
-                  <MdEmail size={23} title='Email' />
-               </LinkIcon>
-            )}
+               {profileData?.email && (
+                  <LinkIcon
+                     hoverColor='black'
+                     onClick={() => window.open(`mailto:${profileData.email}`)}
+                  >
+                     <MdEmail size={23} title='Email' />
+                  </LinkIcon>
+               )}
+            </HStack>
          </Wrap>
 
          <Divider mt='2rem' mb={3} />

@@ -40,6 +40,7 @@ export const SecondaryBtn = ({
    display,
    onClick,
    color,
+   disabled,
    size,
    m,
    name,
@@ -50,6 +51,7 @@ export const SecondaryBtn = ({
          variant='ghost'
          fontWeight='400'
          color={color}
+         disabled={disabled}
          m={m}
          size={size}
          type='button'

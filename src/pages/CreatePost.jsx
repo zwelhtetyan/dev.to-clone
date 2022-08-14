@@ -17,6 +17,7 @@ const CreatePost = ({ currentPostDataToEdit }) => {
       title,
       postData,
       publishing,
+      savingDraft,
       uploadingImg,
       setUploadingImg,
    } = useCreatePost(currentPostDataToEdit);
@@ -35,9 +36,15 @@ const CreatePost = ({ currentPostDataToEdit }) => {
          postData={postData}
          pageTitle={currentPostDataToEdit ? 'Edit' : 'Create'}
          publishing={publishing}
+         savingDraft={savingDraft}
          uploadingImg={uploadingImg}
          setUploadingImg={setUploadingImg}
-         toEdit={currentPostDataToEdit ? true : false}
+         toEdit={
+            currentPostDataToEdit && !currentPostDataToEdit?.draft
+               ? true
+               : false
+         }
+         isDraftPost={currentPostDataToEdit?.draft}
       />
    );
 };

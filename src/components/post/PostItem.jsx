@@ -9,6 +9,7 @@ import {
    Heading,
    Wrap,
    WrapItem,
+   Flex,
 } from '@chakra-ui/react';
 import heart from '../../assets/logo/heart.svg';
 import comment from '../../assets/logo/comment.svg';
@@ -22,6 +23,7 @@ import {
 import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/Avatar';
 import { nanoid } from 'nanoid';
+import ManangePost from '../ManangePost';
 
 const PostItem = ({
    name,
@@ -33,6 +35,8 @@ const PostItem = ({
    id,
    readTime,
    isUpdated,
+   fromDashboard,
+   draftPost,
 }) => {
    const navigate = useNavigate();
 
@@ -136,14 +140,31 @@ const PostItem = ({
                )}
 
                <HStack justify='space-between' w='100%'>
-                  <HStack>
-                     <ReactionButton icon={heart} value={11} text='Reaction' />
-                     <ReactionButton icon={comment} value={11} text='Comment' />
-                  </HStack>
+                  <Box>
+                     {!draftPost && (
+                        <HStack>
+                           <ReactionButton
+                              icon={heart}
+                              value={11}
+                              text='Reaction'
+                           />
+                           <ReactionButton
+                              icon={comment}
+                              value={11}
+                              text='Comment'
+                           />
+                        </HStack>
+                     )}
+                  </Box>
 
-                  <Text fontSize='13px' color='#717171'>
-                     {readTime} min read
-                  </Text>
+                  <Flex align='center'>
+                     <Text fontSize='13px' color='#717171'>
+                        {readTime} min read
+                     </Text>
+                     {fromDashboard && (
+                        <ManangePost postId={id} m='0 0 0 .5rem' />
+                     )}
+                  </Flex>
                </HStack>
             </VStack>
          </Box>

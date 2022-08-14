@@ -1,14 +1,12 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentPostData } from '../store/post/currentPost';
+import { useSelector } from 'react-redux';
 import DetailElements from '../components/post/DetailElements';
 import '../styles/postdetail.scss';
 
 const PostDetails = () => {
    const { id } = useParams();
    const navigate = useNavigate();
-   const dispatch = useDispatch();
 
    const {
       transformedData,
@@ -16,21 +14,7 @@ const PostDetails = () => {
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
 
-   const postDetail = transformedData?.find((item) => item.id === id);
-
-   useEffect(() => {
-      if (postDetail) {
-         dispatch(
-            setCurrentPostData({
-               cvImg: postDetail.cvImg,
-               title: postDetail.title,
-               filteredTags: postDetail.filteredTags,
-               MDEValue: postDetail.MDEValue,
-               id,
-            })
-         );
-      }
-   }, [postDetail, dispatch, id]);
+   const postDetail = transformedData?.find((postData) => postData.id === id);
 
    //to preview images
    useEffect(() => {
@@ -56,7 +40,7 @@ const PostDetails = () => {
          postDetail={postDetail}
          loading={loading}
          err={err}
-         pramId={id}
+         postId={id}
       />
    );
 };

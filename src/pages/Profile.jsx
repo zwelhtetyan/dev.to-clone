@@ -32,7 +32,7 @@ const Profile = () => {
    let publishedPosts = null;
    if (transformedData && !loading && !err) {
       publishedPosts = transformedData.filter(
-         (postData) => postData.userId === user.userId
+         (postData) => postData.userId === user.userId && !postData.draft
       );
    }
 

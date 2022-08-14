@@ -12,7 +12,10 @@ const AllPost = () => {
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
 
-   console.log('all post render');
+   let allPostData = null;
+   if (transformedData && !loading && !err) {
+      allPostData = transformedData.filter((postData) => !postData.draft);
+   }
 
    return (
       <Box h={err ? '50vh' : 'auto'}>
@@ -26,10 +29,8 @@ const AllPost = () => {
             </>
          )}
 
-         {transformedData &&
-            !loading &&
-            !err &&
-            transformedData.map((postData) => (
+         {allPostData &&
+            allPostData.map((postData) => (
                <PostItem
                   key={postData.id}
                   name={postData.name}

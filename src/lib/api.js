@@ -53,8 +53,8 @@ export const deletePost = async (postId) => {
       .catch((err) => console.log(err));
 };
 
-export const editPost = async (postData, postId) => {
-   const docRef = doc(db, 'posts', postId);
+export const editPost = async (postData) => {
+   const docRef = doc(db, 'posts', postData.id);
 
    await updateDoc(docRef, {
       ...postData,

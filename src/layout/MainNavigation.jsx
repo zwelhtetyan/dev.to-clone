@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import logo from '../assets/logo/logo.png';
 import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';

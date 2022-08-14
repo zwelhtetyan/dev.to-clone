@@ -36,8 +36,9 @@ const useCreatePost = (currentPostDataToEdit) => {
          initialState
    );
    const [title, setTitle] = useState(postData?.title || '');
-   const [publishing, setPublishing] = useState(false);
    const [uploadingImg, setUploadingImg] = useState(false);
+   const [publishing, setPublishing] = useState(false);
+   const [savingDraft, setSavingDraft] = useState(false);
 
    //set title to store
    useEffect(() => {
@@ -45,7 +46,6 @@ const useCreatePost = (currentPostDataToEdit) => {
    }, [title, dispatch]);
 
    //set postData everytime postDataFromStore change
-
    useEffect(() => {
       const newData = {
          cvImg: postDataFromStore.cvImg,
@@ -67,16 +67,29 @@ const useCreatePost = (currentPostDataToEdit) => {
       }
    }, [postData, currentPostDataToEdit]);
 
-   //publish post
-   const publishPostHandler = () => {
-      setPublishing(true);
+   //helper function for set publishing || saving logic
+   const helper = (type, bol) => {
+      let newData;
 
-      const newData = { ...postData, userId: user.userId };
+      if (type === 'publish') {
+         setPublishing(bol);
+         newData = { ...postData, userId: user.userId, draft: false };
+      } else if (type === 'draft') {
+         setSavingDraft(bol);
+         newData = { ...postData, userId: user.userId, draft: true };
+      }
+
+      return newData;
+   };
+
+   //publish post
+   const publishPostHandler = (publishingType) => {
+      const newData = helper(publishingType, true);
 
       createPost(newData)
          .then((_) => {
             navigate('/');
-            setPublishing(false);
+            helper(publishingType, false);
             removeFromLocalStorage('postDataToPublish');
 
             console.log('uploaded post successfully!');
@@ -85,13 +98,13 @@ const useCreatePost = (currentPostDataToEdit) => {
    };
 
    //Edit post
-   const eidtPostHandler = () => {
-      setPublishing(true);
+   const eidtPostHandler = (publishingType) => {
+      const newData = helper(publishingType, true);
 
-      editPost(postData, postData.id)
+      editPost(newData)
          .then((_) => {
             navigate(-1);
-            setPublishing(false);
+            helper(publishingType, false);
             removeFromLocalStorage('postDataToEdit');
 
             console.log('updated post successfully');
@@ -104,6 +117,7 @@ const useCreatePost = (currentPostDataToEdit) => {
       title,
       setTitle,
       publishing,
+      savingDraft,
       uploadingImg,
       setUploadingImg,
       publishPostHandler,
