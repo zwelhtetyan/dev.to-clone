@@ -9,13 +9,22 @@ import {
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/auth';
 import CustomAvatar from '../utils/Avatar';
 import CustomMenuItem from '../utils/CustomMenuItem';
 
 const MainMenu = () => {
    const navigate = useNavigate();
+   const user = useAuth();
 
    const profileData = useSelector((state) => state.profileData.profileData);
+
+   let currentUserProfile = null;
+   if (profileData) {
+      currentUserProfile = profileData.find(
+         (data) => data.userId === user?.userId
+      );
+   }
 
    return (
       <Menu autoSelect={false}>
@@ -25,7 +34,7 @@ const MainMenu = () => {
             }}
             transition='.3s'
          >
-            <CustomAvatar profile={profileData?.profile} size='40px' />
+            <CustomAvatar profile={currentUserProfile?.profile} size='40px' />
          </MenuButton>
 
          <MenuList
@@ -35,9 +44,11 @@ const MainMenu = () => {
             boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'
             bg='white'
          >
-            <CustomMenuItem onClick={() => navigate('/profile')}>
+            <CustomMenuItem
+               onClick={() => navigate(`/profile/${currentUserProfile.userId}`)}
+            >
                <VStack>
-                  <Text>{profileData?.name}</Text>
+                  <Text>{currentUserProfile?.name}</Text>
                </VStack>
             </CustomMenuItem>
 

@@ -26,10 +26,13 @@ import { useAuth } from '../../context/auth';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 import '../../styles/postdetail.scss';
 import CustomAvatar from '../../utils/Avatar';
+import { useNavigate } from 'react-router-dom';
 
 const DetailElements = ({ postDetail, loading, err, postId }) => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
+
+   const navigate = useNavigate();
 
    const user = useAuth();
 
@@ -55,9 +58,9 @@ const DetailElements = ({ postDetail, loading, err, postId }) => {
                borderRadius='5px'
             >
                {/* coverImgae */}
-               {postDetail?.cvImg.url && (
+               {postDetail?.cvImg && (
                   <Image
-                     src={postDetail.cvImg.url}
+                     src={postDetail.cvImg}
                      alt='cover_image'
                      maxH='300px'
                      width='100%'
@@ -99,6 +102,9 @@ const DetailElements = ({ postDetail, loading, err, postId }) => {
                               <CustomAvatar
                                  profile={postDetail.profile}
                                  size='40px'
+                                 onClick={() =>
+                                    navigate(`/profile/${postDetail.userId}`)
+                                 }
                               />
                               <Box>
                                  <HStack>

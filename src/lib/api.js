@@ -21,12 +21,14 @@ export const uploadImage = async (img, selectedImgPath) => {
    await uploadBytes(cvImgRef, img);
 
    const url = await getDownloadURL(cvImgRef);
+   console.log('image uploaded successfully');
    return url;
 };
 
-export const removeImage = async (path) => {
-   const desertRef = ref(storage, path);
+export const removeImage = async (url) => {
+   const desertRef = ref(storage, url);
    await deleteObject(desertRef);
+
    console.log('removed image');
 };
 

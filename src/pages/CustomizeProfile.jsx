@@ -9,7 +9,7 @@ import Work from '../components/profile/customizeProfile/Work';
 import Branding from '../components/profile/customizeProfile/Branding';
 import User from '../components/profile/customizeProfile/User';
 import Coding from '../components/profile/customizeProfile/Coding';
-import { updateProfileData } from '../lib/api';
+import { removeImage, updateProfileData } from '../lib/api';
 import { useSelector } from 'react-redux';
 import { getAuth, updateProfile } from 'firebase/auth';
 import {
@@ -27,6 +27,13 @@ const CustomizeProfile = () => {
    const auth = getAuth();
 
    const profileData = useSelector((state) => state.profileData.profileData);
+
+   let currentUserProfile = null;
+   if (profileData) {
+      currentUserProfile = profileData.find(
+         (data) => data.userId === user.userId
+      );
+   }
 
    const nameRef = useRef();
    const emailRef = useRef();
@@ -85,9 +92,16 @@ const CustomizeProfile = () => {
          work,
          education,
          background,
+         userId: user.userId,
       };
 
       setLoading(true);
+
+      if (name) {
+         updateProfile(auth.currentUser, {
+            displayName: name,
+         });
+      }
 
       if (previewImg) {
          uploadString(storageRef, previewImg, 'data_url').then((_) => {
@@ -112,12 +126,17 @@ const CustomizeProfile = () => {
          navigate('/profile');
          console.log('prifile informations are updated');
       });
+   };
 
-      if (name) {
-         updateProfile(auth.currentUser, {
-            displayName: name,
-         });
-      }
+   const removeProfileImgHandler = (url) => {
+      setLoading(true);
+
+      removeImage(url);
+      updateProfileData({ profile: '' }, user.userId).then((_) => {
+         setLoading(false);
+         navigate('/profile');
+         console.log('prifile informations are updated');
+      });
    };
 
    return (
@@ -125,7 +144,7 @@ const CustomizeProfile = () => {
          <Heading fontSize={{ base: '1.3rem', md: '1.5rem' }}>
             Profile for{' '}
             <Text color='rgb(59 73 223)' as='span'>
-               @{profileData?.name} 😎
+               @{currentUserProfile?.name} 🤓
             </Text>
          </Heading>
 
@@ -140,8 +159,9 @@ const CustomizeProfile = () => {
             <User
                nameRef={nameRef}
                emailRef={emailRef}
-               profileData={profileData}
+               profileData={currentUserProfile}
                previewImgRef={previewImgRef}
+               removeProfileImgHandler={removeProfileImgHandler}
             />
 
             <Basic
@@ -150,7 +170,7 @@ const CustomizeProfile = () => {
                twitterRef={twitterRef}
                locationRef={locationRef}
                bioRef={bioRef}
-               profileData={profileData}
+               profileData={currentUserProfile}
             />
 
             <Coding
@@ -158,16 +178,19 @@ const CustomizeProfile = () => {
                skillRef={skillRef}
                hackingRef={hackingRef}
                avaliableRef={avaliableRef}
-               profileData={profileData}
+               profileData={currentUserProfile}
             />
 
             <Work
                workRef={workRef}
                educationRef={educationRef}
-               profileData={profileData}
+               profileData={currentUserProfile}
             />
 
-            <Branding backgroundRef={backgroundRef} profileData={profileData} />
+            <Branding
+               backgroundRef={backgroundRef}
+               profileData={currentUserProfile}
+            />
 
             <Box {...whiteBoxStyles} pb='1rem'>
                <PrimaryBtn

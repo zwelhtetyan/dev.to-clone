@@ -37,6 +37,8 @@ const PostItem = ({
    isUpdated,
    fromDashboard,
    draftPost,
+   userId,
+   currentUserProfile,
 }) => {
    const navigate = useNavigate();
 
@@ -47,6 +49,7 @@ const PostItem = ({
 
    const handleViewProfile = (e) => {
       e.stopPropagation();
+      navigate(`/profile/${userId}`);
    };
 
    return (
@@ -72,17 +75,19 @@ const PostItem = ({
          <Box p={{ base: '.5rem', sm: '1.5rem' }}>
             <HStack align='flex-start'>
                <HStack>
+                  {/* avatar */}
                   <CustomAvatar
                      profile={profile}
                      size='40px'
                      onClick={handleViewProfile}
+                     // onMouseOver={() => console.log(currentUserProfile)}
                   />
+
                   <Box>
                      <HStack>
                         <Text
                            fontWeight={600}
                            lineHeight={1}
-                           onClick={handleViewProfile}
                            fontSize={{ base: '15px', md: '16px' }}
                         >
                            {name}
@@ -99,11 +104,7 @@ const PostItem = ({
                         {!isLimitedDate(createdAt) && (
                            <Text as='span'>
                               (
-                              {
-                                 <Moment fromNow>
-                                    {calTimeStamp(createdAt)}
-                                 </Moment>
-                              }
+                              <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
                               )
                            </Text>
                         )}

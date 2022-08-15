@@ -21,13 +21,11 @@ const SignOutConfirm = () => {
    };
 
    return (
-      <VStack
-         h={{ base: '50vh', md: '85vh' }}
-         justify='center'
-         p='0 .5rem'
-         textAlign='center'
-      >
-         <Heading fontSize={{ base: '1.3rem', md: '1.5rem' }}>
+      <VStack minH='85vh' justify='center' p='0 .5rem' textAlign='center'>
+         <Heading
+            fontSize={{ base: '1.2rem', md: '1.5rem' }}
+            mb='.7rem !important'
+         >
             Are you sure you want to sign out?
          </Heading>
          <PrimaryBtn bg='rgb(59 73 223)' onClick={handleSignOut}>

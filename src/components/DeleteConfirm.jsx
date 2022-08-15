@@ -20,7 +20,7 @@ const DeleteConfirm = () => {
 
    const onDelete = () => {
       deletePost(currentPostData.id).then(() => {
-         navigate('/');
+         navigate('/dashboard');
       });
    };
 

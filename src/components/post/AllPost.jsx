@@ -12,13 +12,19 @@ const AllPost = () => {
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
 
+   const profileData = useSelector((state) => state.profileData.profileData);
+
    let allPostData = null;
    if (transformedData && !loading && !err) {
       allPostData = transformedData.filter((postData) => !postData.draft);
    }
 
+   const getUserProfileData = (userId) => {
+      return profileData.find((data) => data.userId === userId);
+   };
+
    return (
-      <Box h={err ? '50vh' : 'auto'}>
+      <Box h={err ? '63vh' : 'auto'}>
          {err && <ErrorMessage />}
 
          {loading && !err && (
@@ -41,6 +47,8 @@ const AllPost = () => {
                   tags={postData.filteredTags}
                   readTime={postData.readTime}
                   isUpdated={postData?.isUpdated}
+                  userId={postData.userId}
+                  currentUserProfile={getUserProfileData(postData.userId)}
                />
             ))}
       </Box>

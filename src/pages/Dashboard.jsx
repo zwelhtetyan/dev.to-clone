@@ -9,7 +9,7 @@ import {
    Tabs,
    Text,
 } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import PostItem from '../components/post/PostItem';
@@ -33,6 +33,9 @@ const ReactionBox = ({ count, title }) => {
 };
 
 const Dashboard = () => {
+   //scroll top
+   useEffect(() => window.scrollTo(0, 0), []);
+
    const {
       transformedData,
       transfromedDataLoading: loading,
@@ -70,8 +73,10 @@ const Dashboard = () => {
 
          <Tabs>
             <TabList>
-               <Tab fontSize='1.2rem'>Posts</Tab>
-               <Tab fontSize='1.2rem'>Drafts</Tab>
+               <Tab fontSize={['1.1rem', '1.2rem']}>Posts</Tab>
+               <Tab fontSize={['1.1rem', '1.2rem']}>
+                  Draft {draftPosts.length ? `(${draftPosts.length})` : ''}
+               </Tab>
             </TabList>
 
             <TabPanels>

@@ -1,7 +1,7 @@
 import { Box, Button, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../context/auth';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostItem from '../components/post/PostItem';
 import AllPostSkeletons from '../components/skeletons/AllPostSkeletons';
@@ -12,6 +12,8 @@ import ProfileLeftPart from '../components/profile/ProfileLeftPart';
 const Profile = () => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
+   const user = useAuth();
+   const { userIdToView } = useParams();
 
    const profileData = useSelector((state) => state.profileData.profileData);
 
@@ -23,16 +25,21 @@ const Profile = () => {
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
 
-   const user = useAuth();
-
    if (!user) {
       return <Navigate to='/login' />;
+   }
+
+   let currentUserProfile = null;
+   if (profileData) {
+      currentUserProfile = profileData.find(
+         (data) => data.userId === userIdToView
+      );
    }
 
    let publishedPosts = null;
    if (transformedData && !loading && !err) {
       publishedPosts = transformedData.filter(
-         (postData) => postData.userId === user.userId && !postData.draft
+         (postData) => postData.userId === userIdToView && !postData.draft
       );
    }
 
@@ -40,11 +47,11 @@ const Profile = () => {
       <Box mt='-.5rem !important'>
          <Box
             h={['7rem', '7rem', '9rem']}
-            background={profileData?.background || '#000000'}
+            background={currentUserProfile?.background || '#000000'}
          />
          <Box mx={{ base: 'none', md: '.5rem' }}>
             <Box maxW='1000px' mx='auto'>
-               <TopLayer profileData={profileData} />
+               <TopLayer profileData={currentUserProfile} />
 
                <Flex
                   mt='1rem'
@@ -55,7 +62,7 @@ const Profile = () => {
                   {/* left */}
                   <ProfileLeftPart
                      publishedPosts={publishedPosts}
-                     profileData={profileData}
+                     profileData={currentUserProfile}
                      display={{ base: !moreInfo && 'none', md: 'block' }}
                   />
 
@@ -74,7 +81,7 @@ const Profile = () => {
                         bg: 'rgb(0 0 0 / 4%)',
                      }}
                   >
-                     More info about @{profileData?.name}
+                     More info about @{currentUserProfile?.name}
                   </Button>
 
                   {/* right */}

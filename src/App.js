@@ -16,18 +16,16 @@ import Profile from './pages/Profile';
 import SignOutConfirm from './components/SignOutConfirm';
 import useGetData from './hooks/useGetData';
 import {
-   setTransformData,
+   setTransformedData,
    setTransformedDataErr,
    setTransformedDataLoading,
 } from './store/data/transformedData';
 import CustomizeProfile from './pages/CustomizeProfile';
-import { getProfileData } from './store/user/getProfiledata';
-import { useAuth } from './context/auth';
 import Dashboard from './pages/Dashboard';
+import { setProfileData } from './store/user/profileData';
 
 const App = () => {
    const dispatch = useDispatch();
-   const user = useAuth();
 
    const {
       data: allPostData,
@@ -63,17 +61,15 @@ const App = () => {
    // transform data logic end
 
    useEffect(() => {
-      dispatch(setTransformData(modifiedPostData));
+      dispatch(setTransformedData(modifiedPostData));
       dispatch(setTransformedDataLoading(loading));
       dispatch(setTransformedDataErr(err));
    }, [dispatch, err, loading, modifiedPostData]);
 
-   //fetch profile data
+   // //fetch profile data
    useEffect(() => {
-      if (user) {
-         dispatch(getProfileData(user.userId));
-      }
-   }, [user, dispatch]);
+      dispatch(setProfileData(userData));
+   }, [dispatch, userData]);
 
    console.log('app render');
 
@@ -82,12 +78,12 @@ const App = () => {
          <Routes>
             <Route path='/' element={<Layout />}>
                <Route index element={<Home />} />
-               <Route path='profile' element={<Profile />} />
+               <Route path='profile/:userIdToView' element={<Profile />} />
                <Route path='details/:id' element={<PostDetails />} />
-               <Route path='delete-confirm' element={<DeleteConfirm />} />
-               <Route path='signout-confirm' element={<SignOutConfirm />} />
                <Route path='create-account' element={<SignUp />} />
                <Route path='login' element={<Login />} />
+               <Route path='delete-confirm' element={<DeleteConfirm />} />
+               <Route path='signout-confirm' element={<SignOutConfirm />} />
                <Route path='customize-profile' element={<CustomizeProfile />} />
                <Route path='dashboard' element={<Dashboard />} />
             </Route>

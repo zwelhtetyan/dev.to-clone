@@ -85,13 +85,15 @@ const TopLayer = ({ profileData }) => {
             backgroundSize='cover'
          />
 
-         <HStack justify='flex-end' mb={['1rem', '1rem', '2rem']}>
-            <PrimaryBtn
-               bg='rgb(59 73 223)'
-               onClick={() => navigate('/customize-profile')}
-            >
-               Edit Profile
-            </PrimaryBtn>
+         <HStack justify='flex-end' mb={['1rem', '1rem', '2rem']} h='40px'>
+            {profileData && (
+               <PrimaryBtn
+                  bg='rgb(59 73 223)'
+                  onClick={() => navigate('/customize-profile')}
+               >
+                  Edit Profile
+               </PrimaryBtn>
+            )}
          </HStack>
 
          <Heading fontSize={['1.5rem', '2rem']}>{profileData?.name}</Heading>

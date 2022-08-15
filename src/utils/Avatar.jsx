@@ -2,9 +2,11 @@ import React from 'react';
 import { Box } from '@chakra-ui/react';
 import defaultProfile from '../assets/images/defaultProfile.jpg';
 
-const CustomAvatar = ({ profile, size, onClick }) => {
+const CustomAvatar = ({ profile, size, onClick, onMouseOver, title }) => {
    return (
       <Box
+         title={title}
+         onMouseOver={onMouseOver}
          boxSize={size}
          backgroundImage={profile || defaultProfile}
          borderRadius='full'

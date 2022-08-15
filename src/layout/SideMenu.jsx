@@ -76,6 +76,7 @@ const SideMenu = () => {
                         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                         borderRadius='5px'
                         py='.5rem'
+                        mb='.7rem'
                      >
                         <Hero w='80%' onClose={onClose} m='0' />
                      </Box>
@@ -86,10 +87,12 @@ const SideMenu = () => {
                      <Image src={HomeIcon} alt='menu_icon' />
                      <Text>Home</Text>
                   </MenuItem>
-                  <MenuItem>
-                     <Image src={ReadingListIcon} alt='menu_icon' />
-                     <Text>Reading List</Text>
-                  </MenuItem>
+                  {user && (
+                     <MenuItem>
+                        <Image src={ReadingListIcon} alt='menu_icon' />
+                        <Text>Reading List</Text>
+                     </MenuItem>
+                  )}
                   <MenuItem>
                      <Image src={FAQIcon} alt='menu_icon' />
                      <Text>FAQ</Text>

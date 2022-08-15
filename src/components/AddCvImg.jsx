@@ -16,12 +16,7 @@ import { setCvImgToStore } from '../store/post/postData';
 import { SecondaryBtn } from '../utils/Buttons';
 
 const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
-   const [cvImg, setCvImg] = useState(
-      cvImgFromLocalStorage || {
-         url: null,
-         path: null,
-      }
-   );
+   const [cvImg, setCvImg] = useState(cvImgFromLocalStorage || '');
 
    const [uploading, setUploading] = useState(false);
 
@@ -34,7 +29,7 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
    const handleCVImageUpload = (e) => {
       const image = e.target.files[0];
       if (image) {
-         cvImg.path && removeImage(cvImg.path);
+         cvImg && removeImage(cvImg);
 
          const selectedImgPath = `images/${image.name}${nanoid()}`;
          setUploading(true);
@@ -44,7 +39,7 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
             .then((url) => {
                setUploading(false);
                setUploadingImg(false);
-               setCvImg({ url, path: selectedImgPath });
+               setCvImg(url);
             })
             .catch((err) => console.log(err));
 
@@ -52,9 +47,9 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
       }
    };
 
-   const handleCVImgRemove = (path) => {
-      setCvImg({ url: null, path: null });
-      removeImage(path).catch((err) => console.log(err));
+   const handleCVImgRemove = (url) => {
+      setCvImg('');
+      removeImage(url).catch((err) => console.log(err));
    };
 
    return (
@@ -66,9 +61,9 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
             </HStack>
          )}
 
-         {!uploading && cvImg.url && (
+         {!uploading && cvImg && (
             <Image
-               src={cvImg.url}
+               src={cvImg}
                alt='cover_image'
                w='250px'
                h='105px'
@@ -101,15 +96,15 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
                         accept='image/jpeg, image/png, image/jpg , image/webp, image/gif'
                         onChange={handleCVImageUpload}
                      />
-                     {cvImg.url ? 'change' : 'Add a cover image'}
+                     {cvImg ? 'change' : 'Add a cover image'}
                   </Button>
                </Tooltip>
 
-               {cvImg.url && (
+               {cvImg && (
                   <SecondaryBtn
                      color='red'
                      hoverColor='red'
-                     onClick={() => handleCVImgRemove(cvImg.path)}
+                     onClick={() => handleCVImgRemove(cvImg)}
                   >
                      Remove
                   </SecondaryBtn>

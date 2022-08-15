@@ -9,10 +9,8 @@ const ErrorMessage = () => {
    return (
       <VStack my='8rem'>
          <HStack m='auto'>
-            <TbWifiOff size={23} />
-            <Text fontSize='17px' letterSpacing='1px'>
-               No internet connection!
-            </Text>
+            <TbWifiOff size={22} />
+            <Text letterSpacing='1px'>No internet connection !</Text>
          </HStack>
          <PrimaryBtn onClick={reload}>Try again</PrimaryBtn>
       </VStack>

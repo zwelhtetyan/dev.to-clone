@@ -20,7 +20,13 @@ import defaultProfile from '../../../assets/images/defaultProfile.jpg';
 import { FaRegEdit } from 'react-icons/fa';
 import CustomMenuItem from '../../../utils/CustomMenuItem';
 
-const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
+const User = ({
+   nameRef,
+   emailRef,
+   profileData,
+   previewImgRef,
+   removeProfileImgHandler,
+}) => {
    const [previewImg, setPreviewImg] = useState('');
 
    const imagePreviewHandler = (e) => {
@@ -41,6 +47,10 @@ const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
       }
    };
 
+   const clickEdit = () => {
+      document.getElementById('edit').click();
+   }; // if no profile image , i want user to go to file directly without choosing option.
+
    return (
       <Box {...whiteBoxStyles}>
          <Text {...titleStyles}>User</Text>
@@ -53,7 +63,11 @@ const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
                   </Text>
 
                   <Menu>
-                     <MenuButton type='button' display='block'>
+                     <MenuButton
+                        type='button'
+                        display='block'
+                        onClick={!profileData?.profile ? clickEdit : null}
+                     >
                         <Box
                            boxSize='100px'
                            borderRadius='full'
@@ -83,13 +97,22 @@ const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
                            </HStack>
                         </Box>
                      </MenuButton>
+
                      <MenuList
                         mx='auto !imporant'
                         minW='0 !important'
                         w='100px'
+                        opacity={
+                           !profileData?.profile
+                              ? '0 !important'
+                              : '1 !important'
+                        }
                      >
                         <CustomMenuItem py='0'>
-                           <label style={{ width: '100%', padding: '8px 0' }}>
+                           <label
+                              style={{ width: '100%', padding: '8px 0' }}
+                              id='edit'
+                           >
                               <Input
                                  type='file'
                                  display='none'
@@ -98,7 +121,14 @@ const User = ({ nameRef, emailRef, profileData, previewImgRef }) => {
                               Edit
                            </label>
                         </CustomMenuItem>
-                        <CustomMenuItem>Delete</CustomMenuItem>
+
+                        <CustomMenuItem
+                           onClick={() =>
+                              removeProfileImgHandler(profileData.profile)
+                           }
+                        >
+                           Delete
+                        </CustomMenuItem>
                      </MenuList>
                   </Menu>
                </Flex>

@@ -10,7 +10,7 @@ const transformedDataSlice = createSlice({
    name: 'userData',
    initialState,
    reducers: {
-      setTransformData: (state, action) => {
+      setTransformedData: (state, action) => {
          state.transformedData = action.payload;
       },
 
@@ -25,7 +25,7 @@ const transformedDataSlice = createSlice({
 });
 
 export const {
-   setTransformData,
+   setTransformedData,
    setTransformedDataLoading,
    setTransformedDataErr,
 } = transformedDataSlice.actions;

@@ -21,7 +21,7 @@ const useCreatePost = (currentPostDataToEdit) => {
 
    const initialState = useMemo(
       () => ({
-         cvImg: null,
+         cvImg: '',
          title: '',
          filteredTags: [],
          MDEValue: '',
@@ -88,7 +88,7 @@ const useCreatePost = (currentPostDataToEdit) => {
 
       createPost(newData)
          .then((_) => {
-            navigate('/');
+            navigate('/dashboard');
             helper(publishingType, false);
             removeFromLocalStorage('postDataToPublish');
 
