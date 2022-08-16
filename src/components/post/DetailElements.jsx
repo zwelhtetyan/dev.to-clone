@@ -105,6 +105,11 @@ const DetailElements = ({ postDetail, loading, err, postId }) => {
                                        cursor='pointer'
                                        lineHeight={1}
                                        _hover={{ color: 'rgb(47 58 178)' }}
+                                       onClick={() =>
+                                          navigate(
+                                             `/profile/${postDetail.userId}`
+                                          )
+                                       }
                                     >
                                        {postDetail.name}
                                     </Text>
@@ -153,9 +158,8 @@ const DetailElements = ({ postDetail, loading, err, postId }) => {
 
                         <Divider
                            mt={7}
-                           w='95%'
                            h='1px'
-                           background='#7a7a7a'
+                           background='#efefef'
                            mx='auto'
                         />
 

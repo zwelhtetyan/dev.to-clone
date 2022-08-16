@@ -1,5 +1,5 @@
-import { Box, Heading, Spinner, Text } from '@chakra-ui/react';
 import React, { useRef, useState } from 'react';
+import { Box, Heading, Spinner, Text } from '@chakra-ui/react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
 import { PrimaryBtn } from '../utils/Buttons';
@@ -19,8 +19,8 @@ import {
    uploadString,
 } from 'firebase/storage';
 import { nanoid } from 'nanoid';
-import DetailSkeleton from '../components/skeletons/DetailSkeleton';
 import ErrorMessage from '../utils/ErrorMessage';
+import CustomizeProfileSkeleton from '../components/skeletons/CustomizeProfileSkeleton';
 
 const CustomizeProfile = () => {
    const user = useAuth();
@@ -56,7 +56,7 @@ const CustomizeProfile = () => {
    }
 
    if (profileDataLoading) {
-      return <DetailSkeleton />;
+      return <CustomizeProfileSkeleton />;
    }
 
    if (!profileData && !profileDataLoading && profileDataErr) {

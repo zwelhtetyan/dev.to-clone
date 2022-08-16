@@ -64,7 +64,6 @@ const TopLayer = ({ profileData }) => {
          textAlign={{ base: 'start', md: 'center' }}
       >
          <Box
-            title='profile'
             boxSize={{ base: '60px', md: '120px' }}
             pos='absolute'
             top={{ base: '-30px', md: '-60px' }}

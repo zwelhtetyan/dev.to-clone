@@ -13,7 +13,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import PostItem from '../components/post/PostItem';
-import AllPostSkeletons from '../components/skeletons/AllPostSkeletons';
+import PostItemSkeleton from '../components/skeletons/PostItemSkeleton';
 import { useAuth } from '../context/auth';
 import ErrorMessage from '../utils/ErrorMessage';
 
@@ -62,7 +62,7 @@ const Dashboard = () => {
    }
 
    if (loading && (!publishedPosts || !publishedPosts)) {
-      return <AllPostSkeletons w='650px' h='calc(100vh - 120px)' />;
+      return <PostItemSkeleton w='650px' h='calc(100vh - 120px)' />;
    }
 
    if (!loading && err) {
@@ -90,7 +90,7 @@ const Dashboard = () => {
 
             <TabPanels>
                <TabPanel px='0'>
-                  {loading && <AllPostSkeletons />}
+                  {loading && <PostItemSkeleton />}
                   {publishedPosts &&
                      publishedPosts.map((postData) => (
                         <PostItem

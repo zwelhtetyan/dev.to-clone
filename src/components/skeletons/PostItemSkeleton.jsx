@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-const AllPostSkeletons = ({ w, h }) => {
+const PostItemSkeleton = ({ w, h }) => {
    return (
       <Box
          bg='transparent'
@@ -41,4 +41,4 @@ const AllPostSkeletons = ({ w, h }) => {
    );
 };
 
-export default AllPostSkeletons;
+export default PostItemSkeleton;

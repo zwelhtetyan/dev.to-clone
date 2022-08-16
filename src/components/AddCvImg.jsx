@@ -74,7 +74,7 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
          )}
 
          {!uploading && (
-            <HStack mt='3'>
+            <Flex mt='3'>
                <Tooltip
                   label='Use a ratio of 100:42 for best result.'
                   aria-label='A tooltip'
@@ -105,11 +105,12 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
                      color='red'
                      hoverColor='red'
                      onClick={() => handleCVImgRemove(cvImg)}
+                     m='0 0 0 .5rem'
                   >
                      Remove
                   </SecondaryBtn>
                )}
-            </HStack>
+            </Flex>
          )}
       </Flex>
    );

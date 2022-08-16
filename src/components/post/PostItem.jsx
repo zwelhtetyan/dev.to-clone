@@ -85,7 +85,7 @@ const PostItem = ({
                   />
 
                   <Box>
-                     <HStack>
+                     <Flex>
                         {!currentUserProfile || window.innerWidth <= 768 ? (
                            <Text
                               fontWeight={600}
@@ -111,11 +111,11 @@ const PostItem = ({
                         )}
 
                         {isUpdated && (
-                           <Text fontSize='11px' color='#717171'>
+                           <Text fontSize='11px' color='#717171' ms='.5rem'>
                               (updated)
                            </Text>
                         )}
-                     </HStack>
+                     </Flex>
 
                      <Text fontSize='12px' color='#717171'>
                         {dateFormat(createdAt)}{' '}

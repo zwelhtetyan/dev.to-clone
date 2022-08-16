@@ -14,7 +14,6 @@ const ErrorMessage = ({ offline, urlNotFound }) => {
          justify='center'
          h='calc(100vh - 120px)'
          fontSize={['16px', '17px']}
-         id='err'
       >
          {offline && (
             <VStack>

@@ -4,10 +4,10 @@ import { useAuth } from '../context/auth';
 import { Navigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostItem from '../components/post/PostItem';
-import AllPostSkeletons from '../components/skeletons/AllPostSkeletons';
 import TopLayer from '../components/profile/TopLayer';
 import ProfileLeftPart from '../components/profile/ProfileLeftPart';
 import ErrorMessage from '../utils/ErrorMessage';
+import ProfileSkeleton from '../components/skeletons/ProfileSkeleton';
 
 const Profile = () => {
    //scroll top
@@ -35,7 +35,7 @@ const Profile = () => {
    }
 
    if (loading && !transformedData && !err) {
-      return <AllPostSkeletons />;
+      return <ProfileSkeleton />;
    }
 
    let currentUserProfile = null;
@@ -45,15 +45,15 @@ const Profile = () => {
       );
    }
 
-   if (transformedData && currentUserProfile === undefined) {
-      return <ErrorMessage urlNotFound={true} />;
-   }
-
    let publishedPosts = null;
    if (transformedData && !loading && !err) {
       publishedPosts = transformedData.filter(
          (postData) => postData.userId === userIdToView && !postData.draft
       );
+   }
+
+   if (transformedData && currentUserProfile === undefined) {
+      return <ErrorMessage urlNotFound={true} />;
    }
 
    return (
@@ -66,6 +66,7 @@ const Profile = () => {
             <Box maxW='1000px' mx='auto'>
                <TopLayer profileData={currentUserProfile} />
 
+               {/* bottom layer */}
                <Flex
                   mt='1rem'
                   color='rgb(64 64 64)'
@@ -110,7 +111,7 @@ const Profile = () => {
                      px={{ base: '.5rem', md: 'unset' }}
                   >
                      <>
-                        {/* {loading && <AllPostSkeletons />} */}
+                        {/* {loading && <PostItemSkeleton />} */}
                         {publishedPosts &&
                            publishedPosts.map((postData) => (
                               <PostItem

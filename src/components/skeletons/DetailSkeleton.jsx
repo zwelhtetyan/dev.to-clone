@@ -16,7 +16,6 @@ const DetailSkeleton = () => {
          mx='auto'
          maxW='650px'
          h='calc(100vh - 120px)'
-         id='detail-skele'
       >
          <HStack>
             <SkeletonCircle size='10' />

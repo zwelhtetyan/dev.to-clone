@@ -53,7 +53,7 @@ const SideMenu = () => {
 
          <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
             <DrawerOverlay />
-            <DrawerContent maxW='250px' pt='60px'>
+            <DrawerContent maxW='300px' pt='60px'>
                <DrawerHeader
                   padding='.9rem .5rem .5rem'
                   display='flex'

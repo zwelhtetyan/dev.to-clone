@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import AllPostSkeletons from '../skeletons/AllPostSkeletons';
+import PostItemSkeleton from '../skeletons/PostItemSkeleton';
 import PostItem from './PostItem';
 import { useSelector } from 'react-redux';
 import ErrorMessage from '../../utils/ErrorMessage';
@@ -36,9 +36,9 @@ const AllPost = () => {
 
                {loading && !err && (
                   <>
-                     <AllPostSkeletons />
-                     <AllPostSkeletons />
-                     <AllPostSkeletons />
+                     <PostItemSkeleton />
+                     <PostItemSkeleton />
+                     <PostItemSkeleton />
                   </>
                )}
 
