@@ -1,16 +1,15 @@
 import React from 'react';
 import { Box, Text, Tooltip } from '@chakra-ui/react';
 import { joinOnDate } from '../helper/joinOnDate';
+import { useNavigate } from 'react-router-dom';
 
-const Content = ({ title, text }) => {
+const Content = ({ title, text, contentMb }) => {
    return (
-      <Box mb='.3rem'>
+      <Box mb={contentMb || '.3rem'}>
          <Text textTransform='uppercase' fontSize='15' fontWeight='600'>
             {title}
          </Text>
-         <Text fontSize='15px' mt='-.3rem'>
-            {text}
-         </Text>
+         <Text fontSize='15px'>{text}</Text>
       </Box>
    );
 };
@@ -20,7 +19,7 @@ export const TooltipWrapper = ({ children, currentUserProfile }) => {
       <Tooltip
          closeOnMouseDown={false}
          label={
-            <UserProfilePoupu
+            <UserProfilePopup
                background={currentUserProfile?.background}
                profile={currentUserProfile?.profile}
                name={currentUserProfile?.name}
@@ -44,7 +43,7 @@ export const TooltipWrapper = ({ children, currentUserProfile }) => {
    );
 };
 
-const UserProfilePoupu = ({
+const UserProfilePopup = ({
    background,
    profile,
    name,
@@ -53,10 +52,17 @@ const UserProfilePoupu = ({
    location,
    education,
    joined,
+   w,
+   p,
+   contentMb,
+   backgroundHeight,
+   userId,
 }) => {
+   const navigate = useNavigate();
+
    return (
-      <Box w='300px' borderRadius='5px' overflow='hidden'>
-         <Box bg={background} h='45px'></Box>
+      <Box w={w || '300px'} borderRadius='5px'>
+         <Box bg={background} h={backgroundHeight || '45px'} />
          <Box bg='white' pos='relative'>
             <Box
                bgImage={profile}
@@ -68,9 +74,18 @@ const UserProfilePoupu = ({
                bgRepeat='no-repeat'
                top='-27.5px'
                left='1rem'
+               cursor='pointer'
+               onClick={() => navigate(`/profile/${userId}`)}
             />
-            <Box p='.5rem' pt='.2rem'>
-               <Text ps='4.5rem' fontSize='1.3rem' fontWeight='600'>
+            <Box p={p || '.5rem'} pt='.2rem'>
+               <Text
+                  ps='4.5rem'
+                  fontSize='1.3rem'
+                  fontWeight='600'
+                  cursor='pointer'
+                  _hover={{ color: 'rgb(47 58 178)' }}
+                  onClick={() => navigate(`/profile/${userId}`)}
+               >
                   {name}
                </Text>
                <Text
@@ -81,14 +96,34 @@ const UserProfilePoupu = ({
                >
                   {bio}
                </Text>
-               {work && <Content title='Work' text={work} />}
-               {location && <Content title='Location' text={location} />}
-               {education && <Content title='Education' text={education} />}
-               {joined && <Content title='Joined' text={joinOnDate(joined)} />}
+               {work && (
+                  <Content contentMb={contentMb} title='Work' text={work} />
+               )}
+               {location && (
+                  <Content
+                     contentMb={contentMb}
+                     title='Location'
+                     text={location}
+                  />
+               )}
+               {education && (
+                  <Content
+                     contentMb={contentMb}
+                     title='Education'
+                     text={education}
+                  />
+               )}
+               {joined && (
+                  <Content
+                     contentMb={contentMb}
+                     title='Joined'
+                     text={joinOnDate(joined)}
+                  />
+               )}
             </Box>
          </Box>
       </Box>
    );
 };
 
-export default UserProfilePoupu;
+export default UserProfilePopup;

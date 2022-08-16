@@ -83,7 +83,7 @@ const TopLayer = ({ profileData }) => {
          />
 
          <HStack justify='flex-end' mb={['1rem', '1rem', '2rem']} h='40px'>
-            {profileData?.userId === user.userId && (
+            {profileData?.userId === user?.userId && (
                <PrimaryBtn
                   bg='rgb(59 73 223)'
                   onClick={() => navigate('/customize-profile')}
@@ -100,10 +100,12 @@ const TopLayer = ({ profileData }) => {
                </Heading>
 
                <Text
-                  fontSize='1.1rem'
+                  fontSize='17px'
                   letterSpacing='.5px'
-                  color='#717171'
+                  color={profileData.bio ? 'black' : '#717171'}
                   mt='.3rem'
+                  maxW={{ base: '100%', md: '70%' }}
+                  mx='auto'
                >
                   {profileData.bio.trim().length
                      ? profileData.bio

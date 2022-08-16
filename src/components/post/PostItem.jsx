@@ -13,18 +13,13 @@ import {
 } from '@chakra-ui/react';
 import heart from '../../assets/logo/heart.svg';
 import comment from '../../assets/logo/comment.svg';
-import Moment from 'react-moment';
 import { useNavigate } from 'react-router-dom';
-import {
-   calTimeStamp,
-   dateFormat,
-   isLimitedDate,
-} from '../../helper/calcTimestamp';
 import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/Avatar';
 import { nanoid } from 'nanoid';
 import ManangePost from '../ManangePost';
-import { TooltipWrapper } from '../UserProfilePoupu';
+import { TooltipWrapper } from '../UserProfilePopup';
+import DisplayDate from './DisplayDate';
 
 const PostItem = ({
    name,
@@ -85,8 +80,17 @@ const PostItem = ({
                   />
 
                   <Box>
-                     <Flex>
-                        {!currentUserProfile || window.innerWidth <= 768 ? (
+                     {!currentUserProfile || window.innerWidth <= 768 ? (
+                        <Text
+                           fontWeight={600}
+                           lineHeight={1}
+                           fontSize={{ base: '15px', md: '16px' }}
+                           onClick={handleViewProfile}
+                        >
+                           {name}
+                        </Text>
+                     ) : (
+                        <TooltipWrapper currentUserProfile={currentUserProfile}>
                            <Text
                               fontWeight={600}
                               lineHeight={1}
@@ -95,38 +99,10 @@ const PostItem = ({
                            >
                               {name}
                            </Text>
-                        ) : (
-                           <TooltipWrapper
-                              currentUserProfile={currentUserProfile}
-                           >
-                              <Text
-                                 fontWeight={600}
-                                 lineHeight={1}
-                                 fontSize={{ base: '15px', md: '16px' }}
-                                 onClick={handleViewProfile}
-                              >
-                                 {name}
-                              </Text>
-                           </TooltipWrapper>
-                        )}
+                        </TooltipWrapper>
+                     )}
 
-                        {isUpdated && (
-                           <Text fontSize='11px' color='#717171' ms='.5rem'>
-                              (updated)
-                           </Text>
-                        )}
-                     </Flex>
-
-                     <Text fontSize='12px' color='#717171'>
-                        {dateFormat(createdAt)}{' '}
-                        {!isLimitedDate(createdAt) && (
-                           <Text as='span'>
-                              (
-                              <Moment fromNow>{calTimeStamp(createdAt)}</Moment>
-                              )
-                           </Text>
-                        )}
-                     </Text>
+                     <DisplayDate createdAt={createdAt} isUpdated={isUpdated} />
                   </Box>
                </HStack>
             </HStack>

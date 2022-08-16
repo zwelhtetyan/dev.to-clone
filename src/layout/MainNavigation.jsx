@@ -28,13 +28,18 @@ const MainNavigation = () => {
          w='100%'
          h='56px'
          pos='fixed'
-         sx={{ p: ['.5rem', '0 2rem'] }}
          boxShadow='md'
          zIndex={10000}
          top='0'
          left='0'
       >
-         <HStack justify='space-between' width='100%' maxW='1200px' m='auto'>
+         <HStack
+            justify='space-between'
+            width='100%'
+            maxW='1200px'
+            m='auto'
+            px={{ base: '.5rem', md: '1rem' }}
+         >
             <Box display='flex' alignItems='center'>
                <SideMenu />
 

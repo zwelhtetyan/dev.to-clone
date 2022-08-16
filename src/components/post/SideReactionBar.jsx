@@ -1,9 +1,9 @@
 import { Flex, IconButton } from '@chakra-ui/react';
 import React from 'react';
-import Heart from '../assets/logo/Heart';
-import Unicorn from '../assets/logo/Unicorn';
-import Save from '../assets/logo/Save';
-import Option from '../assets/logo/Option';
+import Heart from '../../assets/logo/Heart';
+import Unicorn from '../../assets/logo/Unicorn';
+import Save from '../../assets/logo/Save';
+import Option from '../../assets/logo/Option';
 
 const SideReactionBar = () => {
    return (
@@ -21,6 +21,7 @@ const SideReactionBar = () => {
          align='center'
          justify={{ base: 'space-around', md: 'flex-start' }}
          gap='1rem'
+         me='1rem'
       >
          <Flex direction={{ base: 'row', md: 'column' }} align='center'>
             <IconButton
@@ -36,6 +37,7 @@ const SideReactionBar = () => {
             />
             11
          </Flex>
+
          <Flex direction={{ base: 'row', md: 'column' }} align='center'>
             <IconButton
                bg='transparent'
@@ -50,6 +52,7 @@ const SideReactionBar = () => {
             />
             5
          </Flex>
+
          <Flex direction={{ base: 'row', md: 'column' }} align='center'>
             <IconButton
                bg='transparent'
@@ -64,6 +67,7 @@ const SideReactionBar = () => {
             />
             9
          </Flex>
+
          <Flex direction={{ base: 'row', md: 'column' }} align='center'>
             <IconButton
                bg='transparent'

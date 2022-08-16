@@ -14,7 +14,20 @@ const PostDetails = () => {
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
 
+   const profileData = useSelector((state) => state.profileData.profileData);
+
    const postDetail = transformedData?.find((postData) => postData.id === id);
+
+   const currentUserProfile = profileData?.find(
+      (data) => data.userId === postDetail?.userId
+   );
+
+   const otherPosts = transformedData?.filter(
+      (postData) =>
+         postData.userId === currentUserProfile?.userId &&
+         postData.id !== id &&
+         !postData.draft
+   );
 
    //to preview images
    useEffect(() => {
@@ -33,14 +46,14 @@ const PostDetails = () => {
       }
    }, [postDetail, navigate, id]);
 
-   console.log('post detail run');
-
    return (
       <DetailElements
          postDetail={postDetail}
          loading={loading}
          err={err}
          postId={id}
+         currentUserProfile={currentUserProfile}
+         otherPosts={otherPosts}
       />
    );
 };

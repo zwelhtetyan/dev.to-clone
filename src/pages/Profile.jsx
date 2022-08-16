@@ -1,7 +1,6 @@
 import { Box, Button, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/auth';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostItem from '../components/post/PostItem';
 import TopLayer from '../components/profile/TopLayer';
@@ -13,7 +12,6 @@ const Profile = () => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
 
-   const user = useAuth();
    const { userIdToView } = useParams();
 
    const { profileData } = useSelector((state) => state.profileData);
@@ -25,10 +23,6 @@ const Profile = () => {
       transfromedDataLoading: loading,
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
-
-   if (!user) {
-      return <Navigate to='/login' />;
-   }
 
    if (err) {
       return <ErrorMessage offline={true} />;
@@ -110,24 +104,21 @@ const Profile = () => {
                      w={{ base: '100%' }}
                      px={{ base: '.5rem', md: 'unset' }}
                   >
-                     <>
-                        {/* {loading && <PostItemSkeleton />} */}
-                        {publishedPosts &&
-                           publishedPosts.map((postData) => (
-                              <PostItem
-                                 key={postData.id}
-                                 name={postData.name}
-                                 profile={postData.profile}
-                                 id={postData.id}
-                                 createdAt={postData.createdAt}
-                                 title={postData.title}
-                                 tags={postData.filteredTags}
-                                 readTime={postData.readTime}
-                                 isUpdated={postData?.isUpdated}
-                                 userId={postData.userId}
-                              />
-                           ))}
-                     </>
+                     {publishedPosts &&
+                        publishedPosts.map((postData) => (
+                           <PostItem
+                              key={postData.id}
+                              name={postData.name}
+                              profile={postData.profile}
+                              id={postData.id}
+                              createdAt={postData.createdAt}
+                              title={postData.title}
+                              tags={postData.filteredTags}
+                              readTime={postData.readTime}
+                              isUpdated={postData?.isUpdated}
+                              userId={postData.userId}
+                           />
+                        ))}
                   </Box>
                </Flex>
             </Box>
