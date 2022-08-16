@@ -24,6 +24,7 @@ import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/Avatar';
 import { nanoid } from 'nanoid';
 import ManangePost from '../ManangePost';
+import { TooltipWrapper } from '../UserProfilePoupu';
 
 const PostItem = ({
    name,
@@ -76,22 +77,39 @@ const PostItem = ({
             <HStack align='flex-start'>
                <HStack>
                   {/* avatar */}
+
                   <CustomAvatar
                      profile={profile}
                      size='40px'
                      onClick={handleViewProfile}
-                     // onMouseOver={() => console.log(currentUserProfile)}
                   />
 
                   <Box>
                      <HStack>
-                        <Text
-                           fontWeight={600}
-                           lineHeight={1}
-                           fontSize={{ base: '15px', md: '16px' }}
-                        >
-                           {name}
-                        </Text>
+                        {!currentUserProfile || window.innerWidth <= 768 ? (
+                           <Text
+                              fontWeight={600}
+                              lineHeight={1}
+                              fontSize={{ base: '15px', md: '16px' }}
+                              onClick={handleViewProfile}
+                           >
+                              {name}
+                           </Text>
+                        ) : (
+                           <TooltipWrapper
+                              currentUserProfile={currentUserProfile}
+                           >
+                              <Text
+                                 fontWeight={600}
+                                 lineHeight={1}
+                                 fontSize={{ base: '15px', md: '16px' }}
+                                 onClick={handleViewProfile}
+                              >
+                                 {name}
+                              </Text>
+                           </TooltipWrapper>
+                        )}
+
                         {isUpdated && (
                            <Text fontSize='11px' color='#717171'>
                               (updated)

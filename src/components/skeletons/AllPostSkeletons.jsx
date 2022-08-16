@@ -7,14 +7,16 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 
-const AllPostSkeletons = () => {
+const AllPostSkeletons = ({ w, h }) => {
    return (
       <Box
          bg='transparent'
          p={6}
-         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
          borderRadius='5px'
          mb={2}
+         w={w}
+         mx='auto'
+         h={h}
       >
          <HStack>
             <SkeletonCircle size='10' />

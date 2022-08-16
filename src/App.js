@@ -22,7 +22,11 @@ import {
 } from './store/data/transformedData';
 import CustomizeProfile from './pages/CustomizeProfile';
 import Dashboard from './pages/Dashboard';
-import { setProfileData } from './store/user/profileData';
+import {
+   setProfileData,
+   setProfileDataErr,
+   setProfileDataLoading,
+} from './store/user/profileData';
 
 const App = () => {
    const dispatch = useDispatch();
@@ -69,7 +73,9 @@ const App = () => {
    // //fetch profile data
    useEffect(() => {
       dispatch(setProfileData(userData));
-   }, [dispatch, userData]);
+      dispatch(setProfileDataLoading(userLoading));
+      dispatch(setProfileDataErr(userErr));
+   }, [dispatch, userData, userLoading, userErr]);
 
    console.log('app render');
 

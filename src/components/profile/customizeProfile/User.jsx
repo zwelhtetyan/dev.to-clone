@@ -140,6 +140,7 @@ const User = ({
                   defaultValue={profileData?.name}
                   placeholder='First name'
                   type='text'
+                  required
                   {...InputborderColor}
                   ref={nameRef}
                />

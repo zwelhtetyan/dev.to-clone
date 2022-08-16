@@ -19,6 +19,8 @@ import {
    uploadString,
 } from 'firebase/storage';
 import { nanoid } from 'nanoid';
+import DetailSkeleton from '../components/skeletons/DetailSkeleton';
+import ErrorMessage from '../utils/ErrorMessage';
 
 const CustomizeProfile = () => {
    const user = useAuth();
@@ -26,14 +28,9 @@ const CustomizeProfile = () => {
    const [loading, setLoading] = useState(false);
    const auth = getAuth();
 
-   const profileData = useSelector((state) => state.profileData.profileData);
-
-   let currentUserProfile = null;
-   if (profileData) {
-      currentUserProfile = profileData.find(
-         (data) => data.userId === user.userId
-      );
-   }
+   const { profileData, profileDataLoading, profileDataErr } = useSelector(
+      (state) => state.profileData
+   );
 
    const nameRef = useRef();
    const emailRef = useRef();
@@ -50,6 +47,21 @@ const CustomizeProfile = () => {
    const educationRef = useRef();
    const backgroundRef = useRef();
    const previewImgRef = useRef();
+
+   let currentUserProfile = null;
+   if (profileData) {
+      currentUserProfile = profileData.find(
+         (data) => data.userId === user.userId
+      );
+   }
+
+   if (profileDataLoading) {
+      return <DetailSkeleton />;
+   }
+
+   if (!profileData && !profileDataLoading && profileDataErr) {
+      return <ErrorMessage offline={true} />;
+   }
 
    if (!user) {
       return <Navigate to='/login' />;
@@ -111,7 +123,7 @@ const CustomizeProfile = () => {
                   user.userId
                ).then((_) => {
                   setLoading(false);
-                  navigate('/profile');
+                  navigate(`/profile/${user.userId}`);
                   console.log('prifile informations are updated');
                });
 
@@ -123,7 +135,7 @@ const CustomizeProfile = () => {
 
       updateProfileData(newData, user.userId).then((_) => {
          setLoading(false);
-         navigate('/profile');
+         navigate(`/profile/${user.userId}`);
          console.log('prifile informations are updated');
       });
    };
@@ -134,7 +146,7 @@ const CustomizeProfile = () => {
       removeImage(url);
       updateProfileData({ profile: '' }, user.userId).then((_) => {
          setLoading(false);
-         navigate('/profile');
+         navigate(`/profile/${user.userId}`);
          console.log('prifile informations are updated');
       });
    };

@@ -21,7 +21,12 @@ const SignOutConfirm = () => {
    };
 
    return (
-      <VStack minH='85vh' justify='center' p='0 .5rem' textAlign='center'>
+      <VStack
+         h='calc(100vh - 120px)'
+         justify='center'
+         p='0 .5rem'
+         textAlign='center'
+      >
          <Heading
             fontSize={{ base: '1.2rem', md: '1.5rem' }}
             mb='.7rem !important'

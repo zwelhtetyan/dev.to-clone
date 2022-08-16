@@ -22,6 +22,8 @@ const TechStack = ({ title, text }) => {
 };
 
 const ProfileLeftPart = ({ publishedPosts, profileData, display }) => {
+   if (!profileData) return;
+
    return (
       <Box
          m={{ base: '0 0 1rem 0', md: '0 1rem 0 0' }}
@@ -29,24 +31,13 @@ const ProfileLeftPart = ({ publishedPosts, profileData, display }) => {
          w={{ base: '100%' }}
          display={display}
       >
-         {profileData?.learning && (
-            <TechStack title='Currently Learning' text={profileData.learning} />
-         )}
+         <TechStack title='Currently Learning' text={profileData.learning} />
 
-         {profileData?.skills && (
-            <TechStack title='Skills/Languages' text={profileData.skills} />
-         )}
+         <TechStack title='Skills/Languages' text={profileData.skills} />
 
-         {profileData?.hacking && (
-            <TechStack
-               title='Currently hacking on'
-               text={profileData.hacking}
-            />
-         )}
+         <TechStack title='Currently hacking on' text={profileData.hacking} />
 
-         {profileData?.avaliable && (
-            <TechStack title='Available for' text={profileData.avaliable} />
-         )}
+         <TechStack title='Available for' text={profileData.avaliable} />
 
          <Box
             boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'

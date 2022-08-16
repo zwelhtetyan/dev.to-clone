@@ -29,13 +29,11 @@ const DeleteConfirm = () => {
    };
 
    return (
-      <Box p={{ base: '1rem 0.5rem', md: '1rem' }}>
+      <VStack h='calc(100vh - 120px)' justify='center'>
          <VStack
-            mt='3rem !important'
-            p={{ base: '2rem .5rem', md: '2rem 1rem' }}
+            p='3rem 1rem'
             maxW='900px'
             w='100%'
-            m='auto'
             bg='white'
             boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
             borderRadius='5px'
@@ -73,7 +71,7 @@ const DeleteConfirm = () => {
                </HStack>
             </Box>
          </VStack>
-      </Box>
+      </VStack>
    );
 };
 

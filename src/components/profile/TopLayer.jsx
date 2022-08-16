@@ -19,6 +19,7 @@ import personalWebsite from '../../assets/logo/personalWebsite.svg';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import defaultProfile from '../../assets/images/defaultProfile.jpg';
+import { joinOnDate } from '../../helper/joinOnDate';
 
 const LinkIcon = ({ hoverColor, href, children, onClick }) => {
    return (
@@ -52,9 +53,6 @@ const TopLayer = ({ profileData }) => {
    const navigate = useNavigate();
    const user = useAuth();
 
-   const date = new Date(+user.createdAt).toDateString().split(' ').slice(1, 4);
-   const joinOnDate = [date[0], +date[1] + ',', date[2]].join(' ');
-
    return (
       <Box
          boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
@@ -86,7 +84,7 @@ const TopLayer = ({ profileData }) => {
          />
 
          <HStack justify='flex-end' mb={['1rem', '1rem', '2rem']} h='40px'>
-            {profileData && (
+            {profileData?.userId === user.userId && (
                <PrimaryBtn
                   bg='rgb(59 73 223)'
                   onClick={() => navigate('/customize-profile')}
@@ -96,82 +94,101 @@ const TopLayer = ({ profileData }) => {
             )}
          </HStack>
 
-         <Heading fontSize={['1.5rem', '2rem']}>{profileData?.name}</Heading>
+         {profileData && (
+            <Box>
+               <Heading fontSize={['1.5rem', '2rem']}>
+                  {profileData.name}
+               </Heading>
 
-         <Text
-            fontSize='1.1rem'
-            letterSpacing='.5px'
-            color='#717171'
-            mt='.3rem'
-         >
-            {profileData?.bio || '404 bio not found'}
-         </Text>
+               <Text
+                  fontSize='1.1rem'
+                  letterSpacing='.5px'
+                  color='#717171'
+                  mt='.3rem'
+               >
+                  {profileData.bio.trim().length
+                     ? profileData.bio
+                     : '404 bio not found'}
+               </Text>
 
-         <Wrap
-            display='flex'
-            justifyContent={{ base: 'flex-start', md: 'center' }}
-            mt='1rem'
-            color='#717171'
-            fontSize='15px'
-            spacing={3}
-         >
-            <HStack>
-               <Image src={joinOn} alt='icon' />
-               <Text>Joined on {joinOnDate}</Text>
-            </HStack>
+               <Wrap
+                  display='flex'
+                  justifyContent={{ base: 'flex-start', md: 'center' }}
+                  mt='1rem'
+                  color='#717171'
+                  fontSize='15px'
+                  spacing={3}
+               >
+                  {profileData?.location && (
+                     <HStack>
+                        <Image src={location} alt='icon' />
+                        <Text>{profileData.location}</Text>
+                     </HStack>
+                  )}
 
-            {profileData?.location && (
-               <HStack>
-                  <Image src={location} alt='icon' />
-                  <Text>{profileData.location}</Text>
-               </HStack>
-            )}
+                  {profileData?.createdAt && (
+                     <HStack>
+                        <Image src={joinOn} alt='icon' />
+                        <Text>
+                           Joined on {joinOnDate(profileData.createdAt)}
+                        </Text>
+                     </HStack>
+                  )}
 
-            {profileData?.website && (
-               <HStack cursor='pointer'>
-                  <Image src={personalWebsite} alt='icon' />
-                  <Link
-                     _hover={{ color: 'rgb(59 73 223)' }}
-                     href={profileData.website}
-                     target='blank'
-                  >
-                     {profileData?.website}
-                  </Link>
-               </HStack>
-            )}
+                  {profileData?.website && (
+                     <HStack cursor='pointer'>
+                        <Image src={personalWebsite} alt='icon' />
+                        <Link
+                           _hover={{ color: 'rgb(59 73 223)' }}
+                           href={profileData.website}
+                           target='blank'
+                        >
+                           {profileData?.website}
+                        </Link>
+                     </HStack>
+                  )}
 
-            <HStack>
-               {profileData?.github && (
-                  <LinkIcon href={profileData.github} hoverColor='black'>
-                     <BsGithub size={22} title='Github' />
-                  </LinkIcon>
-               )}
+                  <HStack>
+                     {profileData?.github && (
+                        <LinkIcon href={profileData.github} hoverColor='black'>
+                           <BsGithub size={22} title='Github' />
+                        </LinkIcon>
+                     )}
 
-               {profileData?.twitter && (
-                  <LinkIcon href={profileData.twitter} hoverColor='#1da1f2'>
-                     <BsTwitter size={23} title='Twitter' />
-                  </LinkIcon>
-               )}
+                     {profileData?.twitter && (
+                        <LinkIcon
+                           href={profileData.twitter}
+                           hoverColor='#1da1f2'
+                        >
+                           <BsTwitter size={23} title='Twitter' />
+                        </LinkIcon>
+                     )}
 
-               {profileData?.email && (
-                  <LinkIcon
-                     hoverColor='black'
-                     onClick={() => window.open(`mailto:${profileData.email}`)}
-                  >
-                     <MdEmail size={23} title='Email' />
-                  </LinkIcon>
-               )}
-            </HStack>
-         </Wrap>
+                     {profileData?.email && (
+                        <LinkIcon
+                           hoverColor='black'
+                           onClick={() =>
+                              window.open(`mailto:${profileData.email}`)
+                           }
+                        >
+                           <MdEmail size={23} title='Email' />
+                        </LinkIcon>
+                     )}
+                  </HStack>
+               </Wrap>
 
-         <Divider mt='2rem' mb={3} />
+               <Divider mt='2rem' mb={3} />
 
-         <Flex flexDirection={{ base: 'column', md: 'row' }} gap={2}>
-            {profileData?.education && (
-               <Work title='Education' text={profileData.education} />
-            )}
-            {profileData?.work && <Work title='Work' text={profileData.work} />}
-         </Flex>
+               <Flex flexDirection={{ base: 'column', md: 'row' }} gap={2}>
+                  {profileData?.education && (
+                     <Work title='Education' text={profileData.education} />
+                  )}
+                  {profileData?.work && (
+                     <Work title='Work' text={profileData.work} />
+                  )}
+               </Flex>
+            </Box>
+         )}
       </Box>
    );
 };

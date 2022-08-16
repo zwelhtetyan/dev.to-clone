@@ -5,17 +5,18 @@ import { Navigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostItem from '../components/post/PostItem';
 import AllPostSkeletons from '../components/skeletons/AllPostSkeletons';
-
 import TopLayer from '../components/profile/TopLayer';
 import ProfileLeftPart from '../components/profile/ProfileLeftPart';
+import ErrorMessage from '../utils/ErrorMessage';
 
 const Profile = () => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
+
    const user = useAuth();
    const { userIdToView } = useParams();
 
-   const profileData = useSelector((state) => state.profileData.profileData);
+   const { profileData } = useSelector((state) => state.profileData);
 
    const [moreInfo, setMoreInfo] = useState(false);
 
@@ -29,11 +30,23 @@ const Profile = () => {
       return <Navigate to='/login' />;
    }
 
+   if (err) {
+      return <ErrorMessage offline={true} />;
+   }
+
+   if (loading && !transformedData && !err) {
+      return <AllPostSkeletons />;
+   }
+
    let currentUserProfile = null;
    if (profileData) {
       currentUserProfile = profileData.find(
          (data) => data.userId === userIdToView
       );
+   }
+
+   if (transformedData && currentUserProfile === undefined) {
+      return <ErrorMessage urlNotFound={true} />;
    }
 
    let publishedPosts = null;
@@ -67,22 +80,27 @@ const Profile = () => {
                   />
 
                   {/* more info button */}
-                  <Button
-                     display={{ base: moreInfo ? 'none' : 'block', md: 'none' }}
-                     onClick={() => setMoreInfo(true)}
-                     w='97%'
-                     mx='auto'
-                     mb={3}
-                     bg='white'
-                     _active={{ bg: 'white' }}
-                     boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-                     transition='.3s'
-                     _hover={{
-                        bg: 'rgb(0 0 0 / 4%)',
-                     }}
-                  >
-                     More info about @{currentUserProfile?.name}
-                  </Button>
+                  {publishedPosts && (
+                     <Button
+                        display={{
+                           base: moreInfo ? 'none' : 'block',
+                           md: 'none',
+                        }}
+                        onClick={() => setMoreInfo(true)}
+                        w='97%'
+                        mx='auto'
+                        mb={3}
+                        bg='white'
+                        _active={{ bg: 'white' }}
+                        boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+                        transition='.3s'
+                        _hover={{
+                           bg: 'rgb(0 0 0 / 4%)',
+                        }}
+                     >
+                        More info about @{currentUserProfile?.name}
+                     </Button>
+                  )}
 
                   {/* right */}
                   <Box
@@ -92,7 +110,7 @@ const Profile = () => {
                      px={{ base: '.5rem', md: 'unset' }}
                   >
                      <>
-                        {loading && <AllPostSkeletons />}
+                        {/* {loading && <AllPostSkeletons />} */}
                         {publishedPosts &&
                            publishedPosts.map((postData) => (
                               <PostItem
@@ -105,6 +123,7 @@ const Profile = () => {
                                  tags={postData.filteredTags}
                                  readTime={postData.readTime}
                                  isUpdated={postData?.isUpdated}
+                                 userId={postData.userId}
                               />
                            ))}
                      </>

@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
    profileData: null,
+   profileDataLoading: false,
+   profileDataErr: false,
 };
 
 const profileDataSlice = createSlice({
@@ -11,9 +13,18 @@ const profileDataSlice = createSlice({
       setProfileData: (state, action) => {
          state.profileData = action.payload;
       },
+
+      setProfileDataLoading: (state, action) => {
+         state.profileDataLoading = action.payload;
+      },
+
+      setProfileDataErr: (state, action) => {
+         state.profileDataErr = action.payload;
+      },
    },
 });
 
-export const { setProfileData } = profileDataSlice.actions;
+export const { setProfileData, setProfileDataLoading, setProfileDataErr } =
+   profileDataSlice.actions;
 
 export default profileDataSlice.reducer;

@@ -15,6 +15,7 @@ import { Navigate } from 'react-router-dom';
 import PostItem from '../components/post/PostItem';
 import AllPostSkeletons from '../components/skeletons/AllPostSkeletons';
 import { useAuth } from '../context/auth';
+import ErrorMessage from '../utils/ErrorMessage';
 
 const ReactionBox = ({ count, title }) => {
    return (
@@ -60,6 +61,14 @@ const Dashboard = () => {
       );
    }
 
+   if (loading && (!publishedPosts || !publishedPosts)) {
+      return <AllPostSkeletons w='650px' h='calc(100vh - 120px)' />;
+   }
+
+   if (!loading && err) {
+      return <ErrorMessage offline={true} />;
+   }
+
    return (
       <Box maxW='650px' mx='auto' p='.5rem' minH='50vh'>
          <Heading mb={5} fontSize={{ base: '1.5rem', md: '2rem' }}>
@@ -75,7 +84,7 @@ const Dashboard = () => {
             <TabList>
                <Tab fontSize={['1.1rem', '1.2rem']}>Posts</Tab>
                <Tab fontSize={['1.1rem', '1.2rem']}>
-                  Draft {draftPosts.length ? `(${draftPosts.length})` : ''}
+                  Draft {draftPosts?.length ? `(${draftPosts.length})` : ''}
                </Tab>
             </TabList>
 
@@ -95,11 +104,11 @@ const Dashboard = () => {
                            readTime={postData.readTime}
                            isUpdated={postData?.isUpdated}
                            fromDashboard={true}
+                           userId={postData.userId}
                         />
                      ))}
                </TabPanel>
                <TabPanel px='0'>
-                  {loading && <AllPostSkeletons />}
                   {draftPosts &&
                      draftPosts.map((postData) => (
                         <PostItem
@@ -114,6 +123,7 @@ const Dashboard = () => {
                            isUpdated={postData?.isUpdated}
                            fromDashboard={true}
                            draftPost={true}
+                           userId={postData.userId}
                         />
                      ))}
                </TabPanel>

@@ -45,52 +45,44 @@ const DetailElements = ({ postDetail, loading, err, postId }) => {
          py='0'
          px={{ base: '0', md: '1rem' }}
          mt={{ base: '-.5rem !important', md: '0 !important' }}
-         h={{ base: (loading || err) && '50vh' }}
       >
-         <Flex align='flex-start'>
-            {postDetail && <SideReactionBar />}
+         {!postDetail && loading && <DetailSkeleton />}
 
-            <Box
-               w={{ base: '100%', md: '650px' }}
-               margin='0 auto !important'
-               bg='white'
-               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-               borderRadius='5px'
-            >
-               {/* coverImgae */}
-               {postDetail?.cvImg && (
-                  <Image
-                     src={postDetail.cvImg}
-                     alt='cover_image'
-                     maxH='300px'
-                     width='100%'
-                     borderTopLeftRadius={{ base: 'none', md: '5px' }}
-                     borderTopRightRadius={{ base: 'none', md: '5px' }}
-                     objectFit='cover'
-                  />
-               )}
+         {!postDetail && !loading && !err && (
+            <ErrorMessage urlNotFound={true} />
+         )}
 
-               {/* content */}
+         {!postDetail && !loading && err && <ErrorMessage offline={true} />}
+
+         {postDetail && (
+            <Flex align='flex-start'>
+               <SideReactionBar />
+
                <Box
-                  px={{ base: '.7rem', md: '2.5rem' }}
-                  pb={{ base: '3rem', md: '1rem' }}
+                  w={{ base: '100%', md: '650px' }}
+                  margin='0 auto !important'
+                  bg='white'
+                  boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+                  borderRadius='5px'
                >
-                  {!postDetail && loading && <DetailSkeleton />}
-
-                  {!postDetail && !loading && !err && (
-                     <Text
-                        textAlign='center'
-                        my='2rem'
-                        fontSize='17px'
-                        letterSpacing='1px'
-                     >
-                        wrong url 😟!
-                     </Text>
+                  {/* coverImgae */}
+                  {postDetail.cvImg && (
+                     <Image
+                        src={postDetail.cvImg}
+                        alt='cover_image'
+                        maxH='300px'
+                        width='100%'
+                        borderTopLeftRadius={{ base: 'none', md: '5px' }}
+                        borderTopRightRadius={{ base: 'none', md: '5px' }}
+                        objectFit='cover'
+                     />
                   )}
 
-                  {!loading && err && <ErrorMessage />}
-
-                  {postDetail && (
+                  {/* content */}
+                  <Box
+                     px={{ base: '.7rem', md: '2.5rem' }}
+                     pb={{ base: '3rem', md: '1rem' }}
+                  >
                      <Box className='mde-preview'>
                         <Flex
                            align='center'
@@ -108,7 +100,12 @@ const DetailElements = ({ postDetail, loading, err, postId }) => {
                               />
                               <Box>
                                  <HStack>
-                                    <Text fontWeight={600} lineHeight={1}>
+                                    <Text
+                                       fontWeight={600}
+                                       cursor='pointer'
+                                       lineHeight={1}
+                                       _hover={{ color: 'rgb(47 58 178)' }}
+                                    >
                                        {postDetail.name}
                                     </Text>
                                     {postDetail.isUpdated && (
@@ -177,10 +174,10 @@ const DetailElements = ({ postDetail, loading, err, postId }) => {
                            ))}
                         </Box>
                      </Box>
-                  )}
+                  </Box>
                </Box>
-            </Box>
-         </Flex>
+            </Flex>
+         )}
       </Box>
    );
 };

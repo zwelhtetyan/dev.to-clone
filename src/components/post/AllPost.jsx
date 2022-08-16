@@ -4,8 +4,13 @@ import AllPostSkeletons from '../skeletons/AllPostSkeletons';
 import PostItem from './PostItem';
 import { useSelector } from 'react-redux';
 import ErrorMessage from '../../utils/ErrorMessage';
+import { getUserProfileData } from '../../helper/getUserProfileData';
+import { useAuth } from '../../context/auth';
+import Hero from '../Hero';
 
 const AllPost = () => {
+   const user = useAuth();
+
    const {
       transformedData,
       transfromedDataLoading: loading,
@@ -19,38 +24,45 @@ const AllPost = () => {
       allPostData = transformedData.filter((postData) => !postData.draft);
    }
 
-   const getUserProfileData = (userId) => {
-      return profileData.find((data) => data.userId === userId);
-   };
-
    return (
-      <Box h={err ? '63vh' : 'auto'}>
-         {err && <ErrorMessage />}
+      <Box>
+         <Box px={{ base: '.5rem', md: '1rem' }} maxW='650px' m='auto'>
+            {!user && !err && (
+               <Hero display={{ base: 'none', md: 'flex' }} isLogo={true} />
+            )}
 
-         {loading && !err && (
-            <>
-               <AllPostSkeletons />
-               <AllPostSkeletons />
-               <AllPostSkeletons />
-            </>
-         )}
+            <Box h={loading ? 'calc(100vh - 120px)' : 'auto'}>
+               {err && <ErrorMessage offline={true} />}
 
-         {allPostData &&
-            allPostData.map((postData) => (
-               <PostItem
-                  key={postData.id}
-                  name={postData.name}
-                  profile={postData.profile}
-                  id={postData.id}
-                  createdAt={postData.createdAt}
-                  title={postData.title}
-                  tags={postData.filteredTags}
-                  readTime={postData.readTime}
-                  isUpdated={postData?.isUpdated}
-                  userId={postData.userId}
-                  currentUserProfile={getUserProfileData(postData.userId)}
-               />
-            ))}
+               {loading && !err && (
+                  <>
+                     <AllPostSkeletons />
+                     <AllPostSkeletons />
+                     <AllPostSkeletons />
+                  </>
+               )}
+
+               {allPostData &&
+                  allPostData.map((postData) => (
+                     <PostItem
+                        key={postData.id}
+                        name={postData.name}
+                        profile={postData.profile}
+                        id={postData.id}
+                        createdAt={postData.createdAt}
+                        title={postData.title}
+                        tags={postData.filteredTags}
+                        readTime={postData.readTime}
+                        isUpdated={postData?.isUpdated}
+                        userId={postData.userId}
+                        currentUserProfile={getUserProfileData(
+                           profileData,
+                           postData.userId
+                        )}
+                     />
+                  ))}
+            </Box>
+         </Box>
       </Box>
    );
 };

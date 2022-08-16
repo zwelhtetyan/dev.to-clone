@@ -24,9 +24,11 @@ const SignUp = ({ type }) => {
       signInWithPopup(auth, provider)
          .then((res) => {
             const userId = res.user.uid;
+
             const userData = {
                name: res.user.displayName,
                profile: res.user.photoURL,
+               createdAt: res.user.metadata.createdAt,
             };
 
             createUser(userId, userData).then((_) => {
@@ -37,12 +39,7 @@ const SignUp = ({ type }) => {
          .catch((err) => console.log(err.message));
 
    return (
-      <Box
-         h={{ xl: '65vh' }}
-         mx='auto'
-         mt={{ base: '3rem', md: '4rem' }}
-         maxW='640px'
-      >
+      <VStack h='calc(100vh - 120px)' mx='auto' justify='center' maxW='640px'>
          <VStack
             boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
             bg='rgb(255 255 255)'
@@ -92,7 +89,7 @@ const SignUp = ({ type }) => {
                </Flex>
             )}
          </VStack>
-      </Box>
+      </VStack>
    );
 };
 

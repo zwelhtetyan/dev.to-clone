@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const Error = () => {
    const navigate = useNavigate();
    return (
-      <VStack mt='5rem'>
+      <VStack justify='center' h='calc(100vh - 120px)'>
          <Image src={dev_ghost} alt='dev_ghost' />
          <Heading mt='0 !important' fontSize='5xl'>
             404
