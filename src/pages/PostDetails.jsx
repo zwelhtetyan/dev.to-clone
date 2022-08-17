@@ -19,7 +19,7 @@ const PostDetails = () => {
    const postDetail = transformedData?.find((postData) => postData.id === id);
 
    const currentUserProfile = profileData?.find(
-      (data) => data.userId === postDetail?.userId
+      (data) => data.id === postDetail?.userId
    );
 
    const otherPosts = transformedData?.filter(

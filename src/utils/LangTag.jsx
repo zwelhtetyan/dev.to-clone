@@ -1,7 +1,7 @@
 import { Button, Image, Text } from '@chakra-ui/react';
 import { getLogo } from '../helper/getLogo';
 
-const LangTag = ({ tag, handleClickTag }) => {
+const LangTag = ({ tag, handleClickTag, cursor }) => {
    const src = getLogo(tag);
    return (
       <Button
@@ -12,6 +12,8 @@ const LangTag = ({ tag, handleClickTag }) => {
          bg='white'
          _hover={{ borderColor: 'rgb(0 0 0 / 14%)' }}
          borderRadius='5px'
+         cursor={cursor || 'default'}
+         _active={{ bg: 'white' }}
       >
          {src !== '#' ? <Image src={getLogo(tag)} w='15px' /> : '#'}
 

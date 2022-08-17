@@ -61,7 +61,7 @@ const UserProfilePopup = ({
 
    return (
       <Box w={w || '300px'} borderRadius='5px'>
-         <Box bg={background} h={backgroundHeight || '45px'} />
+         <Box bg={background || '#000000'} h={backgroundHeight || '45px'} />
          <Box bg='white' pos='relative'>
             <Box
                bgImage={profile}

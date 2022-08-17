@@ -83,7 +83,7 @@ const TopLayer = ({ profileData }) => {
          />
 
          <HStack justify='flex-end' mb={['1rem', '1rem', '2rem']} h='40px'>
-            {profileData?.userId === user?.userId && (
+            {profileData?.id === user?.userId && (
                <PrimaryBtn
                   bg='rgb(59 73 223)'
                   onClick={() => navigate('/customize-profile')}
@@ -107,7 +107,7 @@ const TopLayer = ({ profileData }) => {
                   maxW={{ base: '100%', md: '70%' }}
                   mx='auto'
                >
-                  {profileData.bio.trim().length
+                  {profileData?.bio?.trim().length
                      ? profileData.bio
                      : '404 bio not found'}
                </Text>

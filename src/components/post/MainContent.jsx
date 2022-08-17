@@ -10,7 +10,7 @@ import {
    Wrap,
    WrapItem,
 } from '@chakra-ui/react';
-import CustomAvatar from '../../utils/Avatar';
+import CustomAvatar from '../../utils/CustomAvatar';
 import ManangePost from '../ManangePost';
 import { nanoid } from 'nanoid';
 import LangTag from '../../utils/LangTag';

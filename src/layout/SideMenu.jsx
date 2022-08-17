@@ -7,9 +7,6 @@ import {
    DrawerContent,
    DrawerHeader,
    DrawerOverlay,
-   HStack,
-   Image,
-   Text,
    useDisclosure,
 } from '@chakra-ui/react';
 import { SecondaryBtn } from '../utils/Buttons';
@@ -19,22 +16,7 @@ import { useAuth } from '../context/auth';
 import HomeIcon from '../assets/logo/HomeIcon.svg';
 import ReadingListIcon from '../assets/logo/ReadingListIcon.svg';
 import FAQIcon from '../assets/logo/FAQIcon.svg';
-
-const MenuItem = ({ children }) => {
-   return (
-      <HStack
-         cursor='pointer'
-         p='.5rem'
-         borderRadius='5px'
-         _hover={{
-            bg: 'rgb(59 73 223 / 10%)',
-            color: 'rgb(47 58 178)',
-         }}
-      >
-         {children}
-      </HStack>
-   );
-};
+import SideMenuItem from '../utils/SideMenuItem';
 
 const SideMenu = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
@@ -82,21 +64,15 @@ const SideMenu = () => {
                      </Box>
                   )}
 
-                  {/* menuItem */}
-                  <MenuItem>
-                     <Image src={HomeIcon} alt='menu_icon' />
-                     <Text>Home</Text>
-                  </MenuItem>
+                  {/* menu items */}
+                  <SideMenuItem icon={HomeIcon} title='Home' />
                   {user && (
-                     <MenuItem>
-                        <Image src={ReadingListIcon} alt='menu_icon' />
-                        <Text>Reading List</Text>
-                     </MenuItem>
+                     <SideMenuItem
+                        icon={ReadingListIcon}
+                        title='Reading List'
+                     />
                   )}
-                  <MenuItem>
-                     <Image src={FAQIcon} alt='menu_icon' />
-                     <Text>FAQ</Text>
-                  </MenuItem>
+                  <SideMenuItem icon={FAQIcon} title='FAQ' />
                </DrawerBody>
             </DrawerContent>
          </Drawer>

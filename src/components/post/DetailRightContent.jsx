@@ -46,34 +46,36 @@ const DetailRightContent = ({
             />
          </Box>
 
-         <Box
-            borderRadius='5px'
-            boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-            mt='1rem'
-            overflow='hidden'
-            p={p || '1rem'}
-            bg='white'
-         >
-            <Text fontSize='1.3rem' mb='1rem' fontWeight={600}>
-               More from{' '}
-               <Text
-                  as='span'
-                  color='rgb(47 58 178)'
-                  cursor='pointer'
-                  onClick={() => navigate(`/profile/${userId}`)}
-               >
-                  {currentUserProfile.name}
+         {otherPosts.length !== 0 && (
+            <Box
+               borderRadius='5px'
+               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+               mt='1rem'
+               overflow='hidden'
+               p={p || '1rem'}
+               bg='white'
+            >
+               <Text fontSize='1.3rem' mb='1rem' fontWeight={600}>
+                  More from{' '}
+                  <Text
+                     as='span'
+                     color='rgb(47 58 178)'
+                     cursor='pointer'
+                     onClick={() => navigate(`/profile/${userId}`)}
+                  >
+                     {currentUserProfile.name}
+                  </Text>
                </Text>
-            </Text>
-            {otherPosts.map((postData) => (
-               <OtherPost
-                  key={nanoid()}
-                  title={postData.title}
-                  tags={postData.filteredTags}
-                  postId={postData.id}
-               />
-            ))}
-         </Box>
+               {otherPosts.map((postData) => (
+                  <OtherPost
+                     key={nanoid()}
+                     title={postData.title}
+                     tags={postData.filteredTags}
+                     postId={postData.id}
+                  />
+               ))}
+            </Box>
+         )}
       </Box>
    );
 };

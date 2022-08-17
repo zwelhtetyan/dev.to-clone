@@ -15,7 +15,7 @@ import heart from '../../assets/logo/heart.svg';
 import comment from '../../assets/logo/comment.svg';
 import { useNavigate } from 'react-router-dom';
 import { ReactionButton } from '../../utils/Buttons';
-import CustomAvatar from '../../utils/Avatar';
+import CustomAvatar from '../../utils/CustomAvatar';
 import { nanoid } from 'nanoid';
 import ManangePost from '../ManangePost';
 import { TooltipWrapper } from '../UserProfilePopup';
@@ -124,10 +124,7 @@ const PostItem = ({
                {tags.length !== 0 && (
                   <Wrap spacing='.3rem' py='.5rem' mt='0 !important'>
                      {tags?.map((tag) => (
-                        <WrapItem
-                           key={nanoid()}
-                           onClick={(e) => e.stopPropagation()}
-                        >
+                        <WrapItem key={nanoid()}>
                            <LangTag tag={tag} />
                         </WrapItem>
                      ))}

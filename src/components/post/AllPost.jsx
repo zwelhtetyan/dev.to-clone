@@ -25,43 +25,45 @@ const AllPost = () => {
    }
 
    return (
-      <Box>
-         <Box px={{ base: '.5rem', md: '1rem' }} maxW='650px' m='auto'>
-            {!user && !err && (
-               <Hero display={{ base: 'none', md: 'flex' }} isLogo={true} />
+      <Box flex='2' maxW={{ base: '100%', md: '650px' }}>
+         {!user && !err && (
+            <Hero
+               display={{ base: 'none', md: 'flex' }}
+               isLogo={true}
+               onClose={() => {}}
+            />
+         )}
+
+         <Box h={loading ? 'calc(100vh - 120px)' : 'auto'}>
+            {err && <ErrorMessage offline={true} />}
+
+            {loading && !err && (
+               <>
+                  <PostItemSkeleton />
+                  <PostItemSkeleton />
+                  <PostItemSkeleton />
+               </>
             )}
 
-            <Box h={loading ? 'calc(100vh - 120px)' : 'auto'}>
-               {err && <ErrorMessage offline={true} />}
-
-               {loading && !err && (
-                  <>
-                     <PostItemSkeleton />
-                     <PostItemSkeleton />
-                     <PostItemSkeleton />
-                  </>
-               )}
-
-               {allPostData &&
-                  allPostData.map((postData) => (
-                     <PostItem
-                        key={postData.id}
-                        name={postData.name}
-                        profile={postData.profile}
-                        id={postData.id}
-                        createdAt={postData.createdAt}
-                        title={postData.title}
-                        tags={postData.filteredTags}
-                        readTime={postData.readTime}
-                        isUpdated={postData?.isUpdated}
-                        userId={postData.userId}
-                        currentUserProfile={getUserProfileData(
-                           profileData,
-                           postData.userId
-                        )}
-                     />
-                  ))}
-            </Box>
+            {allPostData &&
+               allPostData.map((postData) => (
+                  <PostItem
+                     key={postData.id}
+                     name={postData.name}
+                     profile={postData.profile}
+                     id={postData.id}
+                     createdAt={postData.createdAt}
+                     title={postData.title}
+                     tags={postData.filteredTags}
+                     readTime={postData.readTime}
+                     isUpdated={postData?.isUpdated}
+                     userId={postData.userId}
+                     currentUserProfile={getUserProfileData(
+                        profileData,
+                        postData.userId
+                     )}
+                  />
+               ))}
          </Box>
       </Box>
    );

@@ -10,7 +10,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
-import CustomAvatar from '../utils/Avatar';
+import CustomAvatar from '../utils/CustomAvatar';
 import CustomMenuItem from '../utils/CustomMenuItem';
 
 const MainMenu = () => {
@@ -21,9 +21,7 @@ const MainMenu = () => {
 
    let currentUserProfile = null;
    if (profileData) {
-      currentUserProfile = profileData.find(
-         (data) => data.userId === user?.userId
-      );
+      currentUserProfile = profileData.find((data) => data.id === user?.userId);
    }
 
    return (
@@ -45,7 +43,7 @@ const MainMenu = () => {
             bg='white'
          >
             <CustomMenuItem
-               onClick={() => navigate(`/profile/${currentUserProfile.userId}`)}
+               onClick={() => navigate(`/profile/${currentUserProfile?.id}`)}
             >
                <VStack>
                   <Text>{currentUserProfile?.name}</Text>

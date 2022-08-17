@@ -14,7 +14,7 @@ const SignOutConfirm = () => {
 
    const handleSignOut = () => {
       signOut(auth).then((_) => {
-         navigate(-1);
+         navigate('/');
          removeFromLocalStorage('user');
          console.log('signed out');
       });

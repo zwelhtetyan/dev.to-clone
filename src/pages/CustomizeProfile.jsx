@@ -50,9 +50,7 @@ const CustomizeProfile = () => {
 
    let currentUserProfile = null;
    if (profileData) {
-      currentUserProfile = profileData.find(
-         (data) => data.userId === user.userId
-      );
+      currentUserProfile = profileData.find((data) => data.id === user.userId);
    }
 
    if (profileDataLoading) {
@@ -104,7 +102,7 @@ const CustomizeProfile = () => {
          work,
          education,
          background,
-         userId: user.userId,
+         // userId: user.userId,
       };
 
       setLoading(true);

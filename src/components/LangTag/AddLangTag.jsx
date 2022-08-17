@@ -109,6 +109,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
                <LangTag
                   handleClickTag={() => handleAddLangTag(customTag)}
                   tag={customTag}
+                  cursor='pointer'
                />
             </WrapItem>
          );
@@ -118,6 +119,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
                <LangTag
                   handleClickTag={() => handleAddLangTag(tag)}
                   tag={tag}
+                  cursor='pointer'
                />
             </WrapItem>
          ));

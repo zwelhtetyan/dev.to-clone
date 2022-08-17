@@ -23,8 +23,6 @@ const SignUp = ({ type }) => {
       return <Navigate to={`/profile/${user.userId}`} />;
    }
 
-   console.log('sign up render', signingIn);
-
    const signin = (provider) => {
       setSigningIn(true);
       signInWithPopup(auth, provider)

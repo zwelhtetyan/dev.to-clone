@@ -34,9 +34,7 @@ const Profile = () => {
 
    let currentUserProfile = null;
    if (profileData) {
-      currentUserProfile = profileData.find(
-         (data) => data.userId === userIdToView
-      );
+      currentUserProfile = profileData.find((data) => data.id === userIdToView);
    }
 
    let publishedPosts = null;

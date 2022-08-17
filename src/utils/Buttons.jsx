@@ -82,7 +82,7 @@ export const ReactionButton = ({ icon, value, text }) => {
          <Image src={icon} mr={1} />
          <Text fontWeight={400} fontSize='14px'>
             {value}{' '}
-            <Text as='span' display={{ base: 'none', md: 'inline-block' }}>
+            <Text as='span' display={{ base: 'none', sm: 'inline-block' }}>
                {value > 1
                   ? text.substr(text.length - 1, text.length) === 'y'
                      ? text.replace('y', 'ies')
