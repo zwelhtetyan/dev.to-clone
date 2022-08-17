@@ -10,10 +10,7 @@ const LangTag = ({ tag, handleClickTag }) => {
          p='0 .5rem'
          border='1px solid rgb(0 0 0 / 4%)'
          bg='white'
-         _hover={{
-            transform: 'translateY(-1px)',
-            borderColor: 'rgb(0 0 0 / 14%)',
-         }}
+         _hover={{ borderColor: 'rgb(0 0 0 / 14%)' }}
          borderRadius='5px'
       >
          {src !== '#' ? <Image src={getLogo(tag)} w='15px' /> : '#'}

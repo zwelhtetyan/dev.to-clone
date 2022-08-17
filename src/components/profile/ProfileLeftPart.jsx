@@ -31,13 +31,24 @@ const ProfileLeftPart = ({ publishedPosts, profileData, display }) => {
          w={{ base: '100%' }}
          display={display}
       >
-         <TechStack title='Currently Learning' text={profileData.learning} />
+         {profileData.learning && (
+            <TechStack title='Currently Learning' text={profileData.learning} />
+         )}
 
-         <TechStack title='Skills/Languages' text={profileData.skills} />
+         {profileData.skills && (
+            <TechStack title='Skills/Languages' text={profileData.skills} />
+         )}
 
-         <TechStack title='Currently hacking on' text={profileData.hacking} />
+         {profileData.hacking && (
+            <TechStack
+               title='Currently hacking on'
+               text={profileData.hacking}
+            />
+         )}
 
-         <TechStack title='Available for' text={profileData.avaliable} />
+         {profileData.avaliable && (
+            <TechStack title='Available for' text={profileData.avaliable} />
+         )}
 
          <Box
             boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'

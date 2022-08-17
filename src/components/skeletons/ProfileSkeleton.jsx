@@ -1,11 +1,10 @@
 import React from 'react';
 import { Box, Skeleton, SkeletonCircle } from '@chakra-ui/react';
-import PostItemSkeleton from './PostItemSkeleton';
 
 const ProfileSkeleton = () => {
    return (
       <Box h='calc(100vh - 120px)'>
-         <Skeleton h={['7rem', '7rem', '9rem']} endColor='black' />
+         <Skeleton h={['7rem', '7rem', '9rem']} />
 
          <Box mx={{ base: 'none', md: '.5rem' }}>
             <Box maxW='1000px' mx='auto'>
@@ -47,7 +46,6 @@ const ProfileSkeleton = () => {
                      mx={{ md: 'auto' }}
                   />
                </Box>
-               <PostItemSkeleton />
             </Box>
          </Box>
       </Box>

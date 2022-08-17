@@ -1,4 +1,4 @@
-import { Box, Divider, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import { Divider, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import SignUpButton from '../utils/SignUpButton';
@@ -7,6 +7,7 @@ import { signInWithPopup } from 'firebase/auth';
 import { useAuth } from '../context/auth';
 import { auth } from '../config/firebase';
 import { createUser } from '../lib/api';
+import { useState } from 'react';
 
 const SignUp = ({ type }) => {
    //scroll top
@@ -14,13 +15,18 @@ const SignUp = ({ type }) => {
 
    const navigate = useNavigate();
 
+   const [signingIn, setSigningIn] = useState(false);
+
    const user = useAuth();
 
-   if (user) {
-      return <Navigate to='/' />;
+   if (!signingIn && user) {
+      return <Navigate to={`/profile/${user.userId}`} />;
    }
 
-   const signin = (provider) =>
+   console.log('sign up render', signingIn);
+
+   const signin = (provider) => {
+      setSigningIn(true);
       signInWithPopup(auth, provider)
          .then((res) => {
             const userId = res.user.uid;
@@ -32,11 +38,17 @@ const SignUp = ({ type }) => {
             };
 
             createUser(userId, userData).then((_) => {
-               navigate('/');
+               navigate(-1);
+               // setSigningIn(false);
+
                console.log('created user successfully');
             });
          })
-         .catch((err) => console.log(err.message));
+         .catch((err) => {
+            setSigningIn(false);
+            console.log(err.message);
+         });
+   };
 
    return (
       <VStack h='calc(100vh - 120px)' mx='auto' justify='center' maxW='640px'>

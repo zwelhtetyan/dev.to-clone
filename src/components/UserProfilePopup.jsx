@@ -17,7 +17,6 @@ const Content = ({ title, text, contentMb }) => {
 export const TooltipWrapper = ({ children, currentUserProfile }) => {
    return (
       <Tooltip
-         closeOnMouseDown={false}
          label={
             <UserProfilePopup
                background={currentUserProfile?.background}
@@ -76,6 +75,8 @@ const UserProfilePopup = ({
                left='1rem'
                cursor='pointer'
                onClick={() => navigate(`/profile/${userId}`)}
+               transition='.3s'
+               _hover={{ filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))' }}
             />
             <Box p={p || '.5rem'} pt='.2rem'>
                <Text
