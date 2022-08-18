@@ -102,7 +102,6 @@ const CustomizeProfile = () => {
          work,
          education,
          background,
-         // userId: user.userId,
       };
 
       setLoading(true);

@@ -1,7 +1,6 @@
 import React from 'react';
 import {
    Box,
-   Divider,
    Flex,
    Heading,
    HStack,
@@ -60,7 +59,7 @@ const TopLayer = ({ profileData }) => {
          mt='-3.5rem'
          borderRadius='5px'
          pos='relative'
-         p={{ base: '.5rem .5rem 2rem', md: '1rem 1rem 2rem' }}
+         p={{ base: '1rem .5rem', md: '1rem' }}
          textAlign={{ base: 'start', md: 'center' }}
       >
          <Box
@@ -82,7 +81,7 @@ const TopLayer = ({ profileData }) => {
             backgroundSize='cover'
          />
 
-         <HStack justify='flex-end' mb={['1rem', '1rem', '2rem']} h='40px'>
+         <HStack justify='flex-end' mb={['.5rem', '.5rem', '1.5rem']} h='40px'>
             {profileData?.id === user?.userId && (
                <PrimaryBtn
                   bg='rgb(59 73 223)'
@@ -100,7 +99,7 @@ const TopLayer = ({ profileData }) => {
                </Heading>
 
                <Text
-                  fontSize='17px'
+                  fontSize={{ md: '17px' }}
                   letterSpacing='.5px'
                   color={profileData.bio ? 'black' : '#717171'}
                   mt='.3rem'
@@ -178,16 +177,22 @@ const TopLayer = ({ profileData }) => {
                   </HStack>
                </Wrap>
 
-               <Divider mt='2rem' mb={3} />
-
-               <Flex flexDirection={{ base: 'column', md: 'row' }} gap={2}>
-                  {profileData?.education && (
-                     <Work title='Education' text={profileData.education} />
-                  )}
-                  {profileData?.work && (
-                     <Work title='Work' text={profileData.work} />
-                  )}
-               </Flex>
+               {(profileData?.education || profileData?.work) && (
+                  <Flex
+                     flexDirection={{ base: 'column', md: 'row' }}
+                     gap={2}
+                     borderTop='1px solid rgb(23 23 23 / 5%)'
+                     mt='2rem'
+                     pt={['.5rem', '.5rem', '1rem']}
+                  >
+                     {profileData?.education && (
+                        <Work title='Education' text={profileData.education} />
+                     )}
+                     {profileData?.work && (
+                        <Work title='Work' text={profileData.work} />
+                     )}
+                  </Flex>
+               )}
             </Box>
          )}
       </Box>

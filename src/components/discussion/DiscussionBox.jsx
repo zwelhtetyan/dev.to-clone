@@ -8,6 +8,7 @@ import { setCommentVal } from '../../store/comment/comment';
 import { PrimaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
 import '../../styles/markdown.scss';
+import { useAuth } from '../../context/auth';
 
 const DiscussionBox = ({ id, comments }) => {
    const [submitting, setSubmitting] = useState(false);
@@ -16,6 +17,8 @@ const DiscussionBox = ({ id, comments }) => {
 
    const commentVal = useSelector((state) => state.comment.commentVal);
    const dispatch = useDispatch();
+
+   const user = useAuth();
 
    useEffect(() => {
       setHasValue(commentVal?.trim().length !== 0);
@@ -35,6 +38,7 @@ const DiscussionBox = ({ id, comments }) => {
                {
                   value: converter().makeHtml(commentVal),
                   createdAt,
+                  userId: user.userId,
                },
             ],
          });

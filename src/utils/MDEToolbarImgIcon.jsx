@@ -8,7 +8,6 @@ const MDEToolbarImgIcon = ({ onChange }) => {
          justify='center'
          m='0'
          cursor='pointer'
-         mt='2px'
          w='18px'
          h='18px'
          pos='relative'

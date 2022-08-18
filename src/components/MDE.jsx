@@ -27,7 +27,7 @@ const codeBlock = {
    name: 'code-block',
    icon: () => '{ }',
    execute: (opts) => {
-      opts.textApi.replaceSelection('```\n put your code block here... \n```');
+      opts.textApi.replaceSelection('```\n Enter code here... \n```');
    },
 };
 

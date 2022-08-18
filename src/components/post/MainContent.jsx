@@ -21,11 +21,15 @@ import CommentItem from '../comment/CommentItem';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import DisplayDate from './DisplayDate';
+import { useSelector } from 'react-redux';
+import { getUserProfileData } from '../../helper/getUserProfileData';
 
 const MainContent = ({ postDetail, postId }) => {
    const navigate = useNavigate();
 
    const user = useAuth();
+
+   const profileData = useSelector((state) => state.profileData.profileData);
 
    const isAuthor = user?.userId === postDetail?.userId;
 
@@ -120,6 +124,10 @@ const MainContent = ({ postDetail, postId }) => {
                         key={nanoid()}
                         text={cmt.value}
                         createdAt={cmt.createdAt}
+                        currentUserProfile={getUserProfileData(
+                           profileData,
+                           cmt.userId
+                        )}
                      />
                   ))}
                </Box>

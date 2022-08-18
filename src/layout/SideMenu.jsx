@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
    Box,
    Drawer,
@@ -22,6 +22,15 @@ const SideMenu = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
 
    const user = useAuth();
+
+   const [clickHome, setClickHome] = useState(false);
+
+   useEffect((_) => window.scrollTo(0, 0), [clickHome]);
+
+   const handleClickHome = () => {
+      setClickHome((prev) => !prev);
+      onClose();
+   };
 
    return (
       <>
@@ -60,12 +69,16 @@ const SideMenu = () => {
                         py='.5rem'
                         mb='.7rem'
                      >
-                        <Hero w='80%' onClose={onClose} m='0' />
+                        <Hero w='80%' onClose={onClose} p='0' />
                      </Box>
                   )}
 
                   {/* menu items */}
-                  <SideMenuItem icon={HomeIcon} title='Home' />
+                  <SideMenuItem
+                     icon={HomeIcon}
+                     title='Home'
+                     onClick={handleClickHome}
+                  />
                   {user && (
                      <SideMenuItem
                         icon={ReadingListIcon}
