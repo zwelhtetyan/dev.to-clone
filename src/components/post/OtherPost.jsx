@@ -30,9 +30,9 @@ const OtherPost = ({ title, tags, postId }) => {
             {title}
          </Text>
          <Wrap spacing='.3rem' pt='.3rem'>
-            {tags?.map((tag) => (
+            {tags?.map((langtag) => (
                <WrapItem key={nanoid()} onClick={(e) => e.stopPropagation()}>
-                  <LangTag tag={tag} />
+                  <LangTag tag={langtag} />
                </WrapItem>
             ))}
          </Wrap>

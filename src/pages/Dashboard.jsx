@@ -100,7 +100,7 @@ const Dashboard = () => {
                            id={postData.id}
                            createdAt={postData.createdAt}
                            title={postData.title}
-                           tags={postData.filteredTags}
+                           tags={postData.tags}
                            readTime={postData.readTime}
                            isUpdated={postData?.isUpdated}
                            fromDashboard={true}
@@ -118,7 +118,7 @@ const Dashboard = () => {
                            id={postData.id}
                            createdAt={postData.createdAt}
                            title={postData.title}
-                           tags={postData.filteredTags}
+                           tags={postData.tags}
                            readTime={postData.readTime}
                            isUpdated={postData?.isUpdated}
                            fromDashboard={true}

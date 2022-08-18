@@ -100,7 +100,7 @@ const MainContent = ({ postDetail, postId }) => {
                <Heading mt={2}>{postDetail.title}</Heading>
 
                <Wrap py={2} spacing={2}>
-                  {postDetail.filteredTags.map((tag) => (
+                  {postDetail.tags.map((tag) => (
                      <WrapItem key={nanoid()}>
                         <LangTag tag={tag} />
                      </WrapItem>

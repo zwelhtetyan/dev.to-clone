@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
    cvImg: '',
    title: '',
-   filteredTags: [],
+   tags: [],
    MDEValue: '',
 };
 
@@ -19,8 +19,8 @@ const PostDataSlice = createSlice({
          state.cvImg = action.payload;
       },
 
-      setFilteredTagsToStore: (state, action) => {
-         state.filteredTags = action.payload;
+      setTagsToStore: (state, action) => {
+         state.tags = action.payload;
       },
 
       setMDEValueToStore: (state, action) => {
@@ -32,7 +32,7 @@ const PostDataSlice = createSlice({
 export const {
    setCvImgToStore,
    setTitleToStore,
-   setFilteredTagsToStore,
+   setTagsToStore,
    setMDEValueToStore,
 } = PostDataSlice.actions;
 

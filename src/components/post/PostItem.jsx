@@ -35,6 +35,7 @@ const PostItem = ({
    draftPost,
    userId,
    currentUserProfile,
+   setAlreadyInProfile,
 }) => {
    const navigate = useNavigate();
 
@@ -45,7 +46,12 @@ const PostItem = ({
 
    const handleViewProfile = (e) => {
       e.stopPropagation();
+
       navigate(`/profile/${userId}`);
+
+      if (setAlreadyInProfile) {
+         setAlreadyInProfile((val) => !val);
+      }
    };
 
    return (

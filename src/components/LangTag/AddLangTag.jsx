@@ -4,7 +4,7 @@ import LangTag from '../../utils/LangTag';
 import { useDispatch } from 'react-redux';
 import { Box, Circle, Input, Square, Wrap, WrapItem } from '@chakra-ui/react';
 import tagsData from './LangTagData.json';
-import { setFilteredTagsToStore } from '../../store/post/postData';
+import { setTagsToStore } from '../../store/post/postData';
 import { nanoid } from 'nanoid';
 
 const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
@@ -19,7 +19,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    const dispatch = useDispatch();
 
    useEffect(() => {
-      dispatch(setFilteredTagsToStore(filteredTags));
+      dispatch(setTagsToStore(filteredTags));
    }, [filteredTags, dispatch]);
 
    //refs
@@ -31,11 +31,11 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
          return;
       }
 
-      const filteredTags = tagData.filter((tag) =>
+      const searchedTags = tagData.filter((tag) =>
          tag.topic.toLowerCase().includes(filterTagName.toLowerCase())
       );
 
-      return filteredTags;
+      return searchedTags;
    };
 
    const filteredTagsToShow = () => {

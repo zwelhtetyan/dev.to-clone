@@ -24,7 +24,7 @@ const PostDetails = () => {
 
    const otherPosts = transformedData?.filter(
       (postData) =>
-         postData.userId === currentUserProfile?.userId &&
+         postData.userId === currentUserProfile?.id &&
          postData.id !== id &&
          !postData.draft
    );
@@ -32,11 +32,11 @@ const PostDetails = () => {
    //to preview images
    useEffect(() => {
       if (postDetail) {
-         const imgTags = [
+         const imgfilteredTags = [
             ...document.querySelectorAll('.mde-preview-content p img'),
          ];
 
-         imgTags.forEach((img) => {
+         imgfilteredTags.forEach((img) => {
             img.style.cursor = 'zoom-in';
 
             img.addEventListener('click', () =>

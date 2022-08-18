@@ -70,7 +70,7 @@ const DetailRightContent = ({
                   <OtherPost
                      key={nanoid()}
                      title={postData.title}
-                     tags={postData.filteredTags}
+                     tags={postData.tags}
                      postId={postData.id}
                   />
                ))}

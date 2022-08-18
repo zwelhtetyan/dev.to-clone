@@ -23,7 +23,7 @@ const useCreatePost = (currentPostDataToEdit) => {
       () => ({
          cvImg: '',
          title: '',
-         filteredTags: [],
+         tags: [],
          MDEValue: '',
       }),
       []
@@ -50,7 +50,7 @@ const useCreatePost = (currentPostDataToEdit) => {
       const newData = {
          cvImg: postDataFromStore.cvImg,
          title: postDataFromStore.title,
-         filteredTags: postDataFromStore.filteredTags,
+         tags: postDataFromStore.tags,
          MDEValue: postDataFromStore.MDEValue,
       };
 
@@ -94,7 +94,10 @@ const useCreatePost = (currentPostDataToEdit) => {
 
             console.log('uploaded post successfully!');
          })
-         .catch((err) => console.log(err));
+         .catch((err) => {
+            helper(publishingType, false);
+            console.log(err);
+         });
    };
 
    //Edit post

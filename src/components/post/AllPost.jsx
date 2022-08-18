@@ -54,7 +54,7 @@ const AllPost = () => {
                      id={postData.id}
                      createdAt={postData.createdAt}
                      title={postData.title}
-                     tags={postData.filteredTags}
+                     tags={postData.tags}
                      readTime={postData.readTime}
                      isUpdated={postData?.isUpdated}
                      userId={postData.userId}

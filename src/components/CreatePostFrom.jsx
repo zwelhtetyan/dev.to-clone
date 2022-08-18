@@ -27,7 +27,6 @@ const CreatePostFrom = ({
    setUploadingImg,
    postTitle,
    toEdit,
-   isDraftPost,
 }) => {
    const naviagte = useNavigate();
 
@@ -100,9 +99,7 @@ const CreatePostFrom = ({
                   </Text>
                )}
 
-               <AddLangTag
-                  filteredTagsFromLocalStorage={postData?.filteredTags}
-               />
+               <AddLangTag filteredTagsFromLocalStorage={postData?.tags} />
 
                <Box mt='1.5rem !important' w='100%' mb='.5rem !important'>
                   <MDE

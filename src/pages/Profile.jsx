@@ -9,8 +9,10 @@ import ErrorMessage from '../utils/ErrorMessage';
 import ProfileSkeleton from '../components/skeletons/ProfileSkeleton';
 
 const Profile = () => {
+   const [alreadyInProfile, setAlreadyInProfile] = useState(false);
+
    //scroll top
-   useEffect(() => window.scrollTo(0, 0), []);
+   useEffect(() => window.scrollTo(0, 0), [alreadyInProfile]);
 
    const { userIdToView } = useParams();
 
@@ -111,10 +113,11 @@ const Profile = () => {
                               id={postData.id}
                               createdAt={postData.createdAt}
                               title={postData.title}
-                              tags={postData.filteredTags}
+                              tags={postData.tags}
                               readTime={postData.readTime}
                               isUpdated={postData?.isUpdated}
                               userId={postData.userId}
+                              setAlreadyInProfile={setAlreadyInProfile}
                            />
                         ))}
                   </Box>

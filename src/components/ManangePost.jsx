@@ -21,7 +21,7 @@ const ManangePost = ({ postId, m }) => {
          setCurrentPostData({
             cvImg: postDetail.cvImg,
             title: postDetail.title,
-            filteredTags: postDetail.filteredTags,
+            tags: postDetail.tags,
             MDEValue: postDetail.MDEValue,
             id: postId,
             draft: postDetail.draft,
