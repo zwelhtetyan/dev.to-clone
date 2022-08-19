@@ -35,11 +35,10 @@ const MainContent = ({ postDetail, postId }) => {
 
    return (
       <Box
-         margin='0 auto !important'
+         mx={{ base: '0', md: '1px' }}
          bg='white'
          boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-         borderRadius='5px'
-         flex='2'
+         borderRadius={{ base: '0', md: '5px' }}
       >
          {/* coverImgae */}
          {postDetail.cvImg && (
@@ -55,10 +54,7 @@ const MainContent = ({ postDetail, postId }) => {
          )}
 
          {/* content */}
-         <Box
-            px={{ base: '.7rem', md: '2.5rem' }}
-            pb={{ base: '3rem', md: '1rem' }}
-         >
+         <Box px={{ base: '.7rem', md: '2.5rem' }} pb='1rem'>
             <Box className='mde-preview'>
                <Flex
                   align='center'

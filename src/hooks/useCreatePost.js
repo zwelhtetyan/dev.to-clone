@@ -112,7 +112,10 @@ const useCreatePost = (currentPostDataToEdit) => {
 
             console.log('updated post successfully');
          })
-         .catch((err) => console.log(err));
+         .catch((err) => {
+            helper(publishingType, false);
+            console.log(err);
+         });
    };
 
    return {

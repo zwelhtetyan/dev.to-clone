@@ -1,11 +1,14 @@
 import { Box, Button, HStack, Text, VStack } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
 import { deletePost } from '../lib/api';
 
 const DeleteConfirm = () => {
+   //scroll top
+   useEffect(() => window.scrollTo(0, 0), []);
+
    const navigate = useNavigate();
 
    const user = useAuth();

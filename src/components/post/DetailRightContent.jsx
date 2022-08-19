@@ -10,14 +10,14 @@ const DetailRightContent = ({
    otherPosts,
    userId,
    display,
-   mt,
+   m,
    p,
 }) => {
    const navigate = useNavigate();
 
    return (
       <Box
-         mt={mt}
+         m={m}
          flex='1'
          ms={{ xl: '1rem' }}
          pos='sticky'
@@ -25,7 +25,7 @@ const DetailRightContent = ({
          display={display}
       >
          <Box
-            borderRadius='5px'
+            borderRadius={{ base: '0', md: '5px' }}
             boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
             overflow='hidden'
          >
@@ -48,7 +48,7 @@ const DetailRightContent = ({
 
          {otherPosts.length !== 0 && (
             <Box
-               borderRadius='5px'
+               borderRadius={{ base: '0', md: '5px' }}
                boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                mt='1rem'
                overflow='hidden'

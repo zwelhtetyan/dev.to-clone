@@ -81,7 +81,7 @@ const TopLayer = ({ profileData }) => {
             backgroundSize='cover'
          />
 
-         <HStack justify='flex-end' mb={['.5rem', '.5rem', '1.5rem']} h='40px'>
+         <HStack justify='flex-end' mb={{ md: '1.5rem' }} h='40px'>
             {profileData?.id === user?.userId && (
                <PrimaryBtn
                   bg='rgb(59 73 223)'

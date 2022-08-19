@@ -3,9 +3,9 @@ import { Box, Flex } from '@chakra-ui/react';
 import DetailSkeleton from '../../components/skeletons/DetailSkeleton';
 import SideReactionBar from './SideReactionBar';
 import ErrorMessage from '../../utils/ErrorMessage';
-import 'react-mde/lib/styles/css/react-mde-all.css';
 import DetailRightContent from './DetailRightContent';
 import MainContent from './MainContent';
+import 'react-mde/lib/styles/css/react-mde-all.css';
 import '../../styles/postdetail.scss';
 
 const DetailElements = ({
@@ -36,11 +36,11 @@ const DetailElements = ({
          {!postDetail && !loading && err && <ErrorMessage offline={true} />}
 
          {postDetail && (
-            <Flex align='flex-start'>
+            <Flex flex={2} align='flex-start'>
                {/* side bar */}
                <SideReactionBar />
 
-               <Box flex='2'>
+               <Box flex='2' overflow='hidden' pb='1px'>
                   {/* main content */}
                   <MainContent postDetail={postDetail} postId={postId} />
 
@@ -50,7 +50,7 @@ const DetailElements = ({
                      otherPosts={otherPosts}
                      userId={postDetail.userId}
                      display={{ base: 'block', xl: 'none' }}
-                     mt={{ base: '1.5rem', md: '2rem' }}
+                     m={{ base: '1.5rem 0', md: '1.5rem 1px 0' }}
                      p='.5rem'
                   />
                </Box>

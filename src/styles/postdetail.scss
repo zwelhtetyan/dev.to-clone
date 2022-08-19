@@ -2,7 +2,12 @@
    padding: 0;
    font-family: monospace;
 
-   pre {
+   h3 {
+      font-weight: 700 !important;
+   }
+
+   pre,
+   p code {
       background-color: black;
       color: white;
    }

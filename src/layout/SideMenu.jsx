@@ -17,9 +17,12 @@ import HomeIcon from '../assets/logo/HomeIcon.svg';
 import ReadingListIcon from '../assets/logo/ReadingListIcon.svg';
 import FAQIcon from '../assets/logo/FAQIcon.svg';
 import SideMenuItem from '../utils/SideMenuItem';
+import { useNavigate } from 'react-router-dom';
 
 const SideMenu = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
+
+   const navigate = useNavigate();
 
    const user = useAuth();
 
@@ -28,6 +31,7 @@ const SideMenu = () => {
    useEffect((_) => window.scrollTo(0, 0), [clickHome]);
 
    const handleClickHome = () => {
+      navigate('/');
       setClickHome((prev) => !prev);
       onClose();
    };
