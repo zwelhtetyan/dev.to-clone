@@ -35,7 +35,7 @@ const MainContent = ({ postDetail, postId }) => {
 
    return (
       <Box
-         mx={{ base: '0', md: '1px' }}
+         m={{ base: '0', md: '1px' }}
          bg='white'
          boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
          borderRadius={{ base: '0', md: '5px' }}
@@ -86,6 +86,7 @@ const MainContent = ({ postDetail, postId }) => {
                         <DisplayDate
                            createdAt={postDetail.createdAt}
                            isUpdated={postDetail.isUpdated}
+                           isDraft={postDetail.draft}
                         />
                      </Box>
                   </HStack>

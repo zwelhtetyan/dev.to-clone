@@ -64,7 +64,7 @@ export const editPost = async (postData) => {
       readTime: Math.ceil(
          converter().makeHtml(postData.MDEValue).split(' ').length / 200
       ),
-      isUpdated: true,
+      isUpdated: postData?.isUpdated ?? true,
    });
 };
 

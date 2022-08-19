@@ -71,31 +71,33 @@ const Profile = () => {
                   <ProfileLeftPart
                      publishedPosts={publishedPosts}
                      profileData={currentUserProfile}
-                     display={{ base: !moreInfo && 'none', md: 'block' }}
+                     display={{
+                        base: !moreInfo && 'none',
+                        md: 'block',
+                     }}
                   />
 
                   {/* more info button */}
-                  {publishedPosts && (
-                     <Button
-                        display={{
-                           base: moreInfo ? 'none' : 'block',
-                           md: 'none',
-                        }}
-                        onClick={() => setMoreInfo(true)}
-                        w='97%'
-                        mx='auto'
-                        mb={3}
-                        bg='white'
-                        _active={{ bg: 'white' }}
-                        boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-                        transition='.3s'
-                        _hover={{
-                           bg: 'rgb(0 0 0 / 4%)',
-                        }}
-                     >
-                        More info about @{currentUserProfile?.name}
-                     </Button>
-                  )}
+
+                  <Button
+                     display={{
+                        base: moreInfo ? 'none' : 'block',
+                        md: 'none',
+                     }}
+                     onClick={() => setMoreInfo(true)}
+                     w='97%'
+                     mx='auto'
+                     mb={3}
+                     bg='white'
+                     _active={{ bg: 'white' }}
+                     boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+                     transition='.3s'
+                     _hover={{
+                        bg: 'rgb(0 0 0 / 4%)',
+                     }}
+                  >
+                     More info about @{currentUserProfile?.name}
+                  </Button>
 
                   {/* right */}
                   <Box

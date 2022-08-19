@@ -25,8 +25,9 @@ const MainMenu = () => {
    }
 
    return (
-      <Menu autoSelect={false}>
+      <Menu autoSelect={false} isLazy>
          <MenuButton
+            disabled={!currentUserProfile}
             _hover={{
                filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))',
             }}
@@ -52,7 +53,9 @@ const MainMenu = () => {
 
             <MenuDivider h='.5px' bg='#d6d6d7' />
 
-            <CustomMenuItem onClick={() => navigate('/dashboard')}>
+            <CustomMenuItem
+               onClick={() => navigate('/dashboard/?category=post')}
+            >
                Dashboard
             </CustomMenuItem>
             <CustomMenuItem onClick={() => navigate('/create-post')}>

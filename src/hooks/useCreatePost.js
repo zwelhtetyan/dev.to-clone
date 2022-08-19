@@ -73,10 +73,30 @@ const useCreatePost = (currentPostDataToEdit) => {
 
       if (type === 'publish') {
          setPublishing(bol);
-         newData = { ...postData, userId: user.userId, draft: false };
+
+         if (postData.draft) {
+            return {
+               ...postData,
+               userId: user.userId,
+               draft: false,
+               isUpdated: false,
+            };
+         }
+
+         newData = {
+            ...postData,
+            userId: user.userId,
+            draft: false,
+         };
       } else if (type === 'draft') {
          setSavingDraft(bol);
-         newData = { ...postData, userId: user.userId, draft: true };
+
+         newData = {
+            ...postData,
+            userId: user.userId,
+            draft: true,
+            isUpdated: false,
+         };
       }
 
       return newData;
@@ -86,9 +106,11 @@ const useCreatePost = (currentPostDataToEdit) => {
    const publishPostHandler = (publishingType) => {
       const newData = helper(publishingType, true);
 
+      const queryLink = newData.draft ? 'draft' : 'post';
+
       createPost(newData)
          .then((_) => {
-            navigate('/dashboard');
+            navigate(`/dashboard/?category=${queryLink}`);
             helper(publishingType, false);
             removeFromLocalStorage('postDataToPublish');
 
@@ -102,11 +124,16 @@ const useCreatePost = (currentPostDataToEdit) => {
 
    //Edit post
    const eidtPostHandler = (publishingType) => {
+      const queryLink =
+         postData.draft && publishingType === 'publish'
+            ? '/dashboard/?category=post'
+            : -1;
+
       const newData = helper(publishingType, true);
 
       editPost(newData)
          .then((_) => {
-            navigate(-1);
+            navigate(queryLink);
             helper(publishingType, false);
             removeFromLocalStorage('postDataToEdit');
 

@@ -36,6 +36,7 @@ const PostItem = ({
    userId,
    currentUserProfile,
    setAlreadyInProfile,
+   isDraft,
 }) => {
    const navigate = useNavigate();
 
@@ -108,7 +109,11 @@ const PostItem = ({
                         </TooltipWrapper>
                      )}
 
-                     <DisplayDate createdAt={createdAt} isUpdated={isUpdated} />
+                     <DisplayDate
+                        createdAt={createdAt}
+                        isUpdated={isUpdated}
+                        isDraft={isDraft}
+                     />
                   </Box>
                </HStack>
             </HStack>

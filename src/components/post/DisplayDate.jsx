@@ -7,7 +7,7 @@ import {
    isLimitedDate,
 } from '../../helper/calcTimestamp';
 
-const DisplayDate = ({ createdAt, isUpdated }) => {
+const DisplayDate = ({ createdAt, isUpdated, isDraft }) => {
    return (
       <Text fontSize='12px' color='#717171'>
          {dateFormat(createdAt)}{' '}
@@ -16,9 +16,9 @@ const DisplayDate = ({ createdAt, isUpdated }) => {
                (<Moment fromNow>{calTimeStamp(createdAt)}</Moment>)
             </Text>
          )}{' '}
-         {isUpdated && (
+         {(isUpdated || isDraft) && (
             <Text fontSize='11px' color='#717171' as='span'>
-               • updated
+               • {isDraft && 'draft'} {isUpdated && 'updated'}
             </Text>
          )}
       </Text>

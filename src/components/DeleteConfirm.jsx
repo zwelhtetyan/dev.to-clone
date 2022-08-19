@@ -21,9 +21,11 @@ const DeleteConfirm = () => {
       return <Navigate to='/' />;
    }
 
+   const queryLink = currentPostData.draft ? 'draft' : 'post';
+
    const onDelete = () => {
       deletePost(currentPostData.id).then(() => {
-         navigate('/dashboard');
+         navigate(`/dashboard/?category=${queryLink}`);
       });
    };
 

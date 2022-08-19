@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import PostItem from '../components/post/PostItem';
 import PostItemSkeleton from '../components/skeletons/PostItemSkeleton';
 import { useAuth } from '../context/auth';
@@ -36,6 +36,16 @@ const ReactionBox = ({ count, title }) => {
 const Dashboard = () => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
+   const location = useLocation();
+   const navigate = useNavigate();
+
+   const queryParam = new URLSearchParams(location.search);
+
+   const defaultIndex = queryParam.get('category') === 'post' ? 0 : 1;
+
+   const handleChangeTabs = (type) => {
+      navigate(`/dashboard/?category=${type}`);
+   };
 
    const {
       transformedData,
@@ -69,6 +79,13 @@ const Dashboard = () => {
       return <ErrorMessage offline={true} />;
    }
 
+   const totalPost = publishedPosts?.length + draftPosts?.length || 0;
+   const totalPublishedPost = publishedPosts?.length || '';
+   const totalDraftPost = draftPosts?.length || '';
+
+   const hasPublishPost = publishedPosts && publishedPosts.length !== 0;
+   const hasDraftPost = draftPosts && draftPosts.length !== 0;
+
    return (
       <Box maxW='650px' mx='auto' p='.5rem' minH='50vh'>
          <Heading mb={5} fontSize={{ base: '1.5rem', md: '2rem' }}>
@@ -76,59 +93,77 @@ const Dashboard = () => {
          </Heading>
 
          <HStack spacing={[2, 3, 5]} mb={6}>
-            <ReactionBox count={publishedPosts?.length} title='Total Posts' />
+            <ReactionBox count={totalPost} title='Total Posts' />
             <ReactionBox count={11} title='Total Reactions' />
          </HStack>
 
-         <Tabs>
-            <TabList>
-               <Tab fontSize={['1.1rem', '1.2rem']}>Posts</Tab>
-               <Tab fontSize={['1.1rem', '1.2rem']}>
-                  Draft {draftPosts?.length ? `(${draftPosts.length})` : ''}
-               </Tab>
-            </TabList>
+         {(hasPublishPost || hasDraftPost) && (
+            <Tabs isLazy defaultIndex={defaultIndex}>
+               <TabList>
+                  <Tab
+                     fontSize={['1.1rem', '1.2rem']}
+                     onClick={() => handleChangeTabs('post')}
+                  >
+                     Post {totalPublishedPost}
+                  </Tab>
 
-            <TabPanels>
-               <TabPanel px='0'>
-                  {loading && <PostItemSkeleton />}
-                  {publishedPosts &&
-                     publishedPosts.map((postData) => (
-                        <PostItem
-                           key={postData.id}
-                           name={postData.name}
-                           profile={postData.profile}
-                           id={postData.id}
-                           createdAt={postData.createdAt}
-                           title={postData.title}
-                           tags={postData.tags}
-                           readTime={postData.readTime}
-                           isUpdated={postData?.isUpdated}
-                           fromDashboard={true}
-                           userId={postData.userId}
-                        />
-                     ))}
-               </TabPanel>
-               <TabPanel px='0'>
-                  {draftPosts &&
-                     draftPosts.map((postData) => (
-                        <PostItem
-                           key={postData.id}
-                           name={postData.name}
-                           profile={postData.profile}
-                           id={postData.id}
-                           createdAt={postData.createdAt}
-                           title={postData.title}
-                           tags={postData.tags}
-                           readTime={postData.readTime}
-                           isUpdated={postData?.isUpdated}
-                           fromDashboard={true}
-                           draftPost={true}
-                           userId={postData.userId}
-                        />
-                     ))}
-               </TabPanel>
-            </TabPanels>
-         </Tabs>
+                  <Tab
+                     fontSize={['1.1rem', '1.2rem']}
+                     onClick={() => handleChangeTabs('draft')}
+                  >
+                     Draft {totalDraftPost}
+                  </Tab>
+               </TabList>
+
+               <TabPanels>
+                  <TabPanel px='0'>
+                     {hasPublishPost ? (
+                        publishedPosts.map((postData) => (
+                           <PostItem
+                              key={postData.id}
+                              name={postData.name}
+                              profile={postData.profile}
+                              id={postData.id}
+                              createdAt={postData.createdAt}
+                              title={postData.title}
+                              tags={postData.tags}
+                              readTime={postData.readTime}
+                              isUpdated={postData?.isUpdated}
+                              fromDashboard={true}
+                              userId={postData.userId}
+                           />
+                        ))
+                     ) : (
+                        <Text>No published post here 👻</Text>
+                     )}
+                  </TabPanel>
+
+                  <TabPanel px='0'>
+                     {hasDraftPost ? (
+                        draftPosts.map((postData) => (
+                           <PostItem
+                              key={postData.id}
+                              name={postData.name}
+                              profile={postData.profile}
+                              id={postData.id}
+                              createdAt={postData.createdAt}
+                              title={postData.title}
+                              tags={postData.tags}
+                              readTime={postData.readTime}
+                              isUpdated={postData?.isUpdated}
+                              fromDashboard={true}
+                              draftPost={true}
+                              userId={postData.userId}
+                              isDraft={true}
+                           />
+                        ))
+                     ) : (
+                        <Text>No drafted post here 👻</Text>
+                     )}
+                  </TabPanel>
+               </TabPanels>
+            </Tabs>
+         )}
       </Box>
    );
 };

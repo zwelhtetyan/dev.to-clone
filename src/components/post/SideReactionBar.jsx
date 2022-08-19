@@ -5,7 +5,7 @@ import Unicorn from '../../assets/logo/Unicorn';
 import Save from '../../assets/logo/Save';
 import Option from '../../assets/logo/Option';
 
-const SideReactionBar = () => {
+const SideReactionBar = ({ postDetail }) => {
    return (
       <Flex
          bg={{ base: 'white', md: 'transparent' }}
@@ -23,50 +23,56 @@ const SideReactionBar = () => {
          gap='1rem'
          me='1rem'
       >
-         <Flex direction={{ base: 'row', md: 'column' }} align='center'>
-            <IconButton
-               bg='transparent'
-               icon={<Heart />}
-               borderRadius='full'
-               mb={{ base: '0', md: '2' }}
-               mr={{ base: '2', md: '0' }}
-               _hover={{
-                  bg: 'rgb(220 38 38 / 10%)',
-                  svg: { fill: 'rgb(220 38 38)' },
-               }}
-            />
-            11
-         </Flex>
+         {!postDetail.draft && (
+            <Flex direction={{ base: 'row', md: 'column' }} align='center'>
+               <IconButton
+                  bg='transparent'
+                  icon={<Heart />}
+                  borderRadius='full'
+                  mb={{ base: '0', md: '2' }}
+                  mr={{ base: '2', md: '0' }}
+                  _hover={{
+                     bg: 'rgb(220 38 38 / 10%)',
+                     svg: { fill: 'rgb(220 38 38)' },
+                  }}
+               />
+               11
+            </Flex>
+         )}
 
-         <Flex direction={{ base: 'row', md: 'column' }} align='center'>
-            <IconButton
-               bg='transparent'
-               icon={<Unicorn />}
-               borderRadius='full'
-               mb={{ base: '0', md: '2' }}
-               mr={{ base: '2', md: '0' }}
-               _hover={{
-                  bg: 'rgb(5 150 105 / 10%)',
-                  svg: { fill: 'rgb(5 150 105)' },
-               }}
-            />
-            5
-         </Flex>
+         {!postDetail.draft && (
+            <Flex direction={{ base: 'row', md: 'column' }} align='center'>
+               <IconButton
+                  bg='transparent'
+                  icon={<Unicorn />}
+                  borderRadius='full'
+                  mb={{ base: '0', md: '2' }}
+                  mr={{ base: '2', md: '0' }}
+                  _hover={{
+                     bg: 'rgb(5 150 105 / 10%)',
+                     svg: { fill: 'rgb(5 150 105)' },
+                  }}
+               />
+               5
+            </Flex>
+         )}
 
-         <Flex direction={{ base: 'row', md: 'column' }} align='center'>
-            <IconButton
-               bg='transparent'
-               icon={<Save />}
-               borderRadius='full'
-               mb={{ base: '0', md: '2' }}
-               mr={{ base: '2', md: '0' }}
-               _hover={{
-                  bg: 'rgb(79 70 229 / 10%)',
-                  svg: { fill: 'rgb(79 70 229)' },
-               }}
-            />
-            9
-         </Flex>
+         {!postDetail.draft && (
+            <Flex direction={{ base: 'row', md: 'column' }} align='center'>
+               <IconButton
+                  bg='transparent'
+                  icon={<Save />}
+                  borderRadius='full'
+                  mb={{ base: '0', md: '2' }}
+                  mr={{ base: '2', md: '0' }}
+                  _hover={{
+                     bg: 'rgb(79 70 229 / 10%)',
+                     svg: { fill: 'rgb(79 70 229)' },
+                  }}
+               />
+               9
+            </Flex>
+         )}
 
          <Flex direction={{ base: 'row', md: 'column' }} align='center'>
             <IconButton

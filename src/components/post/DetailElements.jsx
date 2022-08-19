@@ -38,7 +38,7 @@ const DetailElements = ({
          {postDetail && (
             <Flex flex={2} align='flex-start'>
                {/* side bar */}
-               <SideReactionBar />
+               <SideReactionBar postDetail={postDetail} />
 
                <Box flex='2' overflow='hidden' pb='1px'>
                   {/* main content */}
