@@ -69,7 +69,7 @@ export const SecondaryBtn = ({
    );
 };
 
-export const ReactionButton = ({ icon, value, text }) => {
+export const ReactionButton = ({ icon, value, text, onClick }) => {
    return (
       <Button
          h='30px'
@@ -78,6 +78,7 @@ export const ReactionButton = ({ icon, value, text }) => {
          border='1px solid transparent'
          _hover={{ bg: 'rgb(0 0 0 / 4%)' }}
          _active={{ bg: 'rgb(0 0 0 / 4%)' }}
+         onClick={onClick}
       >
          <Image src={icon} mr={1} />
          <Text fontWeight={400} fontSize='14px'>

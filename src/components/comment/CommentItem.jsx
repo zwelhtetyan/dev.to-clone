@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Flex, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Flex, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { ReactionButton } from '../../utils/Buttons';
 import heart from '../../assets/logo/heart.svg';
 import red_heart from '../../assets/logo/red_heart.svg';
@@ -8,22 +8,36 @@ import OptionBtn from '../../utils/OptionBtn';
 import { dateFormat } from '../../helper/calcTimestamp';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import converter from '../../helper/converter';
-import 'react-mde/lib/styles/css/react-mde-all.css';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { useNavigate } from 'react-router-dom';
+import authorIcon from '../../assets/logo/authorIcon.svg';
+import { useState } from 'react';
+import DiscussionBox from '../discussion/DiscussionBox';
 
-const CommentItem = ({ text, createdAt, currentUserProfile }) => {
+const CommentItem = ({
+   text,
+   createdAt,
+   currentUserProfile,
+   createdUserId,
+   userId,
+}) => {
    const navigate = useNavigate();
 
    const handleViewProfile = (userId) => {
       navigate(`/profile/${userId}`);
    };
 
+   const isAuthor = createdUserId === userId;
+
+   const [showDiscussionBox, setShowDiscussionbox] = useState(false);
+
+   const handleshowDiscussionBox = () => setShowDiscussionbox((prev) => !prev);
+
    return (
       <VStack mb='1rem'>
          <Flex align='flex-start' w='100%'>
             <CustomAvatar
-               size='32px'
+               size='25px'
                profile={currentUserProfile.profile}
                onClick={() => handleViewProfile(currentUserProfile.id)}
             />
@@ -39,16 +53,23 @@ const CommentItem = ({ text, createdAt, currentUserProfile }) => {
                overflow='hidden'
             >
                <HStack justify='space-between' mb={1}>
-                  <HStack>
+                  <Flex align='center'>
                      <Text
                         fontSize='15px'
                         fontWeight='900'
                         cursor='pointer'
                         onClick={() => handleViewProfile(currentUserProfile.id)}
                      >
-                        {currentUserProfile.name} {''}
+                        {currentUserProfile.name}{' '}
                      </Text>
-                     <Text as='span' color='gray'>
+                     {isAuthor && (
+                        <Image
+                           src={authorIcon}
+                           alt='author_icon'
+                           title='author'
+                        />
+                     )}
+                     <Text as='span' color='gray' me='.5rem'>
                         •
                      </Text>{' '}
                      {''}
@@ -59,9 +80,8 @@ const CommentItem = ({ text, createdAt, currentUserProfile }) => {
                         fontSize='12px'
                      >
                         {dateFormat(createdAt)}
-                        {/* <Moment fromNow>{calTimeStamp(createdAt)}</Moment> */}
                      </Text>
-                  </HStack>
+                  </Flex>
 
                   {/* option menu */}
                   <OptionBtn size={19} />
@@ -76,10 +96,26 @@ const CommentItem = ({ text, createdAt, currentUserProfile }) => {
                </Box>
             </Box>
          </Flex>
-         <HStack justify='flex-start' w='100%' ps='43px'>
-            <ReactionButton icon={heart} value={11} text='like' />
-            <ReactionButton icon={comment} value={1} text='reply' />
-         </HStack>
+
+         <Box w='100%' ps='33px'>
+            {!showDiscussionBox && (
+               <HStack justify='flex-start'>
+                  <ReactionButton icon={heart} value={11} text='like' />
+                  <ReactionButton
+                     icon={comment}
+                     value={1}
+                     text='reply'
+                     onClick={handleshowDiscussionBox}
+                  />
+               </HStack>
+            )}
+            {showDiscussionBox && (
+               <DiscussionBox
+                  showDismiss={true}
+                  onDismiss={handleshowDiscussionBox}
+               />
+            )}
+         </Box>
       </VStack>
    );
 };

@@ -3,6 +3,16 @@
 
    .mde-header {
       border: none;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+
+      .mde-tabs {
+         display: none;
+      }
+
+      & > .mde-header-group {
+         padding-left: 0;
+      }
 
       ul.mde-header-group li.mde-header-item {
          display: flex;
@@ -17,20 +27,15 @@
       .svg-icon {
          font-size: 15px;
       }
-
-      .mde-tabs button {
-         padding: 0 10px;
-         border-radius: 5px;
-         font-size: 14px;
-      }
    }
 
    .mde-text {
-      height: calc(100vh - 420px) !important;
+      height: calc(100vh - 405px) !important;
 
       @media screen and (max-width: 480px) {
-         height: 240px !important;
+         height: calc(100vh - 335px) !important;
       }
+
       &:focus {
          outline: none;
       }

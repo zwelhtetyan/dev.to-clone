@@ -29,13 +29,15 @@ const ModalAlert = () => {
             isOpen={isOpen}
             motionPreset='none'
             closeOnOverlayClick={false}
-            size='2xl'
+            size={{ base: 'full', md: '2xl' }}
          >
             <ModalOverlay />
-            <ModalContent w='95%'>
-               <ModalHeader>You have unsaved changes</ModalHeader>
+            <ModalContent>
+               <ModalHeader borderBottom='1px solid rgb(23 23 23 / 10%)'>
+                  You have unsaved changes
+               </ModalHeader>
                <ModalCloseButton />
-               <ModalBody>
+               <ModalBody mt='1rem'>
                   You've made changes to your post. Do you want to navigate to
                   leave this page?
                </ModalBody>

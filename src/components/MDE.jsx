@@ -15,7 +15,7 @@ import { setCommentVal } from '../store/comment/comment';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
 import { setMDEValueToStore } from '../store/post/postData';
-import 'react-mde/lib/styles/css/react-mde-all.css';
+import CodeBlockIcon from '../assets/logo/CodeBlockIcon';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -25,13 +25,19 @@ const customToolbarCommands = () => {
 
 const codeBlock = {
    name: 'code-block',
-   icon: () => '{ }',
+   icon: () => <CodeBlockIcon />,
    execute: (opts) => {
       opts.textApi.replaceSelection('```\n Enter code here... \n```');
    },
 };
 
-const MDE = ({ MDEValue, where, isSubmitting, setUploadingImg }) => {
+const MDE = ({
+   MDEValue,
+   where,
+   isSubmitting,
+   setUploadingImg,
+   placeholder,
+}) => {
    const [value, setValue] = React.useState(MDEValue || '');
    const [selectedTab, setSelectedTab] = React.useState('write');
    const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
@@ -42,8 +48,8 @@ const MDE = ({ MDEValue, where, isSubmitting, setUploadingImg }) => {
 
    React.useEffect(() => {
       const textBox = document.querySelector('.mde-text');
-      textBox.placeholder = 'Write your post content here...';
-   }, []);
+      textBox.placeholder = placeholder || 'Write your post content here...';
+   }, [placeholder]);
 
    React.useEffect(() => {
       if (where === 'CREATE_POST') {
@@ -116,6 +122,7 @@ const MDE = ({ MDEValue, where, isSubmitting, setUploadingImg }) => {
                'code-block': codeBlock,
                img_url: img,
             }}
+            loadingPreview='loading...'
             toolbarCommands={customToolbarCommands()}
             value={value}
             onChange={setValue}

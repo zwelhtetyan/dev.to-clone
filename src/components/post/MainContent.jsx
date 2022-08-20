@@ -107,6 +107,7 @@ const MainContent = ({ postDetail, postId }) => {
                <Box
                   className='mde-preview-content'
                   fontSize={['16px', '17px', '19px']}
+                  fontFamily='monospace'
                >
                   {htmlToJsx(converter().makeHtml(postDetail.MDEValue))}
                </Box>
@@ -125,6 +126,8 @@ const MainContent = ({ postDetail, postId }) => {
                            profileData,
                            cmt.userId
                         )}
+                        createdUserId={postDetail.userId}
+                        userId={cmt.userId}
                      />
                   ))}
                </Box>

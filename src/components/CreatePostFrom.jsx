@@ -1,20 +1,14 @@
-import {
-   Box,
-   HStack,
-   Image,
-   Input,
-   Spinner,
-   Text,
-   VStack,
-} from '@chakra-ui/react';
+import { Box, HStack, Image, Input, Spinner, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import AddCvImg from './AddCvImg';
 import AddLangTag from './LangTag/AddLangTag';
 import MDE from './MDE';
 import logo from '../assets/logo/logo.png';
-import ModalAlert from './Modla';
+import ModalAlert from './Modal';
 import { useNavigate } from 'react-router-dom';
+import PostPreview from './PostPreview';
+import NoTitleMessage from '../utils/NoTitleMessage';
 
 const CreatePostFrom = ({
    handleSubmit,
@@ -32,6 +26,13 @@ const CreatePostFrom = ({
 
    const [touch, setTouch] = useState(false);
 
+   const [mdeTab, setMdeTab] = useState('write');
+
+   const mdeTabChangeHandler = (tabName) => {
+      setMdeTab(tabName);
+   };
+
+   //helper sumbit
    const submit = (publishingType) => {
       if (postTitle) {
          handleSubmit(publishingType);
@@ -41,10 +42,15 @@ const CreatePostFrom = ({
    };
 
    return (
-      <Box mt='-3.5rem' mb='1rem'>
+      <Box mt='-3.5rem'>
          <Box maxW='768px' m='auto'>
+            {/* navbar */}
             <Box display='flex' mx={{ base: '.5rem', lg: '0rem' }}>
-               <Box display='flex' alignItems='center' mr='auto'>
+               <Box
+                  display={{ base: 'none', md: 'flex' }}
+                  alignItems='center'
+                  mr='auto'
+               >
                   <Image
                      src={logo}
                      cursor='pointer'
@@ -57,61 +63,68 @@ const CreatePostFrom = ({
                      {pageTitle} Post
                   </Text>
                </Box>
-               <ModalAlert />
+               <Box ms='auto'>
+                  <SecondaryBtn onClick={() => mdeTabChangeHandler('write')}>
+                     Edit
+                  </SecondaryBtn>
+                  <SecondaryBtn
+                     m='0 1rem 0 .5rem'
+                     onClick={() => mdeTabChangeHandler('preview')}
+                  >
+                     Priview
+                  </SecondaryBtn>
+                  <ModalAlert />
+               </Box>
             </Box>
 
-            <VStack
-               as='form'
+            <Box
                align='start'
                bg='white'
                boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                borderRadius='5px'
-               mt='1rem'
-               p={{ base: '1rem 0.5rem', md: '1rem 2rem' }}
+               mt={{ base: '.5rem', md: '1rem' }}
+               p={{ base: '0.5rem', md: '1rem' }}
             >
-               <AddCvImg
-                  cvImgFromLocalStorage={postData?.cvImg}
-                  setUploadingImg={setUploadingImg}
-               />
+               {mdeTab === 'write' && (
+                  <Box w='100%'>
+                     <AddCvImg
+                        cvImgFromLocalStorage={postData?.cvImg}
+                        setUploadingImg={setUploadingImg}
+                     />
 
-               <Input
-                  variant='unstyled'
-                  placeholder='New post title here...'
-                  fontSize={{ base: '2rem', md: '2.5rem' }}
-                  fontWeight='700'
-                  value={postTitle}
-                  height='60px'
-                  m='0'
-                  required
-                  onChange={({ target }) => setPostTitle(target.value)}
-                  _placeholder={{ color: '#525252' }}
-               />
-               {touch && !postTitle && (
-                  <Text
-                     px='.5rem'
-                     borderRadius='3px'
-                     fontSize='15px'
-                     letterSpacing='.5px'
-                     background='#FBE9E9'
-                     color='red'
-                  >
-                     Title can't be blank!
-                  </Text>
+                     <Input
+                        variant='unstyled'
+                        placeholder='New post title here...'
+                        fontSize={{ base: '2rem', md: '2.5rem' }}
+                        fontWeight='700'
+                        value={postTitle}
+                        height='60px'
+                        m='0'
+                        required
+                        onChange={({ target }) => setPostTitle(target.value)}
+                        _placeholder={{ color: '#525252' }}
+                     />
+                     {touch && !postTitle && <NoTitleMessage />}
+
+                     <AddLangTag
+                        filteredTagsFromLocalStorage={postData?.tags}
+                     />
+
+                     <Box w='100%' my='.5rem !important'>
+                        <MDE
+                           MDEValue={postData?.MDEValue}
+                           where='CREATE_POST'
+                           isSubmitting={publishing}
+                           setUploadingImg={setUploadingImg}
+                        />
+                     </Box>
+                  </Box>
                )}
 
-               <AddLangTag filteredTagsFromLocalStorage={postData?.tags} />
-
-               <Box mt='1.5rem !important' w='100%' mb='.5rem !important'>
-                  <MDE
-                     MDEValue={postData?.MDEValue}
-                     where='CREATE_POST'
-                     isSubmitting={publishing}
-                     setUploadingImg={setUploadingImg}
-                  />
-               </Box>
+               {mdeTab === 'preview' && <PostPreview />}
 
                {/* buttons container */}
-               <HStack justify='flex-end' w='100%'>
+               <HStack justify='flex-end' w='100%' mt='.5rem'>
                   {!toEdit && (
                      <SecondaryBtn
                         disabled={uploadingImg || publishing || savingDraft}
@@ -137,7 +150,7 @@ const CreatePostFrom = ({
                      )}
                   </PrimaryBtn>
                </HStack>
-            </VStack>
+            </Box>
          </Box>
       </Box>
    );

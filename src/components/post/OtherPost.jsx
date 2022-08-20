@@ -17,7 +17,6 @@ const OtherPost = ({ title, tags, postId }) => {
          _hover={{
             boxShadow: '0 0 0 1px rgb(23 23 23 / 10%)',
             bg: '#F5F5F5',
-            p: { color: 'rgb(47 58 178)' },
          }}
       >
          <Text

@@ -74,7 +74,7 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
          )}
 
          {!uploading && (
-            <Flex mt='3'>
+            <Flex mt='1'>
                <Tooltip
                   label='Use a ratio of 100:42 for best result.'
                   aria-label='A tooltip'

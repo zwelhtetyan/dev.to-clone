@@ -80,8 +80,8 @@ const Dashboard = () => {
    }
 
    const totalPost = publishedPosts?.length + draftPosts?.length || 0;
-   const totalPublishedPost = publishedPosts?.length || '';
-   const totalDraftPost = draftPosts?.length || '';
+   const totalPublishedPost = publishedPosts?.length;
+   const totalDraftPost = draftPosts?.length;
 
    const hasPublishPost = publishedPosts && publishedPosts.length !== 0;
    const hasDraftPost = draftPosts && draftPosts.length !== 0;
@@ -104,14 +104,14 @@ const Dashboard = () => {
                      fontSize={['1.1rem', '1.2rem']}
                      onClick={() => handleChangeTabs('post')}
                   >
-                     Post {totalPublishedPost}
+                     Post {totalPublishedPost ? `(${totalPublishedPost})` : ''}
                   </Tab>
 
                   <Tab
                      fontSize={['1.1rem', '1.2rem']}
                      onClick={() => handleChangeTabs('draft')}
                   >
-                     Draft {totalDraftPost}
+                     Draft {totalDraftPost ? `(${totalDraftPost})` : ''}
                   </Tab>
                </TabList>
 

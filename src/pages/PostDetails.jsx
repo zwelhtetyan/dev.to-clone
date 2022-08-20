@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import DetailElements from '../components/post/DetailElements';
-import '../styles/postdetail.scss';
 
 const PostDetails = () => {
    const { id } = useParams();
