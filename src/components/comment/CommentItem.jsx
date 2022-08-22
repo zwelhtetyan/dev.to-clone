@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import authorIcon from '../../assets/logo/authorIcon.svg';
 import { useState } from 'react';
 import DiscussionBox from '../discussion/DiscussionBox';
+import { updateComment } from '../../lib/api';
 
 const CommentItem = ({
    text,
@@ -22,17 +23,17 @@ const CommentItem = ({
    userId,
    postId,
    commentId,
-   handleClickLike,
+   comments,
    likes,
    currentUserId,
-   updatingLike,
    ps,
    footerPs,
    avatarSize,
 }) => {
    const navigate = useNavigate();
 
-   console.log('comment item render');
+   const [showDiscussionBox, setShowDiscussionbox] = useState(false);
+   const [updatingLike, setUpdatingLike] = useState(false);
 
    const handleViewProfile = (userId) => {
       navigate(`/profile/${userId}`);
@@ -42,9 +43,60 @@ const CommentItem = ({
 
    const isAuthor = createdUserId === userId;
 
-   const [showDiscussionBox, setShowDiscussionbox] = useState(false);
-
    const handleshowDiscussionBox = () => setShowDiscussionbox((prev) => !prev);
+
+   ///////////////////////////////////
+
+   const handleClickLike = (comments, commentId) => {
+      setUpdatingLike(true);
+
+      const modifiedComments = comments.map((comment) => {
+         if (comment.commentId === commentId) {
+            return {
+               ...comment,
+               likes: comment.likes.includes(currentUserId)
+                  ? comment.likes.filter((id) => id !== currentUserId)
+                  : [...comment.likes, currentUserId],
+            };
+         }
+
+         const innerComments = Object.values(comment.replies);
+
+         if (innerComments.find((cmt) => cmt.commentId === commentId)) {
+            const modifiedInnerComments = innerComments.map((cmt) =>
+               cmt.commentId === commentId
+                  ? {
+                       ...cmt,
+                       likes: cmt.likes.includes(currentUserId)
+                          ? cmt.likes.filter((id) => id !== currentUserId)
+                          : [...cmt.likes, currentUserId],
+                    }
+                  : cmt
+            );
+
+            return {
+               ...comment,
+               replies: { ...modifiedInnerComments },
+            };
+         }
+
+         return comment;
+      });
+
+      console.log(modifiedComments);
+
+      updateComment(modifiedComments, postId)
+         .then((_) => {
+            setUpdatingLike(false);
+            console.log('updated');
+         })
+         .catch((err) => {
+            setUpdatingLike(false);
+            console.log(err);
+         });
+   };
+
+   ///////////////////////////////////
 
    return (
       <VStack mb='1rem' ps={ps}>
@@ -123,11 +175,8 @@ const CommentItem = ({
                               : 'like'
                            : ''
                      }
-                     onClick={() => handleClickLike(commentId)}
-                     disabled={
-                        updatingLike.status &&
-                        updatingLike.commentId === commentId
-                     }
+                     disabled={updatingLike}
+                     onClick={() => handleClickLike(comments, commentId)}
                   />
                   <ReactionButton
                      icon={comment}
