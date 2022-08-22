@@ -50,7 +50,6 @@ const PostDetails = () => {
          postDetail={postDetail}
          loading={loading}
          err={err}
-         postId={id}
          currentUserProfile={currentUserProfile}
          otherPosts={otherPosts}
       />

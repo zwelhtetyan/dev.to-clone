@@ -73,3 +73,9 @@ export const updateProfileData = async (profileData, userId) => {
 
    await updateDoc(docRef, profileData);
 };
+
+export const updateComment = async (comments, postId) => {
+   const docRef = doc(db, 'posts', postId);
+
+   await updateDoc(docRef, { comments });
+};

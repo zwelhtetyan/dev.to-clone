@@ -1,29 +1,28 @@
+import React, { useState } from 'react';
 import { Box, HStack, Spinner } from '@chakra-ui/react';
-import { doc, Timestamp, updateDoc } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { db } from '../../config/firebase';
 import converter from '../../helper/converter';
-import { setCommentVal } from '../../store/comment/comment';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
 import '../../styles/markdown.scss';
+import { htmlToJsx } from '../../helper/htmlToJsx';
+import { updateComment } from '../../lib/api';
+import { useSelector } from 'react-redux';
+import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/auth';
+import { nanoid } from 'nanoid';
 
-const DiscussionBox = ({ id, comments, showDismiss, onDismiss }) => {
-   const [submitting, setSubmitting] = useState(false);
-   const [hasValue, setHasValue] = useState(false);
-   const [uploadingImg, setUploadingImg] = useState(false);
-   const [mdeTab, setMdeTab] = useState('write');
-
-   const commentVal = useSelector((state) => state.comment.commentVal);
-   const dispatch = useDispatch();
-
+const DiscussionBox = ({ postId, commentId, showDismiss, onDismiss }) => {
    const user = useAuth();
 
-   useEffect(() => {
-      setHasValue(commentVal?.trim().length !== 0);
-   }, [commentVal]);
+   const [submitting, setSubmitting] = useState(false);
+   const [uploadingImg, setUploadingImg] = useState(false);
+   const [mdeTab, setMdeTab] = useState('write');
+   const [MDEValue, setMDEValue] = useState('');
+
+   const { transformedData } = useSelector((state) => state.transformedData);
+   const comments = transformedData.find((data) => data.id === postId).comments;
+
+   const hasValue = MDEValue.trim();
 
    const mdeTabChangeHandler = () => {
       setMdeTab((prev) => (prev === 'write' ? 'preview' : 'write'));
@@ -33,50 +32,77 @@ const DiscussionBox = ({ id, comments, showDismiss, onDismiss }) => {
       e.preventDefault();
       setSubmitting(true);
 
-      const docRef = doc(db, 'posts', id);
-
-      const updateComments = async () => {
-         const createdAt = Timestamp.now();
-         await updateDoc(docRef, {
-            comments: [
-               ...comments,
-               {
-                  value: converter().makeHtml(commentVal),
-                  createdAt,
-                  userId: user.userId,
-               },
-            ],
-         });
-
-         setSubmitting(false);
-         dispatch(setCommentVal(''));
+      const createdAt = Timestamp.now();
+      const newComment = {
+         value: converter().makeHtml(MDEValue),
+         replies: {},
+         createdAt,
+         userId: user.userId,
+         commentId: nanoid(),
+         likes: [user.userId],
       };
 
-      updateComments().catch((err) => {
-         setSubmitting(false);
-         console.log(err);
-      });
+      let modifiedComments = [];
+      if (commentId) {
+         modifiedComments = comments.map((comment) =>
+            comment.commentId === commentId ||
+            Object.values(comment.replies).find(
+               (cmt) => cmt.commentId === commentId
+            )
+               ? {
+                    ...comment,
+                    replies: { ...comment.replies, [nanoid()]: newComment },
+                 }
+               : comment
+         );
+      } else {
+         modifiedComments = [...comments, newComment];
+      }
+
+      updateComment(modifiedComments, postId)
+         .then((_) => {
+            setSubmitting(false);
+            setMDEValue('');
+            onDismiss && onDismiss();
+            console.log('added comment successfully');
+         })
+         .catch((err) => {
+            setSubmitting(false);
+            console.log(err);
+         });
    };
 
    return (
       <Box>
-         <Box
-            as='form'
-            onSubmit={handleSubmit}
-            border='1px solid rgb(59 73 223)'
-            borderRadius='5px'
-            overflow='hidden'
-            className='discussion-box'
-         >
-            <MDE
-               MDEValue={commentVal}
-               where='DISCUSSION'
-               setHasValue={setHasValue}
-               isSubmitting={submitting}
-               setUploadingImg={setUploadingImg}
-               placeholder='Add to the discussion'
-            />
-         </Box>
+         {mdeTab === 'write' && (
+            <Box
+               borderRadius='5px'
+               boxShadow='0 0 0 1px rgb(59 73 233)'
+               overflow='hidden'
+               className='discussion-box mde-preview'
+            >
+               <MDE
+                  MDEValue={MDEValue}
+                  setMDEValue={setMDEValue}
+                  isSubmitting={submitting}
+                  setUploadingImg={setUploadingImg}
+                  placeholder='Add to the discussion'
+               />
+            </Box>
+         )}
+
+         {mdeTab === 'preview' && (
+            <Box
+               minH='192px'
+               borderRadius='5px'
+               p='10px !important'
+               className='mde-preview-content'
+               boxShadow='0 0 0 1px #d6d6d7'
+               fontSize={['1rem', '1.1rem']}
+            >
+               {htmlToJsx(converter().makeHtml(MDEValue))}
+            </Box>
+         )}
 
          {/* buttons */}
          <HStack justify='flex-end' w='100%' mt='.3rem' id='hi'>
@@ -85,13 +111,18 @@ const DiscussionBox = ({ id, comments, showDismiss, onDismiss }) => {
             )}
 
             <SecondaryBtn
-               disabled={!hasValue || uploadingImg || submitting}
+               disabled={
+                  (!hasValue && mdeTab === 'write') ||
+                  uploadingImg ||
+                  submitting
+               }
                onClick={mdeTabChangeHandler}
             >
                {mdeTab === 'write' ? 'Preview' : 'Edit'}
             </SecondaryBtn>
 
             <PrimaryBtn
+               onClick={handleSubmit}
                bg='rgb(59 73 223)'
                disabled={!hasValue || uploadingImg || submitting}
             >

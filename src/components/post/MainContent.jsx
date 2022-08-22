@@ -17,19 +17,15 @@ import LangTag from '../../utils/LangTag';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import converter from '../../helper/converter';
 import Discussion from '../discussion/Discussion';
-import CommentItem from '../comment/CommentItem';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import DisplayDate from './DisplayDate';
-import { useSelector } from 'react-redux';
-import { getUserProfileData } from '../../helper/getUserProfileData';
+import AllComment from '../comment/AllComment';
 
-const MainContent = ({ postDetail, postId }) => {
+const MainContent = ({ postDetail }) => {
    const navigate = useNavigate();
 
    const user = useAuth();
-
-   const profileData = useSelector((state) => state.profileData.profileData);
 
    const isAuthor = user?.userId === postDetail?.userId;
 
@@ -91,7 +87,9 @@ const MainContent = ({ postDetail, postId }) => {
                      </Box>
                   </HStack>
 
-                  {isAuthor && postDetail && <ManangePost postId={postId} />}
+                  {isAuthor && postDetail && (
+                     <ManangePost postId={postDetail.id} />
+                  )}
                </Flex>
 
                <Heading mt={2}>{postDetail.title}</Heading>
@@ -114,23 +112,12 @@ const MainContent = ({ postDetail, postId }) => {
 
                <Divider mt={7} h='1px' background='#efefef' mx='auto' />
 
-               <Discussion id={postId} comments={postDetail.comments} />
+               <Discussion
+                  postId={postDetail.id}
+                  comments={postDetail.comments}
+               />
 
-               <Box mt='2rem'>
-                  {postDetail.comments.map((cmt) => (
-                     <CommentItem
-                        key={nanoid()}
-                        text={cmt.value}
-                        createdAt={cmt.createdAt}
-                        currentUserProfile={getUserProfileData(
-                           profileData,
-                           cmt.userId
-                        )}
-                        createdUserId={postDetail.userId}
-                        userId={cmt.userId}
-                     />
-                  ))}
-               </Box>
+               <AllComment postDetail={postDetail} />
             </Box>
          </Box>
       </Box>

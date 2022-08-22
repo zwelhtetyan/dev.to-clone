@@ -13,11 +13,10 @@ const DetailElements = ({
    currentUserProfile,
    loading,
    err,
-   postId,
    otherPosts,
 }) => {
    //scroll top
-   useEffect(() => window.scrollTo(0, 0), [postId]);
+   useEffect(() => window.scrollTo(0, 0), [postDetail?.id]);
 
    return (
       <Box
@@ -42,7 +41,7 @@ const DetailElements = ({
 
                <Box flex='2' overflow='hidden' pb='1px'>
                   {/* main content */}
-                  <MainContent postDetail={postDetail} postId={postId} />
+                  <MainContent postDetail={postDetail} />
 
                   {/* right content */}
                   <DetailRightContent

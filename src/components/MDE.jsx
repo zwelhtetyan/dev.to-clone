@@ -11,7 +11,6 @@ import {
    saveToLocalStorage,
 } from '../helper/localStorage';
 import '../styles/markdown.scss';
-import { setCommentVal } from '../store/comment/comment';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
 import { setMDEValueToStore } from '../store/post/postData';
@@ -33,7 +32,7 @@ const codeBlock = {
 
 const MDE = ({
    MDEValue,
-   where,
+   setMDEValue,
    isSubmitting,
    setUploadingImg,
    placeholder,
@@ -52,19 +51,18 @@ const MDE = ({
    }, [placeholder]);
 
    React.useEffect(() => {
-      if (where === 'CREATE_POST') {
-         dispatch(setMDEValueToStore(value));
-      } else if (where === 'DISCUSSION') {
-         dispatch(setCommentVal(value));
-      }
-   }, [value, dispatch, where]);
+      dispatch(setMDEValueToStore(value)); //for postData to publish or edit
+      setMDEValue && setMDEValue(value); //for comment
+   }, [value, dispatch, setMDEValue]);
 
    React.useEffect(() => {
       saveToLocalStorage('uploadedMDEImg', JSON.stringify(uploadedMDEImg));
    }, [uploadedMDEImg]);
 
    React.useEffect(() => {
-      setValue(MDEValue);
+      if (!MDEValue) {
+         setValue(MDEValue);
+      } // run only if MDEValue is empty string
    }, [MDEValue]);
 
    if (isSubmitting && uploadedMDEImg.length !== 0) {

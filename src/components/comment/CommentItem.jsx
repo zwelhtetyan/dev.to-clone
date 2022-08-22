@@ -20,12 +20,25 @@ const CommentItem = ({
    currentUserProfile,
    createdUserId,
    userId,
+   postId,
+   commentId,
+   handleClickLike,
+   likes,
+   currentUserId,
+   updatingLike,
+   ps,
+   footerPs,
+   avatarSize,
 }) => {
    const navigate = useNavigate();
+
+   console.log('comment item render');
 
    const handleViewProfile = (userId) => {
       navigate(`/profile/${userId}`);
    };
+
+   const alreadyLiked = likes.includes(currentUserId);
 
    const isAuthor = createdUserId === userId;
 
@@ -34,10 +47,10 @@ const CommentItem = ({
    const handleshowDiscussionBox = () => setShowDiscussionbox((prev) => !prev);
 
    return (
-      <VStack mb='1rem'>
+      <VStack mb='1rem' ps={ps}>
          <Flex align='flex-start' w='100%'>
             <CustomAvatar
-               size='25px'
+               size={avatarSize}
                profile={currentUserProfile.profile}
                onClick={() => handleViewProfile(currentUserProfile.id)}
             />
@@ -97,22 +110,39 @@ const CommentItem = ({
             </Box>
          </Flex>
 
-         <Box w='100%' ps='33px'>
+         <Box w='100%' ps={footerPs}>
             {!showDiscussionBox && (
                <HStack justify='flex-start'>
-                  <ReactionButton icon={heart} value={11} text='like' />
+                  <ReactionButton
+                     icon={alreadyLiked ? red_heart : heart}
+                     value={likes.length || ''}
+                     text={
+                        likes.length !== 0
+                           ? likes.length > 1
+                              ? 'likes'
+                              : 'like'
+                           : ''
+                     }
+                     onClick={() => handleClickLike(commentId)}
+                     disabled={
+                        updatingLike.status &&
+                        updatingLike.commentId === commentId
+                     }
+                  />
                   <ReactionButton
                      icon={comment}
-                     value={1}
                      text='reply'
                      onClick={handleshowDiscussionBox}
                   />
                </HStack>
             )}
+
             {showDiscussionBox && (
                <DiscussionBox
+                  postId={postId}
                   showDismiss={true}
                   onDismiss={handleshowDiscussionBox}
+                  commentId={commentId}
                />
             )}
          </Box>
