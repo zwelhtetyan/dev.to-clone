@@ -43,7 +43,8 @@ const CommentItem = ({
       navigate(`/profile/${userId}`);
    };
 
-   const alreadyLiked = likes.includes(currentUserId);
+   const alreadyLiked =
+      likes.includes(currentUserId) || currentUserId === userId;
 
    const isAuthor = createdUserId === userId;
 
@@ -171,7 +172,7 @@ const CommentItem = ({
                <HStack justify='flex-start'>
                   <ReactionButton
                      icon={alreadyLiked ? red_heart : heart}
-                     value={likes.length || ''}
+                     value={likes.length}
                      text={
                         likes.length
                            ? likes.length > 1

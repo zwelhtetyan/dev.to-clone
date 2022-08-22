@@ -39,7 +39,7 @@ const DiscussionBox = ({ postId, commentId, showDismiss, onDismiss }) => {
          createdAt,
          userId: user.userId,
          commentId: nanoid(),
-         likes: [user.userId],
+         likes: [],
       };
 
       let modifiedComments = [];
