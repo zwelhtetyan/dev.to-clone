@@ -1,15 +1,22 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import { useSelector } from 'react-redux';
-import { useAuth } from '../../context/auth';
+import { useDispatch, useSelector } from 'react-redux';
 import { getUserProfileData } from '../../helper/getUserProfileData';
 import CommentItem from './CommentItem';
+import { useEffect } from 'react';
+import { setCurrentComments } from '../../store/comment/currentComments';
 
 const AllComment = ({ postDetail }) => {
-   const user = useAuth();
-   const { userId } = user;
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      dispatch(setCurrentComments(postDetail.comments));
+   }, [postDetail.comments, dispatch]);
 
    const profileData = useSelector((state) => state.profileData.profileData);
+   const currentComments = useSelector(
+      (state) => state.currentComments.currentComments
+   );
 
    const repliedComment = (replies) =>
       Object.values(replies).sort((a, b) => a.createdAt - b.createdAt); // ordered by created at;
@@ -20,8 +27,8 @@ const AllComment = ({ postDetail }) => {
             <Box key={comment.commentId}>
                <CommentItem
                   avatarSize='28px'
-                  comments={postDetail.comments}
-                  currentUserId={userId}
+                  comments={currentComments}
+                  currentUserId={postDetail.userId}
                   likes={comment.likes}
                   footerPs='36px'
                   text={comment.value}
@@ -39,8 +46,8 @@ const AllComment = ({ postDetail }) => {
                   repliedComment(comment.replies).map((item) => (
                      <CommentItem
                         key={item.commentId}
-                        comments={postDetail.comments}
-                        currentUserId={userId}
+                        comments={currentComments}
+                        currentUserId={postDetail.userId}
                         likes={item.likes}
                         avatarSize='25px'
                         ps='20px'

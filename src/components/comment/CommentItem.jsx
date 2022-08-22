@@ -14,6 +14,8 @@ import authorIcon from '../../assets/logo/authorIcon.svg';
 import { useState } from 'react';
 import DiscussionBox from '../discussion/DiscussionBox';
 import { updateComment } from '../../lib/api';
+import { useDispatch } from 'react-redux';
+import { setCurrentComments } from '../../store/comment/currentComments';
 
 const CommentItem = ({
    text,
@@ -34,6 +36,8 @@ const CommentItem = ({
 
    const [showDiscussionBox, setShowDiscussionbox] = useState(false);
    const [updatingLike, setUpdatingLike] = useState(false);
+
+   const dispatch = useDispatch();
 
    const handleViewProfile = (userId) => {
       navigate(`/profile/${userId}`);
@@ -83,12 +87,12 @@ const CommentItem = ({
          return comment;
       });
 
-      console.log(modifiedComments);
+      dispatch(setCurrentComments(modifiedComments));
 
       updateComment(modifiedComments, postId)
          .then((_) => {
             setUpdatingLike(false);
-            console.log('updated');
+            console.log('updated like');
          })
          .catch((err) => {
             setUpdatingLike(false);
@@ -169,7 +173,7 @@ const CommentItem = ({
                      icon={alreadyLiked ? red_heart : heart}
                      value={likes.length || ''}
                      text={
-                        likes.length !== 0
+                        likes.length
                            ? likes.length > 1
                               ? 'likes'
                               : 'like'

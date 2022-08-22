@@ -85,11 +85,7 @@ export const ReactionButton = ({ icon, value, text, onClick, disabled }) => {
          <Text fontWeight={400} fontSize='14px'>
             {value}{' '}
             <Text as='span' display={{ base: 'none', sm: 'inline-block' }}>
-               {value > 1
-                  ? text.substr(text.length - 1, text.length) === 'y'
-                     ? text.replace('y', 'ies')
-                     : text + 's'
-                  : text}
+               {text}
             </Text>
          </Text>
       </Button>
