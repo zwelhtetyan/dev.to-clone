@@ -33,7 +33,8 @@
       height: calc(100vh - 405px) !important;
 
       @media screen and (max-width: 480px) {
-         height: calc(100vh - 335px) !important;
+         // height: calc(100vh - 335px) !important;
+         height: 350px !important;
       }
 
       &:focus {

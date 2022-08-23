@@ -46,6 +46,13 @@ const MDE = ({
    const dispatch = useDispatch();
 
    React.useEffect(() => {
+      const mdeHeader = document.querySelector('.mde-header');
+      mdeHeader.style.position = 'sticky';
+      mdeHeader.style.top = '0';
+      mdeHeader.style.zIndex = '1';
+   }, []); // sticky header on mobile
+
+   React.useEffect(() => {
       const textBox = document.querySelector('.mde-text');
       textBox.placeholder = placeholder || 'Write your post content here...';
    }, [placeholder]);

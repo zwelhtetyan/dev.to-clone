@@ -71,7 +71,7 @@ const CreatePostFrom = ({
                      m='0 1rem 0 .5rem'
                      onClick={() => mdeTabChangeHandler('preview')}
                   >
-                     Priview
+                     Preview
                   </SecondaryBtn>
                   <ModalAlert />
                </Box>

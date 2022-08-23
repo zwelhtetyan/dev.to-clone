@@ -147,7 +147,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
 
    return (
       <>
-         <Box mb={2}>
+         <Box mb={3}>
             <Wrap overflow='visible'>
                {filteredTagsToShow()}
 

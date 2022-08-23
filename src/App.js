@@ -93,11 +93,11 @@ const App = () => {
                <Route path='signout-confirm' element={<SignOutConfirm />} />
                <Route path='customize-profile' element={<CustomizeProfile />} />
                <Route path='dashboard' element={<Dashboard />} />
+               <Route path='edit-comment' element={<EditComment />} />
             </Route>
 
             <Route path='edit-post' element={<EditPost />} />
             <Route path='create-post' element={<CreatePost />} />
-            <Route path='edit-comment' element={<EditComment />} />
             <Route path='preview/:url' element={<PreviewImg />} />
             <Route path='*' element={<Error />} />
          </Routes>

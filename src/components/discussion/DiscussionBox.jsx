@@ -11,16 +11,24 @@ import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/auth';
 import { nanoid } from 'nanoid';
 
-const DiscussionBox = ({ postId, commentId, showDismiss, onDismiss }) => {
+const DiscussionBox = ({
+   postId,
+   commentId,
+   showDismiss,
+   onDismiss,
+   valueToEdit,
+}) => {
    const user = useAuth();
 
    const [submitting, setSubmitting] = useState(false);
    const [uploadingImg, setUploadingImg] = useState(false);
    const [mdeTab, setMdeTab] = useState('write');
-   const [MDEValue, setMDEValue] = useState('');
+   const [MDEValue, setMDEValue] = useState(valueToEdit || '');
 
    const { transformedData } = useSelector((state) => state.transformedData);
-   const comments = transformedData.find((data) => data.id === postId).comments;
+   const comments = transformedData.find(
+      (data) => data.id === postId
+   )?.comments;
 
    const hasValue = MDEValue.trim();
 
@@ -43,7 +51,37 @@ const DiscussionBox = ({ postId, commentId, showDismiss, onDismiss }) => {
       };
 
       let modifiedComments = [];
-      if (commentId) {
+
+      if (valueToEdit) {
+         modifiedComments = comments.map((comment) => {
+            if (comment.commentId === commentId) {
+               return {
+                  ...comment,
+                  value: converter().makeHtml(MDEValue),
+               };
+            }
+
+            const innerComments = Object.values(comment.replies);
+
+            if (innerComments.find((cmt) => cmt.commentId === commentId)) {
+               const modifiedInnerComments = innerComments.map((cmt) =>
+                  cmt.commentId === commentId
+                     ? {
+                          ...cmt,
+                          value: converter().makeHtml(MDEValue),
+                       }
+                     : cmt
+               );
+
+               return {
+                  ...comment,
+                  replies: { ...modifiedInnerComments },
+               };
+            }
+
+            return comment;
+         });
+      } else if (commentId) {
          modifiedComments = comments.map((comment) =>
             comment.commentId === commentId ||
             Object.values(comment.replies).find(
@@ -73,7 +111,7 @@ const DiscussionBox = ({ postId, commentId, showDismiss, onDismiss }) => {
    };
 
    return (
-      <Box>
+      <Box className='mde-preview'>
          {mdeTab === 'write' && (
             <Box
                borderRadius='5px'

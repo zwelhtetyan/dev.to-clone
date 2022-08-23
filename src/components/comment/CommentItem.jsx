@@ -103,7 +103,7 @@ const CommentItem = ({
                   </HStack>
 
                   {/* option menu */}
-                  <ManageComment />
+                  <ManageComment commentId={commentId} postId={postId} />
                </Flex>
 
                <Box
