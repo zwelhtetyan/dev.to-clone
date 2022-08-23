@@ -61,7 +61,7 @@ const useCreatePost = (currentPostDataToEdit) => {
    useEffect(() => {
       if (postData) {
          saveToLocalStorage(
-            currentPostDataToEdit ? 'postDataToEdit' : 'postDataToPublish',
+            currentPostDataToEdit ? 'postDataToManage' : 'postDataToPublish',
             JSON.stringify(postData)
          );
       }
@@ -135,7 +135,7 @@ const useCreatePost = (currentPostDataToEdit) => {
          .then((_) => {
             navigate(queryLink);
             helper(publishingType, false);
-            removeFromLocalStorage('postDataToEdit');
+            removeFromLocalStorage('postDataToManage');
 
             console.log('updated post successfully');
          })

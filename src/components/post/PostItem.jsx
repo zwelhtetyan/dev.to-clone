@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { nanoid } from 'nanoid';
-import ManangePost from '../ManangePost';
+import ManangePost from './ManangePost';
 import { TooltipWrapper } from '../UserProfilePopup';
 import DisplayDate from './DisplayDate';
 

@@ -14,9 +14,9 @@ const store = configureStore({
    reducer: {
       transformedData: transformedDataReducer, // hold all post data on globalStore
       postData: postDataSliceReducer, // data before publish
-      currentPost: currentPostReducer, //data to edit || delete => (get id from it)
+      currentPost: currentPostReducer, //data to edit || delete
       profileData: profileDataReducer,
-      currentComments: currentCommentReducer, // helper comment state, otherwise commentArray form server take a while to response , it cause a bug when click quickly to like button
+      currentComments: currentCommentReducer, // helper comment state, otherwise commentArray form server take a while to response , it cause a bug when click to like button quickly.
    },
 });
 

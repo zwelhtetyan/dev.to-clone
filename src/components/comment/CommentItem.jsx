@@ -4,7 +4,6 @@ import { ReactionButton } from '../../utils/Buttons';
 import heart from '../../assets/logo/heart.svg';
 import red_heart from '../../assets/logo/red_heart.svg';
 import comment from '../../assets/logo/comment.svg';
-import OptionBtn from '../../utils/OptionBtn';
 import { dateFormat } from '../../helper/calcTimestamp';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import converter from '../../helper/converter';
@@ -14,6 +13,7 @@ import authorIcon from '../../assets/logo/authorIcon.svg';
 import { useState } from 'react';
 import DiscussionBox from '../discussion/DiscussionBox';
 import useClickLike from '../../hooks/useClickLike';
+import ManageComment from './ManageComment';
 
 const CommentItem = ({
    text,
@@ -79,7 +79,7 @@ const CommentItem = ({
                ms='.5rem'
                overflow='hidden'
             >
-               <HStack justify='space-between' mb={1}>
+               <Flex justify='space-between' mb={1}>
                   <HStack align='center' spacing='2px'>
                      <Text
                         fontSize='15px'
@@ -103,8 +103,8 @@ const CommentItem = ({
                   </HStack>
 
                   {/* option menu */}
-                  <OptionBtn size={19} />
-               </HStack>
+                  <ManageComment />
+               </Flex>
 
                <Box
                   fontSize={{ base: '14px', sm: '16px' }}

@@ -2,8 +2,9 @@ import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { setCurrentPostData } from '../store/post/currentPost';
-import CustomMenuItem from '../utils/CustomMenuItem';
+import { saveToLocalStorage } from '../../helper/localStorage';
+import { setCurrentPostData } from '../../store/post/currentPost';
+import CustomMenuItem from '../../utils/CustomMenuItem';
 
 const ManangePost = ({ postId, m }) => {
    const navigate = useNavigate();
@@ -17,16 +18,18 @@ const ManangePost = ({ postId, m }) => {
          (postData) => postData.id === postId
       );
 
-      dispatch(
-         setCurrentPostData({
-            cvImg: postDetail.cvImg,
-            title: postDetail.title,
-            tags: postDetail.tags,
-            MDEValue: postDetail.MDEValue,
-            id: postId,
-            draft: postDetail.draft,
-         })
-      );
+      const postData = {
+         cvImg: postDetail.cvImg,
+         title: postDetail.title,
+         tags: postDetail.tags,
+         MDEValue: postDetail.MDEValue,
+         id: postId,
+         draft: postDetail.draft,
+      };
+
+      dispatch(setCurrentPostData(postData));
+
+      saveToLocalStorage('postDataToManage', JSON.stringify(postData));
    };
 
    const goToEdit = (e) => {
@@ -44,7 +47,7 @@ const ManangePost = ({ postId, m }) => {
    };
 
    return (
-      <Menu autoSelect={false}>
+      <Menu autoSelect={false} isLazy>
          <MenuButton
             m={m}
             p='0 5px'

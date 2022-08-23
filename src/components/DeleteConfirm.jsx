@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
+import { removeFromLocalStorage } from '../helper/localStorage';
 import { deletePost } from '../lib/api';
 
 const DeleteConfirm = () => {
@@ -26,6 +27,7 @@ const DeleteConfirm = () => {
    const onDelete = () => {
       deletePost(currentPostData.id).then(() => {
          navigate(`/dashboard/?category=${queryLink}`);
+         removeFromLocalStorage('postDataToManage');
       });
    };
 
@@ -48,7 +50,7 @@ const DeleteConfirm = () => {
                fontSize={{ base: '1.2rem', md: '1.5rem' }}
                fontWeight='700'
             >
-               {currentPostData?.title}
+               {currentPostData.title}
             </Text>
             <Box
                boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'

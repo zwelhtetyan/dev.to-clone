@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getItemFromLocalStorage } from '../../helper/localStorage';
 
 const initialState = {
-   currentPostData: getItemFromLocalStorage('currentPostData') || null,
+   currentPostData: getItemFromLocalStorage('postDataToManage') || null,
 };
 
 const currentPostSlice = createSlice({

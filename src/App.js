@@ -27,6 +27,7 @@ import {
    setProfileDataErr,
    setProfileDataLoading,
 } from './store/user/profileData';
+import EditComment from './pages/EditComment';
 
 const App = () => {
    const dispatch = useDispatch();
@@ -96,6 +97,7 @@ const App = () => {
 
             <Route path='edit-post' element={<EditPost />} />
             <Route path='create-post' element={<CreatePost />} />
+            <Route path='edit-comment' element={<EditComment />} />
             <Route path='preview/:url' element={<PreviewImg />} />
             <Route path='*' element={<Error />} />
          </Routes>

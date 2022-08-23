@@ -11,7 +11,7 @@ import {
    WrapItem,
 } from '@chakra-ui/react';
 import CustomAvatar from '../../utils/CustomAvatar';
-import ManangePost from '../ManangePost';
+import ManangePost from './ManangePost';
 import { nanoid } from 'nanoid';
 import LangTag from '../../utils/LangTag';
 import { htmlToJsx } from '../../helper/htmlToJsx';
