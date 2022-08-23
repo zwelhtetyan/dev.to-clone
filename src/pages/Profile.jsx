@@ -1,4 +1,4 @@
-import { Box, Button, Flex } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -58,7 +58,11 @@ const Profile = () => {
          />
          <Box mx={{ base: 'none', md: '.5rem' }}>
             <Box maxW='1000px' mx='auto'>
-               <TopLayer profileData={currentUserProfile} />
+               <TopLayer
+                  profileData={currentUserProfile}
+                  moreInfo={moreInfo}
+                  setMoreInfo={setMoreInfo}
+               />
 
                {/* bottom layer */}
                <Flex
@@ -77,34 +81,11 @@ const Profile = () => {
                      }}
                   />
 
-                  {/* more info button */}
-
-                  <Button
-                     display={{
-                        base: moreInfo ? 'none' : 'block',
-                        md: 'none',
-                     }}
-                     onClick={() => setMoreInfo(true)}
-                     w='97%'
-                     mx='auto'
-                     mb={3}
-                     bg='white'
-                     _active={{ bg: 'white' }}
-                     boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-                     transition='.3s'
-                     _hover={{
-                        bg: 'rgb(0 0 0 / 4%)',
-                     }}
-                  >
-                     More info about @{currentUserProfile?.name}
-                  </Button>
-
                   {/* right */}
                   <Box
                      flex={{ base: 'unset', md: '2' }}
                      borderRadius='5px'
                      w={{ base: '100%' }}
-                     px={{ base: '.5rem', md: 'unset' }}
                   >
                      {publishedPosts &&
                         publishedPosts.map((postData) => (

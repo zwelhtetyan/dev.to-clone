@@ -20,12 +20,11 @@ const Home = () => {
 
    return (
       <Flex
-         px={{ base: '.5rem', md: '1rem' }}
+         px={{ base: '0', md: '1rem' }}
          maxW='1200px'
          mx='auto'
          pos='relative'
          align='flex-start'
-         id='home'
       >
          {/* home menu */}
          <Box

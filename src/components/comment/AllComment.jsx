@@ -5,9 +5,11 @@ import { getUserProfileData } from '../../helper/getUserProfileData';
 import CommentItem from './CommentItem';
 import { useEffect } from 'react';
 import { setCurrentComments } from '../../store/comment/currentComments';
+import { useAuth } from '../../context/auth';
 
 const AllComment = ({ postDetail }) => {
    const dispatch = useDispatch();
+   const user = useAuth();
 
    useEffect(() => {
       dispatch(setCurrentComments(postDetail.comments));
@@ -28,7 +30,8 @@ const AllComment = ({ postDetail }) => {
                <CommentItem
                   avatarSize='28px'
                   comments={currentComments}
-                  currentUserId={postDetail.userId}
+                  authorId={postDetail.userId}
+                  currentUserId={user?.userId}
                   likes={comment.likes}
                   footerPs='36px'
                   text={comment.value}
@@ -37,7 +40,6 @@ const AllComment = ({ postDetail }) => {
                      profileData,
                      comment.userId
                   )}
-                  createdUserId={postDetail.userId}
                   userId={comment.userId}
                   postId={postDetail.id}
                   commentId={comment.commentId}
@@ -47,7 +49,8 @@ const AllComment = ({ postDetail }) => {
                      <CommentItem
                         key={item.commentId}
                         comments={currentComments}
-                        currentUserId={postDetail.userId}
+                        authorId={postDetail.userId}
+                        currentUserId={user?.userId}
                         likes={item.likes}
                         avatarSize='25px'
                         ps='20px'
@@ -58,7 +61,6 @@ const AllComment = ({ postDetail }) => {
                            profileData,
                            item.userId
                         )}
-                        createdUserId={postDetail.userId}
                         userId={item.userId}
                         postId={postDetail.id}
                         commentId={item.commentId}

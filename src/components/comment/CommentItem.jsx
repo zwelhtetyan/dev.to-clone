@@ -21,12 +21,12 @@ const CommentItem = ({
    text,
    createdAt,
    currentUserProfile,
-   createdUserId,
    userId,
    postId,
    commentId,
    comments,
    likes,
+   authorId,
    currentUserId,
    ps,
    footerPs,
@@ -43,16 +43,31 @@ const CommentItem = ({
       navigate(`/profile/${userId}`);
    };
 
+   const totalLike = likes.includes(userId)
+      ? likes.filter((id) => id !== userId).length - 1
+      : likes.length;
+
    const alreadyLiked =
-      likes.includes(currentUserId) || currentUserId === userId;
+      (likes.includes(currentUserId) && userId !== currentUserId) ||
+      (!likes.includes(currentUserId) && userId === currentUserId);
 
-   const isAuthor = createdUserId === userId;
+   const handleshowDiscussionBox = () => {
+      if (!currentUserId) {
+         navigate('/create-account');
+         return;
+      }
 
-   const handleshowDiscussionBox = () => setShowDiscussionbox((prev) => !prev);
+      setShowDiscussionbox((prev) => !prev);
+   };
 
-   ///////////////////////////////////
+   /////////////////////////////////// separate file later;
 
    const handleClickLike = (comments, commentId) => {
+      if (!currentUserId) {
+         navigate('/create-account');
+         return;
+      }
+
       setUpdatingLike(true);
 
       const modifiedComments = comments.map((comment) => {
@@ -123,35 +138,27 @@ const CommentItem = ({
                overflow='hidden'
             >
                <HStack justify='space-between' mb={1}>
-                  <Flex align='center'>
+                  <HStack align='center' spacing='2px'>
                      <Text
                         fontSize='15px'
                         fontWeight='900'
                         cursor='pointer'
                         onClick={() => handleViewProfile(currentUserProfile.id)}
                      >
-                        {currentUserProfile.name}{' '}
+                        {currentUserProfile.name}
                      </Text>
-                     {isAuthor && (
+                     {authorId === userId && (
                         <Image
                            src={authorIcon}
                            alt='author_icon'
                            title='author'
                         />
                      )}
-                     <Text as='span' color='gray' me='.5rem'>
-                        •
-                     </Text>{' '}
-                     {''}
-                     <Text
-                        as='span'
-                        fontWeight='400'
-                        color='gray'
-                        fontSize='12px'
-                     >
-                        {dateFormat(createdAt)}
+                     {/* <Text color='gray'>•</Text> */}
+                     <Text color='gray' fontSize='12px'>
+                        • {dateFormat(createdAt)}
                      </Text>
-                  </Flex>
+                  </HStack>
 
                   {/* option menu */}
                   <OptionBtn size={19} />
@@ -172,13 +179,9 @@ const CommentItem = ({
                <HStack justify='flex-start'>
                   <ReactionButton
                      icon={alreadyLiked ? red_heart : heart}
-                     value={likes.length}
+                     value={totalLike}
                      text={
-                        likes.length
-                           ? likes.length > 1
-                              ? 'likes'
-                              : 'like'
-                           : ''
+                        totalLike < 1 ? '' : totalLike === 1 ? 'like' : 'likes'
                      }
                      disabled={updatingLike}
                      onClick={() => handleClickLike(comments, commentId)}

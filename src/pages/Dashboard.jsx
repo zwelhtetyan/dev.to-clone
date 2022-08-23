@@ -87,15 +87,17 @@ const Dashboard = () => {
    const hasDraftPost = draftPosts && draftPosts.length !== 0;
 
    return (
-      <Box maxW='650px' mx='auto' p='.5rem' minH='50vh'>
-         <Heading mb={5} fontSize={{ base: '1.5rem', md: '2rem' }}>
-            Dashboard 👻
-         </Heading>
+      <Box maxW='650px' mx='auto' minH='50vh'>
+         <Box mt={2} px='.5rem'>
+            <Heading mb={5} fontSize={{ base: '1.5rem', md: '2rem' }}>
+               Dashboard 👻
+            </Heading>
 
-         <HStack spacing={[2, 3, 5]} mb={6}>
-            <ReactionBox count={totalPost} title='Total Posts' />
-            <ReactionBox count={11} title='Total Reactions' />
-         </HStack>
+            <HStack spacing={[2, 3, 5]} mb={6}>
+               <ReactionBox count={totalPost} title='Total Posts' />
+               <ReactionBox count={11} title='Total Reactions' />
+            </HStack>
+         </Box>
 
          {(hasPublishPost || hasDraftPost) && (
             <Tabs isLazy defaultIndex={defaultIndex}>
@@ -134,7 +136,7 @@ const Dashboard = () => {
                            />
                         ))
                      ) : (
-                        <Text>No published post here 👻</Text>
+                        <Text ps='.5rem'>No published post here 👻</Text>
                      )}
                   </TabPanel>
 
@@ -158,7 +160,7 @@ const Dashboard = () => {
                            />
                         ))
                      ) : (
-                        <Text>No drafted post here 👻</Text>
+                        <Text ps='.5rem'>No drafted post here 👻</Text>
                      )}
                   </TabPanel>
                </TabPanels>

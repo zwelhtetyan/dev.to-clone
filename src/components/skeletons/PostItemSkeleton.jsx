@@ -11,9 +11,10 @@ const PostItemSkeleton = ({ w, h }) => {
    return (
       <Box
          bg='transparent'
-         p={6}
+         px={['.5rem', '1.5rem']}
+         py='.5rem'
          borderRadius='5px'
-         mb={2}
+         mb='1.5rem'
          w={w}
          mx='auto'
          h={h}

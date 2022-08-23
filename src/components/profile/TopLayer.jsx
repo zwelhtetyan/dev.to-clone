@@ -1,6 +1,7 @@
 import React from 'react';
 import {
    Box,
+   Button,
    Flex,
    Heading,
    HStack,
@@ -48,7 +49,7 @@ const Work = ({ title, text }) => {
    );
 };
 
-const TopLayer = ({ profileData }) => {
+const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
    const navigate = useNavigate();
    const user = useAuth();
 
@@ -57,7 +58,7 @@ const TopLayer = ({ profileData }) => {
          boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
          bg='white'
          mt='-3.5rem'
-         borderRadius='5px'
+         borderRadius={['0', '0', '5px']}
          pos='relative'
          p={{ base: '1rem .5rem', md: '1rem' }}
          textAlign={{ base: 'start', md: 'center' }}
@@ -193,6 +194,24 @@ const TopLayer = ({ profileData }) => {
                      )}
                   </Flex>
                )}
+
+               {/* more info button */}
+               <Button
+                  display={{ base: !moreInfo ? 'block' : 'none', md: 'none' }}
+                  w='100%'
+                  mx='auto'
+                  mt='5'
+                  bg='white'
+                  _active={{ bg: 'white' }}
+                  boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+                  transition='.3s'
+                  _hover={{
+                     bg: 'rgb(0 0 0 / 4%)',
+                  }}
+                  onClick={() => setMoreInfo(true)}
+               >
+                  More info about @{profileData.name}
+               </Button>
             </Box>
          )}
       </Box>
