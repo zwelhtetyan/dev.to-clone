@@ -13,9 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import authorIcon from '../../assets/logo/authorIcon.svg';
 import { useState } from 'react';
 import DiscussionBox from '../discussion/DiscussionBox';
-import { updateComment } from '../../lib/api';
-import { useDispatch } from 'react-redux';
-import { setCurrentComments } from '../../store/comment/currentComments';
+import useClickLike from '../../hooks/useClickLike';
 
 const CommentItem = ({
    text,
@@ -35,9 +33,11 @@ const CommentItem = ({
    const navigate = useNavigate();
 
    const [showDiscussionBox, setShowDiscussionbox] = useState(false);
-   const [updatingLike, setUpdatingLike] = useState(false);
 
-   const dispatch = useDispatch();
+   const { handleClickLike, updatingLike } = useClickLike(
+      currentUserId,
+      postId
+   );
 
    const handleViewProfile = (userId) => {
       navigate(`/profile/${userId}`);
@@ -59,64 +59,6 @@ const CommentItem = ({
 
       setShowDiscussionbox((prev) => !prev);
    };
-
-   /////////////////////////////////// separate file later;
-
-   const handleClickLike = (comments, commentId) => {
-      if (!currentUserId) {
-         navigate('/create-account');
-         return;
-      }
-
-      setUpdatingLike(true);
-
-      const modifiedComments = comments.map((comment) => {
-         if (comment.commentId === commentId) {
-            return {
-               ...comment,
-               likes: comment.likes.includes(currentUserId)
-                  ? comment.likes.filter((id) => id !== currentUserId)
-                  : [...comment.likes, currentUserId],
-            };
-         }
-
-         const innerComments = Object.values(comment.replies);
-
-         if (innerComments.find((cmt) => cmt.commentId === commentId)) {
-            const modifiedInnerComments = innerComments.map((cmt) =>
-               cmt.commentId === commentId
-                  ? {
-                       ...cmt,
-                       likes: cmt.likes.includes(currentUserId)
-                          ? cmt.likes.filter((id) => id !== currentUserId)
-                          : [...cmt.likes, currentUserId],
-                    }
-                  : cmt
-            );
-
-            return {
-               ...comment,
-               replies: { ...modifiedInnerComments },
-            };
-         }
-
-         return comment;
-      });
-
-      dispatch(setCurrentComments(modifiedComments));
-
-      updateComment(modifiedComments, postId)
-         .then((_) => {
-            setUpdatingLike(false);
-            console.log('updated like');
-         })
-         .catch((err) => {
-            setUpdatingLike(false);
-            console.log(err);
-         });
-   };
-
-   ///////////////////////////////////
 
    return (
       <VStack mb='1rem' ps={ps}>
