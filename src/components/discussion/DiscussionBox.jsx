@@ -18,6 +18,7 @@ const DiscussionBox = ({
    showDismiss,
    onDismiss,
    valueToEdit,
+   transformedComments,
 }) => {
    const user = useAuth();
 
@@ -54,34 +55,7 @@ const DiscussionBox = ({
       let modifiedComments = [];
 
       if (valueToEdit) {
-         modifiedComments = comments.map((comment) => {
-            if (comment.commentId === commentId) {
-               return {
-                  ...comment,
-                  value: converter().makeHtml(MDEValue),
-               };
-            }
-
-            const innerComments = Object.values(comment.replies);
-
-            if (innerComments.find((cmt) => cmt.commentId === commentId)) {
-               const modifiedInnerComments = innerComments.map((cmt) =>
-                  cmt.commentId === commentId
-                     ? {
-                          ...cmt,
-                          value: converter().makeHtml(MDEValue),
-                       }
-                     : cmt
-               );
-
-               return {
-                  ...comment,
-                  replies: { ...modifiedInnerComments },
-               };
-            }
-
-            return comment;
-         });
+         modifiedComments = transformedComments(comments, MDEValue);
       } else if (commentId) {
          modifiedComments = comments.map((comment) =>
             comment.commentId === commentId ||

@@ -18,7 +18,7 @@ const ManageComment = ({ commentId, postId, comments }) => {
       (state) => state.currentComments.currentComments
    );
 
-   //helper func
+   //helper funcs
    const setCurrentCommentItemHandler = () => {
       let commentItem;
 
