@@ -3,7 +3,7 @@ import Layout from './layout/Layout';
 import CreatePost from './pages/CreatePost';
 import Home from './pages/Home';
 import PreviewImg from './pages/PreviewImg';
-import DeleteConfirm from './components/DeleteConfirm';
+import DeletePost from './components/DeletePost';
 import EditPost from './pages/EditPost';
 import { Box } from '@chakra-ui/react';
 import Error from './pages/Error';
@@ -28,6 +28,7 @@ import {
    setProfileDataLoading,
 } from './store/user/profileData';
 import EditComment from './pages/EditComment';
+import DeleteComment from './components/DeleteComment';
 
 const App = () => {
    const dispatch = useDispatch();
@@ -89,10 +90,11 @@ const App = () => {
                <Route path='details/:id' element={<PostDetails />} />
                <Route path='create-account' element={<SignUp />} />
                <Route path='login' element={<Login />} />
-               <Route path='delete-confirm' element={<DeleteConfirm />} />
                <Route path='signout-confirm' element={<SignOutConfirm />} />
                <Route path='customize-profile' element={<CustomizeProfile />} />
                <Route path='dashboard' element={<Dashboard />} />
+               <Route path='delete-post' element={<DeletePost />} />
+               <Route path='delete-comment' element={<DeleteComment />} />
                <Route path='edit-comment' element={<EditComment />} />
             </Route>
 

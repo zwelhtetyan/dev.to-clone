@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/auth';
 import { nanoid } from 'nanoid';
+import { removeFromLocalStorage } from '../../helper/localStorage';
 
 const DiscussionBox = ({
    postId,
@@ -26,7 +27,7 @@ const DiscussionBox = ({
    const [MDEValue, setMDEValue] = useState(valueToEdit || '');
 
    const { transformedData } = useSelector((state) => state.transformedData);
-   const comments = transformedData.find(
+   const comments = transformedData?.find(
       (data) => data.id === postId
    )?.comments;
 
@@ -102,6 +103,7 @@ const DiscussionBox = ({
             setSubmitting(false);
             setMDEValue('');
             onDismiss && onDismiss();
+            removeFromLocalStorage('commentItemToManage');
             console.log('added comment successfully');
          })
          .catch((err) => {

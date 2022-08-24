@@ -4,10 +4,13 @@ import { RiMoreLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveToLocalStorage } from '../../helper/localStorage';
-import { setcommentItem } from '../../store/comment/currentComments';
+import {
+   setcommentItem,
+   setTransformedComments,
+} from '../../store/comment/currentComments';
 import CustomMenuItem from '../../utils/CustomMenuItem';
 
-const ManageComment = ({ commentId, postId }) => {
+const ManageComment = ({ commentId, postId, comments }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
@@ -41,6 +44,29 @@ const ManageComment = ({ commentId, postId }) => {
       );
    };
 
+   const transformedCommentsHandler = () => {
+      let transformedCommennts;
+
+      const filteredComments = comments.filter(
+         (comment) => comment.commentId !== commentId
+      );
+
+      transformedCommennts = filteredComments.map((comment) => ({
+         ...comment,
+         replies: {
+            ...Object.values(comment.replies).filter(
+               (cmt) => cmt.commentId !== commentId
+            ),
+         },
+      }));
+
+      dispatch(setTransformedComments(transformedCommennts));
+      saveToLocalStorage(
+         'transformedComments',
+         JSON.stringify(transformedCommennts)
+      );
+   };
+
    const goToEdit = () => {
       setCurrentCommentItemHandler();
       navigate('/edit-comment');
@@ -48,7 +74,8 @@ const ManageComment = ({ commentId, postId }) => {
 
    const goToDelete = () => {
       setCurrentCommentItemHandler();
-      navigate('/delete-confirm');
+      transformedCommentsHandler();
+      navigate('/delete-comment');
    };
 
    return (

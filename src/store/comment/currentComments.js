@@ -4,6 +4,7 @@ import { getItemFromLocalStorage } from '../../helper/localStorage';
 const initialState = {
    currentComments: [],
    commentItem: getItemFromLocalStorage('commentItemToManage') || {}, // to manage => edit || delete
+   transformedComments: getItemFromLocalStorage('transformedComments') || [], // for deleting comment
 };
 
 const currentCommentsSlice = createSlice({
@@ -17,10 +18,14 @@ const currentCommentsSlice = createSlice({
       setcommentItem: (state, action) => {
          state.commentItem = action.payload;
       },
+
+      setTransformedComments: (state, action) => {
+         state.transformedComments = action.payload;
+      },
    },
 });
 
-export const { setCurrentComments, setcommentItem } =
+export const { setCurrentComments, setcommentItem, setTransformedComments } =
    currentCommentsSlice.actions;
 
 export default currentCommentsSlice.reducer;

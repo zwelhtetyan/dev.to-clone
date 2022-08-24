@@ -43,7 +43,7 @@ const ManangePost = ({ postId, m }) => {
       e.stopPropagation();
 
       setCurrentPostDataHandler();
-      navigate('/delete-confirm');
+      navigate('/delete-post');
    };
 
    return (
