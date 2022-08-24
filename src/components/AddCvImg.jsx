@@ -42,8 +42,6 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
                setCvImg(url);
             })
             .catch((err) => console.log(err));
-
-         e.target.value = '';
       }
    };
 

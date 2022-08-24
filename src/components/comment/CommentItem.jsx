@@ -43,13 +43,8 @@ const CommentItem = ({
       navigate(`/profile/${userId}`);
    };
 
-   const totalLike = likes.includes(userId)
-      ? likes.filter((id) => id !== userId).length - 1
-      : likes.length;
-
-   const alreadyLiked =
-      (likes.includes(currentUserId) && userId !== currentUserId) ||
-      (!likes.includes(currentUserId) && userId === currentUserId);
+   const totalLike = likes.length;
+   const alreadyLiked = likes.includes(currentUserId);
 
    const handleshowDiscussionBox = () => {
       if (!currentUserId) {
@@ -127,7 +122,7 @@ const CommentItem = ({
                <HStack justify='flex-start'>
                   <ReactionButton
                      icon={alreadyLiked ? red_heart : heart}
-                     value={totalLike}
+                     value={totalLike < 1 ? '' : totalLike}
                      text={
                         totalLike < 1 ? '' : totalLike === 1 ? 'like' : 'likes'
                      }

@@ -18,20 +18,21 @@ const useClickLike = (currentUserId, postId) => {
 
       setUpdatingLike(true);
 
-      const modifiedComments = comments.map((comment) => {
-         if (comment.commentId === commentId) {
-            return {
-               ...comment,
-               likes: comment.likes.includes(currentUserId)
-                  ? comment.likes.filter((id) => id !== currentUserId)
-                  : [...comment.likes, currentUserId],
-            };
-         }
+      const externalComments = comments.map((comment) =>
+         comment.commentId === commentId
+            ? {
+                 ...comment,
+                 likes: comment.likes.includes(currentUserId)
+                    ? comment.likes.filter((id) => id !== currentUserId)
+                    : [...comment.likes, currentUserId],
+              }
+            : comment
+      );
 
-         const innerComments = Object.values(comment.replies);
-
-         if (innerComments.find((cmt) => cmt.commentId === commentId)) {
-            const modifiedInnerComments = innerComments.map((cmt) =>
+      const modifiedComments = externalComments.map((comment) => ({
+         ...comment,
+         replies: {
+            ...Object.values(comment.replies).map((cmt) =>
                cmt.commentId === commentId
                   ? {
                        ...cmt,
@@ -40,16 +41,9 @@ const useClickLike = (currentUserId, postId) => {
                           : [...cmt.likes, currentUserId],
                     }
                   : cmt
-            );
-
-            return {
-               ...comment,
-               replies: { ...modifiedInnerComments },
-            };
-         }
-
-         return comment;
-      });
+            ),
+         },
+      }));
 
       dispatch(setCurrentComments(modifiedComments));
 

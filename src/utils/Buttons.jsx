@@ -81,12 +81,18 @@ export const ReactionButton = ({ icon, value, text, onClick, disabled }) => {
          onClick={onClick}
          disabled={disabled}
       >
-         <Image src={icon} mr={1} />
+         <Image src={icon} />
          <Text fontWeight={400} fontSize='14px'>
             {value}{' '}
-            <Text as='span' display={{ base: 'none', sm: 'inline-block' }}>
-               {text}
-            </Text>
+            {text && (
+               <Text
+                  as='span'
+                  // display={{ base: 'none', sm: 'inline-block' }}
+                  ms={1}
+               >
+                  {text}
+               </Text>
+            )}
          </Text>
       </Button>
    );

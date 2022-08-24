@@ -10,6 +10,7 @@ const DetailRightContent = ({
    otherPosts,
    userId,
    display,
+   isDraft,
    m,
    p,
 }) => {
@@ -46,7 +47,7 @@ const DetailRightContent = ({
             />
          </Box>
 
-         {otherPosts.length !== 0 && (
+         {otherPosts.length !== 0 && !isDraft && (
             <Box
                borderRadius={{ base: '0', md: '5px' }}
                boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'

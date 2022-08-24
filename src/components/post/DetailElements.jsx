@@ -55,11 +55,13 @@ const DetailElements = ({
                </Box>
 
                {/* right content */}
+
                <DetailRightContent
                   currentUserProfile={currentUserProfile}
                   otherPosts={otherPosts}
                   userId={postDetail.userId}
                   display={{ base: 'none', xl: 'block' }}
+                  isDraft={postDetail.draft}
                />
             </Flex>
          )}

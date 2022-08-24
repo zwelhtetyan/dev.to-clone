@@ -69,13 +69,12 @@ const MDE = ({
    React.useEffect(() => {
       if (!MDEValue) {
          setValue(MDEValue);
-      } // run only if MDEValue is empty string
+      } // setting MDEValue to useState doesn't trigger after initial render so I set empty string to value
    }, [MDEValue]);
 
    if (isSubmitting && uploadedMDEImg.length !== 0) {
       // eslint-disable-next-line array-callback-return
       uploadedMDEImg.map((img) => {
-         console.log('map render');
          if (!MDEValue?.includes(img.url)) {
             removeImage(img.path).catch((err) => console.log(err));
          }

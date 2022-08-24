@@ -113,7 +113,7 @@ const CreatePostFrom = ({
                      <Box w='100%' my='.5rem !important'>
                         <MDE
                            MDEValue={postData?.MDEValue}
-                           isSubmitting={publishing}
+                           isSubmitting={publishing || savingDraft}
                            setUploadingImg={setUploadingImg}
                         />
                      </Box>
