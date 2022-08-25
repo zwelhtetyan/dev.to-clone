@@ -55,10 +55,10 @@ const MainContent = ({ postDetail }) => {
                <Flex
                   align='center'
                   justify='space-between'
-                  wrap='wrap'
+                  wrap='wrap-revert'
                   gap='.5rem'
                >
-                  <HStack pt={3}>
+                  <HStack pt={3} align='flex-start'>
                      <CustomAvatar
                         profile={postDetail.profile}
                         size='40px'
@@ -66,7 +66,7 @@ const MainContent = ({ postDetail }) => {
                            navigate(`/profile/${postDetail.userId}`)
                         }
                      />
-                     <Box>
+                     <Box flex='1'>
                         <Text
                            fontWeight={600}
                            cursor='pointer'

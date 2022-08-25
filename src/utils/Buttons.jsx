@@ -69,7 +69,14 @@ export const SecondaryBtn = ({
    );
 };
 
-export const ReactionButton = ({ icon, value, text, onClick, disabled }) => {
+export const ReactionButton = ({
+   icon,
+   value,
+   text,
+   onClick,
+   disabled,
+   display,
+}) => {
    return (
       <Button
          h='30px'
@@ -85,11 +92,7 @@ export const ReactionButton = ({ icon, value, text, onClick, disabled }) => {
          <Text fontWeight={400} fontSize='14px'>
             {value}{' '}
             {text && (
-               <Text
-                  as='span'
-                  // display={{ base: 'none', sm: 'inline-block' }}
-                  ms={1}
-               >
+               <Text as='span' display={display} ms={1}>
                   {text}
                </Text>
             )}

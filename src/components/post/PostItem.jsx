@@ -150,11 +150,13 @@ const PostItem = ({
                               icon={heart}
                               value={11}
                               text='Reaction'
+                              display={{ base: 'none', sm: 'inline-block' }}
                            />
                            <ReactionButton
                               icon={comment}
                               value={11}
                               text='Comment'
+                              display={{ base: 'none', sm: 'inline-block' }}
                            />
                         </HStack>
                      )}
