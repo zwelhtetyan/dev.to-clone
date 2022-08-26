@@ -42,6 +42,7 @@ const AllPost = () => {
                   <PostItemSkeleton />
                   <PostItemSkeleton />
                   <PostItemSkeleton />
+                  <PostItemSkeleton />
                </>
             )}
 
@@ -56,7 +57,7 @@ const AllPost = () => {
                      title={postData.title}
                      tags={postData.tags}
                      readTime={postData.readTime}
-                     isUpdated={postData?.isUpdated}
+                     isUpdated={postData?.updated}
                      userId={postData.userId}
                      currentUserProfile={getUserProfileData(
                         profileData,

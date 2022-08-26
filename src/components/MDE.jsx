@@ -10,11 +10,14 @@ import {
    removeFromLocalStorage,
    saveToLocalStorage,
 } from '../helper/localStorage';
-import '../styles/markdown.scss';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
 import { setMDEValueToStore } from '../store/post/postData';
 import CodeBlockIcon from '../assets/logo/CodeBlockIcon';
+import 'react-mde/lib/styles/css/react-mde-all.css';
+import '../styles/markdown.scss';
+import { useAuth } from '../context/auth';
+import { useNavigate } from 'react-router-dom';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -44,6 +47,19 @@ const MDE = ({
    );
 
    const dispatch = useDispatch();
+   const user = useAuth();
+   const navigate = useNavigate();
+
+   React.useEffect(() => {
+      const textArea = document.querySelector('.mde-text');
+      const checkUser = () => {
+         if (!user) {
+            navigate('/create-account');
+         }
+      };
+      textArea.addEventListener('click', checkUser);
+      return () => textArea.removeEventListener('click', checkUser);
+   }, [navigate, user]);
 
    React.useEffect(() => {
       const mdeHeader = document.querySelector('.mde-header');
@@ -58,18 +74,23 @@ const MDE = ({
    }, [placeholder]);
 
    React.useEffect(() => {
-      dispatch(setMDEValueToStore(value)); //for postData to publish or edit
-      setMDEValue && setMDEValue(value); //for comment
+      if (setMDEValue) {
+         setMDEValue(value); //for comment
+      } else {
+         dispatch(setMDEValueToStore(value)); //for postData to publish or edit
+      }
    }, [value, dispatch, setMDEValue]);
 
    React.useEffect(() => {
-      saveToLocalStorage('uploadedMDEImg', JSON.stringify(uploadedMDEImg));
+      if (uploadedMDEImg.length !== 0) {
+         saveToLocalStorage('uploadedMDEImg', JSON.stringify(uploadedMDEImg));
+      }
    }, [uploadedMDEImg]);
 
    React.useEffect(() => {
       if (!MDEValue) {
          setValue(MDEValue);
-      } // setting MDEValue to useState doesn't trigger after initial render so I set empty string to value
+      } // setting MDEValue to useState doesn't trigger again after initial render so I set empty string to value if it's empty
    }, [MDEValue]);
 
    if (isSubmitting && uploadedMDEImg.length !== 0) {
@@ -83,6 +104,14 @@ const MDE = ({
       setUploadedMdeImg([]);
       removeFromLocalStorage('uploadedMDEImg');
    }
+
+   React.useEffect(() => {
+      if (isSubmitting) {
+         document.querySelector('.mde-text').disabled = true;
+      } else {
+         document.querySelector('.mde-text').disabled = false;
+      }
+   }, [isSubmitting]);
 
    const mdeImgUploadHandler = (e) => {
       const image = e.target.files[0];

@@ -19,8 +19,8 @@ import converter from '../../helper/converter';
 import Discussion from '../discussion/Discussion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
-import DisplayDate from './DisplayDate';
 import AllComment from '../comment/AllComment';
+import { dateFormat } from '../../helper/calcTimestamp';
 
 const MainContent = ({ postDetail }) => {
    const navigate = useNavigate();
@@ -28,6 +28,14 @@ const MainContent = ({ postDetail }) => {
    const user = useAuth();
 
    const isAuthor = user?.userId === postDetail?.userId;
+
+   let showEditedDate;
+   if (postDetail.updatedAt) {
+      const reg = /\d+/;
+      const postedDate = dateFormat(postDetail?.createdAt);
+      const editedDate = dateFormat(postDetail?.updatedAt);
+      showEditedDate = postedDate.match(reg)[0] < editedDate.match(reg)[0];
+   }
 
    return (
       <Box
@@ -50,15 +58,15 @@ const MainContent = ({ postDetail }) => {
          )}
 
          {/* content */}
-         <Box px={{ base: '.7rem', md: '2.5rem' }} pb='1rem'>
+         <Box px={{ base: '.7rem', md: '2.5rem' }} pb='1rem' pt={3}>
             <Box className='mde-preview'>
                <Flex
                   align='center'
                   justify='space-between'
-                  wrap='wrap-revert'
                   gap='.5rem'
+                  wrap='wrap-reverse'
                >
-                  <HStack pt={3} align='flex-start'>
+                  <HStack align='flex-start'>
                      <CustomAvatar
                         profile={postDetail.profile}
                         size='40px'
@@ -66,7 +74,8 @@ const MainContent = ({ postDetail }) => {
                            navigate(`/profile/${postDetail.userId}`)
                         }
                      />
-                     <Box flex='1'>
+
+                     <Box flex='1' pt='3px'>
                         <Text
                            fontWeight={600}
                            cursor='pointer'
@@ -79,16 +88,38 @@ const MainContent = ({ postDetail }) => {
                            {postDetail.name}
                         </Text>
 
-                        <DisplayDate
-                           createdAt={postDetail.createdAt}
-                           isUpdated={postDetail.isUpdated}
-                           isDraft={postDetail.draft}
-                        />
+                        {postDetail.draft && (
+                           <Text
+                              bg='#FCD34D'
+                              px='5px'
+                              fontSize='12px'
+                              rounded='sm'
+                              display='inline-block'
+                           >
+                              Draft
+                           </Text>
+                        )}
+
+                        {postDetail.createdAt && (
+                           <Text fontSize='12px' color='#717171'>
+                              Posted on {dateFormat(postDetail.createdAt)}{' '}
+                              {postDetail.updatedAt && (
+                                 <Text as='span'>
+                                    {showEditedDate
+                                       ? `• Updated on ${dateFormat(
+                                            postDetail.updatedAt
+                                         )}`
+                                       : '• updated'}
+                                 </Text>
+                              )}
+                           </Text>
+                        )}
                      </Box>
                   </HStack>
 
+                  {/* manage post */}
                   {isAuthor && postDetail && (
-                     <ManangePost postId={postDetail.id} />
+                     <ManangePost postId={postDetail.id} m='0 0 0 auto' />
                   )}
                </Flex>
 
@@ -112,10 +143,12 @@ const MainContent = ({ postDetail }) => {
 
                <Divider mt={7} h='1px' background='#efefef' mx='auto' />
 
-               <Discussion
-                  postId={postDetail.id}
-                  comments={postDetail.comments}
-               />
+               {!postDetail.draft && (
+                  <Discussion
+                     postId={postDetail.id}
+                     comments={postDetail.comments}
+                  />
+               )}
 
                <AllComment postDetail={postDetail} />
             </Box>

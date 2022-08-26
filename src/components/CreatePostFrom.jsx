@@ -1,5 +1,5 @@
-import { Box, HStack, Image, Input, Spinner, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { Box, HStack, Image, Input, Spinner, Text } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import AddCvImg from './AddCvImg';
 import AddLangTag from './LangTag/AddLangTag';
@@ -11,34 +11,36 @@ import PostPreview from './PostPreview';
 import NoTitleMessage from '../utils/NoTitleMessage';
 
 const CreatePostFrom = ({
-   handleSubmit,
+   publishPostHandler,
+   draftPostHandler,
+   eidtPostHandler,
+   setPostTitle,
+   postTitle,
    postData,
    pageTitle,
-   setPostTitle,
    publishing,
    savingDraft,
    uploadingImg,
    setUploadingImg,
-   postTitle,
    toEdit,
 }) => {
    const naviagte = useNavigate();
 
    const [touch, setTouch] = useState(false);
-
    const [mdeTab, setMdeTab] = useState('write');
 
    const mdeTabChangeHandler = (tabName) => {
       setMdeTab(tabName);
    };
 
-   //helper sumbit
-   const submit = (publishingType) => {
-      if (postTitle) {
-         handleSubmit(publishingType);
-         return;
-      }
+   const isToEdit = toEdit && !postData.draft;
+
+   const onSubmit = (handler) => {
       setTouch(true);
+
+      if (postTitle) {
+         handler();
+      }
    };
 
    return (
@@ -124,28 +126,37 @@ const CreatePostFrom = ({
 
                {/* buttons container */}
                <HStack justify='flex-end' w='100%' mt='.5rem'>
-                  {!toEdit && (
+                  {!isToEdit && (
                      <SecondaryBtn
-                        disabled={uploadingImg || publishing || savingDraft}
-                        onClick={() => submit('draft')}
+                        onClick={() => onSubmit(draftPostHandler)}
+                        disabled={savingDraft || publishing || uploadingImg}
                      >
-                        {savingDraft ? 'Saving Draft' : 'Save Draft'}
+                        {savingDraft ? (
+                           <>
+                              <Spinner size='sm' mr='1' /> Saving draft
+                           </>
+                        ) : (
+                           'Save draft'
+                        )}
                      </SecondaryBtn>
                   )}
 
                   <PrimaryBtn
                      bg='rgb(59 73 223)'
-                     disabled={uploadingImg || publishing || savingDraft}
-                     onClick={() => submit('publish')}
+                     onClick={() =>
+                        onSubmit(
+                           isToEdit ? eidtPostHandler : publishPostHandler
+                        )
+                     }
+                     disabled={publishing || savingDraft || uploadingImg}
                   >
                      {publishing ? (
                         <>
-                           <Spinner size='sm' mr='1' /> Publishing
+                           <Spinner size='sm' mr='1' />{' '}
+                           {isToEdit ? 'Saving changes' : 'Publishing'}
                         </>
-                     ) : toEdit ? (
-                        'Save Changes'
                      ) : (
-                        'Publish'
+                        <>{isToEdit ? 'Save changes' : 'Publish'}</>
                      )}
                   </PrimaryBtn>
                </HStack>

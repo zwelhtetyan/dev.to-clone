@@ -24,7 +24,7 @@ const ManangePost = ({ postId, m }) => {
          tags: postDetail.tags,
          MDEValue: postDetail.MDEValue,
          id: postId,
-         draft: postDetail.draft,
+         draft: postDetail.draft ? true : false,
       };
 
       dispatch(setCurrentPostData(postData));

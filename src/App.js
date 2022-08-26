@@ -1,34 +1,35 @@
+import React, { useEffect, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { Box, Spinner } from '@chakra-ui/react';
+import { useDispatch } from 'react-redux';
 import Layout from './layout/Layout';
 import CreatePost from './pages/CreatePost';
 import Home from './pages/Home';
 import PreviewImg from './pages/PreviewImg';
 import DeletePost from './components/DeletePost';
 import EditPost from './pages/EditPost';
-import { Box } from '@chakra-ui/react';
 import Error from './pages/Error';
-import PostDetails from './pages/PostDetails';
-import { useDispatch } from 'react-redux';
-import React, { useEffect } from 'react';
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
-import Profile from './pages/Profile';
 import SignOutConfirm from './components/SignOutConfirm';
 import useGetData from './hooks/useGetData';
+import EditComment from './pages/EditComment';
+import DeleteComment from './components/DeleteComment';
 import {
    setTransformedData,
    setTransformedDataErr,
    setTransformedDataLoading,
 } from './store/data/transformedData';
-import CustomizeProfile from './pages/CustomizeProfile';
-import Dashboard from './pages/Dashboard';
 import {
    setProfileData,
    setProfileDataErr,
    setProfileDataLoading,
 } from './store/user/profileData';
-import EditComment from './pages/EditComment';
-import DeleteComment from './components/DeleteComment';
+
+const PostDetails = React.lazy(() => import('./pages/PostDetails'));
+const Profile = React.lazy(() => import('./pages/Profile'));
+const CustomizeProfile = React.lazy(() => import('./pages/CustomizeProfile'));
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
 
 const App = () => {
    const dispatch = useDispatch();
@@ -83,26 +84,42 @@ const App = () => {
 
    return (
       <Box>
-         <Routes>
-            <Route path='/' element={<Layout />}>
-               <Route index element={<Home />} />
-               <Route path='profile/:userIdToView' element={<Profile />} />
-               <Route path='details/:id' element={<PostDetails />} />
-               <Route path='create-account' element={<SignUp />} />
-               <Route path='login' element={<Login />} />
-               <Route path='signout-confirm' element={<SignOutConfirm />} />
-               <Route path='customize-profile' element={<CustomizeProfile />} />
-               <Route path='dashboard' element={<Dashboard />} />
-               <Route path='delete-post' element={<DeletePost />} />
-               <Route path='delete-comment' element={<DeleteComment />} />
-               <Route path='edit-comment' element={<EditComment />} />
-            </Route>
+         <Suspense
+            fallback={
+               <Spinner
+                  size='md'
+                  mr='1'
+                  pos='fixed'
+                  color='rgb(59 73 223)'
+                  top={1.5}
+                  right={1.5}
+               />
+            }
+         >
+            <Routes>
+               <Route path='/' element={<Layout />}>
+                  <Route index element={<Home />} />
+                  <Route path='profile/:userIdToView' element={<Profile />} />
+                  <Route path='details/:id' element={<PostDetails />} />
+                  <Route path='create-account' element={<SignUp />} />
+                  <Route path='login' element={<Login />} />
+                  <Route path='signout-confirm' element={<SignOutConfirm />} />
+                  <Route
+                     path='customize-profile'
+                     element={<CustomizeProfile />}
+                  />
+                  <Route path='dashboard' element={<Dashboard />} />
+                  <Route path='delete-post' element={<DeletePost />} />
+                  <Route path='delete-comment' element={<DeleteComment />} />
+                  <Route path='edit-comment' element={<EditComment />} />
+               </Route>
 
-            <Route path='edit-post' element={<EditPost />} />
-            <Route path='create-post' element={<CreatePost />} />
-            <Route path='preview/:url' element={<PreviewImg />} />
-            <Route path='*' element={<Error />} />
-         </Routes>
+               <Route path='edit-post' element={<EditPost />} />
+               <Route path='create-post' element={<CreatePost />} />
+               <Route path='preview/:url' element={<PreviewImg />} />
+               <Route path='*' element={<Error />} />
+            </Routes>
+         </Suspense>
       </Box>
    );
 };

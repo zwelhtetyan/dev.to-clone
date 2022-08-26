@@ -47,12 +47,8 @@ export const createPost = async (postData) => {
    });
 };
 
-export const deletePost = async (postId) => {
-   const docRef = doc(db, 'posts', postId);
-
-   deleteDoc(docRef)
-      .then((_) => console.log('deleted post successfully'))
-      .catch((err) => console.log(err));
+export const draftPost = async (postData) => {
+   await setDoc(doc(db, 'posts', postData.id), { ...postData, comments: [] });
 };
 
 export const editPost = async (postData) => {
@@ -60,12 +56,19 @@ export const editPost = async (postData) => {
 
    await updateDoc(docRef, {
       ...postData,
-      createdAt: serverTimestamp(),
+      updatedAt: serverTimestamp(),
       readTime: Math.ceil(
          converter().makeHtml(postData.MDEValue).split(' ').length / 200
       ),
-      isUpdated: postData?.isUpdated ?? true,
    });
+};
+
+export const deletePost = async (postId) => {
+   const docRef = doc(db, 'posts', postId);
+
+   deleteDoc(docRef)
+      .then((_) => console.log('deleted post successfully'))
+      .catch((err) => console.log(err));
 };
 
 export const updateProfileData = async (profileData, userId) => {

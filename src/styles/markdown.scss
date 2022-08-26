@@ -32,6 +32,10 @@
    .mde-text {
       height: calc(100vh - 405px) !important;
 
+      &:disabled {
+         background-color: #fafafa;
+      }
+
       @media screen and (max-width: 480px) {
          // height: calc(100vh - 335px) !important;
          height: 350px !important;

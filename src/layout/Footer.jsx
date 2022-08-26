@@ -25,7 +25,7 @@ const Footer = () => {
          color='rgb(64 64 64)'
          fontSize='14px'
          textAlign='center'
-         mt='4rem'
+         mt='3rem'
          as='footer'
       >
          <Text>

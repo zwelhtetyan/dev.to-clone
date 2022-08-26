@@ -11,15 +11,16 @@ const CreatePost = ({ currentPostDataToEdit }) => {
    const user = useAuth();
 
    const {
-      publishPostHandler,
-      eidtPostHandler,
-      setTitle,
-      title,
       postData,
+      title,
+      setTitle,
       publishing,
       savingDraft,
       uploadingImg,
       setUploadingImg,
+      publishPostHandler,
+      draftPostHandler,
+      eidtPostHandler,
    } = useCreatePost(currentPostDataToEdit);
 
    if (!user) {
@@ -28,9 +29,9 @@ const CreatePost = ({ currentPostDataToEdit }) => {
 
    return (
       <CreatePostFrom
-         handleSubmit={
-            currentPostDataToEdit ? eidtPostHandler : publishPostHandler
-         }
+         publishPostHandler={publishPostHandler}
+         draftPostHandler={draftPostHandler}
+         eidtPostHandler={eidtPostHandler}
          setPostTitle={setTitle}
          postTitle={title}
          postData={postData}
@@ -39,12 +40,7 @@ const CreatePost = ({ currentPostDataToEdit }) => {
          savingDraft={savingDraft}
          uploadingImg={uploadingImg}
          setUploadingImg={setUploadingImg}
-         toEdit={
-            currentPostDataToEdit && !currentPostDataToEdit?.draft
-               ? true
-               : false
-         }
-         isDraftPost={currentPostDataToEdit?.draft}
+         toEdit={currentPostDataToEdit ? true : false}
       />
    );
 };

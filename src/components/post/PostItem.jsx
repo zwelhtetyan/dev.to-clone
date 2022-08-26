@@ -32,16 +32,13 @@ const PostItem = ({
    readTime,
    isUpdated,
    fromDashboard,
-   draftPost,
    userId,
    currentUserProfile,
    setAlreadyInProfile,
-   isDraft,
 }) => {
    const navigate = useNavigate();
 
-   const handleNavigate = (e) => {
-      e.stopPropagation();
+   const handleNavigate = () => {
       navigate(`/details/${id}`);
    };
 
@@ -77,7 +74,7 @@ const PostItem = ({
          )}
          <Box p={{ base: '.5rem', sm: '1.5rem' }}>
             <HStack align='flex-start'>
-               <HStack>
+               <HStack align='flex-start'>
                   {/* avatar */}
 
                   <CustomAvatar
@@ -109,11 +106,7 @@ const PostItem = ({
                         </TooltipWrapper>
                      )}
 
-                     <DisplayDate
-                        createdAt={createdAt}
-                        isUpdated={isUpdated}
-                        isDraft={isDraft}
-                     />
+                     <DisplayDate createdAt={createdAt} isUpdated={isUpdated} />
                   </Box>
                </HStack>
             </HStack>
@@ -144,22 +137,20 @@ const PostItem = ({
 
                <HStack justify='space-between' w='100%'>
                   <Box>
-                     {!draftPost && (
-                        <HStack>
-                           <ReactionButton
-                              icon={heart}
-                              value={11}
-                              text='Reaction'
-                              display={{ base: 'none', sm: 'inline-block' }}
-                           />
-                           <ReactionButton
-                              icon={comment}
-                              value={11}
-                              text='Comment'
-                              display={{ base: 'none', sm: 'inline-block' }}
-                           />
-                        </HStack>
-                     )}
+                     <HStack>
+                        <ReactionButton
+                           icon={heart}
+                           value={11}
+                           text='Reaction'
+                           display={{ base: 'none', sm: 'inline-block' }}
+                        />
+                        <ReactionButton
+                           icon={comment}
+                           value={11}
+                           text='Comment'
+                           display={{ base: 'none', sm: 'inline-block' }}
+                        />
+                     </HStack>
                   </Box>
 
                   <Flex align='center'>

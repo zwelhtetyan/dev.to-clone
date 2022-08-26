@@ -1,3 +1,4 @@
+import { nanoid } from 'nanoid';
 import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -7,7 +8,7 @@ import {
    removeFromLocalStorage,
    saveToLocalStorage,
 } from '../helper/localStorage';
-import { createPost, editPost } from '../lib/api';
+import { createPost, deletePost, draftPost, editPost } from '../lib/api';
 import { setTitleToStore } from '../store/post/postData';
 
 const useCreatePost = (currentPostDataToEdit) => {
@@ -25,8 +26,9 @@ const useCreatePost = (currentPostDataToEdit) => {
          title: '',
          tags: [],
          MDEValue: '',
+         userId: user.userId,
       }),
-      []
+      [user.userId]
    );
 
    //states
@@ -52,95 +54,74 @@ const useCreatePost = (currentPostDataToEdit) => {
          title: postDataFromStore.title,
          tags: postDataFromStore.tags,
          MDEValue: postDataFromStore.MDEValue,
+         userId: user.userId,
       };
 
       setPostData((prevData) => ({ ...prevData, ...newData }));
-   }, [postDataFromStore]);
+   }, [postDataFromStore, user.userId]);
 
    //save to localStorage
    useEffect(() => {
-      if (postData) {
-         saveToLocalStorage(
-            currentPostDataToEdit ? 'postDataToManage' : 'postDataToPublish',
-            JSON.stringify(postData)
-         );
-      }
+      saveToLocalStorage(
+         currentPostDataToEdit ? 'postDataToManage' : 'postDataToPublish',
+         JSON.stringify(postData)
+      );
    }, [postData, currentPostDataToEdit]);
 
-   //helper function for set publishing || saving logic
-   const helper = (type, bol) => {
-      let newData;
+   const publishPostHandler = () => {
+      setPublishing(true);
 
-      if (type === 'publish') {
-         setPublishing(bol);
-
-         if (postData.draft) {
-            return {
-               ...postData,
-               userId: user.userId,
-               draft: false,
-               isUpdated: false,
-            };
-         }
-
-         newData = {
-            ...postData,
-            userId: user.userId,
-            draft: false,
-         };
-      } else if (type === 'draft') {
-         setSavingDraft(bol);
-
-         newData = {
-            ...postData,
-            userId: user.userId,
-            draft: true,
-            isUpdated: false,
-         };
+      if (postData.draft) {
+         deletePost(postData.id);
       }
 
-      return newData;
-   };
+      //if post is a draft , It will have an id but It will be replced with firebase auto generated id when fetch data in [useGetData.js] file
 
-   //publish post
-   const publishPostHandler = (publishingType) => {
-      const newData = helper(publishingType, true);
-
-      const queryLink = newData.draft ? 'draft' : 'post';
-
-      createPost(newData)
+      createPost({ ...postData, draft: false })
          .then((_) => {
-            navigate(`/dashboard/?category=${queryLink}`);
-            helper(publishingType, false);
+            setPublishing(false);
+            navigate('/dashboard/?category=post');
             removeFromLocalStorage('postDataToPublish');
-
-            console.log('uploaded post successfully!');
+            removeFromLocalStorage('postDataToManage');
+            console.log('created post successfully');
          })
          .catch((err) => {
-            helper(publishingType, false);
+            setPublishing(false);
             console.log(err);
          });
    };
 
-   //Edit post
-   const eidtPostHandler = (publishingType) => {
-      const queryLink =
-         postData.draft && publishingType === 'publish'
-            ? '/dashboard/?category=post'
-            : -1;
+   const draftPostHandler = () => {
+      setSavingDraft(true);
 
-      const newData = helper(publishingType, true);
+      const searchParam = postData.draft ? -1 : '/dashboard/?category=draft';
 
-      editPost(newData)
+      draftPost({ ...postData, draft: true, id: postData.id || nanoid() })
          .then((_) => {
-            navigate(queryLink);
-            helper(publishingType, false);
+            setSavingDraft(false);
+            navigate(searchParam);
+            removeFromLocalStorage('postDataToPublish');
             removeFromLocalStorage('postDataToManage');
-
-            console.log('updated post successfully');
+            console.log('drafted post successfully');
          })
          .catch((err) => {
-            helper(publishingType, false);
+            setSavingDraft(false);
+            console.log(err);
+         });
+   };
+
+   const eidtPostHandler = () => {
+      setPublishing(true);
+
+      editPost({ ...postData, updated: true })
+         .then((_) => {
+            setPublishing(false);
+            navigate(-1);
+            removeFromLocalStorage('postDataToManage');
+            console.log('edited post successfully');
+         })
+         .catch((err) => {
+            setPublishing(false);
             console.log(err);
          });
    };
@@ -154,6 +135,7 @@ const useCreatePost = (currentPostDataToEdit) => {
       uploadingImg,
       setUploadingImg,
       publishPostHandler,
+      draftPostHandler,
       eidtPostHandler,
    };
 };

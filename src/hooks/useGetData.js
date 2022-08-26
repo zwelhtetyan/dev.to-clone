@@ -1,4 +1,4 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../config/firebase';
 
@@ -11,8 +11,7 @@ const useGetData = (colName) => {
       let colRef;
 
       if (colName === 'posts') {
-         const postRef = collection(db, 'posts');
-         colRef = query(postRef, orderBy('createdAt', 'desc'));
+         colRef = collection(db, 'posts');
       } else if (colName === 'users') {
          colRef = collection(db, 'users');
       }

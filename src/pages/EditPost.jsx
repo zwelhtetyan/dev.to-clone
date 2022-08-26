@@ -1,6 +1,5 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { getItemFromLocalStorage } from '../helper/localStorage';
 import CreatePost from './CreatePost';
 
 const EditPost = () => {
@@ -8,10 +7,7 @@ const EditPost = () => {
       (state) => state.currentPost.currentPostData
    );
 
-   const currentPost =
-      currentPostData || getItemFromLocalStorage('postDataToManage');
-
-   return <CreatePost currentPostDataToEdit={currentPost} />;
+   return <CreatePost currentPostDataToEdit={currentPostData} />;
 };
 
 export default EditPost;

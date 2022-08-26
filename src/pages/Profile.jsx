@@ -98,7 +98,7 @@ const Profile = () => {
                               title={postData.title}
                               tags={postData.tags}
                               readTime={postData.readTime}
-                              isUpdated={postData?.isUpdated}
+                              isUpdated={postData?.updated}
                               userId={postData.userId}
                               setAlreadyInProfile={setAlreadyInProfile}
                            />

@@ -12,6 +12,7 @@ import {
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
+import DraftPostItem from '../components/post/DraftPostItem';
 import PostItem from '../components/post/PostItem';
 import PostItemSkeleton from '../components/skeletons/PostItemSkeleton';
 import { useAuth } from '../context/auth';
@@ -130,7 +131,7 @@ const Dashboard = () => {
                               title={postData.title}
                               tags={postData.tags}
                               readTime={postData.readTime}
-                              isUpdated={postData?.isUpdated}
+                              isUpdated={postData?.updated}
                               fromDashboard={true}
                               userId={postData.userId}
                            />
@@ -143,20 +144,10 @@ const Dashboard = () => {
                   <TabPanel px='0'>
                      {hasDraftPost ? (
                         draftPosts.map((postData) => (
-                           <PostItem
+                           <DraftPostItem
                               key={postData.id}
-                              name={postData.name}
-                              profile={postData.profile}
-                              id={postData.id}
-                              createdAt={postData.createdAt}
                               title={postData.title}
-                              tags={postData.tags}
-                              readTime={postData.readTime}
-                              isUpdated={postData?.isUpdated}
-                              fromDashboard={true}
-                              draftPost={true}
-                              userId={postData.userId}
-                              isDraft={true}
+                              postId={postData.id}
                            />
                         ))
                      ) : (
