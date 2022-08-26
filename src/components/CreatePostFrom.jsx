@@ -9,6 +9,7 @@ import ModalAlert from './Modal';
 import { useNavigate } from 'react-router-dom';
 import PostPreview from './PostPreview';
 import NoTitleMessage from '../utils/NoTitleMessage';
+import { useEffect } from 'react';
 
 const CreatePostFrom = ({
    publishPostHandler,
@@ -42,6 +43,11 @@ const CreatePostFrom = ({
          handler();
       }
    };
+
+   useEffect(() => {
+      document.querySelector('.mde-text').placeholder =
+         'Write your post content here...';
+   }, []);
 
    return (
       <Box mt='-3.5rem'>

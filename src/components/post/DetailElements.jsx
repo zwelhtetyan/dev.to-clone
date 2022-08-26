@@ -51,6 +51,7 @@ const DetailElements = ({
                      display={{ base: 'block', xl: 'none' }}
                      m={{ base: '1.5rem 0', md: '1.5rem 1px 0' }}
                      p='.5rem'
+                     isDraft={postDetail.draft}
                   />
                </Box>
 

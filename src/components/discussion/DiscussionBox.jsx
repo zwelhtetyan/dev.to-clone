@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, HStack, Spinner } from '@chakra-ui/react';
 import converter from '../../helper/converter';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
@@ -11,6 +11,7 @@ import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/auth';
 import { nanoid } from 'nanoid';
 import { removeFromLocalStorage } from '../../helper/localStorage';
+import { useNavigate } from 'react-router-dom';
 
 const DiscussionBox = ({
    postId,
@@ -21,6 +22,7 @@ const DiscussionBox = ({
    transformedComments,
 }) => {
    const user = useAuth();
+   const navigate = useNavigate();
 
    const [submitting, setSubmitting] = useState(false);
    const [uploadingImg, setUploadingImg] = useState(false);
@@ -37,6 +39,29 @@ const DiscussionBox = ({
    const mdeTabChangeHandler = () => {
       setMdeTab((prev) => (prev === 'write' ? 'preview' : 'write'));
    };
+
+   useEffect(() => {
+      const textArea = document.querySelector('.mde-text');
+      if (!user) {
+         document.querySelector('.mde-header').style.display = 'none';
+      }
+      const checkUser = () => {
+         if (!user) {
+            navigate('/create-account');
+         }
+      };
+      textArea.addEventListener('click', checkUser);
+      return () => textArea.removeEventListener('click', checkUser);
+   }, [user, navigate]);
+
+   useEffect(() => {
+      const textBoxes = [...document.querySelectorAll('.mde-text')];
+      textBoxes.map((textbox, idx) =>
+         idx === 0
+            ? (textbox.placeholder = 'Add to the discussion...')
+            : (textbox.placeholder = 'Reply...')
+      );
+   }, []);
 
    const handleSubmit = (e) => {
       e.preventDefault();
@@ -101,7 +126,6 @@ const DiscussionBox = ({
                   setMDEValue={setMDEValue}
                   isSubmitting={submitting}
                   setUploadingImg={setUploadingImg}
-                  placeholder='Add to the discussion'
                />
             </Box>
          )}

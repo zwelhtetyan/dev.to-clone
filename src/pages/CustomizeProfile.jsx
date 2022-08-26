@@ -4,11 +4,13 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
 import { PrimaryBtn } from '../utils/Buttons';
 import { whiteBoxStyles } from '../utils/CustomizeProfileStyles';
-import Basic from '../components/profile/customizeProfile/Basic';
-import Work from '../components/profile/customizeProfile/Work';
-import Branding from '../components/profile/customizeProfile/Branding';
-import User from '../components/profile/customizeProfile/User';
-import Coding from '../components/profile/customizeProfile/Coding';
+import {
+   Basic,
+   Work,
+   Branding,
+   User,
+   Coding,
+} from '../components/profile/customizeProfile';
 import { removeImage, updateProfileData } from '../lib/api';
 import { useSelector } from 'react-redux';
 import { getAuth, updateProfile } from 'firebase/auth';

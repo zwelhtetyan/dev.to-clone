@@ -3,18 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 import { Box, Spinner } from '@chakra-ui/react';
 import { useDispatch } from 'react-redux';
 import Layout from './layout/Layout';
-import CreatePost from './pages/CreatePost';
 import Home from './pages/Home';
-import PreviewImg from './pages/PreviewImg';
-import DeletePost from './components/DeletePost';
-import EditPost from './pages/EditPost';
-import Error from './pages/Error';
-import SignUp from './pages/SignUp';
-import Login from './pages/Login';
-import SignOutConfirm from './components/SignOutConfirm';
 import useGetData from './hooks/useGetData';
-import EditComment from './pages/EditComment';
-import DeleteComment from './components/DeleteComment';
+
 import {
    setTransformedData,
    setTransformedDataErr,
@@ -30,6 +21,16 @@ const PostDetails = React.lazy(() => import('./pages/PostDetails'));
 const Profile = React.lazy(() => import('./pages/Profile'));
 const CustomizeProfile = React.lazy(() => import('./pages/CustomizeProfile'));
 const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const PreviewImg = React.lazy(() => import('./pages/PreviewImg'));
+const CreatePost = React.lazy(() => import('./pages/CreatePost'));
+const EditPost = React.lazy(() => import('./pages/EditPost'));
+const SignUp = React.lazy(() => import('./pages/SignUp'));
+const Login = React.lazy(() => import('./pages/Login'));
+const DeletePost = React.lazy(() => import('./components/DeletePost'));
+const Error = React.lazy(() => import('./pages/Error'));
+const SignOutConfirm = React.lazy(() => import('./components/SignOutConfirm'));
+const EditComment = React.lazy(() => import('./pages/EditComment'));
+const DeleteComment = React.lazy(() => import('./components/DeleteComment'));
 
 const App = () => {
    const dispatch = useDispatch();
@@ -86,14 +87,14 @@ const App = () => {
       <Box>
          <Suspense
             fallback={
-               <Spinner
-                  size='md'
-                  mr='1'
+               <Box
                   pos='fixed'
-                  color='rgb(59 73 223)'
-                  top={1.5}
-                  right={1.5}
-               />
+                  top='50%'
+                  left='50%'
+                  transform='translate(-50%, -50%)'
+               >
+                  <Spinner size='lg' color='rgb(59 73 223)' />
+               </Box>
             }
          >
             <Routes>

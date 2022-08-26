@@ -17,7 +17,7 @@ const Work = ({ workRef, educationRef, profileData }) => {
                <label style={labelStyles}>Work</label>
                <Input
                   defaultValue={profileData?.work}
-                  placeholder='What do you do? Example: CEO at Google'
+                  placeholder='What do you do?'
                   type='text'
                   {...InputborderColor}
                   ref={workRef}

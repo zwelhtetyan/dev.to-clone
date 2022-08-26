@@ -51,8 +51,6 @@ const EditComment = () => {
       }));
    };
 
-   console.log(Timestamp.now());
-
    return (
       <HStack h='calc(100vh - 120px)' px={{ md: '.5rem' }}>
          <Box

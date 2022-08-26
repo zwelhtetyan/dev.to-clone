@@ -16,8 +16,6 @@ import { setMDEValueToStore } from '../store/post/postData';
 import CodeBlockIcon from '../assets/logo/CodeBlockIcon';
 import 'react-mde/lib/styles/css/react-mde-all.css';
 import '../styles/markdown.scss';
-import { useAuth } from '../context/auth';
-import { useNavigate } from 'react-router-dom';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -33,13 +31,7 @@ const codeBlock = {
    },
 };
 
-const MDE = ({
-   MDEValue,
-   setMDEValue,
-   isSubmitting,
-   setUploadingImg,
-   placeholder,
-}) => {
+const MDE = ({ MDEValue, setMDEValue, isSubmitting, setUploadingImg }) => {
    const [value, setValue] = React.useState(MDEValue || '');
    const [selectedTab, setSelectedTab] = React.useState('write');
    const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
@@ -47,19 +39,6 @@ const MDE = ({
    );
 
    const dispatch = useDispatch();
-   const user = useAuth();
-   const navigate = useNavigate();
-
-   React.useEffect(() => {
-      const textArea = document.querySelector('.mde-text');
-      const checkUser = () => {
-         if (!user) {
-            navigate('/create-account');
-         }
-      };
-      textArea.addEventListener('click', checkUser);
-      return () => textArea.removeEventListener('click', checkUser);
-   }, [navigate, user]);
 
    React.useEffect(() => {
       const mdeHeader = document.querySelector('.mde-header');
@@ -67,11 +46,6 @@ const MDE = ({
       mdeHeader.style.top = '0';
       mdeHeader.style.zIndex = '1';
    }, []); // sticky header on mobile
-
-   React.useEffect(() => {
-      const textBox = document.querySelector('.mde-text');
-      textBox.placeholder = placeholder || 'Write your post content here...';
-   }, [placeholder]);
 
    React.useEffect(() => {
       if (setMDEValue) {
