@@ -7,6 +7,7 @@ import ErrorMessage from '../../utils/ErrorMessage';
 import { getUserProfileData } from '../../helper/getUserProfileData';
 import { useAuth } from '../../context/auth';
 import Hero from '../Hero';
+import { calcTotalDiscussion } from '../../helper/calcTotalDiscussions';
 
 const AllPost = () => {
    const user = useAuth();
@@ -63,6 +64,7 @@ const AllPost = () => {
                         profileData,
                         postData.userId
                      )}
+                     totalDiscussion={calcTotalDiscussion(postData.comments)}
                   />
                ))}
          </Box>

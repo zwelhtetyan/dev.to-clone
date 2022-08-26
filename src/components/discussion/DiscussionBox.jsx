@@ -77,6 +77,7 @@ const DiscussionBox = ({
             setSubmitting(false);
             setMDEValue('');
             onDismiss && onDismiss();
+            setMdeTab('write');
             removeFromLocalStorage('commentItemToManage');
             console.log('added comment successfully');
          })

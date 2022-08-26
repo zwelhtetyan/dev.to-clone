@@ -4,7 +4,7 @@ import { ReactionButton } from '../../utils/Buttons';
 import heart from '../../assets/logo/heart.svg';
 import red_heart from '../../assets/logo/red_heart.svg';
 import comment from '../../assets/logo/comment.svg';
-import { dateFormat } from '../../helper/calcTimestamp';
+import { dateFormat, showEditedDate } from '../../helper/calcTimestamp';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import converter from '../../helper/converter';
 import CustomAvatar from '../../utils/CustomAvatar';
@@ -29,6 +29,8 @@ const CommentItem = ({
    ps,
    footerPs,
    avatarSize,
+   edited,
+   editedAt,
 }) => {
    const navigate = useNavigate();
 
@@ -91,9 +93,17 @@ const CommentItem = ({
                            title='author'
                         />
                      )}
-                     {/* <Text color='gray'>•</Text> */}
-                     <Text color='gray' fontSize='12px'>
-                        • {dateFormat(createdAt)}
+
+                     {/* show Date */}
+                     <Text fontSize='12px' color='#717171'>
+                        • {dateFormat(createdAt)}{' '}
+                        {editedAt && (
+                           <Text as='span'>
+                              {showEditedDate(createdAt, editedAt)
+                                 ? `• Edited on ${dateFormat(editedAt)}`
+                                 : '• edited'}
+                           </Text>
+                        )}
                      </Text>
                   </HStack>
 

@@ -1,7 +1,9 @@
-import { Box, Button, HStack, Text, VStack } from '@chakra-ui/react';
+import { Box, Button, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 import React from 'react';
 
 const DeleteConfirm = ({ title, onDismiss, onDelete, loading, type }) => {
+   console.log(title);
+
    return (
       <VStack h='calc(100vh - 120px)' justify='center'>
          <VStack
@@ -13,18 +15,18 @@ const DeleteConfirm = ({ title, onDismiss, onDelete, loading, type }) => {
             borderRadius='5px'
             className='mde-preview'
          >
-            <Box
-               textAlign='center'
-               fontSize={{ base: '1.3rem', md: '1.7rem' }}
+            <Heading
+               fontSize={{ base: '1.3rem', md: '1.5rem' }}
                fontWeight='700'
                className='mde-preview-content'
             >
-               {title}
-            </Box>
+               {title.substring(0, 100) + '...'}
+            </Heading>
             <Box
                boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                my='1.5rem !important'
-               width={{ base: '100%', md: '500px' }}
+               w='100%'
+               maxW='650px'
                p={{ base: '1rem .5rem', md: '1rem' }}
                borderRadius='5px'
                bg='#FAFAFA'

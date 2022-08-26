@@ -83,6 +83,7 @@ const ManageComment = ({ commentId, postId, comments }) => {
          <MenuButton
             bg='transparent'
             p='0 3px'
+            h='24px'
             borderRadius='5px'
             _hover={{
                bg: 'rgb(59 73 223 / 10%)',

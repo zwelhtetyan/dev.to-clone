@@ -209,7 +209,7 @@ const CustomizeProfile = () => {
                   type='submit'
                >
                   {loading && <Spinner size='sm' mr={3} />}
-                  {loading ? 'Updationg' : 'Update'} Profile Information.
+                  {loading ? 'Updating' : 'Update'} Profile Information.
                </PrimaryBtn>
             </Box>
          </Box>

@@ -35,6 +35,7 @@ const PostItem = ({
    userId,
    currentUserProfile,
    setAlreadyInProfile,
+   totalDiscussion,
 }) => {
    const navigate = useNavigate();
 
@@ -146,8 +147,14 @@ const PostItem = ({
                         />
                         <ReactionButton
                            icon={comment}
-                           value={11}
-                           text='Comment'
+                           value={totalDiscussion || ''}
+                           text={
+                              totalDiscussion === 1
+                                 ? 'Comment'
+                                 : totalDiscussion > 0
+                                 ? 'Comments'
+                                 : 'Add comment'
+                           }
                            display={{ base: 'none', sm: 'inline-block' }}
                         />
                      </HStack>

@@ -1,4 +1,5 @@
 import { Box, Heading, HStack } from '@chakra-ui/react';
+import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -24,7 +25,12 @@ const EditComment = () => {
    const transformedComments = (comments, MDEValue) => {
       const externalComments = comments.map((comment) =>
          comment.commentId === currentCommentItem.commentId
-            ? { ...comment, value: converter().makeHtml(MDEValue) }
+            ? {
+                 ...comment,
+                 value: converter().makeHtml(MDEValue),
+                 edited: true,
+                 editedAt: Timestamp.now(),
+              }
             : comment
       );
 
@@ -33,12 +39,19 @@ const EditComment = () => {
          replies: {
             ...Object.values(comment.replies).map((cmt) =>
                cmt.commentId === currentCommentItem.commentId
-                  ? { ...cmt, value: converter().makeHtml(MDEValue) }
+                  ? {
+                       ...cmt,
+                       value: converter().makeHtml(MDEValue),
+                       edited: true,
+                       editedAt: Timestamp.now(),
+                    }
                   : cmt
             ),
          },
       }));
    };
+
+   console.log(Timestamp.now());
 
    return (
       <HStack h='calc(100vh - 120px)' px={{ md: '.5rem' }}>

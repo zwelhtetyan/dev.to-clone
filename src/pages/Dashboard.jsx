@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import DraftPostItem from '../components/post/DraftPostItem';
 import PostItem from '../components/post/PostItem';
-import PostItemSkeleton from '../components/skeletons/PostItemSkeleton';
+import DashboardSkeleton from '../components/skeletons/DashboardSkeleton';
 import { useAuth } from '../context/auth';
 import ErrorMessage from '../utils/ErrorMessage';
 
@@ -73,7 +73,7 @@ const Dashboard = () => {
    }
 
    if (loading && (!publishedPosts || !publishedPosts)) {
-      return <PostItemSkeleton w='650px' h='calc(100vh - 120px)' />;
+      return <DashboardSkeleton />;
    }
 
    if (!loading && err) {

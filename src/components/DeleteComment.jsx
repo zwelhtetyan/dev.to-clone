@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { htmlToJsx } from '../helper/htmlToJsx';
 import { removeFromLocalStorage } from '../helper/localStorage';
 import { updateComment } from '../lib/api';
 import DeleteConfirm from '../utils/DeleteConfirm';
@@ -45,7 +44,7 @@ const DeleteComment = () => {
    return (
       <DeleteConfirm
          loading={deleting}
-         title={htmlToJsx(currentCommentItem.value)}
+         title={currentCommentItem.value.replace(/<[^>]+>/g, '')}
          onDismiss={onDismiss}
          onDelete={onDelete}
          type='comment'

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Text, Tooltip } from '@chakra-ui/react';
-import { joinOnDate } from '../helper/joinOnDate';
+import { joinOnDate } from '../helper/calcTimestamp';
 import { useNavigate } from 'react-router-dom';
 
 const Content = ({ title, text, contentMb }) => {

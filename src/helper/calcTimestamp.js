@@ -18,3 +18,15 @@ export const isLimitedDate = (createdAt) => {
 
    return limitedDate > 432000;
 };
+
+export const showEditedDate = (createdAt, updatedAt) => {
+   const reg = /\d+/;
+   const postedDate = dateFormat(createdAt);
+   const editedDate = dateFormat(updatedAt);
+   return postedDate.match(reg)[0] < editedDate.match(reg)[0];
+};
+
+export const joinOnDate = (createdAt) => {
+   const date = new Date(+createdAt).toDateString().split(' ').slice(1, 4);
+   return [date[0], +date[1] + ',', date[2]].join(' ');
+};

@@ -20,7 +20,7 @@ import Discussion from '../discussion/Discussion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import AllComment from '../comment/AllComment';
-import { dateFormat } from '../../helper/calcTimestamp';
+import { dateFormat, showEditedDate } from '../../helper/calcTimestamp';
 
 const MainContent = ({ postDetail }) => {
    const navigate = useNavigate();
@@ -28,14 +28,6 @@ const MainContent = ({ postDetail }) => {
    const user = useAuth();
 
    const isAuthor = user?.userId === postDetail?.userId;
-
-   let showEditedDate;
-   if (postDetail.updatedAt) {
-      const reg = /\d+/;
-      const postedDate = dateFormat(postDetail?.createdAt);
-      const editedDate = dateFormat(postDetail?.updatedAt);
-      showEditedDate = postedDate.match(reg)[0] < editedDate.match(reg)[0];
-   }
 
    return (
       <Box
@@ -105,7 +97,10 @@ const MainContent = ({ postDetail }) => {
                               Posted on {dateFormat(postDetail.createdAt)}{' '}
                               {postDetail.updatedAt && (
                                  <Text as='span'>
-                                    {showEditedDate
+                                    {showEditedDate(
+                                       postDetail.createdAt,
+                                       postDetail.updatedAt
+                                    )
                                        ? `• Updated on ${dateFormat(
                                             postDetail.updatedAt
                                          )}`

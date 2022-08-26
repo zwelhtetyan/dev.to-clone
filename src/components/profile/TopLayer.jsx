@@ -19,7 +19,7 @@ import personalWebsite from '../../assets/logo/personalWebsite.svg';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import defaultProfile from '../../assets/images/defaultProfile.jpg';
-import { joinOnDate } from '../../helper/joinOnDate';
+import { joinOnDate } from '../../helper/calcTimestamp';
 
 const LinkIcon = ({ hoverColor, href, children, onClick }) => {
    return (

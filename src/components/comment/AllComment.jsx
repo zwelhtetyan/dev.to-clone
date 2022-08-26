@@ -43,6 +43,8 @@ const AllComment = ({ postDetail }) => {
                   userId={comment.userId}
                   postId={postDetail.id}
                   commentId={comment.commentId}
+                  edited={comment.edited}
+                  editedAt={comment.editedAt}
                />
                {Object.values(comment.replies).length !== 0 &&
                   repliedComment(comment.replies).map((item) => (
@@ -64,6 +66,8 @@ const AllComment = ({ postDetail }) => {
                         userId={item.userId}
                         postId={postDetail.id}
                         commentId={item.commentId}
+                        edited={item.edited}
+                        editedAt={item.editedAt}
                      />
                   ))}
             </Box>
