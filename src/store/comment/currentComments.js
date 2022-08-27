@@ -3,7 +3,7 @@ import { getItemFromLocalStorage } from '../../helper/localStorage';
 
 const initialState = {
    currentComments: [],
-   commentItem: getItemFromLocalStorage('commentItemToManage') || {}, // to manage => edit || delete
+   commentItem: getItemFromLocalStorage('commentItemToManage') || null, // to manage => edit || delete
    transformedComments: getItemFromLocalStorage('transformedComments') || [], // for deleting comment
 };
 

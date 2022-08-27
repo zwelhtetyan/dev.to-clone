@@ -3,7 +3,7 @@ import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import DiscussionBox from '../components/discussion/DiscussionBox';
 import converter from '../helper/converter';
 
@@ -15,6 +15,10 @@ const EditComment = () => {
    const currentCommentItem = useSelector(
       (state) => state.currentComments.commentItem
    );
+
+   if (!currentCommentItem) {
+      return <Navigate to='/' />;
+   }
 
    const onDismiss = () => {
       navigate(-1);

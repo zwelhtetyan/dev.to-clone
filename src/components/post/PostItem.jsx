@@ -20,6 +20,8 @@ import { nanoid } from 'nanoid';
 import ManangePost from './ManangePost';
 import { TooltipWrapper } from '../UserProfilePopup';
 import DisplayDate from './DisplayDate';
+import { useDispatch } from 'react-redux';
+import { setClickComment } from '../../store/scrollDiscussion';
 
 const PostItem = ({
    name,
@@ -38,8 +40,17 @@ const PostItem = ({
    totalDiscussion,
 }) => {
    const navigate = useNavigate();
+   const dispatch = useDispatch();
+
+   const handleClickComment = (e) => {
+      e.stopPropagation();
+
+      dispatch(setClickComment(true)); // if user click comment , it will start on where discussions exist 😉
+      navigate(`/details/${id}`);
+   };
 
    const handleNavigate = () => {
+      dispatch(setClickComment(false));
       navigate(`/details/${id}`);
    };
 
@@ -145,6 +156,7 @@ const PostItem = ({
                            text='Reaction'
                         />
                         <ReactionButton
+                           onClick={handleClickComment}
                            icon={comment}
                            value={totalDiscussion || ''}
                            text={

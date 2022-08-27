@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { removeFromLocalStorage } from '../helper/localStorage';
 import { updateComment } from '../lib/api';
 import DeleteConfirm from '../utils/DeleteConfirm';
@@ -20,6 +20,10 @@ const DeleteComment = () => {
    const currentCommentItem = useSelector(
       (state) => state.currentComments.commentItem
    );
+
+   if (!currentCommentItem) {
+      return <Navigate to='/' />;
+   }
 
    const onDismiss = () => {
       navigate(-1);

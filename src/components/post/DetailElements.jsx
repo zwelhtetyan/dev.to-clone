@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import DetailSkeleton from '../../components/skeletons/DetailSkeleton';
 import SideReactionBar from './SideReactionBar';
@@ -15,9 +15,6 @@ const DetailElements = ({
    err,
    otherPosts,
 }) => {
-   //scroll top
-   useEffect(() => window.scrollTo(0, 0), [postDetail?.id]);
-
    return (
       <Box
          maxW='1200px'

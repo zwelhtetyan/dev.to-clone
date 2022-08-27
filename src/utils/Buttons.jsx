@@ -69,14 +69,7 @@ export const SecondaryBtn = ({
    );
 };
 
-export const ReactionButton = ({
-   icon,
-   value,
-   text,
-   onClick,
-   disabled,
-   display,
-}) => {
+export const ReactionButton = ({ icon, value, text, onClick, disabled }) => {
    return (
       <Button
          h={['27px', '30px']}

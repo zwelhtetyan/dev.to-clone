@@ -4,6 +4,7 @@ import postDataSliceReducer from './post/postData';
 import transformedDataReducer from './data/transformedData';
 import profileDataReducer from './user/profileData';
 import currentCommentReducer from './comment/currentComments';
+import scrollDiscussionReducer from './scrollDiscussion';
 
 const store = configureStore({
    middleware: (getDefaultMiddleware) =>
@@ -17,6 +18,7 @@ const store = configureStore({
       currentPost: currentPostReducer, //data to edit || delete
       profileData: profileDataReducer,
       currentComments: currentCommentReducer, // helper comment state, otherwise commentArray form server take a while to response , it cause a bug when click to like button quickly.
+      scrollDiscussion: scrollDiscussionReducer,
    },
 });
 

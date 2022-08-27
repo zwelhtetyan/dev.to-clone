@@ -6,6 +6,7 @@ import converter from '../helper/converter';
 import { htmlToJsx } from '../helper/htmlToJsx';
 import LangTag from '../utils/LangTag';
 import NoTitleMessage from '../utils/NoTitleMessage';
+import '../styles/postdetail.scss';
 
 const PostPreview = () => {
    const { cvImg, title, tags, MDEValue } = useSelector(

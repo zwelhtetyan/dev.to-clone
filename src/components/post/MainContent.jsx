@@ -21,11 +21,28 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import AllComment from '../comment/AllComment';
 import { dateFormat, showEditedDate } from '../../helper/calcTimestamp';
+import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 const MainContent = ({ postDetail }) => {
    const navigate = useNavigate();
-
    const user = useAuth();
+   const discussionBoxRef = useRef();
+
+   const { clickComment } = useSelector((state) => state.scrollDiscussion);
+
+   useEffect(() => {
+      const scrollHeight =
+         window.pageYOffset +
+         discussionBoxRef.current.getBoundingClientRect().top -
+         60;
+      if (clickComment) {
+         window.scrollTo({ top: scrollHeight });
+      } else {
+         window.scrollTo(0, 0);
+      }
+   }, [clickComment]);
 
    const isAuthor = user?.userId === postDetail?.userId;
 
@@ -140,6 +157,7 @@ const MainContent = ({ postDetail }) => {
 
                {!postDetail.draft && (
                   <Discussion
+                     discussionBoxRef={discussionBoxRef}
                      postId={postDetail.id}
                      comments={postDetail.comments}
                   />
