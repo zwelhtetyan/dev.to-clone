@@ -63,11 +63,16 @@ const AllComment = ({ postDetail }) => {
                            profileData,
                            item.userId
                         )}
+                        repliedUserName={
+                           getUserProfileData(profileData, item.repliedUserId)
+                              .name
+                        }
                         userId={item.userId}
                         postId={postDetail.id}
                         commentId={item.commentId}
                         edited={item.edited}
                         editedAt={item.editedAt}
+                        reply={true}
                      />
                   ))}
             </Box>

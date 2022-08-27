@@ -54,9 +54,9 @@ const ManageComment = ({ commentId, postId, comments }) => {
       transformedCommennts = filteredComments.map((comment) => ({
          ...comment,
          replies: {
-            ...Object.values(comment.replies).filter(
-               (cmt) => cmt.commentId !== commentId
-            ),
+            ...Object.values(comment.replies)
+               .filter((cmt) => cmt.commentId !== commentId)
+               .filter((cmt) => cmt.repliedCommentId !== commentId),
          },
       }));
 
@@ -90,7 +90,7 @@ const ManageComment = ({ commentId, postId, comments }) => {
                color: 'rgb(47 58 178)',
             }}
          >
-            <RiMoreLine size={20} color='gray' />
+            <RiMoreLine size={20} color='#717171' className='more-icon' />
          </MenuButton>
          <MenuList minW='0' w='105px'>
             <CustomMenuItem onClick={goToEdit}>Edit</CustomMenuItem>

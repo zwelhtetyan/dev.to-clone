@@ -20,6 +20,7 @@ const DiscussionBox = ({
    onDismiss,
    valueToEdit,
    transformedComments,
+   repliedUserId,
 }) => {
    const user = useAuth();
    const navigate = useNavigate();
@@ -89,7 +90,14 @@ const DiscussionBox = ({
             )
                ? {
                     ...comment,
-                    replies: { ...comment.replies, [nanoid()]: newComment },
+                    replies: {
+                       ...comment.replies,
+                       [nanoid()]: {
+                          ...newComment,
+                          repliedUserId,
+                          repliedCommentId: commentId,
+                       },
+                    },
                  }
                : comment
          );

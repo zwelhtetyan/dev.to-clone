@@ -14,6 +14,7 @@ import { useState } from 'react';
 import DiscussionBox from '../discussion/DiscussionBox';
 import useClickLike from '../../hooks/useClickLike';
 import ManageComment from './ManageComment';
+import { FiCornerLeftUp } from 'react-icons/fi';
 
 const CommentItem = ({
    text,
@@ -31,6 +32,8 @@ const CommentItem = ({
    avatarSize,
    edited,
    editedAt,
+   reply,
+   repliedUserName,
 }) => {
    const navigate = useNavigate();
 
@@ -58,7 +61,7 @@ const CommentItem = ({
    };
 
    return (
-      <VStack mb='1rem' ps={ps}>
+      <VStack mb={['.7rem', '1rem']} ps={ps}>
          <Flex align='flex-start' w='100%'>
             <CustomAvatar
                size={avatarSize}
@@ -70,7 +73,10 @@ const CommentItem = ({
                boxShadow='0 0 0 1px rgb(23 23 23 / 13%)'
                p={{ base: '.5rem .7rem', sm: '.5rem 1rem' }}
                borderRadius='5px'
-               _hover={{ svg: { fill: 'black' } }}
+               _hover={{
+                  '.more-icon': { fill: 'black' },
+                  '.arrow-up': { color: 'black' },
+               }}
                w='100%'
                flex='1'
                ms='.5rem'
@@ -97,7 +103,7 @@ const CommentItem = ({
                      {/* show Date */}
                      <Text fontSize='12px' color='#717171'>
                         • {dateFormat(createdAt)}{' '}
-                        {editedAt && (
+                        {edited && (
                            <Text as='span'>
                               {showEditedDate(createdAt, editedAt)
                                  ? `• Edited on ${dateFormat(editedAt)}`
@@ -122,12 +128,29 @@ const CommentItem = ({
                   className='mde-preview-content'
                   fontFamily='monospace'
                >
+                  {reply && repliedUserName !== currentUserProfile.name && (
+                     <Text
+                        fontSize='13px'
+                        color='#717171'
+                        opacity='.7'
+                        mt='-5px !important'
+                        mb='.5rem !important'
+                        fontFamily='sans-serif'
+                     >
+                        <FiCornerLeftUp
+                           className='arrow-up'
+                           style={{ display: 'inline-block' }}
+                        />{' '}
+                        reply to {repliedUserName}
+                     </Text>
+                  )}
+
                   {htmlToJsx(converter().makeHtml(text))}
                </Box>
             </Box>
          </Flex>
 
-         <Box w='100%' ps={footerPs}>
+         <Box w='100%' ps={footerPs} mt='.3rem !important'>
             {!showDiscussionBox && (
                <HStack justify='flex-start'>
                   <ReactionButton
@@ -153,6 +176,7 @@ const CommentItem = ({
                   showDismiss={true}
                   onDismiss={handleshowDiscussionBox}
                   commentId={commentId}
+                  repliedUserId={userId}
                />
             )}
          </Box>

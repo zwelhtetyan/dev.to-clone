@@ -79,7 +79,7 @@ export const ReactionButton = ({
 }) => {
    return (
       <Button
-         h='30px'
+         h={['27px', '30px']}
          bg='white'
          px={1}
          border='1px solid transparent'
@@ -92,7 +92,11 @@ export const ReactionButton = ({
          <Text fontWeight={400} fontSize='14px'>
             {value}{' '}
             {text && (
-               <Text as='span' display={display} ms={1}>
+               <Text
+                  as='span'
+                  display={{ base: 'none', sm: 'inline-block' }}
+                  ms={1}
+               >
                   {text}
                </Text>
             )}
