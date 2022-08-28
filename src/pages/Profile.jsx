@@ -51,7 +51,7 @@ const Profile = () => {
    }
 
    return (
-      <Box mt='-.5rem !important'>
+      <Box mt='-.5rem !important' w='100%' flex='1'>
          <Box
             h={['7rem', '7rem', '9rem']}
             background={currentUserProfile?.background || '#000000'}

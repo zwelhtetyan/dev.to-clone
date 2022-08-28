@@ -52,7 +52,7 @@ const SignUp = ({ type }) => {
    };
 
    return (
-      <VStack h='calc(100vh - 120px)' mx='auto' justify='center' maxW='640px'>
+      <VStack mx='auto' justify='center' maxW='640px' flex='1'>
          <VStack
             boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
             bg='rgb(255 255 255)'

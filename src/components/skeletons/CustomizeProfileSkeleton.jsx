@@ -4,7 +4,7 @@ import { whiteBoxStyles } from '../../utils/CustomizeProfileStyles';
 
 const CustomizeProfileSkeleton = () => {
    return (
-      <Flex justify='center' h='calc(100vh - 120px)' align='flex-start'>
+      <Flex justify='center' w='100%' flex='1' align='flex-start'>
          <Box
             {...whiteBoxStyles}
             w='100%'

@@ -22,9 +22,10 @@ const Home = () => {
       <Flex
          px={{ base: '0', md: '1rem' }}
          maxW='1200px'
-         mx='auto'
+         w='100%'
          pos='relative'
          align='flex-start'
+         flex='1'
       >
          {/* home menu */}
          <Box

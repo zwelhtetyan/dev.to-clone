@@ -3,12 +3,13 @@ import React from 'react';
 
 const DeleteConfirm = ({ title, onDismiss, onDelete, loading, type }) => {
    return (
-      <VStack h='calc(100vh - 120px)' justify='center'>
+      <VStack justify='center' flex='1' w='100%'>
          <VStack
-            p='3rem 1rem'
+            py={['2rem', '3rem']}
+            px={['.5rem', '.5rem', '2rem']}
+            bg='white'
             maxW='900px'
             w='100%'
-            bg='white'
             boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
             borderRadius={['0', '0', '5px']}
             className='mde-preview'

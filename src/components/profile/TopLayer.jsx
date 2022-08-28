@@ -70,7 +70,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
             left={{ base: '2.5rem', md: '50%' }}
             transform='translateX(-50%)'
             borderWidth={{
-               md: '6px ',
+               md: '7px ',
                base: '4px ',
             }}
             borderColor={profileData?.background || '#000000'}

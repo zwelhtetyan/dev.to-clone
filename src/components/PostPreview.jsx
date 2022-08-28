@@ -15,7 +15,7 @@ const PostPreview = () => {
 
    return (
       <Box
-         h='79vh'
+         h={{ base: 'calc(100vh - 125px)', md: 'calc(100vh - 150px)' }}
          overflowY='auto'
          fontFamily='monospace'
          fontSize={{ base: '1rem', sm: '1.1rem' }}
@@ -30,6 +30,7 @@ const PostPreview = () => {
                objectFit='cover'
             />
          )}
+
          {title ? <Heading mt={2}>{title}</Heading> : <NoTitleMessage />}
          {tags && tags.length !== 0 && (
             <Wrap py={2} spacing={2} fontFamily='sans-serif'>

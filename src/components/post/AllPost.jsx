@@ -35,7 +35,7 @@ const AllPost = () => {
             />
          )}
 
-         <Box h={loading ? 'calc(100vh - 120px)' : 'auto'}>
+         <Box>
             {err && <ErrorMessage offline={true} />}
 
             {loading && !err && (

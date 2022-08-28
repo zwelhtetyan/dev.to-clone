@@ -36,9 +36,9 @@
          background-color: #fafafa;
       }
 
-      @media screen and (max-width: 480px) {
-         // height: calc(100vh - 335px) !important;
-         height: 350px !important;
+      @media screen and (max-width: 768px) {
+         height: calc(100vh - 355px) !important;
+         // height: 320px !important;
       }
 
       &:focus {

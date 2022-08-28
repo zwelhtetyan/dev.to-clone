@@ -20,7 +20,7 @@ const ReactionBox = () => {
 
 const DashboardSkeleton = () => {
    return (
-      <Box maxW='650px' h='calc(100vh - 120px)' mx='auto'>
+      <Box maxW='650px' flex='1' w='100%' mx='auto'>
          <Box mt={2} px='.5rem'>
             <Skeleton height='30px' w='200px' mb='1.5rem' />
 

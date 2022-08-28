@@ -3,7 +3,7 @@ import { Box, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 
 const ProfileSkeleton = () => {
    return (
-      <Box h='calc(100vh - 120px)'>
+      <Box flex='1' w='100%'>
          <Skeleton h={['7rem', '7rem', '9rem']} />
 
          <Box mx={{ base: 'none', md: '.5rem' }}>

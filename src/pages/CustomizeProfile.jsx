@@ -151,10 +151,10 @@ const CustomizeProfile = () => {
    };
 
    return (
-      <Box maxW='1000px' mx='auto' mt='1rem' px='.5rem'>
+      <Box maxW='1000px' w='100%' mt='1rem' px={{ md: '.5rem' }} flex='1'>
          <Heading fontSize={{ base: '1.3rem', md: '1.5rem' }}>
             Profile for{' '}
-            <Text color='rgb(59 73 223)' as='span'>
+            <Text color='rgb(59 73 223)' as='span' ps='.5rem'>
                @{currentUserProfile?.name} 🤓
             </Text>
          </Heading>
@@ -165,6 +165,7 @@ const CustomizeProfile = () => {
             maxW='720px'
             mx='auto'
             mt='1rem'
+            pos='relative'
             onSubmit={updateProfileHandler}
          >
             <User
@@ -203,7 +204,14 @@ const CustomizeProfile = () => {
                profileData={currentUserProfile}
             />
 
-            <Box {...whiteBoxStyles} pb='1rem'>
+            <Box
+               {...whiteBoxStyles}
+               pb='1rem'
+               pos='sticky'
+               bottom='0'
+               zIndex='2'
+               w='100%'
+            >
                <PrimaryBtn
                   bg='rgb(59 73 223)'
                   w='100%'

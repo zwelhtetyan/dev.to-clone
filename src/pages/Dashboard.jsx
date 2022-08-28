@@ -88,7 +88,7 @@ const Dashboard = () => {
    const hasDraftPost = draftPosts && draftPosts.length !== 0;
 
    return (
-      <Box maxW='650px' mx='auto' minH='50vh'>
+      <Box maxW='650px' mx='auto' minH='50vh' w='100%' flex='1'>
          <Box mt={2} px='.5rem'>
             <Heading mb={5} fontSize={{ base: '1.5rem', md: '2rem' }}>
                Dashboard 👻

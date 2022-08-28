@@ -91,7 +91,7 @@ const CreatePostFrom = ({
                boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                borderRadius='5px'
                mt={{ base: '.5rem', md: '1rem' }}
-               p={{ base: '0.5rem', md: '1rem' }}
+               p={{ base: '.5rem', md: '1rem' }}
             >
                {mdeTab === 'write' && (
                   <Box w='100%'>
@@ -129,44 +129,42 @@ const CreatePostFrom = ({
                )}
 
                {mdeTab === 'preview' && <PostPreview />}
+            </Box>
 
-               {/* buttons container */}
-               <HStack justify='flex-end' w='100%' mt='.5rem'>
-                  {!isToEdit && (
-                     <SecondaryBtn
-                        onClick={() => onSubmit(draftPostHandler)}
-                        disabled={savingDraft || publishing || uploadingImg}
-                     >
-                        {savingDraft ? (
-                           <>
-                              <Spinner size='sm' mr='1' /> Saving draft
-                           </>
-                        ) : (
-                           'Save draft'
-                        )}
-                     </SecondaryBtn>
-                  )}
-
-                  <PrimaryBtn
-                     bg='rgb(59 73 223)'
-                     onClick={() =>
-                        onSubmit(
-                           isToEdit ? eidtPostHandler : publishPostHandler
-                        )
-                     }
-                     disabled={publishing || savingDraft || uploadingImg}
+            {/* buttons container */}
+            <HStack justify='flex-end' w='100%' mt='.5rem' px='.5rem'>
+               {!isToEdit && (
+                  <SecondaryBtn
+                     onClick={() => onSubmit(draftPostHandler)}
+                     disabled={savingDraft || publishing || uploadingImg}
                   >
-                     {publishing ? (
+                     {savingDraft ? (
                         <>
-                           <Spinner size='sm' mr='1' />{' '}
-                           {isToEdit ? 'Saving changes' : 'Publishing'}
+                           <Spinner size='sm' mr='1' /> Saving draft
                         </>
                      ) : (
-                        <>{isToEdit ? 'Save changes' : 'Publish'}</>
+                        'Save draft'
                      )}
-                  </PrimaryBtn>
-               </HStack>
-            </Box>
+                  </SecondaryBtn>
+               )}
+
+               <PrimaryBtn
+                  bg='rgb(59 73 223)'
+                  onClick={() =>
+                     onSubmit(isToEdit ? eidtPostHandler : publishPostHandler)
+                  }
+                  disabled={publishing || savingDraft || uploadingImg}
+               >
+                  {publishing ? (
+                     <>
+                        <Spinner size='sm' mr='1' />{' '}
+                        {isToEdit ? 'Saving changes' : 'Publishing'}
+                     </>
+                  ) : (
+                     <>{isToEdit ? 'Save changes' : 'Publish'}</>
+                  )}
+               </PrimaryBtn>
+            </HStack>
          </Box>
       </Box>
    );

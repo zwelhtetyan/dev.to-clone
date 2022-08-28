@@ -22,9 +22,10 @@ const SignOutConfirm = () => {
 
    return (
       <VStack
-         h='calc(100vh - 120px)'
+         h='calc(100vh - 64px)'
          justify='center'
          p='0 .5rem'
+         w='100%'
          textAlign='center'
       >
          <Heading

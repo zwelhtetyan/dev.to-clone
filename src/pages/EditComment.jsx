@@ -56,12 +56,11 @@ const EditComment = () => {
    };
 
    return (
-      <HStack h='calc(100vh - 120px)' px={{ md: '.5rem' }}>
+      <HStack px={{ md: '.5rem' }} flex='1' w='100%' justify='center'>
          <Box
             p={['1rem .5rem', '1rem .5rem', '2rem 2.5rem']}
             maxW='900px'
             w='100%'
-            m='auto'
             borderRadius={{ md: '5px' }}
             bg='rgb(255 255 255)'
             boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'

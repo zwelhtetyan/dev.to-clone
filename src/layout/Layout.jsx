@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import MainNavigation from './MainNavigation';
@@ -9,11 +9,11 @@ const Layout = () => {
       <>
          <MainNavigation />
 
-         <Box as='main'>
+         <VStack as='main' minH='calc(100vh - 64px)'>
             <Outlet />
-         </Box>
 
-         <Footer />
+            <Footer />
+         </VStack>
       </>
    );
 };

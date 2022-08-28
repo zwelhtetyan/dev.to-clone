@@ -18,10 +18,12 @@ const DetailElements = ({
    return (
       <Box
          maxW='1200px'
-         mx='auto'
+         w='100%'
          py='0'
          px={{ base: '0', md: '1rem' }}
          mt={{ base: '-.5rem !important', md: '0 !important' }}
+         mb='2rem'
+         flex='1'
       >
          {!postDetail && loading && <DetailSkeleton />}
 

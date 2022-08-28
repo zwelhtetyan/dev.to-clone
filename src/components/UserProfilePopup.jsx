@@ -65,6 +65,7 @@ const UserProfilePopup = ({
          <Box bg='white' pos='relative'>
             <Box
                bgImage={profile}
+               bgColor={background || '#000000'}
                borderWidth='4px'
                borderColor={background || '#000000'}
                pos='absolute'

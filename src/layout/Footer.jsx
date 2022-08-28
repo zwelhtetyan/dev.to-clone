@@ -25,8 +25,9 @@ const Footer = () => {
          color='rgb(64 64 64)'
          fontSize='14px'
          textAlign='center'
-         mt='3rem'
+         mt='1rem !important'
          as='footer'
+         w='100%'
       >
          <Text>
             <Links onClick={handleClickLink}>DEV Community</Links> — A
