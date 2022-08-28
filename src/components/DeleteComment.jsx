@@ -9,6 +9,7 @@ import DeleteConfirm from '../utils/DeleteConfirm';
 const DeleteComment = () => {
    // scroll top
    useEffect(() => window.scrollTo(0, 0), []);
+
    const navigate = useNavigate();
 
    const [deleting, setDeleting] = useState(false);

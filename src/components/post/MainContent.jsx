@@ -42,7 +42,7 @@ const MainContent = ({ postDetail }) => {
       } else {
          window.scrollTo(0, 0);
       }
-   }, [clickComment]);
+   }, [clickComment, postDetail.id]);
 
    const isAuthor = user?.userId === postDetail?.userId;
 
