@@ -35,7 +35,7 @@ const MainContent = ({ postDetail }) => {
    useEffect(() => {
       const scrollHeight =
          window.pageYOffset +
-         discussionBoxRef.current.getBoundingClientRect().top -
+         discussionBoxRef.current?.getBoundingClientRect().top -
          60;
       if (clickComment) {
          window.scrollTo({ top: scrollHeight });
@@ -153,7 +153,9 @@ const MainContent = ({ postDetail }) => {
                   {htmlToJsx(converter().makeHtml(postDetail.MDEValue))}
                </Box>
 
-               <Divider mt={7} h='1px' background='#efefef' mx='auto' />
+               {!postDetail.draft && (
+                  <Divider mt={7} h='1px' background='#efefef' mx='auto' />
+               )}
 
                {!postDetail.draft && (
                   <Discussion
