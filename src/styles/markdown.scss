@@ -30,15 +30,15 @@
    }
 
    .mde-text {
-      height: calc(100vh - 405px) !important;
+      height: calc(100vh - 370px) !important;
 
       &:disabled {
          background-color: #fafafa;
       }
 
       @media screen and (max-width: 768px) {
+         min-height: 300px !important;
          height: calc(100vh - 355px) !important;
-         // height: 320px !important;
       }
 
       &:focus {

@@ -132,7 +132,15 @@ const CreatePostFrom = ({
             </Box>
 
             {/* buttons container */}
-            <HStack justify='flex-end' w='100%' mt='.5rem' px='.5rem'>
+            <HStack
+               justify='flex-end'
+               w='100%'
+               py='.5rem'
+               px='.5rem'
+               pos='sticky'
+               bottom='0'
+               bg='#f5f5f5'
+            >
                {!isToEdit && (
                   <SecondaryBtn
                      onClick={() => onSubmit(draftPostHandler)}

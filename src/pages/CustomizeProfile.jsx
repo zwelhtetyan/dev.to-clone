@@ -152,9 +152,9 @@ const CustomizeProfile = () => {
 
    return (
       <Box maxW='1000px' w='100%' mt='1rem' px={{ md: '.5rem' }} flex='1'>
-         <Heading fontSize={{ base: '1.3rem', md: '1.5rem' }}>
+         <Heading fontSize={{ base: '1.3rem', md: '1.5rem' }} ps='.5rem'>
             Profile for{' '}
-            <Text color='rgb(59 73 223)' as='span' ps='.5rem'>
+            <Text color='rgb(59 73 223)' as='span'>
                @{currentUserProfile?.name} 🤓
             </Text>
          </Heading>

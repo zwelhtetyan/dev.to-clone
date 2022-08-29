@@ -53,7 +53,7 @@ const DiscussionBox = ({
       };
       textArea.addEventListener('click', checkUser);
       return () => textArea.removeEventListener('click', checkUser);
-   }, [user, navigate]);
+   }, [user, navigate]); // hide mde-header if user is not authenticated
 
    useEffect(() => {
       const textBoxes = [...document.querySelectorAll('.mde-text')];
@@ -109,7 +109,8 @@ const DiscussionBox = ({
          .then((_) => {
             setSubmitting(false);
             setMDEValue('');
-            onDismiss && onDismiss();
+            // onDismiss && onDismiss(); // close discussionBox immediately without accepting new state value
+            onDismiss && setTimeout(onDismiss, 100); // need new state value ('submitting = false') to disable || enable to MDE after state change
             setMdeTab('write');
             removeFromLocalStorage('commentItemToManage');
             console.log('added comment successfully');

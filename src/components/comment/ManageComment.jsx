@@ -45,20 +45,35 @@ const ManageComment = ({ commentId, postId, comments }) => {
    };
 
    const transformedCommentsHandler = () => {
-      let transformedCommennts;
-
       const filteredComments = comments.filter(
          (comment) => comment.commentId !== commentId
       );
 
-      transformedCommennts = filteredComments.map((comment) => ({
-         ...comment,
-         replies: {
-            ...Object.values(comment.replies)
-               .filter((cmt) => cmt.commentId !== commentId)
-               .filter((cmt) => cmt.repliedCommentId !== commentId),
-         },
-      }));
+      const transformedCommennts = filteredComments.map((comment) => {
+         const repliedComments = Object.values(comment.replies)
+            .sort((a, b) => a.createdAt - b.createdAt)
+            .filter((cmt) => cmt.commentId !== commentId);
+
+         const commentIds = [
+            comment.commentId,
+            ...repliedComments.map((cmt) => cmt.commentId),
+         ];
+
+         repliedComments.forEach((cmt) => {
+            if (!commentIds.includes(cmt.repliedCommentId)) {
+               commentIds.splice(commentIds.indexOf(cmt.commentId), 1);
+            }
+         });
+
+         const finalRepliedComments = repliedComments.filter((cmt) =>
+            commentIds.includes(cmt.commentId)
+         );
+
+         return {
+            ...comment,
+            replies: { ...finalRepliedComments },
+         };
+      });
 
       dispatch(setTransformedComments(transformedCommennts));
       saveToLocalStorage(
