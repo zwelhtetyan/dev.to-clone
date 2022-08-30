@@ -69,7 +69,7 @@ const SignUp = ({ type }) => {
                   cursor='pointer'
                   onClick={() => navigate('/')}
                >
-                  DEV Community
+                  DEV Community 👩‍💻👨‍💻
                </Text>{' '}
                is a community of 890,178 amazing developers
             </Text>

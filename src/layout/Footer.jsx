@@ -30,7 +30,7 @@ const Footer = () => {
          w='100%'
       >
          <Text>
-            <Links onClick={handleClickLink}>DEV Community</Links> — A
+            <Links onClick={handleClickLink}>DEV Community 👩‍💻👨‍💻</Links> — A
             constructive and inclusive social network for software developers.
             With you every step of your journey.
          </Text>

@@ -82,3 +82,9 @@ export const updateComment = async (comments, postId) => {
 
    await updateDoc(docRef, { comments });
 };
+
+export const updatePostReaction = async (data, postId) => {
+   const docRef = doc(db, 'posts', postId);
+
+   await updateDoc(docRef, data);
+};

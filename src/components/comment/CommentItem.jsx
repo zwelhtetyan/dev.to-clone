@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import authorIcon from '../../assets/logo/authorIcon.svg';
 import { useState } from 'react';
 import DiscussionBox from '../discussion/DiscussionBox';
-import useClickLike from '../../hooks/useClickLike';
+import useClickLikeToComment from '../../hooks/useClickLikeToComment';
 import ManageComment from './ManageComment';
 import { FiCornerLeftUp } from 'react-icons/fi';
 
@@ -39,7 +39,7 @@ const CommentItem = ({
 
    const [showDiscussionBox, setShowDiscussionbox] = useState(false);
 
-   const { handleClickLike, updatingLike } = useClickLike(
+   const { handleClickLike, updatingLike } = useClickLikeToComment(
       currentUserId,
       postId
    );

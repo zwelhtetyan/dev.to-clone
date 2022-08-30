@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { updateComment } from '../lib/api';
 import { setCurrentComments } from '../store/comment/currentComments';
 
-const useClickLike = (currentUserId, postId) => {
+const useClickLikeToComment = (currentUserId, postId) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
@@ -61,4 +61,4 @@ const useClickLike = (currentUserId, postId) => {
    return { handleClickLike, updatingLike };
 };
 
-export default useClickLike;
+export default useClickLikeToComment;
