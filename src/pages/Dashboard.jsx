@@ -16,6 +16,10 @@ import DraftPostItem from '../components/post/DraftPostItem';
 import PostItem from '../components/post/PostItem';
 import DashboardSkeleton from '../components/skeletons/DashboardSkeleton';
 import { useAuth } from '../context/auth';
+import {
+   calcTotalDiscussion,
+   calculateReaction,
+} from '../helper/calculateTotal';
 import ErrorMessage from '../utils/ErrorMessage';
 
 const ReactionBox = ({ count, title }) => {
@@ -83,6 +87,12 @@ const Dashboard = () => {
    const totalPost = publishedPosts?.length + draftPosts?.length || 0;
    const totalPublishedPost = publishedPosts?.length;
    const totalDraftPost = draftPosts?.length;
+   const totalPostReaction = publishedPosts?.reduce(
+      (count, postItem) =>
+         count +
+         calculateReaction(postItem.heart, postItem.unicorn, postItem.saved),
+      0
+   );
 
    const hasPublishPost = publishedPosts && publishedPosts.length !== 0;
    const hasDraftPost = draftPosts && draftPosts.length !== 0;
@@ -96,7 +106,7 @@ const Dashboard = () => {
 
             <HStack spacing={[2, 3, 5]} mb={6}>
                <ReactionBox count={totalPost} title='Total Posts' />
-               <ReactionBox count={11} title='Total Reactions' />
+               <ReactionBox count={totalPostReaction} title='Total Reactions' />
             </HStack>
          </Box>
 
@@ -134,6 +144,14 @@ const Dashboard = () => {
                               isUpdated={postData?.updated}
                               fromDashboard={true}
                               userId={postData.userId}
+                              totalDiscussion={calcTotalDiscussion(
+                                 postData.comments
+                              )}
+                              totalReaction={calculateReaction(
+                                 postData.heart,
+                                 postData.unicorn,
+                                 postData.saved
+                              )}
                            />
                         ))
                      ) : (

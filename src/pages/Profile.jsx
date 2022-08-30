@@ -7,6 +7,11 @@ import TopLayer from '../components/profile/TopLayer';
 import ProfileLeftPart from '../components/profile/ProfileLeftPart';
 import ErrorMessage from '../utils/ErrorMessage';
 import ProfileSkeleton from '../components/skeletons/ProfileSkeleton';
+import {
+   calcTotalDiscussion,
+   calculateReaction,
+   claculateWrittenComments,
+} from '../helper/calculateTotal';
 
 const Profile = () => {
    const [alreadyInProfile, setAlreadyInProfile] = useState(false);
@@ -40,9 +45,17 @@ const Profile = () => {
    }
 
    let publishedPosts = null;
+   let totalCommentWritten = 0;
+
    if (transformedData && !loading && !err) {
       publishedPosts = transformedData.filter(
          (postData) => postData.userId === userIdToView && !postData.draft
+      );
+
+      totalCommentWritten = transformedData.reduce(
+         (count, postItem) =>
+            count + claculateWrittenComments(postItem.comments, userIdToView),
+         0
       );
    }
 
@@ -75,6 +88,7 @@ const Profile = () => {
                   <ProfileLeftPart
                      publishedPosts={publishedPosts}
                      profileData={currentUserProfile}
+                     totalCommentWritten={totalCommentWritten}
                      display={{
                         base: !moreInfo && 'none',
                         md: 'block',
@@ -101,6 +115,14 @@ const Profile = () => {
                               isUpdated={postData?.updated}
                               userId={postData.userId}
                               setAlreadyInProfile={setAlreadyInProfile}
+                              totalDiscussion={calcTotalDiscussion(
+                                 postData.comments
+                              )}
+                              totalReaction={calculateReaction(
+                                 postData.heart,
+                                 postData.unicorn,
+                                 postData.saved
+                              )}
                            />
                         ))}
                   </Box>

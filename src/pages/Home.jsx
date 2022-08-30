@@ -7,12 +7,26 @@ import HomeIcon from '../assets/logo/HomeIcon.svg';
 import ReadingListIcon from '../assets/logo/ReadingListIcon.svg';
 import FAQIcon from '../assets/logo/FAQIcon.svg';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
    const user = useAuth();
    const [clickHome, setClickHome] = useState(false);
 
    useEffect((_) => window.scrollTo(0, 0), [clickHome]);
+
+   const {
+      transformedData,
+      transfromedDataLoading: loading,
+      transformedDataErr: err,
+   } = useSelector((state) => state.transformedData);
+
+   let savedPosts = [];
+   if (transformedData && !loading && !err) {
+      savedPosts = transformedData.filter((postItem) =>
+         postItem.saved?.includes(user.userId)
+      );
+   }
 
    const handleClickHome = () => {
       setClickHome((prev) => !prev);
@@ -42,13 +56,21 @@ const Home = () => {
                onClick={handleClickHome}
             />
             {user && (
-               <SideMenuItem icon={ReadingListIcon} title='Reading List' />
+               <SideMenuItem
+                  icon={ReadingListIcon}
+                  title='Reading List'
+                  savedPosts={savedPosts.length}
+               />
             )}
             <SideMenuItem icon={FAQIcon} title='FAQ' />
          </Box>
 
          {/* all post */}
-         <AllPost />
+         <AllPost
+            transformedData={transformedData}
+            loading={loading}
+            err={err}
+         />
       </Flex>
    );
 };

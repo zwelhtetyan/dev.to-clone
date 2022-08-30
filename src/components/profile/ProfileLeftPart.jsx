@@ -21,7 +21,12 @@ const TechStack = ({ title, text }) => {
    );
 };
 
-const ProfileLeftPart = ({ publishedPosts, profileData, display }) => {
+const ProfileLeftPart = ({
+   publishedPosts,
+   profileData,
+   display,
+   totalCommentWritten,
+}) => {
    if (!profileData) return;
 
    return (
@@ -62,7 +67,10 @@ const ProfileLeftPart = ({ publishedPosts, profileData, display }) => {
             </HStack>
             <HStack>
                <Image src={commentLg} alt='comment_logo' />
-               <Text>0 comment written</Text>
+               <Text>
+                  {totalCommentWritten}{' '}
+                  {totalCommentWritten > 0 ? 'comments' : 'comment'} written
+               </Text>
             </HStack>
          </Box>
       </Box>

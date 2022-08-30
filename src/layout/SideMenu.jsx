@@ -18,6 +18,7 @@ import ReadingListIcon from '../assets/logo/ReadingListIcon.svg';
 import FAQIcon from '../assets/logo/FAQIcon.svg';
 import SideMenuItem from '../utils/SideMenuItem';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const SideMenu = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,6 +28,19 @@ const SideMenu = () => {
    const user = useAuth();
 
    const [clickHome, setClickHome] = useState(false);
+
+   const {
+      transformedData,
+      transfromedDataLoading: loading,
+      transformedDataErr: err,
+   } = useSelector((state) => state.transformedData);
+
+   let savedPosts = [];
+   if (transformedData && !loading && !err) {
+      savedPosts = transformedData.filter((postItem) =>
+         postItem.saved?.includes(user.userId)
+      );
+   }
 
    useEffect((_) => window.scrollTo(0, 0), [clickHome]);
 
@@ -86,6 +100,7 @@ const SideMenu = () => {
                   {user && (
                      <SideMenuItem
                         icon={ReadingListIcon}
+                        savedPosts={savedPosts.length}
                         title='Reading List'
                      />
                   )}

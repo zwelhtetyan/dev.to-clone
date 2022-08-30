@@ -24,8 +24,6 @@ const useClickReactToPost = (reactionArr, postId, reactType) => {
          ? prevReactionArr.filter((id) => id !== userId)
          : [...prevReactionArr, userId];
 
-      console.log(transformedReact);
-
       updatePostReaction({ [reactType]: transformedReact }, postId)
          .then((_) => {
             setUpdatingReact(false);

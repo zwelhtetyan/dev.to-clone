@@ -38,6 +38,7 @@ const PostItem = ({
    currentUserProfile,
    setAlreadyInProfile,
    totalDiscussion,
+   totalReaction,
 }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -150,11 +151,15 @@ const PostItem = ({
                <HStack justify='space-between' w='100%'>
                   <Box>
                      <HStack>
-                        <ReactionButton
-                           icon={heart}
-                           value={11}
-                           text='Reaction'
-                        />
+                        {totalReaction && (
+                           <ReactionButton
+                              icon={heart}
+                              value={totalReaction}
+                              text={
+                                 totalReaction > 1 ? 'Reactions' : 'Reaction'
+                              }
+                           />
+                        )}
                         <ReactionButton
                            onClick={handleClickComment}
                            icon={comment}

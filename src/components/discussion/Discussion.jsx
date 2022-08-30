@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Heading } from '@chakra-ui/react';
 import DiscussionBox from './DiscussionBox';
-import { calcTotalDiscussion } from '../../helper/calcTotalDiscussions';
+import { calcTotalDiscussion } from '../../helper/calculateTotal';
 
 const Discussion = ({ postId, comments, discussionBoxRef }) => {
    return (

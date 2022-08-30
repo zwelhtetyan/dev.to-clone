@@ -7,16 +7,13 @@ import ErrorMessage from '../../utils/ErrorMessage';
 import { getUserProfileData } from '../../helper/getUserProfileData';
 import { useAuth } from '../../context/auth';
 import Hero from '../Hero';
-import { calcTotalDiscussion } from '../../helper/calcTotalDiscussions';
+import {
+   calcTotalDiscussion,
+   calculateReaction,
+} from '../../helper/calculateTotal';
 
-const AllPost = () => {
+const AllPost = ({ transformedData, loading, err }) => {
    const user = useAuth();
-
-   const {
-      transformedData,
-      transfromedDataLoading: loading,
-      transformedDataErr: err,
-   } = useSelector((state) => state.transformedData);
 
    const profileData = useSelector((state) => state.profileData.profileData);
 
@@ -65,6 +62,11 @@ const AllPost = () => {
                         postData.userId
                      )}
                      totalDiscussion={calcTotalDiscussion(postData.comments)}
+                     totalReaction={calculateReaction(
+                        postData.heart,
+                        postData.unicorn,
+                        postData.saved
+                     )}
                   />
                ))}
          </Box>
