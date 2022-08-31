@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { setClickComment } from '../../store/scrollDiscussion';
 import LangTag from '../../utils/LangTag';
 
-const OtherPost = ({ title, tags, postId }) => {
+const OtherPostItem = ({ title, tags, postId }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
@@ -29,7 +29,6 @@ const OtherPost = ({ title, tags, postId }) => {
       >
          <Text
             fontWeight={600}
-            fontSize={['17px', '18px']}
             _hover={{ color: 'rgb(47 58 178)' }}
             cursor='pointer'
             onClick={() => navigate(`/details/${postId}`)}
@@ -47,4 +46,4 @@ const OtherPost = ({ title, tags, postId }) => {
    );
 };
 
-export default OtherPost;
+export default OtherPostItem;

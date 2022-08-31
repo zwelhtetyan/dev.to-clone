@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
-import DetailSkeleton from '../../components/skeletons/DetailSkeleton';
+import DetailSkeleton from '../skeletons/DetailSkeleton';
 import SideReactionBar from './SideReactionBar';
 import ErrorMessage from '../../utils/ErrorMessage';
 import DetailRightContent from './DetailRightContent';
@@ -17,7 +17,7 @@ const DetailElements = ({
 }) => {
    return (
       <Box
-         maxW='1200px'
+         maxW='1280px'
          w='100%'
          py='0'
          px={{ base: '0', md: '1rem' }}
@@ -35,14 +35,11 @@ const DetailElements = ({
 
          {postDetail && (
             <Flex flex={2} align='flex-start'>
-               {/* side bar */}
                <SideReactionBar postDetail={postDetail} />
 
-               <Box flex='2' overflow='hidden' pb='1px'>
-                  {/* main content */}
+               <Box flex='2.5' overflow='hidden' pb='1px'>
                   <MainContent postDetail={postDetail} />
 
-                  {/* right content */}
                   <DetailRightContent
                      currentUserProfile={currentUserProfile}
                      otherPosts={otherPosts}
@@ -53,8 +50,6 @@ const DetailElements = ({
                      isDraft={postDetail.draft}
                   />
                </Box>
-
-               {/* right content */}
 
                <DetailRightContent
                   currentUserProfile={currentUserProfile}

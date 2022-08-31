@@ -13,15 +13,15 @@ import { useAuth } from '../../context/auth';
 const styles = {
    direction: { base: 'row', md: 'column' },
    align: 'center',
-   fontSize: '13px',
+   fontSize: '15px',
    cursor: 'pointer',
 };
 
 const iconStyles = {
    bg: 'transparent',
    borderRadius: 'full',
-   mb: { base: '0', md: '1' },
-   mr: { base: '1', md: '0' },
+   mb: { base: '0', md: '2' },
+   mr: { base: '2', md: '0' },
 };
 
 const SideReactionBar = ({ postDetail }) => {

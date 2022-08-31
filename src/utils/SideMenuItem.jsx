@@ -1,7 +1,7 @@
 import React from 'react';
 import { HStack, Image, Text } from '@chakra-ui/react';
 
-const SideMenuItem = ({ icon, title, onClick, savedPosts }) => {
+const SideMenuItem = ({ icon, title, onClick, savedPosts, bg, color, mb }) => {
    return (
       <HStack
          cursor='pointer'
@@ -12,8 +12,11 @@ const SideMenuItem = ({ icon, title, onClick, savedPosts }) => {
             color: 'rgb(47 58 178)',
          }}
          onClick={onClick}
+         bg={bg}
+         color={color}
+         mb={1}
       >
-         <Image src={icon} alt='menu_icon' />
+         {icon && <Image src={icon} alt='menu_icon' />}
          <Text>{title}</Text>
          {savedPosts && (
             <Text

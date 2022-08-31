@@ -36,7 +36,7 @@ const MainNavigation = () => {
          <HStack
             justify='space-between'
             width='100%'
-            maxW='1200px'
+            maxW='1280px'
             m='auto'
             px={{ base: '.5rem', md: '1rem' }}
          >

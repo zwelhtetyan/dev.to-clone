@@ -26,7 +26,7 @@ export const PrimaryBtn = ({
             bg: bg ? 'rgb(42 55 197)' : 'rgb(59 73 223)',
             color: 'white',
          }}
-         p='0 0.7rem'
+         p='0 .7rem'
          onClick={onClick}
       >
          {children}
@@ -59,7 +59,7 @@ export const SecondaryBtn = ({
             bg: 'rgb(59 73 223 / 10%)',
             color: `${color || 'rgb(47 58 178)'}`,
          }}
-         p='0 0.5rem'
+         p='0 .7rem'
          w={w}
          display={display}
          onClick={onClick}

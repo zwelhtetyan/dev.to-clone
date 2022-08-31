@@ -21,7 +21,8 @@ const DetailSkeleton = () => {
             <SkeletonCircle size='10' />
             <SkeletonText mt='4' noOfLines={2} spacing='2' w='30%' />
          </HStack>
-         <Skeleton h='35px' mt={3} />
+         <Skeleton h='15px' mt={3} />
+         <Skeleton h='15px' mt={3} />
       </Box>
    );
 };

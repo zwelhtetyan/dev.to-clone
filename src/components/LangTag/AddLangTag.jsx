@@ -143,7 +143,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
       }
    });
 
-   const tagInputPlaceHolder = `Add tag ( ${4 - filteredTags.length} ) ...`;
+   const tagInputPlaceHolder = `Add tag ( ${4 - filteredTags.length} )`;
 
    return (
       <>
@@ -152,7 +152,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
                {filteredTagsToShow()}
 
                {filteredTags.length !== 4 && (
-                  <WrapItem maxW='140px'>
+                  <WrapItem maxW='120px'>
                      <Input
                         h='34px'
                         w='100%'

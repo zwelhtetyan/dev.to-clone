@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import UserProfilePopup from '../UserProfilePopup';
-import OtherPost from './OtherPost';
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
+import OtherPostItem from '../post/OtherPostItem';
 
 const DetailRightContent = ({
    currentUserProfile,
@@ -68,7 +68,7 @@ const DetailRightContent = ({
                   </Text>
                </Text>
                {otherPosts.map((postData) => (
-                  <OtherPost
+                  <OtherPostItem
                      key={nanoid()}
                      title={postData.title}
                      tags={postData.tags}

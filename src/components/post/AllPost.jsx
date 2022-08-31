@@ -41,6 +41,12 @@ const AllPost = ({ transformedData, loading, err }) => {
                   <PostItemSkeleton />
                   <PostItemSkeleton />
                   <PostItemSkeleton />
+                  <PostItemSkeleton />
+                  <PostItemSkeleton />
+                  <PostItemSkeleton />
+                  <PostItemSkeleton />
+                  <PostItemSkeleton />
+                  <PostItemSkeleton />
                </>
             )}
 

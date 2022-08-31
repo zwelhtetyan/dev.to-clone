@@ -38,7 +38,7 @@ const SideMenu = () => {
    let savedPosts = [];
    if (transformedData && !loading && !err) {
       savedPosts = transformedData.filter((postItem) =>
-         postItem.saved?.includes(user.userId)
+         postItem.saved?.includes(user?.userId)
       );
    }
 
@@ -47,6 +47,11 @@ const SideMenu = () => {
    const handleClickHome = () => {
       navigate('/');
       setClickHome((prev) => !prev);
+      onClose();
+   };
+
+   const handleClickReadingList = () => {
+      navigate('/reading');
       onClose();
    };
 
@@ -102,6 +107,7 @@ const SideMenu = () => {
                         icon={ReadingListIcon}
                         savedPosts={savedPosts.length}
                         title='Reading List'
+                        onClick={handleClickReadingList}
                      />
                   )}
                   <SideMenuItem icon={FAQIcon} title='FAQ' />

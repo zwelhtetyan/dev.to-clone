@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import DetailElements from '../components/post/DetailElements';
+import DetailElements from '../components/detail/DetailElements';
 
 const PostDetails = () => {
    const { id } = useParams();

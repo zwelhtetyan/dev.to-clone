@@ -11,7 +11,7 @@ import {
    WrapItem,
 } from '@chakra-ui/react';
 import CustomAvatar from '../../utils/CustomAvatar';
-import ManangePost from './ManangePost';
+import ManangePost from '../post/ManangePost';
 import { nanoid } from 'nanoid';
 import LangTag from '../../utils/LangTag';
 import { htmlToJsx } from '../../helper/htmlToJsx';
@@ -58,7 +58,7 @@ const MainContent = ({ postDetail }) => {
             <Image
                src={postDetail.cvImg}
                alt='cover_image'
-               maxH='300px'
+               maxH='335px'
                width='100%'
                borderTopLeftRadius={{ base: 'none', md: '5px' }}
                borderTopRightRadius={{ base: 'none', md: '5px' }}

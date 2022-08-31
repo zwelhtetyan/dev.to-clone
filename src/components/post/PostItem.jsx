@@ -139,7 +139,7 @@ const PostItem = ({
                </Heading>
 
                {tags.length !== 0 && (
-                  <Wrap spacing='.3rem' py='.5rem' mt='0 !important'>
+                  <Wrap spacing='.3rem' py='.2rem' mt='0 !important'>
                      {tags?.map((tag) => (
                         <WrapItem key={nanoid()}>
                            <LangTag tag={tag} />

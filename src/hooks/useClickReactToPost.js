@@ -28,7 +28,7 @@ const useClickReactToPost = (reactionArr, postId, reactType) => {
          .then((_) => {
             setUpdatingReact(false);
 
-            console.log('loved added successfully');
+            console.log('react added successfully');
          })
          .catch((err) => {
             setUpdatingReact(false);

@@ -8,9 +8,11 @@ import ReadingListIcon from '../assets/logo/ReadingListIcon.svg';
 import FAQIcon from '../assets/logo/FAQIcon.svg';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
    const user = useAuth();
+   const navigate = useNavigate();
    const [clickHome, setClickHome] = useState(false);
 
    useEffect((_) => window.scrollTo(0, 0), [clickHome]);
@@ -24,7 +26,7 @@ const Home = () => {
    let savedPosts = [];
    if (transformedData && !loading && !err) {
       savedPosts = transformedData.filter((postItem) =>
-         postItem.saved?.includes(user.userId)
+         postItem.saved?.includes(user?.userId)
       );
    }
 
@@ -35,7 +37,7 @@ const Home = () => {
    return (
       <Flex
          px={{ base: '0', md: '1rem' }}
-         maxW='1200px'
+         maxW='1280px'
          w='100%'
          pos='relative'
          align='flex-start'
@@ -60,6 +62,7 @@ const Home = () => {
                   icon={ReadingListIcon}
                   title='Reading List'
                   savedPosts={savedPosts.length}
+                  onClick={() => navigate('/reading')}
                />
             )}
             <SideMenuItem icon={FAQIcon} title='FAQ' />

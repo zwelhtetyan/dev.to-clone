@@ -20,6 +20,7 @@ const EditComment = React.lazy(() => import('./pages/EditComment'));
 const DeleteComment = React.lazy(() => import('./components/DeleteComment'));
 const SignOutConfirm = React.lazy(() => import('./components/SignOutConfirm'));
 const Error = React.lazy(() => import('./pages/Error'));
+const SavedPosts = React.lazy(() => import('./pages/SavedPosts'));
 
 const App = () => {
    useTransformData();
@@ -56,6 +57,7 @@ const App = () => {
                   <Route path='delete-post' element={<DeletePost />} />
                   <Route path='delete-comment' element={<DeleteComment />} />
                   <Route path='edit-comment' element={<EditComment />} />
+                  <Route path='reading' element={<SavedPosts />} />
                </Route>
 
                <Route path='edit-post' element={<EditPost />} />

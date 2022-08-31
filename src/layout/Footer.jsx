@@ -45,7 +45,7 @@ const Footer = () => {
             <a href='https://github.com/zwelhtetyan' target='blank'>
                <Links>Zwel</Links>
             </a>
-            . DEV Community © 2016 - 2022.
+            . DEV Community 👩‍💻👨‍💻 © 2016 - 2022.
          </Text>
          <Image src={footerLogo} alt='logo' />
       </VStack>
