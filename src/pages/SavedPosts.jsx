@@ -12,37 +12,56 @@ import ErrorMessage from '../utils/ErrorMessage';
 
 const SavedPosts = () => {
    const user = useAuth();
-   const { userId } = user;
+   const userId = user?.userId;
 
    const [savedPosts, setSavedPosts] = useState([]);
+   const [archivedPosts, setArchivedPosts] = useState([]);
    const [allTopics, setAllTopics] = useState([]);
    const [selectedTopic, setSelectedTopic] = useState('All tags');
    const [searchTerm, setSearchTerm] = useState('');
+   const [viewArchive, setViewArchive] = useState(false);
 
    //scroll top
    useEffect(() => window.scrollTo(0, 0), [selectedTopic]);
 
-   const { transformedData, transformedDataErr: err } = useSelector(
-      (state) => state.transformedData
-   );
+   const {
+      transformedData,
+      setTransformedDataLoading: loading,
+      transformedDataErr: err,
+   } = useSelector((state) => state.transformedData);
 
    useEffect(() => {
       if (transformedData) {
-         const savedPosts = transformedData.filter((postItem) =>
-            postItem.saved?.includes(userId)
+         const savedPosts = transformedData.filter(
+            (postItem) =>
+               postItem.saved?.includes(userId) &&
+               !postItem.archived?.includes(userId)
          );
 
+         const archivedPosts = transformedData.filter((postItem) =>
+            postItem.archived?.includes(userId)
+         );
+
+         const currentPosts = viewArchive ? archivedPosts : savedPosts;
+
          const allTopics = [{ topic: 'All tags', active: true }];
-         savedPosts.forEach((postData) => {
+         currentPosts.forEach((postData) => {
             if (postData.tags.length !== 0) {
                allTopics.push(...postData.tags);
             }
          });
 
+         const transform = new Set(allTopics.map((item) => item.topic));
+         const transformedTopics = [...transform].map((topic) =>
+            topic === 'All tags' ? { topic, active: true } : { topic }
+         );
+
          setSavedPosts(savedPosts);
-         setAllTopics(allTopics);
+         setArchivedPosts(archivedPosts);
+         setAllTopics(transformedTopics);
+         setSelectedTopic('All tags');
       }
-   }, [transformedData, userId]);
+   }, [transformedData, userId, viewArchive]);
 
    if (!user) {
       return <Navigate to='/create-account' />;
@@ -64,17 +83,24 @@ const SavedPosts = () => {
    };
 
    const handleSearch = ({ target }) => {
-      setTimeout(() => setSearchTerm(target.value), 300);
+      setSearchTerm(target.value);
+   };
+
+   const toggleViewArchive = () => {
+      setViewArchive((prev) => !prev);
    };
 
    return (
-      <Box flex='1' maxW='1280px' w='100%' p={['.5rem', '1rem']}>
+      <Box flex='1' maxW='1280px' w='100%' p={{ md: '.5rem', xl: '1rem' }}>
          <Header
             readingCount={savedPosts.length}
+            archiveCount={archivedPosts.length}
             allTopics={allTopics}
             handleClickTopic={handleClickTopic}
             selectedTopic={selectedTopic}
             handleSearch={handleSearch}
+            viewArchive={viewArchive}
+            toggleViewArchive={toggleViewArchive}
          />
 
          <HStack mt='1rem' align='flex-start'>
@@ -82,8 +108,11 @@ const SavedPosts = () => {
 
             <Right
                savedPosts={savedPosts}
+               archivedPosts={archivedPosts}
                selectedTopic={selectedTopic}
                searchTerm={searchTerm}
+               viewArchive={viewArchive}
+               loading={loading}
             />
          </HStack>
       </Box>

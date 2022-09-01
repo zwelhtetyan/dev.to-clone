@@ -32,6 +32,7 @@ const OtherPostItem = ({ title, tags, postId }) => {
             _hover={{ color: 'rgb(47 58 178)' }}
             cursor='pointer'
             onClick={() => navigate(`/details/${postId}`)}
+            color='rgb(23 23 23)'
          >
             {title}
          </Text>

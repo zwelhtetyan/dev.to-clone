@@ -88,3 +88,9 @@ export const updatePostReaction = async (data, postId) => {
 
    await updateDoc(docRef, data);
 };
+
+export const saveArchive = async (data, postId) => {
+   const docRef = doc(db, 'posts', postId);
+
+   await updateDoc(docRef, data);
+};

@@ -85,14 +85,14 @@ const PostItem = ({
                alt='cover_img'
             />
          )}
-         <Box p={{ base: '.5rem', sm: '1.5rem' }}>
+         <Box p={{ base: '.5rem', sm: '1rem' }}>
             <HStack align='flex-start'>
-               <HStack align='flex-start'>
+               <HStack align='center'>
                   {/* avatar */}
 
                   <CustomAvatar
                      profile={profile}
-                     size='40px'
+                     size={{ base: '37px', md: '40px' }}
                      onClick={handleViewProfile}
                   />
 
@@ -100,7 +100,7 @@ const PostItem = ({
                      {!currentUserProfile || window.innerWidth <= 768 ? (
                         <Text
                            fontWeight={600}
-                           lineHeight={1}
+                           lineHeight={1.25}
                            fontSize={{ base: '15px', md: '16px' }}
                            onClick={handleViewProfile}
                         >
@@ -110,9 +110,10 @@ const PostItem = ({
                         <TooltipWrapper currentUserProfile={currentUserProfile}>
                            <Text
                               fontWeight={600}
-                              lineHeight={1}
+                              lineHeight={1.25}
                               fontSize={{ base: '15px', md: '16px' }}
                               onClick={handleViewProfile}
+                              color='#3d3d3d'
                            >
                               {name}
                            </Text>
@@ -133,7 +134,8 @@ const PostItem = ({
                   mt={2}
                   w='100%'
                   _hover={{ color: 'rgb(47 58 178)' }}
-                  fontSize={['1.2rem', '1.5rem']}
+                  fontSize={['1.2rem', '1.3rem']}
+                  color='rgb(23 23 23)'
                >
                   {title}
                </Heading>

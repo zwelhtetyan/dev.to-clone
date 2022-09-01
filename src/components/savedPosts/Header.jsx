@@ -14,27 +14,34 @@ import { SecondaryBtn } from '../../utils/Buttons';
 
 const Header = ({
    readingCount,
+   archiveCount,
    allTopics,
    selectedTopic,
    handleClickTopic,
    handleSearch,
+   toggleViewArchive,
+   viewArchive,
 }) => {
    const handleSelectOption = ({ target }) => {
       handleClickTopic(target.value);
    };
 
+   const title = viewArchive
+      ? `Archive (${archiveCount})`
+      : `Reading list (${readingCount})`;
+
    return (
-      <Box>
+      <Box px={{ base: '.5rem', md: '0' }}>
          <HStack
             justify='space-between'
             display={{ base: 'flex', md: 'none' }}
             mb='.5rem'
          >
-            <Heading fontSize={['1.5rem', '1.5rem', '2rem']}>
-               Reading list ({readingCount})
-            </Heading>
+            <Heading fontSize={['1.5rem', '1.5rem', '2rem']}>{title}</Heading>
 
-            <SecondaryBtn>View archive</SecondaryBtn>
+            <SecondaryBtn onClick={toggleViewArchive}>
+               {viewArchive ? 'View reading list' : 'View archive'}
+            </SecondaryBtn>
          </HStack>
 
          <HStack justify='space-between'>
@@ -42,15 +49,18 @@ const Header = ({
                fontSize={['1.5rem', '1.5rem', '2rem']}
                display={{ base: 'none', md: 'block' }}
             >
-               Reading list ({readingCount})
+               {title}
             </Heading>
 
             <HStack
                w={['100%', '100%', 'auto']}
                ms={{ base: '0 !important', md: '.5rem' }}
             >
-               <SecondaryBtn display={{ base: 'none', md: 'block' }}>
-                  View archive
+               <SecondaryBtn
+                  display={{ base: 'none', md: 'block' }}
+                  onClick={toggleViewArchive}
+               >
+                  {viewArchive ? 'View Reading List' : 'View archive'}
                </SecondaryBtn>
 
                <InputGroup

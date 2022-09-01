@@ -37,8 +37,10 @@ const SideMenu = () => {
 
    let savedPosts = [];
    if (transformedData && !loading && !err) {
-      savedPosts = transformedData.filter((postItem) =>
-         postItem.saved?.includes(user?.userId)
+      savedPosts = transformedData.filter(
+         (postItem) =>
+            postItem.saved?.includes(user?.userId) &&
+            !postItem.archived?.includes(user?.userId)
       );
    }
 

@@ -38,6 +38,7 @@ const DraftPostItem = ({ title, postId }) => {
             _hover={{ color: 'rgb(47 58 178)' }}
             fontSize={['1.2rem', '1.5rem']}
             onClick={handleClick}
+            color='rgb(23 23 23)'
          >
             {title}
          </Heading>

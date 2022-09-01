@@ -37,7 +37,7 @@ const DetailElements = ({
             <Flex flex={2} align='flex-start'>
                <SideReactionBar postDetail={postDetail} />
 
-               <Box flex='2.5' overflow='hidden' pb='1px'>
+               <Box flex='2' overflow='hidden' pb='1px'>
                   <MainContent postDetail={postDetail} />
 
                   <DetailRightContent

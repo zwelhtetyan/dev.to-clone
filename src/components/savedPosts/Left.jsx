@@ -5,7 +5,7 @@ import SideMenuItem from '../../utils/SideMenuItem';
 
 const Left = ({ allTopics, handleClickTopic }) => {
    return (
-      <Box w='230px' p='.5rem' display={{ base: 'none', md: 'block' }}>
+      <Box w='230px' display={{ base: 'none', md: 'block' }}>
          {allTopics.map((item) => (
             <SideMenuItem
                bg={item.active && 'rgb(59 73 223 / 10%)'}

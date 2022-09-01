@@ -135,7 +135,9 @@ const MainContent = ({ postDetail }) => {
                   )}
                </Flex>
 
-               <Heading mt={2}>{postDetail.title}</Heading>
+               <Heading mt={2} color='rgb(23 23 23)'>
+                  {postDetail.title}
+               </Heading>
 
                <Wrap py={2} spacing={2}>
                   {postDetail.tags.map((tag) => (
