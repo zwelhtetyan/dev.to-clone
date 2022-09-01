@@ -41,7 +41,10 @@ const PostPreview = () => {
                ))}
             </Wrap>
          )}
-         <Box className='mde-preview-content'>
+         <Box
+            className='mde-preview-content'
+            fontSize={['16px', '17px', '19px']}
+         >
             {htmlToJsx(converter().makeHtml(MDEValue))}
          </Box>
       </Box>

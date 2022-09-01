@@ -26,7 +26,7 @@ const SavedPosts = () => {
 
    const {
       transformedData,
-      setTransformedDataLoading: loading,
+      transfromedDataLoading: loading,
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
 
