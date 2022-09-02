@@ -25,27 +25,23 @@ const DetailRightContent = ({
          top='4rem'
          display={display}
       >
-         <Box
+         <UserProfilePopup
+            w='100%'
+            p='1rem'
+            contentMb='1rem'
             borderRadius={{ base: '0', md: '5px' }}
             boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-            overflow='hidden'
-         >
-            <UserProfilePopup
-               w='100%'
-               p='1rem'
-               contentMb='1rem'
-               backgroundHeight='55px'
-               background={currentUserProfile.background}
-               profile={currentUserProfile.profile}
-               name={currentUserProfile.name}
-               bio={currentUserProfile.bio}
-               work={currentUserProfile.work}
-               location={currentUserProfile.location}
-               education={currentUserProfile.education}
-               joined={currentUserProfile.createdAt}
-               userId={userId}
-            />
-         </Box>
+            backgroundHeight='50px'
+            background={currentUserProfile.background}
+            profile={currentUserProfile.profile}
+            name={currentUserProfile.name}
+            bio={currentUserProfile.bio}
+            work={currentUserProfile.work}
+            location={currentUserProfile.location}
+            education={currentUserProfile.education}
+            joined={currentUserProfile.createdAt}
+            userId={userId}
+         />
 
          {otherPosts.length !== 0 && !isDraft && (
             <Box
@@ -53,10 +49,10 @@ const DetailRightContent = ({
                boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                mt='1rem'
                overflow='hidden'
-               p={p || '1rem'}
-               bg='white'
+               bg='#fafafa'
+               py='.5rem'
             >
-               <Text fontSize='1.3rem' mb='1rem' fontWeight={600}>
+               <Text fontSize='1.3rem' mb='1rem' fontWeight={600} ms='1rem'>
                   More from{' '}
                   <Text
                      as='span'
@@ -67,6 +63,7 @@ const DetailRightContent = ({
                      {currentUserProfile.name}
                   </Text>
                </Text>
+
                {otherPosts.map((postData) => (
                   <OtherPostItem
                      key={nanoid()}

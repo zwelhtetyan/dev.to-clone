@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Tooltip } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 import { joinOnDate } from '../helper/calcTimestamp';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,34 +11,6 @@ const Content = ({ title, text, contentMb }) => {
          </Text>
          <Text fontSize='15px'>{text}</Text>
       </Box>
-   );
-};
-
-export const TooltipWrapper = ({ children, currentUserProfile }) => {
-   return (
-      <Tooltip
-         label={
-            <UserProfilePopup
-               background={currentUserProfile?.background}
-               profile={currentUserProfile?.profile}
-               name={currentUserProfile?.name}
-               bio={currentUserProfile?.bio}
-               work={currentUserProfile?.work}
-               location={currentUserProfile?.location}
-               education={currentUserProfile?.education}
-               joined={currentUserProfile?.createdAt}
-            />
-         }
-         bg='rgb(255 255 255)'
-         color='black'
-         border='1px solid rgb(23 23 23 / 18%)'
-         borderRadius='5px'
-         overflow='hidden'
-         placement='bottom-start'
-         p='0'
-      >
-         {children}
-      </Tooltip>
    );
 };
 
@@ -56,13 +28,29 @@ const UserProfilePopup = ({
    contentMb,
    backgroundHeight,
    userId,
+   pos,
+   display,
+   zIndex,
+   boxShadow,
+   borderRadius,
 }) => {
    const navigate = useNavigate();
 
    return (
-      <Box w={w || '300px'} borderRadius='5px'>
+      <Box
+         w={w || '300px'}
+         borderRadius={borderRadius}
+         pos={pos}
+         zIndex={zIndex}
+         display={display}
+         className='profilePopup'
+         bg='#fafafa'
+         boxShadow={boxShadow}
+         overflow='hidden'
+         onClick={(e) => e.stopPropagation()}
+      >
          <Box bg={background || '#000000'} h={backgroundHeight || '45px'} />
-         <Box bg='white' pos='relative'>
+         <Box pos='relative'>
             <Box
                bgImage={profile}
                bgColor={background || '#000000'}
@@ -78,8 +66,6 @@ const UserProfilePopup = ({
                left='1rem'
                cursor='pointer'
                onClick={() => navigate(`/profile/${userId}`)}
-               transition='.3s'
-               _hover={{ filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))' }}
             />
             <Box p={p || '.5rem'} pt='.2rem'>
                <Text

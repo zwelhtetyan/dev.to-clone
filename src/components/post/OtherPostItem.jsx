@@ -18,14 +18,11 @@ const OtherPostItem = ({ title, tags, postId }) => {
    return (
       <Box
          mb='.5rem'
-         borderRadius='5px'
-         p='.5rem'
+         py='.5rem'
+         px='1rem'
          onClick={handleNavigate}
          cursor='pointer'
-         _hover={{
-            boxShadow: '0 0 0 1px rgb(23 23 23 / 10%)',
-            bg: '#F5F5F5',
-         }}
+         _hover={{ bg: 'white' }}
       >
          <Text
             fontWeight={600}
@@ -36,6 +33,7 @@ const OtherPostItem = ({ title, tags, postId }) => {
          >
             {title}
          </Text>
+
          <Wrap spacing='.3rem' pt='.3rem'>
             {tags?.map((langtag) => (
                <WrapItem key={nanoid()} onClick={(e) => e.stopPropagation()}>

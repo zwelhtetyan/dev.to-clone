@@ -28,6 +28,7 @@ const Branding = ({ backgroundRef, profileData }) => {
                      top='0'
                      left='0'
                      type='color'
+                     className='color-input'
                      w='90px'
                      border='none'
                      value={brandColor}

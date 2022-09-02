@@ -83,7 +83,13 @@ const SavedPostItem = ({ postData, isArchive }) => {
          </Flex>
 
          <SecondaryBtn onClick={handleClickArchive} disabled={loading}>
-            {isArchive ? 'Unarchive' : 'Archive'}
+            {isArchive
+               ? loading
+                  ? 'Unarchiving'
+                  : 'Unarchive'
+               : loading
+               ? 'Archiving'
+               : 'Archive'}
          </SecondaryBtn>
       </HStack>
    );

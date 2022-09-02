@@ -21,12 +21,15 @@ const PostDetails = () => {
       (data) => data.id === postDetail?.userId
    );
 
-   const otherPosts = transformedData?.filter(
-      (postData) =>
-         postData.userId === currentUserProfile?.id &&
-         postData.id !== id &&
-         !postData.draft
-   );
+   const otherPosts = transformedData
+      ?.filter(
+         (postData) =>
+            postData.userId === currentUserProfile?.id &&
+            postData.id !== id &&
+            !postData.draft
+      )
+      .sort((a, b) => (b.heart?.length || 0) - (a.heart?.length || 0))
+      .slice(0, 3); // get just 3 most reaction post
 
    //to preview images
    useEffect(() => {

@@ -10,7 +10,7 @@ const ErrorMessage = ({ offline, urlNotFound }) => {
    const navigate = useNavigate();
 
    return (
-      <VStack justify='center' flex='1' fontSize={['16px', '17px']}>
+      <VStack justify='center' flex='1' fontSize={['16px', '17px']} py='7rem'>
          {offline && (
             <VStack>
                <HStack m='auto'>

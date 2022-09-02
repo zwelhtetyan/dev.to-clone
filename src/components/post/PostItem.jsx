@@ -18,7 +18,7 @@ import { ReactionButton } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { nanoid } from 'nanoid';
 import ManangePost from './ManangePost';
-import { TooltipWrapper } from '../UserProfilePopup';
+import UserProfilePopup from '../UserProfilePopup';
 import DisplayDate from './DisplayDate';
 import { useDispatch } from 'react-redux';
 import { setClickComment } from '../../store/scrollDiscussion';
@@ -34,6 +34,7 @@ const PostItem = ({
    readTime,
    isUpdated,
    fromDashboard,
+   showHover,
    userId,
    currentUserProfile,
    setAlreadyInProfile,
@@ -92,33 +93,45 @@ const PostItem = ({
 
                   <CustomAvatar
                      profile={profile}
-                     size={{ base: '37px', md: '40px' }}
+                     size='37px'
                      onClick={handleViewProfile}
                   />
 
                   <Box>
-                     {!currentUserProfile || window.innerWidth <= 768 ? (
+                     <Box
+                        _hover={
+                           showHover && {
+                              md: { '& .profilePopup': { display: 'block' } },
+                           }
+                        }
+                     >
                         <Text
                            fontWeight={600}
                            lineHeight={1.25}
                            fontSize={{ base: '15px', md: '16px' }}
                            onClick={handleViewProfile}
+                           color='#3d3d3d'
+                           _hover={{ color: '#090909' }}
                         >
                            {name}
                         </Text>
-                     ) : (
-                        <TooltipWrapper currentUserProfile={currentUserProfile}>
-                           <Text
-                              fontWeight={600}
-                              lineHeight={1.25}
-                              fontSize={{ base: '15px', md: '16px' }}
-                              onClick={handleViewProfile}
-                              color='#3d3d3d'
-                           >
-                              {name}
-                           </Text>
-                        </TooltipWrapper>
-                     )}
+
+                        <UserProfilePopup
+                           background={currentUserProfile?.background}
+                           profile={currentUserProfile?.profile}
+                           name={currentUserProfile?.name}
+                           bio={currentUserProfile?.bio}
+                           work={currentUserProfile?.work}
+                           location={currentUserProfile?.location}
+                           education={currentUserProfile?.education}
+                           joined={currentUserProfile?.createdAt}
+                           pos='absolute'
+                           zIndex={1}
+                           display='none'
+                           boxShadow='rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px'
+                           borderRadius='5px'
+                        />
+                     </Box>
 
                      <DisplayDate createdAt={createdAt} isUpdated={isUpdated} />
                   </Box>

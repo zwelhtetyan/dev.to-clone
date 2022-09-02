@@ -37,7 +37,7 @@ const DetailElements = ({
             <Flex flex={2} align='flex-start'>
                <SideReactionBar postDetail={postDetail} />
 
-               <Box flex='2.3' overflow='hidden' pb='1px'>
+               <Box flex='2.1' overflow='hidden' pb='1px'>
                   <MainContent postDetail={postDetail} />
 
                   <DetailRightContent
@@ -46,7 +46,6 @@ const DetailElements = ({
                      userId={postDetail.userId}
                      display={{ base: 'block', xl: 'none' }}
                      m={{ base: '1.5rem 0', md: '1.5rem 1px 0' }}
-                     p='.5rem'
                      isDraft={postDetail.draft}
                   />
                </Box>

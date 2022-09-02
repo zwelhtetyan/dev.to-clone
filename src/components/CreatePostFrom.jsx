@@ -107,6 +107,7 @@ const CreatePostFrom = ({
                         fontWeight='700'
                         value={postTitle}
                         height='60px'
+                        className='title-input'
                         m='0'
                         required
                         onChange={({ target }) => setPostTitle(target.value)}
