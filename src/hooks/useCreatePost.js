@@ -26,9 +26,9 @@ const useCreatePost = (currentPostDataToEdit) => {
          title: '',
          tags: [],
          MDEValue: '',
-         userId: user.userId,
+         userId: user?.userId,
       }),
-      [user.userId]
+      [user?.userId]
    );
 
    //states
@@ -54,11 +54,11 @@ const useCreatePost = (currentPostDataToEdit) => {
          title: postDataFromStore.title,
          tags: postDataFromStore.tags,
          MDEValue: postDataFromStore.MDEValue,
-         userId: user.userId,
+         userId: user?.userId,
       };
 
       setPostData((prevData) => ({ ...prevData, ...newData }));
-   }, [postDataFromStore, user.userId]);
+   }, [postDataFromStore, user?.userId]);
 
    //save to localStorage
    useEffect(() => {

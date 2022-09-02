@@ -61,7 +61,7 @@ const Dashboard = () => {
    const user = useAuth();
 
    if (!user) {
-      return <Navigate to='/login' />;
+      return <Navigate to='/create-account' />;
    }
 
    let publishedPosts = null;

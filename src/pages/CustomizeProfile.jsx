@@ -64,7 +64,7 @@ const CustomizeProfile = () => {
    }
 
    if (!user) {
-      return <Navigate to='/login' />;
+      return <Navigate to='/create-account' />;
    }
 
    const storage = getStorage();
