@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import SavedPostItem from './SavedPostItem';
 import { BsBookmark } from 'react-icons/bs';
+import SavedPostItemSkeleton from '../skeletons/SavedPostItemSkeleton';
 
 const Container = ({ children }) => {
    return (
@@ -101,6 +102,7 @@ const Right = ({
 
    return (
       <Container>
+         {loading && <SavedPostItemSkeleton />}
          {!loading && filteredPosts.length === 0 && <NoFilteredPostMessage />}
          {filteredPosts.map((postData) => (
             <SavedPostItem

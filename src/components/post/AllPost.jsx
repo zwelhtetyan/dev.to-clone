@@ -63,6 +63,7 @@ const AllPost = ({ transformedData, loading, err }) => {
                      readTime={postData.readTime}
                      isUpdated={postData?.updated}
                      userId={postData.userId}
+                     currentUserId={user?.userId}
                      showHover={true}
                      currentUserProfile={getUserProfileData(
                         profileData,
@@ -74,6 +75,8 @@ const AllPost = ({ transformedData, loading, err }) => {
                         postData.unicorn,
                         postData.saved
                      )}
+                     saved={postData.saved}
+                     alreadySaved={postData.saved?.includes(user?.userId)}
                   />
                ))}
          </Box>

@@ -14,7 +14,7 @@ import {
 import heart from '../../assets/logo/heart.svg';
 import comment from '../../assets/logo/comment.svg';
 import { useNavigate } from 'react-router-dom';
-import { ReactionButton } from '../../utils/Buttons';
+import { ReactionButton, SecondaryBtn } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { nanoid } from 'nanoid';
 import ManangePost from './ManangePost';
@@ -22,6 +22,8 @@ import UserProfilePopup from '../UserProfilePopup';
 import DisplayDate from './DisplayDate';
 import { useDispatch } from 'react-redux';
 import { setClickComment } from '../../store/scrollDiscussion';
+import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
+import useClickReactToPost from '../../hooks/useClickReactToPost';
 
 const PostItem = ({
    name,
@@ -36,13 +38,19 @@ const PostItem = ({
    fromDashboard,
    showHover,
    userId,
+   currentUserId,
    currentUserProfile,
    setAlreadyInProfile,
    totalDiscussion,
    totalReaction,
+   saved,
+   alreadySaved,
 }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
+
+   const { clickReactHandler: clickSave, updatingReact: updatingSave } =
+      useClickReactToPost(saved, id, 'saved');
 
    const handleClickComment = (e) => {
       e.stopPropagation();
@@ -64,6 +72,11 @@ const PostItem = ({
       if (setAlreadyInProfile) {
          setAlreadyInProfile((val) => !val);
       }
+   };
+
+   const handleClickSave = (e) => {
+      e.stopPropagation();
+      clickSave();
    };
 
    return (
@@ -97,6 +110,7 @@ const PostItem = ({
                      onClick={handleViewProfile}
                   />
 
+                  {/* name and date */}
                   <Box>
                      <Box
                         _hover={
@@ -164,6 +178,7 @@ const PostItem = ({
                )}
 
                <HStack justify='space-between' w='100%'>
+                  {/* reaction buttons */}
                   <Box>
                      <HStack>
                         {totalReaction && (
@@ -175,6 +190,7 @@ const PostItem = ({
                               }
                            />
                         )}
+
                         <ReactionButton
                            onClick={handleClickComment}
                            icon={comment}
@@ -194,8 +210,24 @@ const PostItem = ({
                      <Text fontSize='13px' color='#717171'>
                         {readTime} min read
                      </Text>
+
                      {fromDashboard && (
                         <ManangePost postId={id} m='0 0 0 .5rem' />
+                     )}
+
+                     {userId !== currentUserId && (
+                        <Box ms='1rem'>
+                           <SecondaryBtn
+                              onClick={handleClickSave}
+                              disabled={updatingSave}
+                           >
+                              {alreadySaved ? (
+                                 <RiBookmarkFill size={19} />
+                              ) : (
+                                 <RiBookmarkLine size={19} />
+                              )}
+                           </SecondaryBtn>
+                        </Box>
                      )}
                   </Flex>
                </HStack>

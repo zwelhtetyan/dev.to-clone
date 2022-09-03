@@ -43,6 +43,7 @@ export const SecondaryBtn = ({
    disabled,
    size,
    m,
+   p,
    name,
 }) => {
    return (
@@ -59,7 +60,7 @@ export const SecondaryBtn = ({
             bg: 'rgb(59 73 223 / 10%)',
             color: `${color || 'rgb(47 58 178)'}`,
          }}
-         p='0 .7rem'
+         p={p || '0 .5rem'}
          w={w}
          display={display}
          onClick={onClick}
