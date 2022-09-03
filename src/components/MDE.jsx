@@ -13,9 +13,9 @@ import {
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
 import { setMDEValueToStore } from '../store/post/postData';
-import CodeBlockIcon from '../assets/logo/CodeBlockIcon';
 import 'react-mde/lib/styles/css/react-mde-all.css';
-import '../styles/markdown.scss';
+import '../styles/customizeMDE.scss';
+import { BsCodeSquare } from 'react-icons/bs';
 
 const customToolbarCommands = () => {
    const commands = getDefaultToolbarCommands();
@@ -25,7 +25,7 @@ const customToolbarCommands = () => {
 
 const codeBlock = {
    name: 'code-block',
-   icon: () => <CodeBlockIcon />,
+   icon: () => <BsCodeSquare size={18} />,
    execute: (opts) => {
       opts.textApi.replaceSelection('```\n Enter code here... \n```');
    },
@@ -39,13 +39,6 @@ const MDE = ({ MDEValue, setMDEValue, isSubmitting, setUploadingImg }) => {
    );
 
    const dispatch = useDispatch();
-
-   React.useEffect(() => {
-      const mdeHeader = document.querySelector('.mde-header');
-      mdeHeader.style.position = 'sticky';
-      mdeHeader.style.top = '0';
-      mdeHeader.style.zIndex = '1';
-   }, []); // sticky header on mobile
 
    React.useEffect(() => {
       if (setMDEValue) {

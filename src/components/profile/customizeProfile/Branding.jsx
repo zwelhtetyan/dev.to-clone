@@ -34,6 +34,11 @@ const Branding = ({ backgroundRef, profileData }) => {
                      value={brandColor}
                      cursor='pointer'
                      zIndex={2}
+                     _focus={{
+                        background: 'none !important',
+                        borderColor: 'none !important',
+                        boxShadow: 'none !important',
+                     }}
                      ref={backgroundRef}
                      onChange={({ target }) => setBrandColor(target.value)}
                   />

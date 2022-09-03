@@ -69,7 +69,7 @@ const UserProfilePopup = ({
             />
             <Box p={p || '.5rem'} pt='.2rem'>
                <Text
-                  ps='4.5rem'
+                  ps='4.2rem'
                   fontSize='1.3rem'
                   fontWeight='600'
                   cursor='pointer'

@@ -108,6 +108,10 @@ const CreatePostFrom = ({
                         value={postTitle}
                         height='60px'
                         className='title-input'
+                        _focus={{
+                           border: 'none !important',
+                           boxShadow: 'none !important',
+                        }}
                         m='0'
                         required
                         onChange={({ target }) => setPostTitle(target.value)}
@@ -140,6 +144,7 @@ const CreatePostFrom = ({
                px='.5rem'
                pos='sticky'
                bottom='0'
+               zIndex='1'
                bg='#f5f5f5'
             >
                {!isToEdit && (

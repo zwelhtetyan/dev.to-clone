@@ -3,7 +3,7 @@ import { Box, HStack, Spinner } from '@chakra-ui/react';
 import converter from '../../helper/converter';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
-import '../../styles/markdown.scss';
+import '../../styles/customizeMDE.scss';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import { updateComment } from '../../lib/api';
 import { useSelector } from 'react-redux';

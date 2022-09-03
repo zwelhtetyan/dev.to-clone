@@ -6,21 +6,38 @@
       flex-wrap: nowrap;
       overflow-x: auto;
 
+      position: sticky;
+      top: 0;
+      z-index: 1;
+
+      background-color: #f9f9f9;
+      height: 50px;
+      display: flex;
+      align-items: center;
+
       .mde-tabs {
          display: none;
       }
 
       & > .mde-header-group {
          padding-left: 0;
+         padding-right: 5px;
       }
 
       ul.mde-header-group li.mde-header-item {
          display: flex;
+         margin: 0;
 
          button {
             padding: 0;
-            margin: 0 4px;
-            font-weight: 900;
+            padding: 5px 10px;
+            height: auto;
+
+            &:hover {
+               background-color: #e2e3f3;
+               color: rgb(47, 58, 178);
+               border-radius: 5px;
+            }
          }
       }
 
@@ -37,7 +54,7 @@
       }
 
       @media screen and (max-width: 768px) {
-         min-height: 300px !important;
+         min-height: 250px !important;
          height: calc(100vh - 355px) !important;
       }
 
@@ -63,6 +80,7 @@
 
       @media screen and (max-width: 480px) {
          font-size: 1rem;
+         padding: 5px !important;
       }
    }
 
@@ -83,6 +101,14 @@
 //discussion box styles
 
 .discussion-box .react-mde {
+   .mde-header {
+      height: 42px;
+
+      & > .mde-header-group {
+         padding: 0 5px;
+      }
+   }
+
    .mde-text,
    .mde-preview {
       min-height: 150px !important;

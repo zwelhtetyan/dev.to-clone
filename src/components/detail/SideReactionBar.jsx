@@ -72,7 +72,7 @@ const SideReactionBar = ({ postDetail }) => {
                   icon={alreadyHeart ? <AlreadyHearted /> : <Heart />}
                   {...iconStyles}
                   border={alreadyHeart && '2px solid rgb(220 38 38)'}
-                  bg={alreadyHeart && 'rgb(220 38 38 / 10%)'}
+                  bg={alreadyHeart ? 'rgb(220 38 38 / 10%)' : 'transparent'}
                   _hover={{
                      bg: 'rgb(220 38 38 / 10%)',
                      svg: { fill: 'rgb(220 38 38)' },
@@ -93,7 +93,7 @@ const SideReactionBar = ({ postDetail }) => {
                   icon={alreadyUnicorned ? <AlreadyUnicorned /> : <Unicorn />}
                   {...iconStyles}
                   border={alreadyUnicorned && '2px solid rgb(5 150 105)'}
-                  bg={alreadyUnicorned && 'rgb(5 150 105 / 10%)'}
+                  bg={alreadyUnicorned ? 'rgb(5 150 105 / 10%)' : 'transparent'}
                   _hover={{
                      bg: 'rgb(5 150 105 / 10%)',
                      svg: { fill: 'rgb(5 150 105)' },
@@ -114,7 +114,7 @@ const SideReactionBar = ({ postDetail }) => {
                   icon={alreadySaved ? <AlreadySaved /> : <Save />}
                   {...iconStyles}
                   border={alreadySaved && '2px solid rgb(79 70 229)'}
-                  bg={alreadySaved && 'rgb(79 70 229 / 10%)'}
+                  bg={alreadySaved ? 'rgb(79 70 229 / 10%)' : 'transparent'}
                   _hover={{
                      bg: 'rgb(79 70 229 / 10%)',
                      svg: { fill: 'rgb(79 70 229)' },

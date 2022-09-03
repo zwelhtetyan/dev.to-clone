@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { IoCloseOutline } from 'react-icons/io5';
 import LangTag from '../../utils/LangTag';
 import { useDispatch } from 'react-redux';
-import { Box, Circle, Input, Square, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box, Input, Wrap, WrapItem } from '@chakra-ui/react';
 import tagsData from './LangTagData.json';
 import { setTagsToStore } from '../../store/post/postData';
 import { nanoid } from 'nanoid';
+import { VscChromeClose } from 'react-icons/vsc';
 
 const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    //states
@@ -40,32 +40,14 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
 
    const filteredTagsToShow = () => {
       const tags = filteredTags.map((tag) => (
-         <WrapItem
-            key={nanoid()}
-            pos='relative'
-            margin='.6rem .3rem !important'
-         >
-            <LangTag tag={tag} />
-            <Square
-               pos='absolute'
-               cursor='pointer'
-               w='25px'
-               h='25px'
-               top='-13'
-               right='-9px'
-               bg='transparent'
-               onClick={() => handleDeleteTag(tag)}
+         <WrapItem key={nanoid()} pos='relative'>
+            <LangTag
+               tag={tag}
+               h='34px'
+               onDeleteTag={() => handleDeleteTag(tag)}
             >
-               <Circle
-                  w='15px'
-                  h='15px'
-                  bg='black'
-                  color='white'
-                  _hover={{ bg: 'red' }}
-               >
-                  <IoCloseOutline />
-               </Circle>
-            </Square>
+               <VscChromeClose size={20} />
+            </LangTag>
          </WrapItem>
       ));
 
@@ -84,7 +66,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
       setFilterTagName('');
       inputTagRef.current.focus();
 
-      setTimeout(() => setFocusTagInput(true), 100); // this action and (line-140's action) trigger once, always false and can't show suggestion box again;
+      setTimeout(() => setFocusTagInput(true), 100); // two setState trigger once and doesn't get true
    };
 
    const handleDeleteTag = (tag) => {
@@ -107,7 +89,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
          return (
             <WrapItem>
                <LangTag
-                  handleClickTag={() => handleAddLangTag(customTag)}
+                  onAddTag={() => handleAddLangTag(customTag)}
                   tag={customTag}
                   cursor='pointer'
                />
@@ -117,7 +99,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
          return tagsToShow().map((tag) => (
             <WrapItem key={nanoid()}>
                <LangTag
-                  handleClickTag={() => handleAddLangTag(tag)}
+                  onAddTag={() => handleAddLangTag(tag)}
                   tag={tag}
                   cursor='pointer'
                />
@@ -156,11 +138,11 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
                      <Input
                         h='34px'
                         w='100%'
-                        variant='flushed'
-                        _focus={{ borderColor: '#e2e8f0', boxShadow: 'none' }}
+                        px='.5rem'
                         className='tag-input'
                         ref={inputTagRef}
                         placeholder={tagInputPlaceHolder}
+                        borderColor='gray.100'
                         borderRadius='5px'
                         _placeholder={{ color: '#525252' }}
                         value={filterTagName}

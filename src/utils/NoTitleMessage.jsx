@@ -9,7 +9,7 @@ const NoTitleMessage = () => {
          letterSpacing='.5px'
          background='#FBE9E9'
          color='red'
-         mb='.5rem'
+         my='.5rem'
       >
          Title can't be blank!
       </Text>

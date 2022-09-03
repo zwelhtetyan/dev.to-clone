@@ -1,16 +1,17 @@
-import { Button, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Image, Text } from '@chakra-ui/react';
 import { getLogo } from '../helper/getLogo';
 
-const LangTag = ({ tag, handleClickTag, cursor }) => {
+const LangTag = ({ children, tag, onAddTag, onDeleteTag, cursor, h }) => {
    const src = getLogo(tag);
    return (
       <Button
-         onClick={handleClickTag}
-         height='28px'
+         onClick={onAddTag}
+         height={h || '28px'}
          p='0 .5rem'
-         border='1px solid rgb(0 0 0 / 4%)'
+         border='1px solid'
+         borderColor='gray.100'
+         _hover={{ borderColor: 'gray.300' }}
          bg='white'
-         _hover={{ borderColor: 'rgb(0 0 0 / 14%)' }}
          borderRadius='5px'
          cursor={cursor || 'default'}
          _active={{ bg: 'white' }}
@@ -25,6 +26,19 @@ const LangTag = ({ tag, handleClickTag, cursor }) => {
          >
             {tag?.topic}
          </Text>
+
+         {/* get close icon as children */}
+         <Box
+            ps='.5rem'
+            h='100%'
+            display='flex'
+            alignItems='center'
+            cursor='pointer'
+            _hover={{ svg: { color: 'red' } }}
+            onClick={onDeleteTag}
+         >
+            {children}
+         </Box>
       </Button>
    );
 };

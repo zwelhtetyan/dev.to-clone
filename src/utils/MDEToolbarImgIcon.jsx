@@ -1,6 +1,6 @@
 import { Box, Input } from '@chakra-ui/react';
 import React from 'react';
-import { FaImage } from 'react-icons/fa';
+import { BsCardImage } from 'react-icons/bs';
 
 const MDEToolbarImgIcon = ({ onChange }) => {
    return (
@@ -8,18 +8,18 @@ const MDEToolbarImgIcon = ({ onChange }) => {
          justify='center'
          m='0'
          cursor='pointer'
-         w='18px'
-         h='18px'
+         w='20px'
+         h='20px'
          pos='relative'
-         d='flex'
+         display='flex'
          alignItems='center'
          justifyContent='center'
       >
          <Input
             pos='absolute'
             opacity={0}
-            w='18px'
-            h='18px'
+            w='21px'
+            h='26px'
             type='file'
             bg='pink'
             cursor='pointer'
@@ -27,8 +27,8 @@ const MDEToolbarImgIcon = ({ onChange }) => {
             accept='image/jpeg, image/png, image/jpg , image/webp, image/gif'
             onChange={onChange}
          />
-         <FaImage
-            size={18}
+         <BsCardImage
+            size={20}
             style={{ position: 'absolute', cursor: 'pointer', zIndex: '1' }}
          />
       </Box>
