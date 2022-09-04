@@ -144,6 +144,7 @@ const Dashboard = () => {
                               isUpdated={postData?.updated}
                               fromDashboard={true}
                               userId={postData.userId}
+                              currentUserId={user.userId} // authenticated userId
                               totalDiscussion={calcTotalDiscussion(
                                  postData.comments
                               )}

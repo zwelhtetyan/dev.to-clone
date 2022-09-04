@@ -63,7 +63,7 @@ const AllPost = ({ transformedData, loading, err }) => {
                      readTime={postData.readTime}
                      isUpdated={postData?.updated}
                      userId={postData.userId}
-                     currentUserId={user?.userId}
+                     currentUserId={user?.userId} // authenticated userId
                      showHover={true}
                      currentUserProfile={getUserProfileData(
                         profileData,

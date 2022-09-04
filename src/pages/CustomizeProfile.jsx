@@ -23,8 +23,12 @@ import {
 import { nanoid } from 'nanoid';
 import ErrorMessage from '../utils/ErrorMessage';
 import CustomizeProfileSkeleton from '../components/skeletons/CustomizeProfileSkeleton';
+import { useEffect } from 'react';
 
 const CustomizeProfile = () => {
+   //scroll top
+   useEffect(() => window.scrollTo(0, 0), []);
+
    const user = useAuth();
    const navigate = useNavigate();
    const [loading, setLoading] = useState(false);

@@ -5,6 +5,7 @@ export const PrimaryBtn = ({
    w,
    display,
    m,
+
    onClick,
    type,
    bg,
@@ -23,11 +24,12 @@ export const PrimaryBtn = ({
          disabled={disabled}
          m={m}
          _hover={{
-            bg: bg ? 'rgb(42 55 197)' : 'rgb(59 73 223)',
+            bg: bg ? 'rgb(47 58 178)' : 'rgb(59 73 223)',
             color: 'white',
          }}
          p='0 .7rem'
          onClick={onClick}
+         _active={{ bg }}
       >
          {children}
       </Button>
@@ -64,6 +66,24 @@ export const SecondaryBtn = ({
          w={w}
          display={display}
          onClick={onClick}
+         _active={{ bg: 'transparent' }}
+      >
+         {children}
+      </Button>
+   );
+};
+
+export const LightBtn = ({ children, w }) => {
+   return (
+      <Button
+         w={w || '100%'}
+         m='.5rem 0'
+         bg='transparent'
+         border='2px solid #d6d6d7'
+         _hover={{ bg: 'gray.100', borderColor: '#a3a3a3' }}
+         fontWeight={400}
+         color='#575757'
+         _active={{ bg: 'transparent' }}
       >
          {children}
       </Button>

@@ -4,6 +4,7 @@ import UserProfilePopup from '../UserProfilePopup';
 import { nanoid } from 'nanoid';
 import { useNavigate } from 'react-router-dom';
 import OtherPostItem from '../post/OtherPostItem';
+import { useAuth } from '../../context/auth';
 
 const DetailRightContent = ({
    currentUserProfile,
@@ -12,9 +13,9 @@ const DetailRightContent = ({
    display,
    isDraft,
    m,
-   p,
 }) => {
    const navigate = useNavigate();
+   const user = useAuth();
 
    return (
       <Box
@@ -40,7 +41,8 @@ const DetailRightContent = ({
             location={currentUserProfile.location}
             education={currentUserProfile.education}
             joined={currentUserProfile.createdAt}
-            userId={userId}
+            id={userId}
+            currentUserId={user?.userId}
          />
 
          {otherPosts.length !== 0 && !isDraft && (

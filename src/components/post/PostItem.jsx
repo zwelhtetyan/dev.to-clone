@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import LangTag from '../../utils/LangTag';
 import {
    Box,
@@ -46,6 +46,8 @@ const PostItem = ({
    saved,
    alreadySaved,
 }) => {
+   const [showProfilePopup, setShowProfilePopup] = useState(false);
+
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
@@ -78,6 +80,22 @@ const PostItem = ({
       e.stopPropagation();
       clickSave();
    };
+
+   /// showPopup logic start
+   let INTERVAl;
+   const handleMouseEnter = () => {
+      if (window.innerWidth < 768 || !showHover) return;
+
+      INTERVAl = setTimeout(() => setShowProfilePopup(true), 300);
+   };
+
+   const handleMouseLeave = () => {
+      if (window.innerWidth < 768 || !showHover) return;
+
+      setShowProfilePopup(false);
+      clearTimeout(INTERVAl);
+   };
+   /// showPopup logic end
 
    return (
       <Box
@@ -113,11 +131,15 @@ const PostItem = ({
                   {/* name and date */}
                   <Box>
                      <Box
-                        _hover={
-                           showHover && {
-                              md: { '& .profilePopup': { display: 'block' } },
-                           }
-                        }
+                        // _hover={
+                        //    showHover && {
+                        //       md: { '& .profilePopup': { display: 'block' } },
+                        //    }
+                        // }
+
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                        // showing popup when hover takes effect instantly , so I use [mouseEnter & mouseLeave] with 300ms dalay instead .
                      >
                         <Text
                            fontWeight={600}
@@ -139,9 +161,11 @@ const PostItem = ({
                            location={currentUserProfile?.location}
                            education={currentUserProfile?.education}
                            joined={currentUserProfile?.createdAt}
+                           id={currentUserProfile?.id}
+                           currentUserId={currentUserId}
                            pos='absolute'
                            zIndex={1}
-                           display='none'
+                           display={showProfilePopup ? 'block' : 'none'}
                            boxShadow='rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px'
                            borderRadius='5px'
                         />

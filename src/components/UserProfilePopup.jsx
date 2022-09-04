@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import { joinOnDate } from '../helper/calcTimestamp';
 import { useNavigate } from 'react-router-dom';
+import { LightBtn, PrimaryBtn } from '../utils/Buttons';
 
 const Content = ({ title, text, contentMb }) => {
    return (
@@ -23,11 +24,12 @@ const UserProfilePopup = ({
    location,
    education,
    joined,
+   id,
+   currentUserId,
    w,
    p,
    contentMb,
    backgroundHeight,
-   userId,
    pos,
    display,
    zIndex,
@@ -35,6 +37,15 @@ const UserProfilePopup = ({
    borderRadius,
 }) => {
    const navigate = useNavigate();
+
+   const handleClick = () => {
+      if (id === currentUserId) {
+         navigate('/customize-profile');
+      } else {
+         // follow handler
+         console.log('follow');
+      }
+   };
 
    return (
       <Box
@@ -47,6 +58,7 @@ const UserProfilePopup = ({
          bg='#fafafa'
          boxShadow={boxShadow}
          overflow='hidden'
+         transitionDelay='.5s'
          onClick={(e) => e.stopPropagation()}
       >
          <Box bg={background || '#000000'} h={backgroundHeight || '45px'} />
@@ -62,22 +74,34 @@ const UserProfilePopup = ({
                bgSize='cover'
                rounded='full'
                bgRepeat='no-repeat'
-               top='-27.5px'
+               top='-23px'
                left='1rem'
                cursor='pointer'
-               onClick={() => navigate(`/profile/${userId}`)}
+               onClick={() => navigate(`/profile/${id}`)}
             />
-            <Box p={p || '.5rem'} pt='.2rem'>
+            <Box p={p || '.5rem .7rem'} pt='.2rem'>
                <Text
                   ps='4.2rem'
                   fontSize='1.3rem'
                   fontWeight='600'
                   cursor='pointer'
                   _hover={{ color: 'rgb(47 58 178)' }}
-                  onClick={() => navigate(`/profile/${userId}`)}
+                  onClick={() => navigate(`/profile/${id}`)}
                >
                   {name}
                </Text>
+
+               <PrimaryBtn
+                  bg='rgb(59 73 223)'
+                  w='100%'
+                  m='.5rem 0'
+                  onClick={handleClick}
+               >
+                  {id === currentUserId ? 'Edit Profile' : 'Follow'}
+               </PrimaryBtn>
+
+               {/* <LightBtn>Following</LightBtn> */}
+
                <Text
                   color='#575757'
                   letterSpacing='.3px'

@@ -52,6 +52,15 @@ const Work = ({ title, text }) => {
 const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
    const navigate = useNavigate();
    const user = useAuth();
+   const userId = user?.userId;
+
+   const handleClick = () => {
+      if (profileData?.id === userId) {
+         navigate('/customize-profile');
+      } else {
+         // follow handler
+      }
+   };
 
    return (
       <Box
@@ -83,14 +92,11 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
          />
 
          <HStack justify='flex-end' mb={{ md: '1.5rem' }} h='40px'>
-            {profileData?.id === user?.userId && (
-               <PrimaryBtn
-                  bg='rgb(59 73 223)'
-                  onClick={() => navigate('/customize-profile')}
-               >
-                  Edit Profile
-               </PrimaryBtn>
-            )}
+            <PrimaryBtn bg='rgb(59 73 223)' onClick={handleClick}>
+               {profileData?.id === userId ? 'Edit Profile' : 'Follow'}
+            </PrimaryBtn>
+
+            {/* <Button>Following</Button> */}
          </HStack>
 
          {profileData && (

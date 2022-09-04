@@ -12,8 +12,11 @@ import {
    calculateReaction,
    claculateWrittenComments,
 } from '../helper/calculateTotal';
+import { useAuth } from '../context/auth';
 
 const Profile = () => {
+   const user = useAuth();
+   const userId = user?.userId;
    const [alreadyInProfile, setAlreadyInProfile] = useState(false);
 
    //scroll top
@@ -114,6 +117,7 @@ const Profile = () => {
                               readTime={postData.readTime}
                               isUpdated={postData?.updated}
                               userId={postData.userId}
+                              currentUserId={userId} // authenticated userId
                               setAlreadyInProfile={setAlreadyInProfile}
                               totalDiscussion={calcTotalDiscussion(
                                  postData.comments
