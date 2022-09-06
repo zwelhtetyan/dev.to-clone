@@ -80,7 +80,7 @@ const useCreatePost = (currentPostDataToEdit) => {
       createPost({ ...postData, draft: false })
          .then((_) => {
             setPublishing(false);
-            navigate('/dashboard/?category=post');
+            navigate('/dashboard/posts');
             removeFromLocalStorage('postDataToPublish');
             removeFromLocalStorage('postDataToManage');
             console.log('created post successfully');
@@ -94,7 +94,7 @@ const useCreatePost = (currentPostDataToEdit) => {
    const draftPostHandler = () => {
       setSavingDraft(true);
 
-      const searchParam = postData.draft ? -1 : '/dashboard/?category=draft';
+      const searchParam = postData.draft ? -1 : '/dashboard/drafts';
 
       draftPost({ ...postData, draft: true, id: postData.id || nanoid() })
          .then((_) => {

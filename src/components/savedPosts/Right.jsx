@@ -8,8 +8,8 @@ const Container = ({ children }) => {
    return (
       <Box
          flex='1'
-         borderRadius='5px'
          p={['.5rem', '.5rem', '1rem']}
+         borderRadius='5px'
          bg='white'
          boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
          ms={{ base: '0 !important', md: '.5rem !important' }}

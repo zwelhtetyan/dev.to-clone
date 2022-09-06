@@ -1,7 +1,8 @@
 import React from 'react';
 import { HStack, Image, Text } from '@chakra-ui/react';
+import IconBadge from './IconBadge';
 
-const SideMenuItem = ({ icon, title, onClick, savedPosts, bg, color, mb }) => {
+const SideMenuItem = ({ icon, title, onClick, savedPostsCount, bg, color }) => {
    return (
       <HStack
          cursor='pointer'
@@ -17,18 +18,10 @@ const SideMenuItem = ({ icon, title, onClick, savedPosts, bg, color, mb }) => {
          mb={1}
       >
          {icon && <Image src={icon} alt='menu_icon' />}
+
          <Text>{title}</Text>
-         {savedPosts && (
-            <Text
-               bg='rgb(212 212 212)'
-               color='rgb(64 64 64)'
-               fontSize='13px'
-               px='5px'
-               borderRadius='5px'
-            >
-               {savedPosts}
-            </Text>
-         )}
+
+         {savedPostsCount && <IconBadge value={savedPostsCount} />}
       </HStack>
    );
 };

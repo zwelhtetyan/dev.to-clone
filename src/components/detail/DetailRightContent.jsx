@@ -43,6 +43,7 @@ const DetailRightContent = ({
             joined={currentUserProfile.createdAt}
             id={userId}
             currentUserId={user?.userId}
+            followers={currentUserProfile.followers || []}
          />
 
          {otherPosts.length !== 0 && !isDraft && (

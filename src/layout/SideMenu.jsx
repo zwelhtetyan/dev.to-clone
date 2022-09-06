@@ -107,7 +107,7 @@ const SideMenu = () => {
                   {user && (
                      <SideMenuItem
                         icon={ReadingListIcon}
-                        savedPosts={savedPosts.length}
+                        savedPostsCount={savedPosts.length}
                         title='Reading List'
                         onClick={handleClickReadingList}
                      />

@@ -121,14 +121,16 @@ const CustomizeProfile = () => {
       if (previewImg) {
          uploadString(storageRef, previewImg, 'data_url').then((_) => {
             getDownloadURL(storageRef).then((url) => {
-               updateProfileData(
-                  { ...newData, profile: url },
-                  user.userId
-               ).then((_) => {
-                  setLoading(false);
-                  navigate(`/profile/${user.userId}`);
-                  console.log('prifile informations are updated');
-               });
+               updateProfileData({ ...newData, profile: url }, user.userId)
+                  .then((_) => {
+                     setLoading(false);
+                     navigate(`/profile/${user.userId}`);
+                     console.log('prifile informations are updated');
+                  })
+                  .catch((err) => {
+                     setLoading(false);
+                     console.log(err);
+                  });
 
                updateProfile(auth.currentUser, { photoURL: url });
             });
@@ -136,22 +138,32 @@ const CustomizeProfile = () => {
          return;
       }
 
-      updateProfileData(newData, user.userId).then((_) => {
-         setLoading(false);
-         navigate(`/profile/${user.userId}`);
-         console.log('prifile informations are updated');
-      });
+      updateProfileData(newData, user.userId)
+         .then((_) => {
+            setLoading(false);
+            navigate(`/profile/${user.userId}`);
+            console.log('prifile informations are updated');
+         })
+         .catch((err) => {
+            setLoading(false);
+            console.log(err);
+         });
    };
 
    const removeProfileImgHandler = (url) => {
       setLoading(true);
 
       removeImage(url);
-      updateProfileData({ profile: '' }, user.userId).then((_) => {
-         setLoading(false);
-         navigate(`/profile/${user.userId}`);
-         console.log('prifile informations are updated');
-      });
+      updateProfileData({ profile: '' }, user.userId)
+         .then((_) => {
+            setLoading(false);
+            navigate(`/profile/${user.userId}`);
+            console.log('prifile informations are updated');
+         })
+         .catch((err) => {
+            setLoading(false);
+            console.log(err);
+         });
    };
 
    return (

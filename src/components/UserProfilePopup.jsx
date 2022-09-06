@@ -3,6 +3,7 @@ import { Box, Text } from '@chakra-ui/react';
 import { joinOnDate } from '../helper/calcTimestamp';
 import { useNavigate } from 'react-router-dom';
 import { LightBtn, PrimaryBtn } from '../utils/Buttons';
+import useClickFollow from '../hooks/useClickFollow';
 
 const Content = ({ title, text, contentMb }) => {
    return (
@@ -26,6 +27,7 @@ const UserProfilePopup = ({
    joined,
    id,
    currentUserId,
+   followers,
    w,
    p,
    contentMb,
@@ -38,14 +40,12 @@ const UserProfilePopup = ({
 }) => {
    const navigate = useNavigate();
 
-   const handleClick = () => {
-      if (id === currentUserId) {
-         navigate('/customize-profile');
-      } else {
-         // follow handler
-         console.log('follow');
-      }
-   };
+   const { handleClickFollow, loading } = useClickFollow(
+      { id, followers },
+      currentUserId
+   );
+
+   const alreadyFollow = followers.includes(currentUserId);
 
    return (
       <Box
@@ -91,16 +91,27 @@ const UserProfilePopup = ({
                   {name}
                </Text>
 
-               <PrimaryBtn
-                  bg='rgb(59 73 223)'
-                  w='100%'
-                  m='.5rem 0'
-                  onClick={handleClick}
-               >
-                  {id === currentUserId ? 'Edit Profile' : 'Follow'}
-               </PrimaryBtn>
+               {!alreadyFollow && (
+                  <PrimaryBtn
+                     w='100%'
+                     m='.5rem 0'
+                     bg='rgb(59 73 223)'
+                     onClick={handleClickFollow}
+                     disabled={loading}
+                  >
+                     {id === currentUserId ? 'Edit Profile' : 'Follow'}
+                  </PrimaryBtn>
+               )}
 
-               {/* <LightBtn>Following</LightBtn> */}
+               {alreadyFollow && (
+                  <LightBtn
+                     bg='white'
+                     onClick={handleClickFollow}
+                     disabled={loading}
+                  >
+                     Following
+                  </LightBtn>
+               )}
 
                <Text
                   color='#575757'

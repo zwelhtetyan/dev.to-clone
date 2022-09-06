@@ -15,11 +15,20 @@ import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import SideMenu from './SideMenu';
 import { useAuth } from '../context/auth';
 import MainMenu from '../components/MainMenu';
+import { useSelector } from 'react-redux';
 
 const MainNavigation = () => {
    const navigate = useNavigate();
 
    const user = useAuth();
+
+   const profileData = useSelector((state) => state.profileData.profileData);
+
+   let currentUserProfile = null;
+
+   if (profileData) {
+      currentUserProfile = profileData.find((data) => data.id === user?.userId);
+   }
 
    return (
       <HStack
@@ -91,7 +100,7 @@ const MainNavigation = () => {
                   </>
                )}
 
-               {user && (
+               {user && currentUserProfile && (
                   <>
                      <PrimaryBtn
                         display={{ base: 'none', md: 'block' }}
@@ -101,7 +110,7 @@ const MainNavigation = () => {
                         Creart Post
                      </PrimaryBtn>
 
-                     <MainMenu />
+                     <MainMenu currentUserProfile={currentUserProfile} />
                   </>
                )}
             </Flex>

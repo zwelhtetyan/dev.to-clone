@@ -63,7 +63,10 @@ const ProfileLeftPart = ({
          >
             <HStack mb='.7rem'>
                <Image src={doc} alt='doc_logo' />
-               <Text>{publishedPosts?.length || 0} post published</Text>
+               <Text>
+                  {publishedPosts?.length || 0}{' '}
+                  {publishedPosts.length > 0 ? 'posts' : 'post'} published
+               </Text>
             </HStack>
             <HStack>
                <Image src={commentLg} alt='comment_logo' />

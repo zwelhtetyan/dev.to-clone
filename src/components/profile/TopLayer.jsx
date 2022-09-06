@@ -12,14 +12,14 @@ import {
 } from '@chakra-ui/react';
 import { BsGithub, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
-import { PrimaryBtn } from '../../utils/Buttons';
+import { LightBtn, PrimaryBtn } from '../../utils/Buttons';
 import joinOn from '../../assets/logo/joinOn.svg';
 import location from '../../assets/logo/location.svg';
 import personalWebsite from '../../assets/logo/personalWebsite.svg';
-import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import defaultProfile from '../../assets/images/defaultProfile.jpg';
 import { joinOnDate } from '../../helper/calcTimestamp';
+import useClickFollow from '../../hooks/useClickFollow';
 
 const LinkIcon = ({ hoverColor, href, children, onClick }) => {
    return (
@@ -50,17 +50,12 @@ const Work = ({ title, text }) => {
 };
 
 const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
-   const navigate = useNavigate();
    const user = useAuth();
    const userId = user?.userId;
 
-   const handleClick = () => {
-      if (profileData?.id === userId) {
-         navigate('/customize-profile');
-      } else {
-         // follow handler
-      }
-   };
+   const { handleClickFollow, loading } = useClickFollow(profileData, userId);
+
+   const alreadyFollow = profileData?.followers?.includes(userId);
 
    return (
       <Box
@@ -92,11 +87,26 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
          />
 
          <HStack justify='flex-end' mb={{ md: '1.5rem' }} h='40px'>
-            <PrimaryBtn bg='rgb(59 73 223)' onClick={handleClick}>
-               {profileData?.id === userId ? 'Edit Profile' : 'Follow'}
-            </PrimaryBtn>
+            {!alreadyFollow && (
+               <PrimaryBtn
+                  bg='rgb(59 73 223)'
+                  onClick={handleClickFollow}
+                  disabled={loading}
+               >
+                  {profileData?.id === userId ? 'Edit Profile' : 'Follow'}
+               </PrimaryBtn>
+            )}
 
-            {/* <Button>Following</Button> */}
+            {alreadyFollow && (
+               <LightBtn
+                  w='100px'
+                  bg='white'
+                  onClick={handleClickFollow}
+                  disabled={loading}
+               >
+                  Following
+               </LightBtn>
+            )}
          </HStack>
 
          {profileData && (

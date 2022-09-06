@@ -25,7 +25,7 @@ const DeletePost = () => {
       return <Navigate to='/' />;
    }
 
-   const queryLink = currentPostData.draft ? 'draft' : 'post';
+   const pathname = currentPostData.draft ? 'drafts' : 'posts';
 
    const onDelete = () => {
       setDeleting(true);
@@ -33,7 +33,7 @@ const DeletePost = () => {
          .then(() => {
             setDeleting(false);
 
-            navigate(`/dashboard/?category=${queryLink}`);
+            navigate(`/dashboard/${pathname}`);
             removeFromLocalStorage('postDataToManage');
          })
          .catch((err) => {

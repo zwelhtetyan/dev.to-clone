@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, HStack, Skeleton, SkeletonText, VStack } from '@chakra-ui/react';
+import { Box, Flex, Skeleton, SkeletonText, VStack } from '@chakra-ui/react';
 
 const ReactionBox = () => {
    return (
@@ -13,7 +13,7 @@ const ReactionBox = () => {
          borderRadius='5px'
       >
          <Skeleton h='20px' w='30px' />
-         <SkeletonText noOfLines={1} w='100px' mx='auto' />
+         <SkeletonText noOfLines={1} w='150px' mx='auto' />
       </VStack>
    );
 };
@@ -22,12 +22,12 @@ const DashboardSkeleton = () => {
    return (
       <Box maxW='650px' flex='1' w='100%' mx='auto'>
          <Box mt={2} px='.5rem'>
-            <Skeleton height='30px' w='200px' mb='1.5rem' />
+            <Skeleton height='25px' w='200px' mb='1.5rem' />
 
-            <HStack spacing={[2, 3, 5]} mb={6}>
+            <Flex direction={{ base: 'column', sm: 'row' }} gap='.5rem'>
                <ReactionBox />
                <ReactionBox />
-            </HStack>
+            </Flex>
          </Box>
       </Box>
    );

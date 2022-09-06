@@ -23,22 +23,23 @@ const Profile = () => {
    useEffect(() => window.scrollTo(0, 0), [alreadyInProfile]);
 
    const { userIdToView } = useParams();
-
-   const { profileData } = useSelector((state) => state.profileData);
-
    const [moreInfo, setMoreInfo] = useState(false);
 
-   const {
-      transformedData,
-      transfromedDataLoading: loading,
-      transformedDataErr: err,
-   } = useSelector((state) => state.transformedData);
+   const { profileData, profileDataLoading, profileDataErr } = useSelector(
+      (state) => state.profileData
+   );
+
+   const { transformedData, transfromedDataLoading, transformedDataErr } =
+      useSelector((state) => state.transformedData);
+
+   const loading = profileDataLoading || transfromedDataLoading;
+   const err = profileDataErr || transformedDataErr;
 
    if (err) {
       return <ErrorMessage offline={true} />;
    }
 
-   if (loading && !transformedData && !err) {
+   if (loading) {
       return <ProfileSkeleton />;
    }
 

@@ -163,6 +163,7 @@ const PostItem = ({
                            joined={currentUserProfile?.createdAt}
                            id={currentUserProfile?.id}
                            currentUserId={currentUserId}
+                           followers={currentUserProfile?.followers || []}
                            pos='absolute'
                            zIndex={1}
                            display={showProfilePopup ? 'block' : 'none'}

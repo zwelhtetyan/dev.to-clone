@@ -5,6 +5,8 @@ import { Box, Spinner } from '@chakra-ui/react';
 import Layout from './layout/Layout';
 import Home from './pages/Home';
 import useTransformData from './hooks/useTransformData';
+import Posts from './components/dashboard/Posts';
+import Drafts from './components/dashboard/Drafts';
 
 const PostDetails = React.lazy(() => import('./pages/PostDetails'));
 const Profile = React.lazy(() => import('./pages/Profile'));
@@ -53,7 +55,15 @@ const App = () => {
                      path='customize-profile'
                      element={<CustomizeProfile />}
                   />
-                  <Route path='dashboard' element={<Dashboard />} />
+                  <Route path='dashboard' element={<Dashboard />}>
+                     <Route path='posts' element={<Posts />} />
+                     <Route path='drafts' element={<Drafts />} />
+                     <Route path='followers' element={<h1>follower</h1>} />
+                     <Route
+                        path='following_users'
+                        element={<h1>following_user</h1>}
+                     />
+                  </Route>
                   <Route path='delete-post' element={<DeletePost />} />
                   <Route path='delete-comment' element={<DeleteComment />} />
                   <Route path='edit-comment' element={<EditComment />} />

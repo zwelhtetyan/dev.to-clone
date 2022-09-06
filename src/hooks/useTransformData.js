@@ -54,7 +54,6 @@ const useTransformData = () => {
       dispatch(setTransformedDataErr(err));
    }, [dispatch, err, loading, modifiedPostData]);
 
-   // //fetch profile data
    useEffect(() => {
       dispatch(setProfileData(userData));
       dispatch(setProfileDataLoading(userLoading));
