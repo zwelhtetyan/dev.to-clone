@@ -9,7 +9,7 @@ import { useAuth } from '../context/auth';
 import { calculateReaction } from '../helper/calculateTotal';
 import ErrorMessage from '../utils/ErrorMessage';
 
-const ReactionBox = ({ count, title }) => {
+const ReactionBox = ({ count, title, m }) => {
    return (
       <Box
          flex='1'
@@ -17,6 +17,7 @@ const ReactionBox = ({ count, title }) => {
          bg='rgb(250 250 250)'
          boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'
          p='1rem'
+         m={m}
          borderRadius='5px'
       >
          <Heading>{count}</Heading>
@@ -103,7 +104,7 @@ const Dashboard = () => {
                display={['block', 'block', 'none']}
                mt='.5rem'
                onChange={handleSelect}
-               defaultValue={selectedMenu}
+               value={selectedMenu}
             >
                <option value='posts'>Posts</option>
                <option value='drafts'>Drafts</option>
@@ -117,9 +118,12 @@ const Dashboard = () => {
                mb='1rem'
                px={['.5rem', '.5rem', '0']}
                direction={['column', 'row']}
-               gap='.5rem'
             >
-               <ReactionBox count={totalPost} title='Total Posts' />
+               <ReactionBox
+                  count={totalPost}
+                  title='Total Posts'
+                  m={{ base: '0 0 .5rem 0', sm: '0 .5rem 0 0' }}
+               />
                <ReactionBox
                   count={totalPostReaction}
                   title='Total post reactions'

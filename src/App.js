@@ -5,8 +5,6 @@ import { Box, Spinner } from '@chakra-ui/react';
 import Layout from './layout/Layout';
 import Home from './pages/Home';
 import useTransformData from './hooks/useTransformData';
-import Posts from './components/dashboard/Posts';
-import Drafts from './components/dashboard/Drafts';
 
 const PostDetails = React.lazy(() => import('./pages/PostDetails'));
 const Profile = React.lazy(() => import('./pages/Profile'));
@@ -23,6 +21,12 @@ const DeleteComment = React.lazy(() => import('./components/DeleteComment'));
 const SignOutConfirm = React.lazy(() => import('./components/SignOutConfirm'));
 const Error = React.lazy(() => import('./pages/Error'));
 const SavedPosts = React.lazy(() => import('./pages/SavedPosts'));
+const Posts = React.lazy(() => import('./components/dashboard/Posts'));
+const Drafts = React.lazy(() => import('./components/dashboard/Drafts'));
+const Follower = React.lazy(() => import('./components/dashboard/Follower'));
+const FollowingUser = React.lazy(() =>
+   import('./components/dashboard/FollowingUser')
+);
 
 const App = () => {
    useTransformData();
@@ -58,10 +62,10 @@ const App = () => {
                   <Route path='dashboard' element={<Dashboard />}>
                      <Route path='posts' element={<Posts />} />
                      <Route path='drafts' element={<Drafts />} />
-                     <Route path='followers' element={<h1>follower</h1>} />
+                     <Route path='followers' element={<Follower />} />
                      <Route
                         path='following_users'
-                        element={<h1>following_user</h1>}
+                        element={<FollowingUser />}
                      />
                   </Route>
                   <Route path='delete-post' element={<DeletePost />} />

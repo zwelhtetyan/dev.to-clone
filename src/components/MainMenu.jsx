@@ -29,7 +29,7 @@ const MainMenu = ({ currentUserProfile }) => {
             p='.5rem'
             minW={{ base: '0 !important' }}
             w='250px'
-            boxShadow='0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.1);'
+            boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'
             bg='white'
          >
             <CustomMenuItem

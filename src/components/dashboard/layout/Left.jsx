@@ -3,6 +3,8 @@ import { Box, HStack, Text } from '@chakra-ui/react';
 import { NavLink } from 'react-router-dom';
 import styled from '@emotion/styled';
 import IconBadge from '../../../utils/IconBadge';
+import { useAuth } from '../../../context/auth';
+import { useSelector } from 'react-redux';
 
 const MenuItem = styled(NavLink)`
    padding: 0.5rem;
@@ -26,40 +28,52 @@ const activeLink = ({ isActive }) => {
       : {};
 };
 
+const Layout = ({ title, count }) => {
+   return (
+      <HStack justify='space-between'>
+         <Text>{title}</Text>
+         {count && <IconBadge value={count} />}
+      </HStack>
+   );
+};
+
 const Left = ({ totalPublishedPosts, totalDraftPosts }) => {
+   const user = useAuth();
+   const { profileData } = useSelector((state) => state.profileData);
+
+   const totalFollowingUsers = profileData.filter((userData) =>
+      userData.followers?.includes(user.userId)
+   ).length;
+
+   const totalFollowers = profileData.find(
+      (userData) => userData.id === user.userId
+   ).followers?.length;
+
    return (
       <Box w='230px' display={{ base: 'none', md: 'block' }}>
          <MenuItem
             to='/dashboard/posts'
             style={(isActive) => activeLink(isActive)}
          >
-            <HStack justify='space-between'>
-               <Text>Posts</Text>
-               {totalPublishedPosts && (
-                  <IconBadge value={totalPublishedPosts} />
-               )}
-            </HStack>
+            <Layout title='Posts' count={totalPublishedPosts} />
          </MenuItem>
          <MenuItem
             to='/dashboard/drafts'
             style={(isActive) => activeLink(isActive)}
          >
-            <HStack justify='space-between'>
-               <Text>Drafts</Text>
-               {totalDraftPosts && <IconBadge value={totalDraftPosts} />}
-            </HStack>
+            <Layout title='Drafts' count={totalDraftPosts} />
          </MenuItem>
          <MenuItem
             to='/dashboard/followers'
             style={(isActive) => activeLink(isActive)}
          >
-            Followers
+            <Layout title='Followers' count={totalFollowers} />
          </MenuItem>
          <MenuItem
             to='/dashboard/following_users'
             style={(isActive) => activeLink(isActive)}
          >
-            Following users
+            <Layout title='Following users' count={totalFollowingUsers} />
          </MenuItem>
       </Box>
    );
