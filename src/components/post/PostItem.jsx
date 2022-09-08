@@ -18,7 +18,7 @@ import { ReactionButton, SecondaryBtn } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { nanoid } from 'nanoid';
 import ManangePost from './ManangePost';
-import UserProfilePopup from '../UserProfilePopup';
+import UserProfilePopup from '../profile/UserProfilePopup';
 import DisplayDate from './DisplayDate';
 import { useDispatch } from 'react-redux';
 import { setClickComment } from '../../store/scrollDiscussion';
@@ -45,6 +45,7 @@ const PostItem = ({
    totalReaction,
    saved,
    alreadySaved,
+   isFirstItem,
 }) => {
    const [showProfilePopup, setShowProfilePopup] = useState(false);
 
@@ -107,13 +108,15 @@ const PostItem = ({
          mb='.5rem'
          onClick={handleNavigate}
       >
-         {coverImg && (
+         {coverImg && isFirstItem && (
             <Image
                src={coverImg}
                w='100%'
+               maxH='335px'
+               objectFit='cover'
                mb='1rem'
-               borderTopLeftRadius='5px'
-               borderTopRightRadius='5px'
+               borderTopLeftRadius={{ base: '0', md: '5px' }}
+               borderTopRightRadius={{ base: '0', md: '5px' }}
                alt='cover_img'
             />
          )}

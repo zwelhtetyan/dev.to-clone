@@ -42,7 +42,7 @@ const MainMenu = ({ currentUserProfile }) => {
 
             <MenuDivider h='.5px' bg='#b5b5b5' borderBottom='none' />
 
-            <CustomMenuItem onClick={() => navigate('/dashboard/posts')}>
+            <CustomMenuItem onClick={() => navigate('/dashboard')}>
                Dashboard
             </CustomMenuItem>
             <CustomMenuItem onClick={() => navigate('/create-post')}>

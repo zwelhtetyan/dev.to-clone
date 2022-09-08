@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Box, HStack, Image, Input, Spinner, Text } from '@chakra-ui/react';
-import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
-import AddCvImg from './AddCvImg';
-import AddLangTag from './LangTag/AddLangTag';
-import MDE from './MDE';
-import logo from '../assets/logo/logo.png';
-import ModalAlert from './Modal';
+import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
+import AddCvImg from '../AddCvImg';
+import AddLangTag from '../LangTag/AddLangTag';
+import MDE from '../MDE';
+import logo from '../../assets/logo/logo.png';
+import ModalAlert from '../Modal';
 import { useNavigate } from 'react-router-dom';
 import PostPreview from './PostPreview';
-import NoTitleMessage from '../utils/NoTitleMessage';
+import NoTitleMessage from '../../utils/NoTitleMessage';
 import { useEffect } from 'react';
 
 const CreatePostFrom = ({

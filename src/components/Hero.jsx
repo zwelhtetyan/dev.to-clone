@@ -1,11 +1,10 @@
 import React from 'react';
-import logo from '../assets/logo/logo.png';
 
-import { Box, Heading, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Heading, HStack, Text, VStack } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import { useNavigate } from 'react-router-dom';
 
-const Hero = ({ display, isLogo, w, p, onClose }) => {
+const Hero = ({ display, btnWidth, p, m, onClose }) => {
    const navigate = useNavigate();
 
    const changeRoute = (type) => {
@@ -17,22 +16,12 @@ const Hero = ({ display, isLogo, w, p, onClose }) => {
       onClose();
    };
 
-   const fontSize = ['1.3rem', '1.3rem', '2rem'];
-
    return (
-      <VStack w='100%' p={p || '1rem'} display={display}>
+      <VStack w='100%' p={p || '1rem'} display={display} m={m}>
          <HStack align='flex-start' mb={5}>
-            <Image
-               src={logo}
-               alt='logo'
-               w='60px'
-               transform='rotate(-17deg)'
-               mr={2}
-               display={isLogo ? 'block' : 'none'}
-            />
             <Box>
-               <Heading fontSize={fontSize}>
-                  <Heading as='span' color='rgb(37 52 213)' fontSize={fontSize}>
+               <Heading fontSize='1.3rem'>
+                  <Heading as='span' color='rgb(37 52 213)' fontSize='1.3rem'>
                      DEV Community
                   </Heading>{' '}
                   is a community of 878,258 amazing developers
@@ -44,10 +33,13 @@ const Hero = ({ display, isLogo, w, p, onClose }) => {
             </Box>
          </HStack>
          <VStack w='100%'>
-            <PrimaryBtn w={w || '50%'} onClick={() => changeRoute('create')}>
+            <PrimaryBtn
+               w={btnWidth || '50%'}
+               onClick={() => changeRoute('create')}
+            >
                Create Account
             </PrimaryBtn>
-            <SecondaryBtn w={w || '50%'} onClick={changeRoute}>
+            <SecondaryBtn w={btnWidth || '50%'} onClick={changeRoute}>
                Log in
             </SecondaryBtn>
          </VStack>

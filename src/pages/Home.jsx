@@ -9,6 +9,7 @@ import FAQIcon from '../assets/logo/FAQIcon.svg';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Hero from '../components/Hero';
 
 const Home = () => {
    const user = useAuth();
@@ -54,6 +55,16 @@ const Home = () => {
             maxW='300px'
             display={{ base: 'none', md: 'block' }}
          >
+            {!user && (
+               <Box
+                  boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+                  borderRadius='5px'
+                  mb='.7rem'
+               >
+                  <Hero btnWidth='90%' p='.7rem' onClose={() => {}} />
+               </Box>
+            )}
+
             <SideMenuItem
                icon={HomeIcon}
                title='Home'

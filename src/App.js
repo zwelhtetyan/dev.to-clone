@@ -15,9 +15,11 @@ const SignUp = React.lazy(() => import('./pages/SignUp'));
 const Login = React.lazy(() => import('./pages/Login'));
 const CreatePost = React.lazy(() => import('./pages/CreatePost'));
 const EditPost = React.lazy(() => import('./pages/EditPost'));
-const DeletePost = React.lazy(() => import('./components/DeletePost'));
+const DeletePost = React.lazy(() => import('./components/post/DeletePost'));
 const EditComment = React.lazy(() => import('./pages/EditComment'));
-const DeleteComment = React.lazy(() => import('./components/DeleteComment'));
+const DeleteComment = React.lazy(() =>
+   import('./components/comment/DeleteComment')
+);
 const SignOutConfirm = React.lazy(() => import('./components/SignOutConfirm'));
 const Error = React.lazy(() => import('./pages/Error'));
 const SavedPosts = React.lazy(() => import('./pages/SavedPosts'));
@@ -49,7 +51,7 @@ const App = () => {
          >
             <Routes>
                <Route path='/' element={<Layout />}>
-                  <Route index element={<Home />} />
+                  <Route path='/' element={<Home />} />
                   <Route path='profile/:userIdToView' element={<Profile />} />
                   <Route path='details/:id' element={<PostDetails />} />
                   <Route path='create-account' element={<SignUp />} />
@@ -60,7 +62,7 @@ const App = () => {
                      element={<CustomizeProfile />}
                   />
                   <Route path='dashboard' element={<Dashboard />}>
-                     <Route path='posts' element={<Posts />} />
+                     <Route index element={<Posts />} />
                      <Route path='drafts' element={<Drafts />} />
                      <Route path='followers' element={<Follower />} />
                      <Route

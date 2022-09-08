@@ -77,11 +77,15 @@ const Dashboard = () => {
    );
 
    const showReactionBox =
-      location.pathname === '/dashboard/posts' ||
+      location.pathname === '/dashboard' ||
       location.pathname === '/dashboard/drafts';
 
    const handleSelect = ({ target }) => {
       const pathname = target.value.toLowerCase();
+
+      if (target.value === 'posts') {
+         navigate('/dashboard');
+      }
 
       if (target.value === 'Following users') {
          navigate('/dashboard/following_users');

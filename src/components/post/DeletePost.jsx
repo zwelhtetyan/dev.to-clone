@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/auth';
-import { removeFromLocalStorage } from '../helper/localStorage';
-import { deletePost } from '../lib/api';
-import DeleteConfirm from '../utils/DeleteConfirm';
+import { useAuth } from '../../context/auth';
+import { removeFromLocalStorage } from '../../helper/localStorage';
+import { deletePost } from '../../lib/api';
+import DeleteConfirm from '../../utils/DeleteConfirm';
 
 const DeletePost = () => {
    //scroll top
@@ -25,7 +25,7 @@ const DeletePost = () => {
       return <Navigate to='/' />;
    }
 
-   const pathname = currentPostData.draft ? 'drafts' : 'posts';
+   const pathname = currentPostData.draft ? '/dashboard/drafts' : '/dashboard';
 
    const onDelete = () => {
       setDeleting(true);
@@ -33,7 +33,7 @@ const DeletePost = () => {
          .then(() => {
             setDeleting(false);
 
-            navigate(`/dashboard/${pathname}`);
+            navigate(pathname);
             removeFromLocalStorage('postDataToManage');
          })
          .catch((err) => {

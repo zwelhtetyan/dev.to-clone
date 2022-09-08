@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
-import CreatePostFrom from '../components/CreatePostFrom';
+import CreatePostFrom from '../components/post/CreatePostFrom';
 import { useAuth } from '../context/auth';
 import useCreatePost from '../hooks/useCreatePost';
 

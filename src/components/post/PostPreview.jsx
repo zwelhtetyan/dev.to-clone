@@ -2,11 +2,11 @@ import { Box, Heading, Image, Wrap, WrapItem } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import converter from '../helper/converter';
-import { htmlToJsx } from '../helper/htmlToJsx';
-import LangTag from '../utils/LangTag';
-import NoTitleMessage from '../utils/NoTitleMessage';
-import '../styles/postdetail.scss';
+import converter from '../../helper/converter';
+import { htmlToJsx } from '../../helper/htmlToJsx';
+import LangTag from '../../utils/LangTag';
+import NoTitleMessage from '../../utils/NoTitleMessage';
+import '../../styles/postdetail.scss';
 
 const PostPreview = () => {
    const { cvImg, title, tags, MDEValue } = useSelector(

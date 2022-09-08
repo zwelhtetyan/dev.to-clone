@@ -80,7 +80,7 @@ const useCreatePost = (currentPostDataToEdit) => {
       createPost({ ...postData, draft: false })
          .then((_) => {
             setPublishing(false);
-            navigate('/dashboard/posts');
+            navigate('/dashboard');
             removeFromLocalStorage('postDataToPublish');
             removeFromLocalStorage('postDataToManage');
             console.log('created post successfully');

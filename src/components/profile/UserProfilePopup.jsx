@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
-import { joinOnDate } from '../helper/calcTimestamp';
+import { joinOnDate } from '../../helper/calcTimestamp';
 import { useNavigate } from 'react-router-dom';
-import { LightBtn, PrimaryBtn } from '../utils/Buttons';
-import useClickFollow from '../hooks/useClickFollow';
+import { LightBtn, PrimaryBtn } from '../../utils/Buttons';
+import useClickFollow from '../../hooks/useClickFollow';
 
 const Content = ({ title, text, contentMb }) => {
    return (

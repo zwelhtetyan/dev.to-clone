@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, HStack, Text } from '@chakra-ui/react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
 import IconBadge from '../../../utils/IconBadge';
 import { useAuth } from '../../../context/auth';
@@ -19,7 +19,7 @@ const MenuItem = styled(NavLink)`
    }
 `;
 
-const activeLink = ({ isActive }) => {
+const activeLink = (isActive) => {
    return isActive
       ? {
            background: 'rgb(59 73 223 / 10%)',
@@ -39,6 +39,8 @@ const Layout = ({ title, count }) => {
 
 const Left = ({ totalPublishedPosts, totalDraftPosts }) => {
    const user = useAuth();
+   const location = useLocation();
+
    const { profileData } = useSelector((state) => state.profileData);
 
    const totalFollowingUsers = profileData.filter((userData) =>
@@ -52,26 +54,26 @@ const Left = ({ totalPublishedPosts, totalDraftPosts }) => {
    return (
       <Box w='230px' display={{ base: 'none', md: 'block' }}>
          <MenuItem
-            to='/dashboard/posts'
-            style={(isActive) => activeLink(isActive)}
+            to='/dashboard'
+            style={() => activeLink(location.pathname === '/dashboard')}
          >
             <Layout title='Posts' count={totalPublishedPosts} />
          </MenuItem>
          <MenuItem
             to='/dashboard/drafts'
-            style={(isActive) => activeLink(isActive)}
+            style={({ isActive }) => activeLink(isActive)}
          >
             <Layout title='Drafts' count={totalDraftPosts} />
          </MenuItem>
          <MenuItem
             to='/dashboard/followers'
-            style={(isActive) => activeLink(isActive)}
+            style={({ isActive }) => activeLink(isActive)}
          >
             <Layout title='Followers' count={totalFollowers} />
          </MenuItem>
          <MenuItem
             to='/dashboard/following_users'
-            style={(isActive) => activeLink(isActive)}
+            style={({ isActive }) => activeLink(isActive)}
          >
             <Layout title='Following users' count={totalFollowingUsers} />
          </MenuItem>

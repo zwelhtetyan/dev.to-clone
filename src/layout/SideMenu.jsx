@@ -91,10 +91,9 @@ const SideMenu = () => {
                      <Box
                         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                         borderRadius='5px'
-                        py='.5rem'
                         mb='.7rem'
                      >
-                        <Hero w='80%' onClose={onClose} p='0' />
+                        <Hero btnWidth='90%' onClose={onClose} p='.5rem' />
                      </Box>
                   )}
 
