@@ -65,6 +65,15 @@ const MoreOptionMenu = ({ iconStyles, postTitle }) => {
       }
    };
 
+   // check touch device or not
+   const isTouchDevice = () => {
+      return (
+         'ontouchstart' in window ||
+         navigator.MaxTouchPoints > 0 ||
+         navigator.msMaxTouchPoints > 0
+      );
+   };
+
    return (
       <Menu autoSelect={false} isLazy>
          <MenuButton _hover={{ '.moreBtn': { bg: 'gray.200' } }}>
@@ -88,33 +97,27 @@ const MoreOptionMenu = ({ iconStyles, postTitle }) => {
                </HStack>
             </CustomMenuItem>
 
-            <CustomMenuItem
-               onClick={() => handleShareVia('twitter')}
-               display={{ base: 'none', md: 'block' }}
-            >
-               Share to Twitter
-            </CustomMenuItem>
+            {!isTouchDevice() && (
+               <>
+                  <CustomMenuItem onClick={() => handleShareVia('twitter')}>
+                     Share to Twitter
+                  </CustomMenuItem>
 
-            <CustomMenuItem
-               onClick={() => handleShareVia('linkedin')}
-               display={{ base: 'none', md: 'block' }}
-            >
-               Share to Linkedin
-            </CustomMenuItem>
+                  <CustomMenuItem onClick={() => handleShareVia('linkedin')}>
+                     Share to Linkedin
+                  </CustomMenuItem>
 
-            <CustomMenuItem
-               onClick={() => handleShareVia('facebook')}
-               display={{ base: 'none', md: 'block' }}
-            >
-               Share to Facebook
-            </CustomMenuItem>
+                  <CustomMenuItem onClick={() => handleShareVia('facebook')}>
+                     Share to Facebook
+                  </CustomMenuItem>
+               </>
+            )}
 
-            <CustomMenuItem
-               onClick={nativeShareVia}
-               display={{ base: 'block', md: 'none' }}
-            >
-               Share post via...
-            </CustomMenuItem>
+            {isTouchDevice() && (
+               <CustomMenuItem onClick={nativeShareVia}>
+                  Share post via...
+               </CustomMenuItem>
+            )}
          </MenuList>
       </Menu>
    );
