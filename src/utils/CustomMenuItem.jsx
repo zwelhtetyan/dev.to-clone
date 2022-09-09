@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenuItem } from '@chakra-ui/react';
 
-const CustomMenuItem = ({ children, onClick, py }) => {
+const CustomMenuItem = ({ children, onClick, py, display }) => {
    return (
       <MenuItem
          py={py || '.5rem'}
@@ -12,6 +12,7 @@ const CustomMenuItem = ({ children, onClick, py }) => {
             color: 'rgb(47 58 178)',
          }}
          onClick={onClick}
+         display={display}
       >
          {children}
       </MenuItem>

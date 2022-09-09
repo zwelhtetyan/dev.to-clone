@@ -6,9 +6,9 @@ import Unicorn from '../../assets/logo/Unicorn';
 import AlreadyUnicorned from '../../assets/logo/AlreadyUnicorned';
 import Save from '../../assets/logo/Save';
 import AlreadySaved from '../../assets/logo/AlreadySaved';
-import Option from '../../assets/logo/Option';
 import useClickReactToPost from '../../hooks/useClickReactToPost';
 import { useAuth } from '../../context/auth';
+import MoreOptionMenu from './MoreOptionMenu';
 
 const styles = {
    direction: { base: 'row', md: 'column' },
@@ -125,7 +125,10 @@ const SideReactionBar = ({ postDetail }) => {
          )}
 
          <Flex direction={{ base: 'row', md: 'column' }} align='center'>
-            <IconButton icon={<Option />} {...iconStyles} />
+            <MoreOptionMenu
+               iconStyles={iconStyles}
+               postTitle={postDetail.title}
+            />
          </Flex>
       </Flex>
    );

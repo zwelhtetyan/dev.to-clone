@@ -1,13 +1,20 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/auth';
 import { updateProfileData } from '../lib/api';
 
 const useClickFollow = (profileData, userId) => {
-   const [loading, setLoading] = useState(false);
-
+   const user = useAuth();
    const navigate = useNavigate();
 
+   const [loading, setLoading] = useState(false);
+
    const handleClickFollow = () => {
+      if (!user) {
+         navigate('/create-account');
+         return;
+      }
+
       if (profileData?.id === userId) {
          navigate('/customize-profile');
       } else {
