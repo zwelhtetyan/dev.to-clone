@@ -83,20 +83,13 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
 
    // generating tag icon
    const suggestions = () => {
-      if (!tagsToShow() || tagsToShow().length === 0) {
-         // return <p>No tag found !</p>;
-         const customTag = { topic: filterTagName, isCustomTag: true };
-         return (
-            <WrapItem>
-               <LangTag
-                  onAddTag={() => handleAddLangTag(customTag)}
-                  tag={customTag}
-                  cursor='pointer'
-               />
-            </WrapItem>
-         );
-      } else if (tagsToShow()) {
-         return tagsToShow().map((tag) => (
+      if (tagsToShow()) {
+         const transformedTags = [
+            { topic: filterTagName, isCustomTag: true },
+            ...tagsToShow(),
+         ];
+
+         return transformedTags.map((tag) => (
             <WrapItem key={nanoid()}>
                <LangTag
                   onAddTag={() => handleAddLangTag(tag)}

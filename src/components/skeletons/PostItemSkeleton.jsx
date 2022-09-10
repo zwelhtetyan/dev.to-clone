@@ -39,7 +39,10 @@ const PostItemSkeleton = ({ firstItem }) => {
                   </HStack>
                </HStack>
 
-               <SkeletonText noOfLines={1} w='70px' />
+               <HStack>
+                  <SkeletonText noOfLines={1} w='70px' />
+                  <Skeleton w='20px' h='20px' />
+               </HStack>
             </HStack>
          </Box>
       </Box>

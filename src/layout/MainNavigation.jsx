@@ -2,24 +2,16 @@ import React from 'react';
 import logo from '../assets/logo/logo.png';
 import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
-import {
-   Box,
-   Flex,
-   HStack,
-   Image,
-   Input,
-   InputGroup,
-   InputRightElement,
-} from '@chakra-ui/react';
+import { Box, Flex, HStack, Image } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import SideMenu from './SideMenu';
 import { useAuth } from '../context/auth';
 import MainMenu from '../components/MainMenu';
 import { useSelector } from 'react-redux';
+import SearchInput from '../components/search/SearchInput';
 
 const MainNavigation = () => {
    const navigate = useNavigate();
-
    const user = useAuth();
 
    const profileData = useSelector((state) => state.profileData.profileData);
@@ -62,18 +54,7 @@ const MainNavigation = () => {
                   cursor='pointer'
                />
 
-               <InputGroup
-                  h='39px'
-                  w='400px'
-                  ms='0.5rem'
-                  display={{ base: 'none', md: 'block' }}
-                  borderColor='#00000033'
-               >
-                  <Input placeholder='Search...' />
-                  <InputRightElement
-                     children={<FiSearch size={23} color='gray' />}
-                  />
-               </InputGroup>
+               <SearchInput w='400px' display={{ base: 'none', md: 'block' }} />
             </Box>
 
             <Flex>
@@ -81,6 +62,7 @@ const MainNavigation = () => {
                   name='search_icon'
                   display={{ base: 'block', md: 'none' }}
                   m='0 .5rem 0 0'
+                  onClick={() => navigate('/search')}
                >
                   <FiSearch size={23} />
                </SecondaryBtn>

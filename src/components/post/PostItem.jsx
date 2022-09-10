@@ -189,7 +189,7 @@ const PostItem = ({
                   mt={2}
                   w='100%'
                   _hover={{ color: 'rgb(47 58 178)' }}
-                  fontSize={['1.2rem', '1.3rem']}
+                  fontSize={['1.1rem', '1.3rem']}
                   color='rgb(23 23 23)'
                >
                   {title}
