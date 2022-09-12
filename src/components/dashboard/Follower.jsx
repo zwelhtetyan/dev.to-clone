@@ -3,6 +3,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useAuth } from '../../context/auth';
 import Card from './Card';
+import NoDataMessage from './NoDataMessage';
 
 const Follower = () => {
    const user = useAuth();
@@ -16,6 +17,10 @@ const Follower = () => {
    const followers = profileData.filter((userData) =>
       followerId.includes(userData.id)
    );
+
+   if (!followers.length) {
+      return <NoDataMessage title={`You don't have any followers yet.`} />;
+   }
 
    return (
       <Box

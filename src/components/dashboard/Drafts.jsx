@@ -1,13 +1,16 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
+import { PrimaryBtn } from '../../utils/Buttons';
 import DraftPostItem from '../post/DraftPostItem';
 import NoDataMessage from './NoDataMessage';
 
 const Drafts = () => {
    const user = useAuth();
    const userId = user.userId;
+   const navigate = useNavigate();
 
    const {
       transformedData,
@@ -23,7 +26,17 @@ const Drafts = () => {
    }
 
    if (draftPosts.length === 0 && !loading && !err) {
-      return <NoDataMessage title='No Drafted posts here 👻' />;
+      return (
+         <NoDataMessage title='You have not saved any draft yet.'>
+            <PrimaryBtn
+               bg='rgb(59 73 223)'
+               m='1rem 0 0 0'
+               onClick={() => navigate('/create-post')}
+            >
+               Write your post now
+            </PrimaryBtn>
+         </NoDataMessage>
+      );
    }
 
    return (

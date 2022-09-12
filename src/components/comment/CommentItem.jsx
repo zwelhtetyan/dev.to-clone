@@ -127,6 +127,7 @@ const CommentItem = ({
                   fontSize={{ base: '14px', sm: '16px' }}
                   className='mde-preview-content'
                   fontFamily='monospace'
+                  sx={{ p: { marginBottom: '8px !important' } }}
                >
                   {reply && repliedUserName !== currentUserProfile.name && (
                      <Text

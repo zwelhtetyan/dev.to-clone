@@ -54,6 +54,11 @@ const CustomizeProfile = () => {
    const backgroundRef = useRef();
    const previewImgRef = useRef();
 
+   if (!user) {
+      navigate('/create-account');
+      return;
+   }
+
    let currentUserProfile = null;
    if (profileData) {
       currentUserProfile = profileData.find((data) => data.id === user.userId);

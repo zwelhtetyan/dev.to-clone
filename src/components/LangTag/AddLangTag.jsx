@@ -6,6 +6,7 @@ import tagsData from './LangTagData.json';
 import { setTagsToStore } from '../../store/post/postData';
 import { nanoid } from 'nanoid';
 import { VscChromeClose } from 'react-icons/vsc';
+import useClickOutside from '../../hooks/useClickOutside';
 
 const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    //states
@@ -24,6 +25,9 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
 
    //refs
    const inputTagRef = useRef();
+
+   //handle click outside to close suggesstion box
+   useClickOutside(setFocusTagInput, ['suggestion-box', 'tag-input']);
 
    //showing tag suggestion
    const tagsToShow = () => {
@@ -103,20 +107,6 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
 
    // showSuggestionBox
    const showSuggestionBox = focusTagInput && tagsToShow() ? 'flex' : 'none';
-
-   //global click event to close suggestion box
-   document.body.addEventListener('click', (e) => {
-      e.stopPropagation();
-
-      if (
-         e.target.classList.contains('suggestion-box') ||
-         e.target.classList.contains('tag-input')
-      ) {
-         setFocusTagInput(true);
-      } else {
-         setFocusTagInput(false);
-      }
-   });
 
    const tagInputPlaceHolder = `Add tag ( ${4 - filteredTags.length} )`;
 

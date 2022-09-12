@@ -50,7 +50,7 @@ const App = () => {
          >
             <Routes>
                <Route path='/' element={<Layout />}>
-                  <Route path='/' element={<Home />} />
+                  <Route index element={<Home />} />
                   <Route path='profile/:userIdToView' element={<Profile />} />
                   <Route path='details/:id' element={<PostDetails />} />
                   <Route path='create-account' element={<SignUp />} />

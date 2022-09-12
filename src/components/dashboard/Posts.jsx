@@ -1,17 +1,20 @@
 import { Box } from '@chakra-ui/react';
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import {
    calcTotalDiscussion,
    calculateReaction,
 } from '../../helper/calculateTotal';
+import { PrimaryBtn } from '../../utils/Buttons';
 import PostItem from '../post/PostItem';
 import NoDataMessage from './NoDataMessage';
 
 const Posts = () => {
    const user = useAuth();
    const userId = user.userId;
+   const navigate = useNavigate();
 
    const {
       transformedData,
@@ -27,7 +30,19 @@ const Posts = () => {
    }
 
    if (publishedPosts.length === 0 && !loading && !err) {
-      return <NoDataMessage title='No Published posts here 👻' />;
+      return (
+         <NoDataMessage
+            title={`This is where you can manage your posts, but you haven't written anything yet.`}
+         >
+            <PrimaryBtn
+               bg='rgb(59 73 223)'
+               m='1rem 0 0 0'
+               onClick={() => navigate('/create-post')}
+            >
+               Write your first post now
+            </PrimaryBtn>
+         </NoDataMessage>
+      );
    }
 
    return (

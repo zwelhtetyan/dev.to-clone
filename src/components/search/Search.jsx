@@ -63,17 +63,19 @@ const Search = () => {
 
          {searchedPostData && searchedPostData.length !== 0 ? (
             <>
-               <Heading
-                  fontSize={{ base: '1.3rem', md: '1.5rem' }}
-                  mb={4}
-                  display={{ base: 'none', md: 'block' }}
-               >
-                  Search results for '{' '}
-                  <Text as='span' color='rgb(47 58 178)'>
-                     {querySearchTerm}
-                  </Text>{' '}
-                  '
-               </Heading>
+               {querySearchTerm && (
+                  <Heading
+                     fontSize={{ base: '1.3rem', md: '1.5rem' }}
+                     mb={4}
+                     display={{ base: 'none', md: 'block' }}
+                  >
+                     Search results for '{' '}
+                     <Text as='span' color='rgb(47 58 178)'>
+                        {querySearchTerm}
+                     </Text>{' '}
+                     '
+                  </Heading>
+               )}
 
                {searchedPostData.map((postData) => (
                   <PostItem

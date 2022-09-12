@@ -51,8 +51,8 @@ const DiscussionBox = ({
             navigate('/create-account');
          }
       };
-      textArea.addEventListener('click', checkUser);
-      return () => textArea.removeEventListener('click', checkUser);
+      textArea?.addEventListener('click', checkUser);
+      return () => textArea?.removeEventListener('click', checkUser);
    }, [user, navigate]); // hide mde-header if user is not authenticated
 
    useEffect(() => {
@@ -143,10 +143,11 @@ const DiscussionBox = ({
             <Box
                minH='192px'
                borderRadius='5px'
-               p='10px !important'
+               padding='10px !important'
                className='mde-preview-content'
                boxShadow='0 0 0 1px #d6d6d7'
                fontSize={['1rem', '1.1rem']}
+               sx={{ p: { marginBottom: '8px !important' } }}
             >
                {htmlToJsx(converter().makeHtml(MDEValue))}
             </Box>

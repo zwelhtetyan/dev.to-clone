@@ -32,7 +32,7 @@ const Layout = ({ title, count }) => {
    return (
       <HStack justify='space-between'>
          <Text>{title}</Text>
-         {count && <IconBadge value={count} />}
+         <IconBadge value={count} />
       </HStack>
    );
 };
@@ -59,18 +59,21 @@ const Left = ({ totalPublishedPosts, totalDraftPosts }) => {
          >
             <Layout title='Posts' count={totalPublishedPosts} />
          </MenuItem>
+
          <MenuItem
             to='/dashboard/drafts'
             style={({ isActive }) => activeLink(isActive)}
          >
             <Layout title='Drafts' count={totalDraftPosts} />
          </MenuItem>
+
          <MenuItem
             to='/dashboard/followers'
             style={({ isActive }) => activeLink(isActive)}
          >
             <Layout title='Followers' count={totalFollowers} />
          </MenuItem>
+
          <MenuItem
             to='/dashboard/following_users'
             style={({ isActive }) => activeLink(isActive)}
