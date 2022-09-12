@@ -5,6 +5,7 @@ import { Box, Spinner } from '@chakra-ui/react';
 import Layout from './layout/Layout';
 import Home from './pages/Home';
 import useTransformData from './hooks/useTransformData';
+import LoginAlert from './components/LoginAlert';
 
 const PostDetails = lazy(() => import('./pages/PostDetails'));
 const Profile = lazy(() => import('./pages/Profile'));
@@ -82,6 +83,9 @@ const App = () => {
                <Route path='*' element={<Error />} />
             </Routes>
          </Suspense>
+
+         {/* modal alert */}
+         <LoginAlert />
       </Box>
    );
 };

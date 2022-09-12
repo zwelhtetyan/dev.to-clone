@@ -15,6 +15,8 @@ import DiscussionBox from '../discussion/DiscussionBox';
 import useClickLikeToComment from '../../hooks/useClickLikeToComment';
 import ManageComment from './ManageComment';
 import { FiCornerLeftUp } from 'react-icons/fi';
+import { useDispatch } from 'react-redux';
+import { setLoginAlert } from '../../store/loginAlert';
 
 const CommentItem = ({
    text,
@@ -36,6 +38,7 @@ const CommentItem = ({
    repliedUserName,
 }) => {
    const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    const [showDiscussionBox, setShowDiscussionbox] = useState(false);
 
@@ -53,7 +56,7 @@ const CommentItem = ({
 
    const handleshowDiscussionBox = () => {
       if (!currentUserId) {
-         navigate('/create-account');
+         dispatch(setLoginAlert(true));
          return;
       }
 
@@ -127,7 +130,7 @@ const CommentItem = ({
                   fontSize={{ base: '14px', sm: '16px' }}
                   className='mde-preview-content'
                   fontFamily='monospace'
-                  sx={{ p: { marginBottom: '8px !important' } }}
+                  sx={{ p: { marginBottom: '5px !important' } }}
                >
                   {reply && repliedUserName !== currentUserProfile.name && (
                      <Text

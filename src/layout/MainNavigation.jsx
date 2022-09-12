@@ -30,7 +30,7 @@ const MainNavigation = () => {
          h='56px'
          pos='fixed'
          boxShadow='md'
-         zIndex={1500}
+         zIndex={1000}
          top='0'
          left='0'
       >

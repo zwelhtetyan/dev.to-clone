@@ -1,17 +1,20 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
 import { updateProfileData } from '../lib/api';
+import { setLoginAlert } from '../store/loginAlert';
 
 const useClickFollow = (profileData, userId) => {
    const user = useAuth();
    const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    const [loading, setLoading] = useState(false);
 
    const handleClickFollow = () => {
       if (!user) {
-         navigate('/create-account');
+         dispatch(setLoginAlert(true));
          return;
       }
 

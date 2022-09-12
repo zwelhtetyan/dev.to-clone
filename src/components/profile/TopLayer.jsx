@@ -111,7 +111,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
 
          {profileData && (
             <Box>
-               <Heading fontSize={['1.5rem', '2rem']}>
+               <Heading fontSize={['1.5rem', '1.7rem']}>
                   {profileData.name}
                </Heading>
 

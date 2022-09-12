@@ -5,6 +5,7 @@ import transformedDataReducer from './data/transformedData';
 import profileDataReducer from './user/profileData';
 import currentCommentReducer from './comment/currentComments';
 import scrollDiscussionReducer from './scrollDiscussion';
+import loginAlertReducer from './loginAlert';
 
 const store = configureStore({
    middleware: (getDefaultMiddleware) =>
@@ -19,6 +20,7 @@ const store = configureStore({
       profileData: profileDataReducer,
       currentComments: currentCommentReducer, // helper comment state, otherwise commentArray form server take a while to response , it cause a bug when click to like button quickly.
       scrollDiscussion: scrollDiscussionReducer,
+      loginAlert: loginAlertReducer,
    },
 });
 

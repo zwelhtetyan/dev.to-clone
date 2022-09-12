@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useAuth } from '../context/auth';
 import { updatePostReaction } from '../lib/api';
+import { setLoginAlert } from '../store/loginAlert';
 
 const useClickReactToPost = (reactionArr, postId, reactType) => {
    const user = useAuth();
+   const dispatch = useDispatch();
    const [updatingReact, setUpdatingReact] = useState(false);
-
-   const navigate = useNavigate();
 
    const clickReactHandler = () => {
       if (!user?.userId) {
-         navigate('/create-account');
+         dispatch(setLoginAlert(true));
          return;
       }
 

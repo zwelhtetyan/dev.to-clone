@@ -6,12 +6,12 @@ import MDE from '../MDE';
 import '../../styles/customizeMDE.scss';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import { updateComment } from '../../lib/api';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/auth';
 import { nanoid } from 'nanoid';
 import { removeFromLocalStorage } from '../../helper/localStorage';
-import { useNavigate } from 'react-router-dom';
+import { setLoginAlert } from '../../store/loginAlert';
 
 const DiscussionBox = ({
    postId,
@@ -23,7 +23,7 @@ const DiscussionBox = ({
    repliedUserId,
 }) => {
    const user = useAuth();
-   const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    const [submitting, setSubmitting] = useState(false);
    const [uploadingImg, setUploadingImg] = useState(false);
@@ -43,18 +43,23 @@ const DiscussionBox = ({
 
    useEffect(() => {
       const textArea = document.querySelector('.mde-text');
+
       if (!user) {
          document.querySelector('.mde-header').style.display = 'none';
       }
+
       const checkUser = () => {
          if (!user) {
-            navigate('/create-account');
+            dispatch(setLoginAlert(true));
          }
       };
-      textArea?.addEventListener('click', checkUser);
-      return () => textArea?.removeEventListener('click', checkUser);
-   }, [user, navigate]); // hide mde-header if user is not authenticated
 
+      textArea?.addEventListener('click', checkUser);
+
+      return () => textArea?.removeEventListener('click', checkUser);
+   }, [user, dispatch]); // hide mde-header if user is not authenticated
+
+   // insert placeholder
    useEffect(() => {
       const textBoxes = [...document.querySelectorAll('.mde-text')];
       textBoxes.map((textbox, idx) =>
@@ -147,7 +152,7 @@ const DiscussionBox = ({
                className='mde-preview-content'
                boxShadow='0 0 0 1px #d6d6d7'
                fontSize={['1rem', '1.1rem']}
-               sx={{ p: { marginBottom: '8px !important' } }}
+               sx={{ p: { marginBottom: '5px !important' } }}
             >
                {htmlToJsx(converter().makeHtml(MDEValue))}
             </Box>

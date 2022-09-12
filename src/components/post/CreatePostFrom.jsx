@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, HStack, Image, Input, Spinner, Text } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import AddCvImg from '../AddCvImg';
 import AddLangTag from '../LangTag/AddLangTag';
 import MDE from '../MDE';
 import logo from '../../assets/logo/logo.png';
-import ModalAlert from '../Modal';
+import LeavePageAlert from '../LeavePageAlert';
 import { useNavigate } from 'react-router-dom';
 import PostPreview from './PostPreview';
 import NoTitleMessage from '../../utils/NoTitleMessage';
-import { useEffect } from 'react';
 
 const CreatePostFrom = ({
    publishPostHandler,
@@ -45,9 +44,11 @@ const CreatePostFrom = ({
    };
 
    useEffect(() => {
-      document.querySelector('.mde-text').placeholder =
-         'Write your post content here...';
-   }, []);
+      if (mdeTab === 'write') {
+         document.querySelector('.mde-text').placeholder =
+            'Write your post content here...';
+      }
+   }, [mdeTab]);
 
    return (
       <Box mt='-3.5rem'>
@@ -81,7 +82,7 @@ const CreatePostFrom = ({
                   >
                      Preview
                   </SecondaryBtn>
-                  <ModalAlert />
+                  <LeavePageAlert />
                </Box>
             </Box>
 

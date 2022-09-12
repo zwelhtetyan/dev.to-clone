@@ -37,12 +37,8 @@ const SignUp = ({ type }) => {
 
             createUser(userId, userData).then((_) => {
                navigate(-1);
-               // setSigningIn(false);
+               // setSigningIn(false);  cause this component render again after creating user
                console.log('created user successfully');
-
-               // I dont't set false to signingIn , because useAuth render immediately after user is created.
-               // So if i set to false here, line.22's condirion is match and navigate to profile and return.
-               // I want to go back to the previous route after login.
             });
          })
          .catch((err) => {

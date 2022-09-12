@@ -82,17 +82,14 @@ const Dashboard = () => {
 
    const handleSelect = ({ target }) => {
       const pathname = target.value.toLowerCase();
-
-      if (target.value === 'posts') {
+      if (pathname === 'posts') {
          navigate('/dashboard');
-      }
-
-      if (target.value === 'Following users') {
-         navigate('/dashboard/following_users');
-
          return;
       }
-
+      if (pathname === 'following users') {
+         navigate('/dashboard/following_users');
+         return;
+      }
       navigate(`/dashboard/${pathname}`);
    };
 

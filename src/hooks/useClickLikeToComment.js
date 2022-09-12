@@ -1,18 +1,17 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { updateComment } from '../lib/api';
 import { setCurrentComments } from '../store/comment/currentComments';
+import { setLoginAlert } from '../store/loginAlert';
 
 const useClickLikeToComment = (currentUserId, postId) => {
-   const navigate = useNavigate();
    const dispatch = useDispatch();
 
    const [updatingLike, setUpdatingLike] = useState(false);
 
    const handleClickLike = (comments, commentId) => {
       if (!currentUserId) {
-         navigate('/create-account');
+         dispatch(setLoginAlert(true));
          return;
       }
 
