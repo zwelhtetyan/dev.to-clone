@@ -82,6 +82,7 @@ const MDE = ({ MDEValue, setMDEValue, isSubmitting, setUploadingImg }) => {
 
    const mdeImgUploadHandler = (e) => {
       const image = e.target.files[0];
+
       if (image) {
          document.querySelector('.mde-text').disabled = true;
          setUploadingImg(true);

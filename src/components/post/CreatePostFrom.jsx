@@ -86,6 +86,7 @@ const CreatePostFrom = ({
                </Box>
             </Box>
 
+            {/* body */}
             <Box
                align='start'
                bg='white'

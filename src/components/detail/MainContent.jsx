@@ -135,7 +135,7 @@ const MainContent = ({ postDetail }) => {
                   )}
                </Flex>
 
-               <Heading mt={2} color='rgb(23 23 23)'>
+               <Heading my={2} color='rgb(23 23 23)'>
                   {postDetail.title}
                </Heading>
 

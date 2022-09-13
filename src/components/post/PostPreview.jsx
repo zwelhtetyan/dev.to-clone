@@ -31,16 +31,22 @@ const PostPreview = () => {
             />
          )}
 
-         {title ? <Heading mt={2}>{title}</Heading> : <NoTitleMessage />}
-         {tags && tags.length !== 0 && (
-            <Wrap py={2} spacing={2} fontFamily='sans-serif'>
-               {tags.map((tag) => (
-                  <WrapItem key={nanoid()}>
-                     <LangTag tag={tag} />
-                  </WrapItem>
-               ))}
-            </Wrap>
+         {title ? (
+            <Heading my={2} color='rgb(23 23 23)'>
+               {title}
+            </Heading>
+         ) : (
+            <NoTitleMessage />
          )}
+
+         <Wrap py={2} spacing={2} fontFamily='sans-serif'>
+            {tags.map((tag) => (
+               <WrapItem key={nanoid()}>
+                  <LangTag tag={tag} />
+               </WrapItem>
+            ))}
+         </Wrap>
+
          <Box
             className='mde-preview-content'
             fontSize={['16px', '17px', '19px']}

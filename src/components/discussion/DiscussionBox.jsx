@@ -67,7 +67,7 @@ const DiscussionBox = ({
             ? (textbox.placeholder = 'Add to the discussion...')
             : (textbox.placeholder = 'Reply...')
       );
-   }, []);
+   }, [mdeTab]);
 
    const handleSubmit = (e) => {
       e.preventDefault();
