@@ -10,8 +10,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/auth';
 import { nanoid } from 'nanoid';
-import { removeFromLocalStorage } from '../../helper/localStorage';
+import {
+   getItemFromLocalStorage,
+   removeFromLocalStorage,
+   saveToLocalStorage,
+} from '../../helper/localStorage';
 import { setLoginAlert } from '../../store/loginAlert';
+import { removeUnnecessaryUploadedMDEImg } from '../../helper/removeUnnecessaryUploadedMDEImg';
 
 const DiscussionBox = ({
    postId,
@@ -21,6 +26,8 @@ const DiscussionBox = ({
    valueToEdit,
    transformedComments,
    repliedUserId,
+   uploadedMDEImgToEditComment,
+   setUploadedMDEImgToEditComment,
 }) => {
    const user = useAuth();
    const dispatch = useDispatch();
@@ -29,8 +36,20 @@ const DiscussionBox = ({
    const [uploadingImg, setUploadingImg] = useState(false);
    const [mdeTab, setMdeTab] = useState('write');
    const [MDEValue, setMDEValue] = useState(valueToEdit || '');
+   const [uploadedMDEImgToPublishComment, setUploadedMDEImgToPublishComment] =
+      useState(getItemFromLocalStorage('uploadedMDEImgToPublishComment') || []);
 
    const { transformedData } = useSelector((state) => state.transformedData);
+
+   useEffect(() => {
+      if (uploadedMDEImgToPublishComment.length) {
+         saveToLocalStorage(
+            'uploadedMDEImgToPublishComment',
+            JSON.stringify(uploadedMDEImgToPublishComment)
+         );
+      }
+   }, [uploadedMDEImgToPublishComment]);
+
    const comments = transformedData?.find(
       (data) => data.id === postId
    )?.comments;
@@ -46,6 +65,7 @@ const DiscussionBox = ({
 
       if (!user) {
          document.querySelector('.mde-header').style.display = 'none';
+         textArea.readOnly = true; // not allow cursor if not authenticated
       }
 
       const checkUser = () => {
@@ -69,13 +89,35 @@ const DiscussionBox = ({
       );
    }, [mdeTab]);
 
+   if (submitting) {
+      if (valueToEdit) {
+         if (uploadedMDEImgToEditComment.length) {
+            removeUnnecessaryUploadedMDEImg(
+               uploadedMDEImgToEditComment,
+               MDEValue
+            );
+            setUploadedMDEImgToEditComment([]);
+            removeFromLocalStorage('uploadedMDEImgToEditComment');
+         }
+      } else {
+         if (uploadedMDEImgToPublishComment.length) {
+            removeUnnecessaryUploadedMDEImg(
+               uploadedMDEImgToPublishComment,
+               MDEValue
+            );
+            setUploadedMDEImgToPublishComment([]);
+            removeFromLocalStorage('uploadedMDEImgToPublishComment');
+         }
+      }
+   }
+
    const handleSubmit = (e) => {
       e.preventDefault();
       setSubmitting(true);
 
       const createdAt = Timestamp.now();
       const newComment = {
-         value: converter().makeHtml(MDEValue),
+         value: MDEValue,
          replies: {},
          createdAt,
          userId: user.userId,
@@ -114,7 +156,7 @@ const DiscussionBox = ({
          .then((_) => {
             setSubmitting(false);
             setMDEValue('');
-            // onDismiss && onDismiss(); // close discussionBox immediately without accepting new state value
+            // onDismiss && onDismiss(); => close discussionBox immediately without accepting new state value
             onDismiss && setTimeout(onDismiss, 100); // need new state value ('submitting = false') to disable || enable to MDE after state change
             setMdeTab('write');
             removeFromLocalStorage('commentItemToManage');
@@ -140,6 +182,11 @@ const DiscussionBox = ({
                   setMDEValue={setMDEValue}
                   isSubmitting={submitting}
                   setUploadingImg={setUploadingImg}
+                  setUploadedMDEImg={
+                     valueToEdit
+                        ? setUploadedMDEImgToEditComment
+                        : setUploadedMDEImgToPublishComment
+                  }
                />
             </Box>
          )}

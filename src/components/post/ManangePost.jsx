@@ -65,7 +65,7 @@ const ManangePost = ({ postId, m }) => {
          >
             Manage
          </MenuButton>
-         <MenuList minW='0' w='105px'>
+         <MenuList minW='0' w='150px'>
             <CustomMenuItem onClick={goToEdit}>Edit</CustomMenuItem>
             <CustomMenuItem onClick={goToDelete}>Delete</CustomMenuItem>
          </MenuList>

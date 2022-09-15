@@ -85,7 +85,7 @@ const CommentItem = ({
                ms='.5rem'
                overflow='hidden'
             >
-               <Flex justify='space-between' mb={1}>
+               <Flex justify='space-between' mb={2}>
                   <HStack align='center' spacing='2px'>
                      <Text
                         fontSize='15px'

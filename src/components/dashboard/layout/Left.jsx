@@ -47,9 +47,9 @@ const Left = ({ totalPublishedPosts, totalDraftPosts }) => {
       userData.followers?.includes(user.userId)
    ).length;
 
-   const totalFollowers = profileData.find(
-      (userData) => userData.id === user.userId
-   ).followers?.length;
+   const totalFollowers =
+      profileData.find((userData) => userData.id === user.userId).followers
+         ?.length || 0;
 
    return (
       <Box w='230px' display={{ base: 'none', md: 'block' }}>

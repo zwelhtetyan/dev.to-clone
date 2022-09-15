@@ -23,6 +23,7 @@ const CreatePostFrom = ({
    uploadingImg,
    setUploadingImg,
    toEdit,
+   setUploadedMDEImg,
 }) => {
    const naviagte = useNavigate();
 
@@ -43,6 +44,7 @@ const CreatePostFrom = ({
       }
    };
 
+   //set placeholder
    useEffect(() => {
       if (mdeTab === 'write') {
          document.querySelector('.mde-text').placeholder =
@@ -79,6 +81,7 @@ const CreatePostFrom = ({
                   <SecondaryBtn
                      m='0 1rem 0 .5rem'
                      onClick={() => mdeTabChangeHandler('preview')}
+                     disabled={uploadingImg}
                   >
                      Preview
                   </SecondaryBtn>
@@ -130,6 +133,7 @@ const CreatePostFrom = ({
                            MDEValue={postData?.MDEValue}
                            isSubmitting={publishing || savingDraft}
                            setUploadingImg={setUploadingImg}
+                           setUploadedMDEImg={setUploadedMDEImg}
                         />
                      </Box>
                   </Box>

@@ -1,15 +1,10 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactMde from 'react-mde';
 import { useDispatch } from 'react-redux';
 import { getDefaultToolbarCommands } from 'react-mde';
 import { Box } from '@chakra-ui/react';
 import { nanoid } from 'nanoid';
-import { removeImage, uploadImage } from '../lib/api';
-import {
-   getItemFromLocalStorage,
-   removeFromLocalStorage,
-   saveToLocalStorage,
-} from '../helper/localStorage';
+import { uploadImage } from '../lib/api';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';
 import { setMDEValueToStore } from '../store/post/postData';
@@ -31,16 +26,19 @@ const codeBlock = {
    },
 };
 
-const MDE = ({ MDEValue, setMDEValue, isSubmitting, setUploadingImg }) => {
-   const [value, setValue] = React.useState(MDEValue || '');
-   const [selectedTab, setSelectedTab] = React.useState('write');
-   const [uploadedMDEImg, setUploadedMdeImg] = React.useState(
-      getItemFromLocalStorage('uploadedMDEImg') || []
-   );
+const MDE = ({
+   MDEValue,
+   setMDEValue,
+   isSubmitting,
+   setUploadingImg,
+   setUploadedMDEImg,
+}) => {
+   const [value, setValue] = useState(MDEValue || '');
+   const [selectedTab, setSelectedTab] = useState('write');
 
    const dispatch = useDispatch();
 
-   React.useEffect(() => {
+   useEffect(() => {
       if (setMDEValue) {
          setMDEValue(value); //for comment
       } else {
@@ -48,31 +46,13 @@ const MDE = ({ MDEValue, setMDEValue, isSubmitting, setUploadingImg }) => {
       }
    }, [value, dispatch, setMDEValue]);
 
-   React.useEffect(() => {
-      if (uploadedMDEImg.length !== 0) {
-         saveToLocalStorage('uploadedMDEImg', JSON.stringify(uploadedMDEImg));
-      }
-   }, [uploadedMDEImg]);
-
-   React.useEffect(() => {
+   useEffect(() => {
       if (!MDEValue) {
          setValue(MDEValue);
       } // setting MDEValue to useState doesn't trigger again after initial render so I set empty string to value if it's empty
    }, [MDEValue]);
 
-   if (isSubmitting && uploadedMDEImg.length !== 0) {
-      // eslint-disable-next-line array-callback-return
-      uploadedMDEImg.map((img) => {
-         if (!MDEValue?.includes(img.url)) {
-            removeImage(img.path).catch((err) => console.log(err));
-         }
-      });
-
-      setUploadedMdeImg([]);
-      removeFromLocalStorage('uploadedMDEImg');
-   }
-
-   React.useEffect(() => {
+   useEffect(() => {
       if (isSubmitting) {
          document.querySelector('.mde-text').disabled = true;
       } else {
@@ -93,18 +73,22 @@ const MDE = ({ MDEValue, setMDEValue, isSubmitting, setUploadingImg }) => {
          uploadImage(image, selectedImgPath)
             .then((url) => {
                document.querySelector('.mde-text').disabled = false;
+
                setValue((prevVal) =>
                   prevVal.replace('uploading...', `![](${url})`)
                );
-               setUploadedMdeImg((prevArr) => [
+
+               //save uploaded MDE images
+               setUploadedMDEImg((prevArr) => [
                   ...prevArr,
-                  { url: `![](${url})`, path: selectedImgPath },
+                  { MDEURL: `![](${url})`, url },
                ]);
+
                setUploadingImg(false);
             })
             .catch((err) => console.log(err));
 
-         e.target.value = ''; // otherwise input event doesn't trigger again user add the same file
+         e.target.value = ''; // otherwise input event doesn't trigger again when user add the same file
       }
    };
 

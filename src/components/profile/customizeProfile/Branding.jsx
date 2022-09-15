@@ -47,7 +47,7 @@ const Branding = ({ backgroundRef, profileData }) => {
                      '.chrome-picker': {
                         position: 'absolute',
                         zIndex: 3,
-                        bottom: '3rem',
+                        top: '2.8rem',
                      },
                      '.chrome-picker .flexbox-fix:last-child': {
                         display: 'none !important',

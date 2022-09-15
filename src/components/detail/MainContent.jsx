@@ -88,7 +88,7 @@ const MainContent = ({ postDetail }) => {
                         <Text
                            fontWeight={600}
                            cursor='pointer'
-                           lineHeight={1}
+                           lineHeight={1.25}
                            _hover={{ color: 'rgb(47 58 178)' }}
                            onClick={() =>
                               navigate(`/profile/${postDetail.userId}`)

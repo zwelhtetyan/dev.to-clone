@@ -1,11 +1,15 @@
 import { Box, Heading, HStack } from '@chakra-ui/react';
 import { Timestamp } from 'firebase/firestore';
-import React from 'react';
+import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import DiscussionBox from '../components/discussion/DiscussionBox';
-import converter from '../helper/converter';
+import { getURLFromMDE } from '../helper/getURLFromMDE';
+import {
+   getItemFromLocalStorage,
+   saveToLocalStorage,
+} from '../helper/localStorage';
 
 const EditComment = () => {
    // scroll top
@@ -16,22 +20,38 @@ const EditComment = () => {
       (state) => state.currentComments.commentItem
    );
 
+   const valueToEdit = currentCommentItem.value;
+
+   const prevUploadedMDEImgToEdit = getURLFromMDE(valueToEdit);
+
+   const [uploadedMDEImgToEditComment, setUploadedMDEImgToEditComment] =
+      useState(
+         prevUploadedMDEImgToEdit ||
+            getItemFromLocalStorage('uploadedMDEImgToEditComment') ||
+            []
+      );
+
+   useEffect(() => {
+      saveToLocalStorage(
+         'uploadedMDEImgToEditComment',
+         JSON.stringify(uploadedMDEImgToEditComment)
+      );
+   }, [uploadedMDEImgToEditComment]);
+
    if (!currentCommentItem) {
-      return <Navigate to='/' />;
+      return <Navigate to={-1} />;
    }
 
    const onDismiss = () => {
       navigate(-1);
    };
 
-   const valueToEdit = converter().makeMarkdown(currentCommentItem.value);
-
    const transformedComments = (comments, MDEValue) => {
       const externalComments = comments.map((comment) =>
          comment.commentId === currentCommentItem.commentId
             ? {
                  ...comment,
-                 value: converter().makeHtml(MDEValue),
+                 value: MDEValue,
                  edited: true,
                  editedAt: Timestamp.now(),
               }
@@ -45,7 +65,7 @@ const EditComment = () => {
                cmt.commentId === currentCommentItem.commentId
                   ? {
                        ...cmt,
-                       value: converter().makeHtml(MDEValue),
+                       value: MDEValue,
                        edited: true,
                        editedAt: Timestamp.now(),
                     }
@@ -75,6 +95,8 @@ const EditComment = () => {
                onDismiss={onDismiss}
                showDismiss={true}
                transformedComments={transformedComments}
+               uploadedMDEImgToEditComment={uploadedMDEImgToEditComment}
+               setUploadedMDEImgToEditComment={setUploadedMDEImgToEditComment}
             />
          </Box>
       </HStack>
