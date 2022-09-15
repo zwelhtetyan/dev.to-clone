@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import { removeFromLocalStorage } from '../../helper/localStorage';
-import { deletePost } from '../../lib/api';
+import { deletePost, removeImage } from '../../lib/api';
 import DeleteConfirm from '../../utils/DeleteConfirm';
 
 const DeletePost = () => {
@@ -29,6 +29,7 @@ const DeletePost = () => {
 
    const onDelete = () => {
       setDeleting(true);
+
       deletePost(currentPostData.id)
          .then(() => {
             setDeleting(false);
@@ -39,6 +40,13 @@ const DeletePost = () => {
          .catch((err) => {
             console.log(err);
          });
+
+      // also delete imgaes inside Content but not images from comments
+      const imgURLArrToDelete = currentPostData.imgURLToDelete;
+      imgURLArrToDelete.length &&
+         imgURLArrToDelete.map((img) =>
+            removeImage(img.url).catch((err) => console.log(err))
+         );
    };
 
    const onDismiss = () => {

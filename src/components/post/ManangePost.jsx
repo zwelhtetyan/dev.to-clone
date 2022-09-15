@@ -2,6 +2,7 @@ import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getURLFromMDE } from '../../helper/getURLFromMDE';
 import { saveToLocalStorage } from '../../helper/localStorage';
 import { setCurrentPostData } from '../../store/post/currentPost';
 import CustomMenuItem from '../../utils/CustomMenuItem';
@@ -18,6 +19,8 @@ const ManangePost = ({ postId, m }) => {
          (postData) => postData.id === postId
       );
 
+      const imgURLToDelete = [...getURLFromMDE(postDetail.MDEValue)];
+
       const postData = {
          cvImg: postDetail.cvImg,
          title: postDetail.title,
@@ -25,6 +28,7 @@ const ManangePost = ({ postId, m }) => {
          MDEValue: postDetail.MDEValue,
          id: postId,
          draft: postDetail.draft ? true : false,
+         imgURLToDelete,
       };
 
       dispatch(setCurrentPostData(postData));

@@ -32,14 +32,14 @@ const DiscussionBox = ({
    const user = useAuth();
    const dispatch = useDispatch();
 
+   const { transformedData } = useSelector((state) => state.transformedData);
+
    const [submitting, setSubmitting] = useState(false);
    const [uploadingImg, setUploadingImg] = useState(false);
    const [mdeTab, setMdeTab] = useState('write');
    const [MDEValue, setMDEValue] = useState(valueToEdit || '');
    const [uploadedMDEImgToPublishComment, setUploadedMDEImgToPublishComment] =
       useState(getItemFromLocalStorage('uploadedMDEImgToPublishComment') || []);
-
-   const { transformedData } = useSelector((state) => state.transformedData);
 
    useEffect(() => {
       if (uploadedMDEImgToPublishComment.length) {
