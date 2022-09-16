@@ -46,26 +46,31 @@ const ManageComment = ({ commentId, postId, comments }) => {
 
    //transform comment for delete
    const transformedCommentsHandler = () => {
+      // filter comments without deleteId
       const filteredComments = comments.filter(
          (comment) => comment.commentId !== commentId
       );
 
       const transformedCommennts = filteredComments.map((comment) => {
+         // filter repliedComments without deleteId
          const repliedComments = Object.values(comment.replies)
             .sort((a, b) => a.createdAt - b.createdAt)
             .filter((cmt) => cmt.commentId !== commentId);
 
+         // make commentId array without deleteId
          const commentIds = [
             comment.commentId,
             ...repliedComments.map((cmt) => cmt.commentId),
          ];
 
+         // remove id when repliedCommentId doesn't include in commentId array
          repliedComments.forEach((cmt) => {
             if (!commentIds.includes(cmt.repliedCommentId)) {
                commentIds.splice(commentIds.indexOf(cmt.commentId), 1);
             }
          });
 
+         // filtered repliedComments which actually exitst in commentId array
          const finalRepliedComments = repliedComments.filter((cmt) =>
             commentIds.includes(cmt.commentId)
          );
@@ -83,12 +88,23 @@ const ManageComment = ({ commentId, postId, comments }) => {
       );
    };
 
+   const unnecessaryMDEImgfFromComments = () => {
+      const commentToDelete = comments.find(
+         (comment) => comment.commentId === commentId
+      );
+
+      console.log(commentToDelete);
+   };
+
    const goToEdit = () => {
       setCurrentCommentItemHandler();
       navigate('/edit-comment');
    };
 
    const goToDelete = () => {
+      // test
+      unnecessaryMDEImgfFromComments();
+
       setCurrentCommentItemHandler();
       transformedCommentsHandler();
       navigate('/delete-comment');

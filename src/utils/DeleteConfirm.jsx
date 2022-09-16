@@ -15,7 +15,7 @@ const DeleteConfirm = ({ title, onDismiss, onDelete, loading, type }) => {
             className='mde-preview'
          >
             <Heading
-               fontSize={{ base: '1.3rem', md: '1.5rem' }}
+               fontSize='1.3rem'
                fontWeight='700'
                className='mde-preview-content'
             >

@@ -1,5 +1,5 @@
 import { Box, Input, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
    InputborderColor,
    smallLabelStyles,
@@ -8,6 +8,7 @@ import {
 } from '../../../utils/CustomizeProfileStyles';
 import { ChromePicker } from 'react-color';
 import useClickOutside from '../../../hooks/useClickOutside';
+import { isTouchDevice } from '../../../helper/isTouchDevice';
 
 const Branding = ({ backgroundRef, profileData }) => {
    const [brandColor, setBrandColor] = useState(
@@ -27,6 +28,28 @@ const Branding = ({ backgroundRef, profileData }) => {
       'hue-horizontal',
       '',
    ]);
+
+   // prevent scroll when picking brand color
+   useEffect(() => {
+      const picker = document.querySelector('.chrome-picker');
+
+      const preventScroll = () => {
+         document.body.style.height = '100vh';
+         document.body.style.overflow = 'hidden';
+         console.log('hi');
+      };
+
+      const enableScroll = () => {
+         document.body.style.height = 'auto';
+         document.body.style.overflow = 'auto';
+      };
+
+      // listen event when picker exist
+      if (picker && isTouchDevice()) {
+         picker.addEventListener('mouseover', preventScroll);
+         picker.addEventListener('mouseout', enableScroll);
+      }
+   }, [showColorPicker]);
 
    return (
       <Box {...whiteBoxStyles}>

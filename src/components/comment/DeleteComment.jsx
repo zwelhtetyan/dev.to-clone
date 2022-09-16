@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
+import converter from '../../helper/converter';
 import { removeFromLocalStorage } from '../../helper/localStorage';
 import { updateComment } from '../../lib/api';
 import DeleteConfirm from '../../utils/DeleteConfirm';
@@ -49,10 +50,12 @@ const DeleteComment = () => {
    return (
       <DeleteConfirm
          loading={deleting}
-         title={currentCommentItem.value.replace(/<[^>]+>/g, '')}
          onDismiss={onDismiss}
          onDelete={onDelete}
          type='comment'
+         title={converter()
+            .makeHtml(currentCommentItem.value)
+            .replace(/<[^>]+>/g, '')}
       />
    );
 };

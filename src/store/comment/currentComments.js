@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { getItemFromLocalStorage } from '../../helper/localStorage';
 
 const initialState = {
-   currentComments: [],
+   currentComments: [], // when giving like to multiple comment items quickly , it takes a time to transform comment item with already liked or not , so I stored transformed current comments in redux store and put them to server
    commentItem: getItemFromLocalStorage('commentItemToManage') || null, // to manage => edit || delete
    transformedComments: getItemFromLocalStorage('transformedComments') || [], // for deleting comment
 };

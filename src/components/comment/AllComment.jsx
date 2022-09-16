@@ -21,7 +21,7 @@ const AllComment = ({ postDetail }) => {
    );
 
    const repliedComment = (replies) =>
-      Object.values(replies).sort((a, b) => a.createdAt - b.createdAt); // ordered by created at;
+      Object.values(replies).sort((a, b) => a.createdAt - b.createdAt); //ascending ordered by created at;
 
    return (
       <Box mt='2rem'>

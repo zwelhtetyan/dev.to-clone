@@ -11,6 +11,7 @@ import {
 import React from 'react';
 import { RiFileCopy2Fill } from 'react-icons/ri';
 import Option from '../../assets/logo/Option';
+import { isTouchDevice } from '../../helper/isTouchDevice';
 import CustomMenuItem from '../../utils/CustomMenuItem';
 
 const MoreOptionMenu = ({ iconStyles, postTitle }) => {
@@ -63,15 +64,6 @@ const MoreOptionMenu = ({ iconStyles, postTitle }) => {
       } catch (err) {
          console.log(err);
       }
-   };
-
-   // check touch device or not
-   const isTouchDevice = () => {
-      return (
-         'ontouchstart' in window ||
-         navigator.MaxTouchPoints > 0 ||
-         navigator.msMaxTouchPoints > 0
-      );
    };
 
    return (
