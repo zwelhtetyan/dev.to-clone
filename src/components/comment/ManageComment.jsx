@@ -88,23 +88,12 @@ const ManageComment = ({ commentId, postId, comments }) => {
       );
    };
 
-   const unnecessaryMDEImgfFromComments = () => {
-      const commentToDelete = comments.find(
-         (comment) => comment.commentId === commentId
-      );
-
-      console.log(commentToDelete);
-   };
-
    const goToEdit = () => {
       setCurrentCommentItemHandler();
       navigate('/edit-comment');
    };
 
    const goToDelete = () => {
-      // test
-      unnecessaryMDEImgfFromComments();
-
       setCurrentCommentItemHandler();
       transformedCommentsHandler();
       navigate('/delete-comment');

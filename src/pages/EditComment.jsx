@@ -1,15 +1,10 @@
 import { Box, Heading, HStack } from '@chakra-ui/react';
 import { Timestamp } from 'firebase/firestore';
-import React, { useState } from 'react';
+import React from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import DiscussionBox from '../components/discussion/DiscussionBox';
-import { getURLFromMDE } from '../helper/getURLFromMDE';
-import {
-   getItemFromLocalStorage,
-   saveToLocalStorage,
-} from '../helper/localStorage';
 
 const EditComment = () => {
    // scroll top
@@ -21,22 +16,6 @@ const EditComment = () => {
    );
 
    const valueToEdit = currentCommentItem.value;
-
-   const prevUploadedMDEImgToEdit = getURLFromMDE(valueToEdit);
-
-   const [uploadedMDEImgToEditComment, setUploadedMDEImgToEditComment] =
-      useState(
-         prevUploadedMDEImgToEdit ||
-            getItemFromLocalStorage('uploadedMDEImgToEditComment') ||
-            []
-      );
-
-   useEffect(() => {
-      saveToLocalStorage(
-         'uploadedMDEImgToEditComment',
-         JSON.stringify(uploadedMDEImgToEditComment)
-      );
-   }, [uploadedMDEImgToEditComment]);
 
    if (!currentCommentItem) {
       return <Navigate to={-1} />;
@@ -95,8 +74,6 @@ const EditComment = () => {
                onDismiss={onDismiss}
                showDismiss={true}
                transformedComments={transformedComments}
-               uploadedMDEImgToEditComment={uploadedMDEImgToEditComment}
-               setUploadedMDEImgToEditComment={setUploadedMDEImgToEditComment}
             />
          </Box>
       </HStack>

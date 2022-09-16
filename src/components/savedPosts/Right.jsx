@@ -53,7 +53,7 @@ const Right = ({
 
    const NoFilteredPostMessage = () => {
       return (
-         <Box px='1rem' py='7rem'>
+         <Box px='1rem' py={{ base: '3rem', sm: '7rem' }}>
             <Text textAlign='center' fontWeight={600} fontSize='1.1rem'>
                Nothing with this filter 🤔
             </Text>
@@ -64,7 +64,7 @@ const Right = ({
    if (!loading && currentPosts.length === 0) {
       return (
          <Container>
-            <Box px='1rem' py='7rem'>
+            <Box px='1rem' py={{ base: '3rem', sm: '7rem' }}>
                <Text textAlign='center' fontWeight={600} fontSize='1.1rem'>
                   Your {viewArchive ? 'archive' : 'reading'} list is empty
                </Text>

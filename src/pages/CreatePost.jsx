@@ -10,11 +10,7 @@ import {
 import { removeUnnecessaryUploadedMDEImg } from '../helper/removeUnnecessaryUploadedMDEImg';
 import useCreatePost from '../hooks/useCreatePost';
 
-const CreatePost = ({
-   currentPostDataToEdit,
-   uploadedMDEImgToEditPost,
-   setUploadedMDEImgToEditPost,
-}) => {
+const CreatePost = ({ currentPostDataToEdit }) => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
 
@@ -49,18 +45,9 @@ const CreatePost = ({
       return <Navigate to='/create-account' />;
    }
 
+   //remove unnecessary images
    if (publishing || savingDraft) {
-      if (currentPostDataToEdit) {
-         if (uploadedMDEImgToEditPost.length) {
-            removeUnnecessaryUploadedMDEImg(
-               uploadedMDEImgToEditPost,
-               postData.MDEValue
-            );
-
-            setUploadedMDEImgToEditPost([]);
-            removeFromLocalStorage('uploadedMDEImgToEditPost');
-         }
-      } else {
+      if (!currentPostDataToEdit) {
          if (uploadedMDEImgToPublishPost.length) {
             removeUnnecessaryUploadedMDEImg(
                uploadedMDEImgToPublishPost,
@@ -87,11 +74,7 @@ const CreatePost = ({
          uploadingImg={uploadingImg}
          setUploadingImg={setUploadingImg}
          toEdit={currentPostDataToEdit ? true : false}
-         setUploadedMDEImg={
-            currentPostDataToEdit
-               ? setUploadedMDEImgToEditPost
-               : setUploadedMDEImgToPublishPost
-         }
+         setUploadedMDEImg={setUploadedMDEImgToPublishPost}
       />
    );
 };

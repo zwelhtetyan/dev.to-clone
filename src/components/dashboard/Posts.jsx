@@ -24,9 +24,9 @@ const Posts = () => {
 
    let publishedPosts = null;
    if (transformedData && !loading && !err) {
-      publishedPosts = transformedData.filter(
-         (postData) => postData.userId === userId && !postData.draft
-      );
+      publishedPosts = transformedData
+         .filter((postData) => postData.userId === userId && !postData.draft)
+         .sort((a, b) => b.createdAt - a.createdAt);
    }
 
    if (publishedPosts.length === 0 && !loading && !err) {

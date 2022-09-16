@@ -32,6 +32,7 @@ const MainContent = ({ postDetail }) => {
 
    const { clickComment } = useSelector((state) => state.scrollDiscussion);
 
+   //scroll to
    useEffect(() => {
       const scrollHeight =
          window.pageYOffset +

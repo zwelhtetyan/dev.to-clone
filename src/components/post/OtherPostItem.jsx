@@ -11,8 +11,8 @@ const OtherPostItem = ({ title, tags, postId }) => {
    const dispatch = useDispatch();
 
    const handleNavigate = () => {
+      navigate(`/details/${postId}`, { replace: true });
       dispatch(setClickComment(false));
-      navigate(`/details/${postId}`);
    };
 
    return (

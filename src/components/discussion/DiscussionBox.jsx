@@ -26,8 +26,6 @@ const DiscussionBox = ({
    valueToEdit,
    transformedComments,
    repliedUserId,
-   uploadedMDEImgToEditComment,
-   setUploadedMDEImgToEditComment,
 }) => {
    const user = useAuth();
    const dispatch = useDispatch();
@@ -89,25 +87,15 @@ const DiscussionBox = ({
       );
    }, [mdeTab]);
 
+   //remove unnecessary images
    if (submitting) {
-      if (valueToEdit) {
-         if (uploadedMDEImgToEditComment.length) {
-            removeUnnecessaryUploadedMDEImg(
-               uploadedMDEImgToEditComment,
-               MDEValue
-            );
-            setUploadedMDEImgToEditComment([]);
-            removeFromLocalStorage('uploadedMDEImgToEditComment');
-         }
-      } else {
-         if (uploadedMDEImgToPublishComment.length) {
-            removeUnnecessaryUploadedMDEImg(
-               uploadedMDEImgToPublishComment,
-               MDEValue
-            );
-            setUploadedMDEImgToPublishComment([]);
-            removeFromLocalStorage('uploadedMDEImgToPublishComment');
-         }
+      if (!valueToEdit && uploadedMDEImgToPublishComment.length) {
+         removeUnnecessaryUploadedMDEImg(
+            uploadedMDEImgToPublishComment,
+            MDEValue
+         );
+         setUploadedMDEImgToPublishComment([]);
+         removeFromLocalStorage('uploadedMDEImgToPublishComment');
       }
    }
 
@@ -173,7 +161,8 @@ const DiscussionBox = ({
          {mdeTab === 'write' && (
             <Box
                borderRadius='5px'
-               boxShadow='0 0 0 1px rgb(59 73 233)'
+               // boxShadow='0 0 0 1px rgb(59 73 233)'
+               border='1px solid rgb(212 212 212)'
                overflow='hidden'
                className='discussion-box mde-preview'
             >
@@ -182,11 +171,7 @@ const DiscussionBox = ({
                   setMDEValue={setMDEValue}
                   isSubmitting={submitting}
                   setUploadingImg={setUploadingImg}
-                  setUploadedMDEImg={
-                     valueToEdit
-                        ? setUploadedMDEImgToEditComment
-                        : setUploadedMDEImgToPublishComment
-                  }
+                  setUploadedMDEImg={setUploadedMDEImgToPublishComment}
                />
             </Box>
          )}
@@ -208,7 +193,12 @@ const DiscussionBox = ({
          {/* buttons */}
          <HStack justify='flex-end' w='100%' mt='.3rem' id='hi'>
             {showDismiss && (
-               <SecondaryBtn onClick={onDismiss}>Dismiss</SecondaryBtn>
+               <SecondaryBtn
+                  onClick={onDismiss}
+                  disabled={uploadingImg || submitting}
+               >
+                  Dismiss
+               </SecondaryBtn>
             )}
 
             <SecondaryBtn
