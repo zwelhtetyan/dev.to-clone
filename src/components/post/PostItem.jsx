@@ -46,6 +46,7 @@ const PostItem = ({
    saved,
    alreadySaved,
    isFirstItem,
+   baseRadius,
 }) => {
    const [showProfilePopup, setShowProfilePopup] = useState(false);
 
@@ -103,7 +104,7 @@ const PostItem = ({
          bg='white'
          boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
          _hover={{ boxShadow: '0 0 0 1.5px rgb(23 23 23 / 10%)' }}
-         borderRadius={{ base: '0', md: '5px' }}
+         borderRadius={{ base: `${baseRadius}` || 0, md: '5px' }}
          cursor='pointer'
          mb='.5rem'
          onClick={handleNavigate}

@@ -1,30 +1,36 @@
-import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
-import React from 'react';
+import { HStack, Menu, MenuButton, MenuList, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { saveToLocalStorage } from '../../helper/localStorage';
 import { setCurrentPostData } from '../../store/post/currentPost';
 import CustomMenuItem from '../../utils/CustomMenuItem';
+import { AiFillPushpin } from 'react-icons/ai';
+import { pinPost } from '../../lib/api';
 
 const ManangePost = ({ postId, m }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
+   const [pinning, setPinning] = useState(false);
+
    const { transformedData } = useSelector((state) => state.transformedData);
+
+   const currentPostItem = transformedData.find(
+      (postData) => postData.id === postId
+   );
+
+   const alreadyPinned = currentPostItem.pinned;
 
    //helper func
    const setCurrentPostDataHandler = () => {
-      const postDetail = transformedData.find(
-         (postData) => postData.id === postId
-      );
-
       const postData = {
-         cvImg: postDetail.cvImg,
-         title: postDetail.title,
-         tags: postDetail.tags,
-         MDEValue: postDetail.MDEValue,
+         cvImg: currentPostItem.cvImg,
+         title: currentPostItem.title,
+         tags: currentPostItem.tags,
+         MDEValue: currentPostItem.MDEValue,
          id: postId,
-         draft: postDetail.draft ? true : false,
+         draft: currentPostItem.draft ? true : false,
       };
 
       dispatch(setCurrentPostData(postData));
@@ -46,6 +52,25 @@ const ManangePost = ({ postId, m }) => {
       navigate('/delete-post');
    };
 
+   const handlePinPost = (e) => {
+      e.stopPropagation();
+
+      setPinning(true);
+
+      const isPinned = currentPostItem.pinned ? false : true;
+
+      pinPost(postId, isPinned)
+         .then((_) => {
+            console.log('pinned post successfully');
+
+            setPinning(false);
+         })
+         .catch((err) => {
+            console.log(err);
+            setPinning(false);
+         });
+   };
+
    return (
       <Menu autoSelect={false} isLazy>
          <MenuButton
@@ -62,10 +87,17 @@ const ManangePost = ({ postId, m }) => {
                color: 'white',
             }}
             onClick={(e) => e.stopPropagation()}
+            disabled={pinning}
          >
-            Manage
+            {pinning ? 'Loading' : 'Manage'}
          </MenuButton>
-         <MenuList minW='0' w='150px'>
+         <MenuList minW='0' w='180px' p='.5rem'>
+            <CustomMenuItem onClick={handlePinPost}>
+               <HStack justify='space-between' w='100%'>
+                  <Text>{alreadyPinned ? 'Unpin' : 'Pin to profile'}</Text>{' '}
+                  <AiFillPushpin size={18} />
+               </HStack>
+            </CustomMenuItem>
             <CustomMenuItem onClick={goToEdit}>Edit</CustomMenuItem>
             <CustomMenuItem onClick={goToDelete}>Delete</CustomMenuItem>
          </MenuList>

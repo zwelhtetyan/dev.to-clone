@@ -2,21 +2,14 @@ import { Box, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import PostItem from '../components/post/PostItem';
 import TopLayer from '../components/profile/TopLayer';
 import ProfileLeftPart from '../components/profile/ProfileLeftPart';
 import ErrorMessage from '../utils/ErrorMessage';
 import ProfileSkeleton from '../components/skeletons/ProfileSkeleton';
-import {
-   calcTotalDiscussion,
-   calculateReaction,
-   claculateWrittenComments,
-} from '../helper/calculateTotal';
-import { useAuth } from '../context/auth';
+import { claculateWrittenComments } from '../helper/calculateTotal';
+import ProfileRightPart from '../components/profile/ProfileRightPart';
 
 const Profile = () => {
-   const user = useAuth();
-   const userId = user?.userId;
    const [alreadyInProfile, setAlreadyInProfile] = useState(false);
 
    //scroll top
@@ -48,12 +41,20 @@ const Profile = () => {
       currentUserProfile = profileData.find((data) => data.id === userIdToView);
    }
 
-   let publishedPosts = null;
+   let pinnedPosts = null;
+   let otherPosts = null;
    let totalCommentWritten = 0;
 
    if (transformedData && !loading && !err) {
-      publishedPosts = transformedData.filter(
-         (postData) => postData.userId === userIdToView && !postData.draft
+      otherPosts = transformedData.filter(
+         (postData) =>
+            postData.userId === userIdToView &&
+            !postData.draft &&
+            !postData.pinned
+      );
+
+      pinnedPosts = transformedData.filter(
+         (postData) => postData.userId === userIdToView && postData.pinned
       );
 
       totalCommentWritten = transformedData.reduce(
@@ -66,6 +67,9 @@ const Profile = () => {
    if (transformedData && currentUserProfile === undefined) {
       return <ErrorMessage urlNotFound={true} />;
    }
+
+   const totalPublishPosts =
+      (pinnedPosts?.length || 0) + (otherPosts?.length || 0);
 
    return (
       <Box mt='-.5rem !important' w='100%' flex='1'>
@@ -90,7 +94,7 @@ const Profile = () => {
                >
                   {/* left */}
                   <ProfileLeftPart
-                     publishedPosts={publishedPosts}
+                     publishedPosts={totalPublishPosts}
                      profileData={currentUserProfile}
                      totalCommentWritten={totalCommentWritten}
                      display={{
@@ -100,37 +104,11 @@ const Profile = () => {
                   />
 
                   {/* right */}
-                  <Box
-                     flex={{ base: 'unset', md: '2' }}
-                     borderRadius='5px'
-                     w={{ base: '100%' }}
-                  >
-                     {publishedPosts &&
-                        publishedPosts.map((postData) => (
-                           <PostItem
-                              key={postData.id}
-                              name={postData.name}
-                              profile={postData.profile}
-                              id={postData.id}
-                              createdAt={postData.createdAt}
-                              title={postData.title}
-                              tags={postData.tags}
-                              readTime={postData.readTime}
-                              isUpdated={postData?.updated}
-                              userId={postData.userId}
-                              currentUserId={userId} // authenticated userId
-                              setAlreadyInProfile={setAlreadyInProfile}
-                              totalDiscussion={calcTotalDiscussion(
-                                 postData.comments
-                              )}
-                              totalReaction={calculateReaction(
-                                 postData.heart,
-                                 postData.unicorn,
-                                 postData.saved
-                              )}
-                           />
-                        ))}
-                  </Box>
+                  <ProfileRightPart
+                     pinnedPosts={pinnedPosts}
+                     otherPosts={otherPosts}
+                     setAlreadyInProfile={setAlreadyInProfile}
+                  />
                </Flex>
             </Box>
          </Box>

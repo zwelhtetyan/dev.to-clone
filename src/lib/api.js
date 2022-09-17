@@ -94,3 +94,9 @@ export const saveArchive = async (data, postId) => {
 
    await updateDoc(docRef, data);
 };
+
+export const pinPost = async (postId, pinned) => {
+   const docRef = doc(db, 'posts', postId);
+
+   await updateDoc(docRef, { pinned });
+};

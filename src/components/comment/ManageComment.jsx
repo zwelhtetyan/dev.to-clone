@@ -113,7 +113,7 @@ const ManageComment = ({ commentId, postId, comments }) => {
          >
             <RiMoreLine size={20} color='#717171' className='more-icon' />
          </MenuButton>
-         <MenuList minW='0' w='150px'>
+         <MenuList minW='0' w='170px' p='.5rem'>
             <CustomMenuItem onClick={goToEdit}>Edit</CustomMenuItem>
             <CustomMenuItem onClick={goToDelete}>Delete</CustomMenuItem>
          </MenuList>
