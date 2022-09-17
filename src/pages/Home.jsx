@@ -52,7 +52,7 @@ const Home = () => {
             pe='1rem'
             pos='sticky'
             top='4rem'
-            maxW='300px'
+            maxW='280px'
             display={{ base: 'none', md: 'block' }}
          >
             {!user && (

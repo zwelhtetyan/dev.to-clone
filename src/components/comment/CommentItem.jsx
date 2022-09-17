@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Flex, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { ReactionButton } from '../../utils/Buttons';
 import heart from '../../assets/logo/heart.svg';
@@ -63,8 +63,16 @@ const CommentItem = ({
       setShowDiscussionbox((prev) => !prev);
    };
 
+   // auto focus when click reply
+   // give commentId for each comment item and when showDiscussionBox is true , select editor inside this specific id and focus it
+   useEffect(() => {
+      if (showDiscussionBox) {
+         document.querySelector(`#comment${commentId} .mde-text`).focus();
+      }
+   }, [showDiscussionBox, commentId]);
+
    return (
-      <VStack mb={['.7rem', '1rem']} ps={ps}>
+      <VStack mb={['.7rem', '1rem']} ps={ps} id={`comment${commentId}`}>
          <Flex align='flex-start' w='100%'>
             <CustomAvatar
                size={avatarSize}

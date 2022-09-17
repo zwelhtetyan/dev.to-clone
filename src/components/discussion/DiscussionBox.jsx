@@ -161,7 +161,10 @@ const DiscussionBox = ({
          {mdeTab === 'write' && (
             <Box
                borderRadius='5px'
-               // boxShadow='0 0 0 1px rgb(59 73 233)'
+               _focusWithin={{
+                  borderColor: 'rgb(59 73 223)',
+                  boxShadow: '0 0 0 1px rgb(59 73 233)',
+               }}
                border='1px solid rgb(212 212 212)'
                overflow='hidden'
                className='discussion-box mde-preview'
