@@ -14,11 +14,7 @@ const ProfileRightPart = ({ pinnedPosts, otherPosts, setAlreadyInProfile }) => {
    const userId = user?.userId;
 
    return (
-      <Box
-         flex={{ base: 'unset', md: '2' }}
-         borderRadius='5px'
-         w={{ base: '100%' }}
-      >
+      <Box flex={{ base: 'unset', md: '2' }} borderRadius='5px' w='100%'>
          {pinnedPosts && pinnedPosts.length !== 0 && (
             <Box
                border='2px solid rgb(59 73 223)'
@@ -58,6 +54,8 @@ const ProfileRightPart = ({ pinnedPosts, otherPosts, setAlreadyInProfile }) => {
                         postData.unicorn,
                         postData.saved
                      )}
+                     saved={postData.saved}
+                     alreadySaved={postData.saved?.includes(userId)}
                      baseRadius='5px'
                   />
                ))}
@@ -85,6 +83,8 @@ const ProfileRightPart = ({ pinnedPosts, otherPosts, setAlreadyInProfile }) => {
                      postData.unicorn,
                      postData.saved
                   )}
+                  saved={postData.saved}
+                  alreadySaved={postData.saved?.includes(userId)}
                />
             ))}
       </Box>

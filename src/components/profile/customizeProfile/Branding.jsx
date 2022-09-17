@@ -69,10 +69,10 @@ const Branding = ({ backgroundRef, profileData }) => {
 
                   <Box
                      bg={brandColor}
-                     height='32px'
+                     height='33px'
                      w='40px'
                      pos='absolute'
-                     left='.5rem'
+                     left='.3rem'
                      borderRadius='5px'
                      zIndex={2}
                      cursor='pointer'
@@ -105,7 +105,7 @@ const Branding = ({ backgroundRef, profileData }) => {
                      ref={backgroundRef}
                      type='text'
                      {...InputborderColor}
-                     ps='60px'
+                     ps='55px'
                      value={brandColor}
                      onChange={({ target }) => setBrandColor(target.value)}
                   />

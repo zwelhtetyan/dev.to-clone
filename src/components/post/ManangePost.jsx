@@ -92,12 +92,14 @@ const ManangePost = ({ postId, m }) => {
             {pinning ? 'Loading' : 'Manage'}
          </MenuButton>
          <MenuList minW='0' w='180px' p='.5rem'>
-            <CustomMenuItem onClick={handlePinPost}>
-               <HStack justify='space-between' w='100%'>
-                  <Text>{alreadyPinned ? 'Unpin' : 'Pin to profile'}</Text>{' '}
-                  <AiFillPushpin size={18} />
-               </HStack>
-            </CustomMenuItem>
+            {!currentPostItem.draft && (
+               <CustomMenuItem onClick={handlePinPost}>
+                  <HStack w='100%'>
+                     <Text>{alreadyPinned ? 'Unpin' : 'Pin to profile'}</Text>{' '}
+                     <AiFillPushpin size={18} />
+                  </HStack>
+               </CustomMenuItem>
+            )}
             <CustomMenuItem onClick={goToEdit}>Edit</CustomMenuItem>
             <CustomMenuItem onClick={goToDelete}>Delete</CustomMenuItem>
          </MenuList>

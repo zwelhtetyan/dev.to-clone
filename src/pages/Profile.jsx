@@ -46,16 +46,20 @@ const Profile = () => {
    let totalCommentWritten = 0;
 
    if (transformedData && !loading && !err) {
-      otherPosts = transformedData.filter(
-         (postData) =>
-            postData.userId === userIdToView &&
-            !postData.draft &&
-            !postData.pinned
-      );
+      otherPosts = transformedData
+         .filter(
+            (postData) =>
+               postData.userId === userIdToView &&
+               !postData.draft &&
+               !postData.pinned
+         )
+         .sort((a, b) => b.createdAt - a.createdAt);
 
-      pinnedPosts = transformedData.filter(
-         (postData) => postData.userId === userIdToView && postData.pinned
-      );
+      pinnedPosts = transformedData
+         .filter(
+            (postData) => postData.userId === userIdToView && postData.pinned
+         )
+         .sort((a, b) => b.createdAt - a.createdAt);
 
       totalCommentWritten = transformedData.reduce(
          (count, postItem) =>
