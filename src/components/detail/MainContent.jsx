@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import CustomAvatar from '../../utils/CustomAvatar';
 import ManangePost from '../post/ManangePost';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import LangTag from '../../utils/LangTag';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import converter from '../../helper/converter';
@@ -140,7 +140,7 @@ const MainContent = ({ postDetail }) => {
                   {postDetail.title}
                </Heading>
 
-               <Wrap py={2} spacing={2}>
+               <Wrap pt='.3rem' pb='1.5rem' spacing={2}>
                   {postDetail.tags.map((tag) => (
                      <WrapItem key={nanoid()}>
                         <LangTag tag={tag} />

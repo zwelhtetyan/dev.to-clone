@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Text } from '@chakra-ui/react';
 import UserProfilePopup from '../profile/UserProfilePopup';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
 import OtherPostItem from '../post/OtherPostItem';
 import { useAuth } from '../../context/auth';

@@ -7,7 +7,7 @@ import {
    InputRightElement,
    Select,
 } from '@chakra-ui/react';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { useLocation } from 'react-router-dom';

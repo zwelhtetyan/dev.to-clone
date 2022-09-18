@@ -1,5 +1,5 @@
 import { Box } from '@chakra-ui/react';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import SideMenuItem from '../../utils/SideMenuItem';
 

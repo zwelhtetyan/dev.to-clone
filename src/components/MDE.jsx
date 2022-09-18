@@ -3,7 +3,7 @@ import ReactMde from 'react-mde';
 import { useDispatch } from 'react-redux';
 import { getDefaultToolbarCommands } from 'react-mde';
 import { Box } from '@chakra-ui/react';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import { uploadImage } from '../lib/api';
 import converter from '../helper/converter';
 import MDEToolbarImgIcon from '../utils/MDEToolbarImgIcon';

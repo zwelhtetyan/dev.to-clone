@@ -1,5 +1,5 @@
 import { Box, Heading, Image, Wrap, WrapItem } from '@chakra-ui/react';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import converter from '../../helper/converter';
@@ -39,7 +39,7 @@ const PostPreview = () => {
             <NoTitleMessage />
          )}
 
-         <Wrap py={2} spacing={2} fontFamily='sans-serif'>
+         <Wrap pt='.3rem' pb='1.5rem' spacing={2} fontFamily='sans-serif'>
             {tags.map((tag) => (
                <WrapItem key={nanoid()}>
                   <LangTag tag={tag} />

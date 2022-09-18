@@ -16,7 +16,7 @@ import comment from '../../assets/logo/comment.svg';
 import { useNavigate } from 'react-router-dom';
 import { ReactionButton, SecondaryBtn } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/CustomAvatar';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import ManangePost from './ManangePost';
 import UserProfilePopup from '../profile/UserProfilePopup';
 import DisplayDate from './DisplayDate';
@@ -197,7 +197,7 @@ const PostItem = ({
                </Heading>
 
                {tags.length !== 0 && (
-                  <Wrap spacing='.3rem' py='.2rem' mt='0 !important'>
+                  <Wrap spacing='.3rem' pt='.5rem' mt='0 !important'>
                      {tags?.map((tag) => (
                         <WrapItem key={nanoid()}>
                            <LangTag tag={tag} />
@@ -206,7 +206,11 @@ const PostItem = ({
                   </Wrap>
                )}
 
-               <HStack justify='space-between' w='100%'>
+               <HStack
+                  justify='space-between'
+                  w='100%'
+                  mt={{ md: '.7rem !important' }}
+               >
                   {/* reaction buttons */}
                   <Box>
                      <HStack>

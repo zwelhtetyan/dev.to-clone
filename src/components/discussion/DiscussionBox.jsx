@@ -9,7 +9,7 @@ import { updateComment } from '../../lib/api';
 import { useDispatch, useSelector } from 'react-redux';
 import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/auth';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import {
    getItemFromLocalStorage,
    removeFromLocalStorage,

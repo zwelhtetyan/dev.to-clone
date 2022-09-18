@@ -20,7 +20,7 @@ import {
    ref,
    uploadString,
 } from 'firebase/storage';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import ErrorMessage from '../utils/ErrorMessage';
 import CustomizeProfileSkeleton from '../components/skeletons/CustomizeProfileSkeleton';
 import { useEffect } from 'react';

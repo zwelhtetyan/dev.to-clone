@@ -8,7 +8,7 @@ import {
    Text,
    Tooltip,
 } from '@chakra-ui/react';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeImage, uploadImage } from '../lib/api';

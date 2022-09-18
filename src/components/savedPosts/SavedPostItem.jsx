@@ -3,7 +3,7 @@ import { Box, Flex, HStack, Text, WrapItem } from '@chakra-ui/react';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { useNavigate } from 'react-router-dom';
 import { dateFormat } from '../../helper/calcTimestamp';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import LangTag from '../../utils/LangTag';
 import { SecondaryBtn } from '../../utils/Buttons';
 import { saveArchive } from '../../lib/api';

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Box, Input, Wrap, WrapItem } from '@chakra-ui/react';
 import tagsData from './LangTagData.json';
 import { setTagsToStore } from '../../store/post/postData';
-import { nanoid } from 'nanoid';
+import { nanoid } from '@reduxjs/toolkit';
 import { VscChromeClose } from 'react-icons/vsc';
 import useClickOutside from '../../hooks/useClickOutside';
 
