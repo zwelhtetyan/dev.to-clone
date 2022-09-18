@@ -19,6 +19,16 @@ const Container = ({ children }) => {
    );
 };
 
+const NoFilteredPostMessage = () => {
+   return (
+      <Box px='1rem' py={{ base: '3rem', sm: '7rem' }}>
+         <Text textAlign='center' fontWeight={600} fontSize='1.1rem'>
+            Nothing with this filter 🤔
+         </Text>
+      </Box>
+   );
+};
+
 const Right = ({
    savedPosts,
    archivedPosts,
@@ -50,16 +60,6 @@ const Right = ({
    const filteredPosts = transformedSavedPosts.filter((postData) =>
       postData.title.toLowerCase().includes(searchTerm.toLowerCase())
    );
-
-   const NoFilteredPostMessage = () => {
-      return (
-         <Box px='1rem' py={{ base: '3rem', sm: '7rem' }}>
-            <Text textAlign='center' fontWeight={600} fontSize='1.1rem'>
-               Nothing with this filter 🤔
-            </Text>
-         </Box>
-      );
-   };
 
    if (!loading && currentPosts.length === 0) {
       return (

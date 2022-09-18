@@ -1,8 +1,6 @@
-const HtmlToReactParser = require('html-to-react').Parser;
+const parse = require('html-react-parser');
 
 export const htmlToJsx = (html) => {
-   const htmlInput = html;
-   const htmlToReactParser = new HtmlToReactParser();
-   const reactElement = htmlToReactParser.parse(htmlInput);
+   const reactElement = parse(html);
    return reactElement;
 };
