@@ -10,7 +10,7 @@ import MainMenu from '../components/MainMenu';
 import { useSelector } from 'react-redux';
 import SearchInput from '../components/search/SearchInput';
 
-const MainNavigation = () => {
+const Header = () => {
    const navigate = useNavigate();
    const user = useAuth();
 
@@ -101,4 +101,4 @@ const MainNavigation = () => {
    );
 };
 
-export default MainNavigation;
+export default Header;

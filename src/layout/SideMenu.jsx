@@ -53,7 +53,7 @@ const SideMenu = () => {
    };
 
    const handleClickReadingList = () => {
-      navigate('/reading');
+      navigate('/readinglist');
       onClose();
    };
 

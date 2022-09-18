@@ -1,13 +1,13 @@
 import { VStack } from '@chakra-ui/react';
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import MainNavigation from './MainNavigation';
+import Header from './Header';
 import Footer from './Footer';
 
 const Layout = () => {
    return (
       <>
-         <MainNavigation />
+         <Header />
 
          <VStack as='main' minH='calc(100vh - 64px)'>
             <Outlet />

@@ -1,5 +1,5 @@
-import { Box, HStack } from '@chakra-ui/react';
 import React from 'react';
+import { Box, HStack } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -17,8 +17,8 @@ const SavedPosts = () => {
    const navigate = useNavigate();
    const location = useLocation();
 
-   const [savedPosts, setSavedPosts] = useState([]);
-   const [archivedPosts, setArchivedPosts] = useState([]);
+   // const [savedPosts, setSavedPosts] = useState([]);
+   // const [archivedPosts, setArchivedPosts] = useState([]);
    const [allTopics, setAllTopics] = useState([]);
    const [selectedTopic, setSelectedTopic] = useState('All tags');
    const [searchTerm, setSearchTerm] = useState('');
@@ -34,6 +34,22 @@ const SavedPosts = () => {
 
    const queryParam = new URLSearchParams(location.search);
    const query = queryParam.get('');
+
+   /*option 1 */
+   let savedPosts = [];
+   let archivedPosts = [];
+
+   if (transformedData) {
+      savedPosts = transformedData.filter(
+         (postItem) =>
+            postItem.saved?.includes(userId) &&
+            !postItem.archived?.includes(userId)
+      );
+
+      archivedPosts = transformedData.filter((postItem) =>
+         postItem.archived?.includes(userId)
+      );
+   }
 
    useEffect(() => {
       if (transformedData) {
@@ -61,12 +77,48 @@ const SavedPosts = () => {
             topic === 'All tags' ? { topic, active: true } : { topic }
          );
 
-         setSavedPosts(savedPosts);
-         setArchivedPosts(archivedPosts);
          setAllTopics(transformedTopics);
          setSelectedTopic('All tags');
       }
-   }, [query, transformedData, userId]);
+   }, [transformedData, query, userId]);
+
+   /* option 2 (using state) 
+      => setting data inside useEffect takes a while to get data
+      => if i create state and set the state inside useEffect , although loading is false but need to wait stateChange and compnent rerender finished
+   */
+
+   // useEffect(() => {
+   //    if (transformedData) {
+   //       const savedPosts = transformedData.filter(
+   //          (postItem) =>
+   //             postItem.saved?.includes(userId) &&
+   //             !postItem.archived?.includes(userId)
+   //       );
+
+   //       const archivedPosts = transformedData.filter((postItem) =>
+   //          postItem.archived?.includes(userId)
+   //       );
+
+   //       const currentPosts = query ? archivedPosts : savedPosts;
+
+   //       const allTopics = [{ topic: 'All tags', active: true }];
+   //       currentPosts.forEach((postData) => {
+   //          if (postData.tags.length !== 0) {
+   //             allTopics.push(...postData.tags);
+   //          }
+   //       });
+
+   //       const transform = new Set(allTopics.map((item) => item.topic));
+   //       const transformedTopics = [...transform].map((topic) =>
+   //          topic === 'All tags' ? { topic, active: true } : { topic }
+   //       );
+
+   //       setSavedPosts(savedPosts);
+   //       setArchivedPosts(archivedPosts);
+   //       setAllTopics(transformedTopics);
+   //       setSelectedTopic('All tags');
+   //    }
+   // }, [query, transformedData, userId]);
 
    if (!user) {
       return <Navigate to='/create-account' />;
