@@ -3,6 +3,7 @@ import { Box, Text } from '@chakra-ui/react';
 import SavedPostItem from './SavedPostItem';
 import { BsBookmark } from 'react-icons/bs';
 import SavedPostItemSkeleton from '../skeletons/SavedPostItemSkeleton';
+import { useLocation } from 'react-router-dom';
 
 const Container = ({ children }) => {
    return (
@@ -32,14 +33,18 @@ const NoFilteredPostMessage = () => {
 const Right = ({
    savedPosts,
    archivedPosts,
-   viewArchive,
    selectedTopic,
    searchTerm,
    loading,
 }) => {
+   const location = useLocation();
+
+   const queryParam = new URLSearchParams(location.search);
+   const query = queryParam.get('');
+
    let transformedSavedPosts = [];
 
-   const currentPosts = viewArchive ? archivedPosts : savedPosts;
+   const currentPosts = query ? archivedPosts : savedPosts;
 
    currentPosts.forEach((postData) => {
       const tags = postData.tags;
@@ -66,10 +71,10 @@ const Right = ({
          <Container>
             <Box px='1rem' py={{ base: '3rem', sm: '7rem' }}>
                <Text textAlign='center' fontWeight={600} fontSize='1.1rem'>
-                  Your {viewArchive ? 'archive' : 'reading'} list is empty
+                  Your {query ? 'archive' : 'reading'} list is empty
                </Text>
 
-               {!viewArchive && (
+               {!query && (
                   <Text
                      color='#717171'
                      justifyContent='center'
@@ -108,7 +113,7 @@ const Right = ({
             <SavedPostItem
                key={postData.id}
                postData={postData}
-               isArchive={viewArchive}
+               isArchive={query}
             />
          ))}
       </Container>

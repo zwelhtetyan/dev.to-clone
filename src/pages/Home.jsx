@@ -75,7 +75,7 @@ const Home = () => {
                   icon={ReadingListIcon}
                   title='Reading List'
                   savedPostsCount={savedPosts.length}
-                  onClick={() => navigate('/reading')}
+                  onClick={() => navigate('/readinglist')}
                />
             )}
             <SideMenuItem icon={FAQIcon} title='FAQ' />

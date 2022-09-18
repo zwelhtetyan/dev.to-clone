@@ -168,7 +168,9 @@ const MainContent = ({ postDetail }) => {
                   />
                )}
 
-               <AllComment postDetail={postDetail} />
+               {postDetail.comments.length !== 0 && (
+                  <AllComment postDetail={postDetail} />
+               )}
             </Box>
          </Box>
       </Box>

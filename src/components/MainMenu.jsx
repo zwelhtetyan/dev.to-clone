@@ -47,7 +47,7 @@ const MainMenu = ({ currentUserProfile }) => {
             <CustomMenuItem onClick={() => navigate('/create-post')}>
                Create Post
             </CustomMenuItem>
-            <CustomMenuItem onClick={() => navigate('/reading')}>
+            <CustomMenuItem onClick={() => navigate('/readinglist')}>
                Reading List
             </CustomMenuItem>
             <CustomMenuItem onClick={() => navigate('/apperance')}>

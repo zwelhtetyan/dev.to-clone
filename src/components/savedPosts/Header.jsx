@@ -10,6 +10,7 @@ import {
 import { nanoid } from 'nanoid';
 import React from 'react';
 import { FiSearch } from 'react-icons/fi';
+import { useLocation } from 'react-router-dom';
 import { SecondaryBtn } from '../../utils/Buttons';
 
 const Header = ({
@@ -20,13 +21,17 @@ const Header = ({
    handleClickTopic,
    handleSearch,
    toggleViewArchive,
-   viewArchive,
 }) => {
+   const location = useLocation();
+
    const handleSelectOption = ({ target }) => {
       handleClickTopic(target.value);
    };
 
-   const title = viewArchive
+   const queryParam = new URLSearchParams(location.search);
+   const query = queryParam.get('');
+
+   const title = query
       ? `Archive (${archiveCount})`
       : `Reading list (${readingCount})`;
 
@@ -40,7 +45,7 @@ const Header = ({
             <Heading fontSize={['1.5rem', '1.5rem', '2rem']}>{title}</Heading>
 
             <SecondaryBtn onClick={toggleViewArchive}>
-               {viewArchive ? 'View reading list' : 'View archive'}
+               {query ? 'View reading list' : 'View archive'}
             </SecondaryBtn>
          </HStack>
 
@@ -60,7 +65,7 @@ const Header = ({
                   display={{ base: 'none', md: 'block' }}
                   onClick={toggleViewArchive}
                >
-                  {viewArchive ? 'View Reading List' : 'View archive'}
+                  {query ? 'View Reading List' : 'View archive'}
                </SecondaryBtn>
 
                <InputGroup

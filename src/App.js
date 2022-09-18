@@ -1,11 +1,12 @@
 import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Box, Spinner } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 
 import Layout from './layout/Layout';
 import Home from './pages/Home';
 import useTransformData from './hooks/useTransformData';
 import LoginAlert from './components/LoginAlert';
+import FallbackSpinner from './utils/FallbackSpinner';
 
 const PostDetails = lazy(() => import('./pages/PostDetails'));
 const Profile = lazy(() => import('./pages/Profile'));
@@ -37,18 +38,7 @@ const App = () => {
 
    return (
       <Box>
-         <Suspense
-            fallback={
-               <Box
-                  pos='fixed'
-                  top='50%'
-                  left='50%'
-                  transform='translate(-50%, -50%)'
-               >
-                  <Spinner size='lg' color='rgb(59 73 223)' />
-               </Box>
-            }
-         >
+         <Suspense fallback={<FallbackSpinner />}>
             <Routes>
                <Route path='/' element={<Layout />}>
                   <Route index element={<Home />} />
@@ -73,7 +63,7 @@ const App = () => {
                   <Route path='delete-post' element={<DeletePost />} />
                   <Route path='delete-comment' element={<DeleteComment />} />
                   <Route path='edit-comment' element={<EditComment />} />
-                  <Route path='reading' element={<SavedPosts />} />
+                  <Route path='readinglist' element={<SavedPosts />} />
                   <Route path='search' element={<Search />} />
                </Route>
 

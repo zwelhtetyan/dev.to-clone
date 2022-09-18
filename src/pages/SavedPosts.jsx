@@ -3,23 +3,25 @@ import React from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Header from '../components/savedPosts/Header';
 import Left from '../components/savedPosts/Left';
 import Right from '../components/savedPosts/Right';
 import { useAuth } from '../context/auth';
 import ErrorMessage from '../utils/ErrorMessage';
+import Error from './Error';
 
 const SavedPosts = () => {
    const user = useAuth();
    const userId = user?.userId;
+   const navigate = useNavigate();
+   const location = useLocation();
 
    const [savedPosts, setSavedPosts] = useState([]);
    const [archivedPosts, setArchivedPosts] = useState([]);
    const [allTopics, setAllTopics] = useState([]);
    const [selectedTopic, setSelectedTopic] = useState('All tags');
    const [searchTerm, setSearchTerm] = useState('');
-   const [viewArchive, setViewArchive] = useState(false);
 
    //scroll top
    useEffect(() => window.scrollTo(0, 0), [selectedTopic]);
@@ -29,6 +31,9 @@ const SavedPosts = () => {
       transfromedDataLoading: loading,
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
+
+   const queryParam = new URLSearchParams(location.search);
+   const query = queryParam.get('');
 
    useEffect(() => {
       if (transformedData) {
@@ -42,7 +47,7 @@ const SavedPosts = () => {
             postItem.archived?.includes(userId)
          );
 
-         const currentPosts = viewArchive ? archivedPosts : savedPosts;
+         const currentPosts = query ? archivedPosts : savedPosts;
 
          const allTopics = [{ topic: 'All tags', active: true }];
          currentPosts.forEach((postData) => {
@@ -61,7 +66,7 @@ const SavedPosts = () => {
          setAllTopics(transformedTopics);
          setSelectedTopic('All tags');
       }
-   }, [transformedData, userId, viewArchive]);
+   }, [query, transformedData, userId]);
 
    if (!user) {
       return <Navigate to='/create-account' />;
@@ -86,8 +91,16 @@ const SavedPosts = () => {
       setSearchTerm(target.value);
    };
 
+   if (query !== 'archive' && query !== null) {
+      return <Error />;
+   }
+
    const toggleViewArchive = () => {
-      setViewArchive((prev) => !prev);
+      if (query) {
+         navigate('/readinglist');
+      } else {
+         navigate('/readinglist?=archive');
+      }
    };
 
    return (
@@ -99,7 +112,6 @@ const SavedPosts = () => {
             handleClickTopic={handleClickTopic}
             selectedTopic={selectedTopic}
             handleSearch={handleSearch}
-            viewArchive={viewArchive}
             toggleViewArchive={toggleViewArchive}
          />
 
@@ -111,7 +123,6 @@ const SavedPosts = () => {
                archivedPosts={archivedPosts}
                selectedTopic={selectedTopic}
                searchTerm={searchTerm}
-               viewArchive={viewArchive}
                loading={loading}
             />
          </HStack>
