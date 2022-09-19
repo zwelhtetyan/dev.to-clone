@@ -28,7 +28,7 @@ const AllComment = ({ postDetail }) => {
          {postDetail.comments.map((comment) => (
             <Box key={comment.commentId}>
                <CommentItem
-                  avatarSize='28px'
+                  avatarSize='30px'
                   comments={currentComments}
                   authorId={postDetail.userId}
                   currentUserId={user?.userId}
@@ -54,7 +54,7 @@ const AllComment = ({ postDetail }) => {
                         authorId={postDetail.userId}
                         currentUserId={user?.userId}
                         likes={item.likes}
-                        avatarSize='25px'
+                        avatarSize='28px'
                         ps='20px'
                         footerPs='33px'
                         text={item.value}

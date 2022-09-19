@@ -4,7 +4,7 @@ import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import AddCvImg from '../AddCvImg';
 import AddLangTag from '../LangTag/AddLangTag';
 import MDE from '../MDE';
-import logo from '../../assets/logo/logo.png';
+import logo from '../../assets/images/logo.png';
 import LeavePageAlert from '../LeavePageAlert';
 import { useNavigate } from 'react-router-dom';
 import PostPreview from './PostPreview';

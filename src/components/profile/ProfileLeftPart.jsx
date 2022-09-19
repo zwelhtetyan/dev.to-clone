@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Divider, HStack, Image, Text } from '@chakra-ui/react';
-import doc from '../../assets/logo/doc.svg';
-import commentLg from '../../assets/logo/commentLg.svg';
+import doc from '../../assets/icons/doc.svg';
+import commentLg from '../../assets/icons/commentLg.svg';
 
 const TechStack = ({ title, text }) => {
    return (

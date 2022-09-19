@@ -11,8 +11,8 @@ import {
    WrapItem,
    Flex,
 } from '@chakra-ui/react';
-import heart from '../../assets/logo/heart.svg';
-import comment from '../../assets/logo/comment.svg';
+import heart from '../../assets/icons/heart.svg';
+import comment from '../../assets/icons/comment.svg';
 import { useNavigate } from 'react-router-dom';
 import { ReactionButton, SecondaryBtn } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/CustomAvatar';
@@ -128,7 +128,7 @@ const PostItem = ({
 
                   <CustomAvatar
                      profile={profile}
-                     size='37px'
+                     size='40px'
                      onClick={handleViewProfile}
                   />
 

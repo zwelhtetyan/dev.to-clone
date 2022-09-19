@@ -1,15 +1,15 @@
 import React, { useEffect } from 'react';
 import { Box, Flex, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { ReactionButton } from '../../utils/Buttons';
-import heart from '../../assets/logo/heart.svg';
-import red_heart from '../../assets/logo/red_heart.svg';
-import comment from '../../assets/logo/comment.svg';
+import heart from '../../assets/icons/heart.svg';
+import red_heart from '../../assets/icons/red_heart.svg';
+import comment from '../../assets/icons/comment.svg';
 import { dateFormat, showEditedDate } from '../../helper/calcTimestamp';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import converter from '../../helper/converter';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { useNavigate } from 'react-router-dom';
-import authorIcon from '../../assets/logo/authorIcon.svg';
+import authorIcon from '../../assets/icons/authorIcon.svg';
 import { useState } from 'react';
 import DiscussionBox from '../discussion/DiscussionBox';
 import useClickLikeToComment from '../../hooks/useClickLikeToComment';
@@ -136,16 +136,16 @@ const CommentItem = ({
 
                <Box
                   fontSize={{ base: '14px', sm: '16px' }}
-                  className='mde-preview-content'
                   fontFamily='monospace'
                   sx={{ p: { marginBottom: '5px !important' } }}
                >
                   {reply && repliedUserName !== currentUserProfile.name && (
                      <Text
+                        as='div'
                         fontSize='13px'
                         color='#717171'
                         opacity='.7'
-                        mt='-5px !important'
+                        mt='-7px !important'
                         mb='.5rem !important'
                         fontFamily='sans-serif'
                      >
@@ -157,7 +157,9 @@ const CommentItem = ({
                      </Text>
                   )}
 
-                  {htmlToJsx(converter().makeHtml(text))}
+                  <Box className='mde-preview-content'>
+                     {htmlToJsx(converter().makeHtml(text))}
+                  </Box>
                </Box>
             </Box>
          </Flex>

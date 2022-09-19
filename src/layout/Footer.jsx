@@ -1,11 +1,11 @@
 import React from 'react';
-import footerLogo from '../assets/logo/footerLogo.svg';
+import footerLogo from '../assets/icons/footerLogo.svg';
 import { Image, Text, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 
 const Links = ({ children, onClick }) => {
    return (
-      <Text as='span' color='rgb(59 73 223)' onClick={onClick}>
+      <Text as='span' cursor='pointer' color='rgb(59 73 223)' onClick={onClick}>
          {children}
       </Text>
    );
@@ -35,9 +35,8 @@ const Footer = () => {
             With you every step of your journey.
          </Text>
          <Text>
-            Built on <Links onClick={handleClickLink}>Forem</Links> — the{' '}
-            <Links onClick={handleClickLink}>open source</Links> software that
-            powers <Links onClick={handleClickLink}>DEV</Links> and other
+            The <Links onClick={handleClickLink}>open source</Links> software
+            that powers <Links onClick={handleClickLink}>DEV</Links> and other
             inclusive communities.
          </Text>
          <Text>

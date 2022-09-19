@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import TopLayer from '../components/profile/TopLayer';
 import ProfileLeftPart from '../components/profile/ProfileLeftPart';
@@ -11,9 +11,10 @@ import ProfileRightPart from '../components/profile/ProfileRightPart';
 
 const Profile = () => {
    const [alreadyInProfile, setAlreadyInProfile] = useState(false);
+   const location = useLocation();
 
    //scroll top
-   useEffect(() => window.scrollTo(0, 0), [alreadyInProfile]);
+   useEffect(() => window.scrollTo(0, 0), [alreadyInProfile, location]);
 
    const { userIdToView } = useParams();
    const [moreInfo, setMoreInfo] = useState(false);

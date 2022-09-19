@@ -62,7 +62,7 @@ const User = ({
                      Profile Image
                   </Text>
 
-                  <Menu>
+                  <Menu autoSelect={false}>
                      <MenuButton
                         type='button'
                         display='block'

@@ -13,9 +13,9 @@ import {
 import { BsGithub, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 import { LightBtn, PrimaryBtn } from '../../utils/Buttons';
-import joinOn from '../../assets/logo/joinOn.svg';
-import location from '../../assets/logo/location.svg';
-import personalWebsite from '../../assets/logo/personalWebsite.svg';
+import joinOn from '../../assets/icons/joinOn.svg';
+import location from '../../assets/icons/location.svg';
+import personalWebsite from '../../assets/icons/personalWebsite.svg';
 import { useAuth } from '../../context/auth';
 import defaultProfile from '../../assets/images/default_profile.webp';
 import { joinOnDate } from '../../helper/calcTimestamp';
@@ -217,6 +217,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
                   w='100%'
                   mx='auto'
                   mt='5'
+                  whiteSpace='normal'
                   bg='white'
                   _active={{ bg: 'white' }}
                   boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
@@ -225,6 +226,8 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
                      bg: 'rgb(0 0 0 / 4%)',
                   }}
                   onClick={() => setMoreInfo(true)}
+                  py='.5rem'
+                  height='auto'
                >
                   More info about @{profileData.name}
                </Button>

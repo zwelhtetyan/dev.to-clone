@@ -13,12 +13,14 @@ import { SecondaryBtn } from '../utils/Buttons';
 import { AiOutlineMenu } from 'react-icons/ai';
 import Hero from '../components/Hero';
 import { useAuth } from '../context/auth';
-import HomeIcon from '../assets/logo/HomeIcon.svg';
-import ReadingListIcon from '../assets/logo/ReadingListIcon.svg';
-import FAQIcon from '../assets/logo/FAQIcon.svg';
+import HomeIcon from '../assets/icons/HomeIcon.svg';
+import ReadingListIcon from '../assets/icons/ReadingListIcon.svg';
+import FAQIcon from '../assets/icons/FAQIcon.svg';
 import SideMenuItem from '../utils/SideMenuItem';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import AboutIcon from '../assets/icons/AboutIcon.svg';
+import ContactIcon from '../assets/icons/ContactIcon.svg';
 
 const SideMenu = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
@@ -52,8 +54,8 @@ const SideMenu = () => {
       onClose();
    };
 
-   const handleClickReadingList = () => {
-      navigate('/readinglist');
+   const handleClickMenu = (route) => {
+      navigate(`/${route}`);
       onClose();
    };
 
@@ -69,7 +71,7 @@ const SideMenu = () => {
 
          <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
             <DrawerOverlay />
-            <DrawerContent maxW='270px'>
+            <DrawerContent maxW='290px'>
                <DrawerHeader
                   padding='.9rem .5rem .5rem'
                   display='flex'
@@ -103,15 +105,33 @@ const SideMenu = () => {
                      title='Home'
                      onClick={handleClickHome}
                   />
+
                   {user && (
                      <SideMenuItem
                         icon={ReadingListIcon}
                         savedPostsCount={savedPosts.length}
                         title='Reading List'
-                        onClick={handleClickReadingList}
+                        onClick={() => handleClickMenu('readinglist')}
                      />
                   )}
-                  <SideMenuItem icon={FAQIcon} title='FAQ' />
+
+                  <SideMenuItem
+                     icon={FAQIcon}
+                     title='FAQ'
+                     onClick={() => handleClickMenu('faq')}
+                  />
+
+                  <SideMenuItem
+                     icon={ContactIcon}
+                     title='Contact'
+                     onClick={() => handleClickMenu('contact')}
+                  />
+
+                  <SideMenuItem
+                     icon={AboutIcon}
+                     title='About'
+                     onClick={() => handleClickMenu('about')}
+                  />
                </DrawerBody>
             </DrawerContent>
          </Drawer>

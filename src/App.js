@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import useTransformData from './hooks/useTransformData';
 import LoginAlert from './components/LoginAlert';
 import FallbackSpinner from './utils/FallbackSpinner';
+import { FAQ, Contact, About } from './pages/menuPages';
 
 const PostDetails = lazy(() => import('./pages/PostDetails'));
 const Profile = lazy(() => import('./pages/Profile'));
@@ -65,6 +66,9 @@ const App = () => {
                   <Route path='edit-comment' element={<EditComment />} />
                   <Route path='readinglist' element={<SavedPosts />} />
                   <Route path='search' element={<Search />} />
+                  <Route path='faq' element={<FAQ />} />
+                  <Route path='contact' element={<Contact />} />
+                  <Route path='about' element={<About />} />
                </Route>
 
                <Route path='edit-post' element={<EditPost />} />

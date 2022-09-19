@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../assets/logo/logo.png';
+import logo from '../assets/images/logo.png';
 import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
 import { Box, Flex, HStack, Image } from '@chakra-ui/react';

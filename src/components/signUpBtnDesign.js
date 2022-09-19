@@ -1,7 +1,7 @@
-import github from '../assets/logo/github.svg';
-import twitter from '../assets/logo/twitter.svg';
-import facebook from '../assets/logo/facebook.svg';
-import google from '../assets/logo/google.svg';
+import github from '../assets/icons/github.svg';
+import twitter from '../assets/icons/twitter.svg';
+import facebook from '../assets/icons/facebook.svg';
+import google from '../assets/icons/google.svg';
 import {
    FacebookAuthProvider,
    GithubAuthProvider,

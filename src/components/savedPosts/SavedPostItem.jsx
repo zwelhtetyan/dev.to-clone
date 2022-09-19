@@ -41,7 +41,7 @@ const SavedPostItem = ({ postData, isArchive }) => {
          <Flex mb='1.5rem' align='flex-start' flex='1'>
             <CustomAvatar
                profile={postData.profile}
-               size={{ base: '32px', md: '35px' }}
+               size='40px'
                onClick={() => navigate(`/profile/${postData.userId}`)}
             />
             <Box ms='.5rem' flex='1'>

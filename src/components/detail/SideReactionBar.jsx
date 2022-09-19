@@ -1,11 +1,11 @@
 import { Flex, IconButton } from '@chakra-ui/react';
 import React from 'react';
-import Heart from '../../assets/logo/Heart';
-import AlreadyHearted from '../../assets/logo/AlreadyHearted';
-import Unicorn from '../../assets/logo/Unicorn';
-import AlreadyUnicorned from '../../assets/logo/AlreadyUnicorned';
-import Save from '../../assets/logo/Save';
-import AlreadySaved from '../../assets/logo/AlreadySaved';
+import Heart from '../../assets/icons/Heart';
+import AlreadyHearted from '../../assets/icons/AlreadyHearted';
+import Unicorn from '../../assets/icons/Unicorn';
+import AlreadyUnicorned from '../../assets/icons/AlreadyUnicorned';
+import Save from '../../assets/icons/Save';
+import AlreadySaved from '../../assets/icons/AlreadySaved';
 import useClickReactToPost from '../../hooks/useClickReactToPost';
 import { useAuth } from '../../context/auth';
 import MoreOptionMenu from './MoreOptionMenu';

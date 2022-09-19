@@ -13,7 +13,8 @@ const CustomAvatar = ({ profile, size, onClick }) => {
          backgroundRepeat='no-repeat'
          cursor='pointer'
          transition='.3s'
-         _hover={{ filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))' }}
+         border='1.5px solid #E2E8F0'
+         _hover={{ filter: 'drop-shadow(0px 0px 1px rgb(59 73 223))' }}
          onClick={onClick}
       />
    );

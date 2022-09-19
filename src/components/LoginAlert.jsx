@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
-import Logo from '../assets/logo/logo.png';
+import Logo from '../assets/images/logo.png';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoginAlert } from '../store/loginAlert';

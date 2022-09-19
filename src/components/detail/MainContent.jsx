@@ -70,12 +70,7 @@ const MainContent = ({ postDetail }) => {
          {/* content */}
          <Box px={{ base: '.7rem', md: '2.5rem' }} pb='1rem' pt={3}>
             <Box className='mde-preview'>
-               <Flex
-                  align='center'
-                  justify='space-between'
-                  gap='.5rem'
-                  wrap='wrap-reverse'
-               >
+               <Flex align='center' justify='space-between' gap='.5rem'>
                   <HStack align='flex-start'>
                      <CustomAvatar
                         profile={postDetail.profile}

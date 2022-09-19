@@ -27,7 +27,7 @@ const ProfileRightPart = ({ pinnedPosts, otherPosts, setAlreadyInProfile }) => {
                      bg='rgb(59 73 223)'
                      m={{ base: '-2rem 0 0 0', md: '-2.5rem 0 0' }}
                   >
-                     <BsFillPinAngleFill size={20} />
+                     <BsFillPinAngleFill size={19} />
                      <Text fontWeight={700} ms='.5rem'>
                         Pinned
                      </Text>

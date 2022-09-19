@@ -10,7 +10,7 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { RiFileCopy2Fill } from 'react-icons/ri';
-import Option from '../../assets/logo/Option';
+import Option from '../../assets/icons/Option';
 import { isTouchDevice } from '../../helper/isTouchDevice';
 import CustomMenuItem from '../../utils/CustomMenuItem';
 
