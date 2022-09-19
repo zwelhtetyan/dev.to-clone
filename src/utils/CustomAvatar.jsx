@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@chakra-ui/react';
-import defaultProfile from '../assets/images/defaultProfile.jpg';
+import defaultProfile from '../assets/images/default_profile.webp';
 
 const CustomAvatar = ({ profile, size, onClick }) => {
    return (

@@ -17,7 +17,7 @@ import joinOn from '../../assets/logo/joinOn.svg';
 import location from '../../assets/logo/location.svg';
 import personalWebsite from '../../assets/logo/personalWebsite.svg';
 import { useAuth } from '../../context/auth';
-import defaultProfile from '../../assets/images/defaultProfile.jpg';
+import defaultProfile from '../../assets/images/default_profile.webp';
 import { joinOnDate } from '../../helper/calcTimestamp';
 import useClickFollow from '../../hooks/useClickFollow';
 

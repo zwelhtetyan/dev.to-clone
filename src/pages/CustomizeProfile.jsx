@@ -162,7 +162,6 @@ const CustomizeProfile = () => {
       updateProfileData({ profile: '' }, user.userId)
          .then((_) => {
             setLoading(false);
-            navigate(`/profile/${user.userId}`);
             console.log('prifile informations are updated');
          })
          .catch((err) => {

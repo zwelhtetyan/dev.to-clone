@@ -4,6 +4,7 @@ import { joinOnDate } from '../../helper/calcTimestamp';
 import { useNavigate } from 'react-router-dom';
 import { LightBtn, PrimaryBtn } from '../../utils/Buttons';
 import useClickFollow from '../../hooks/useClickFollow';
+import defaultProfile from '../../assets/images/default_profile.webp';
 
 const Content = ({ title, text, contentMb }) => {
    return (
@@ -64,7 +65,7 @@ const UserProfilePopup = ({
          <Box bg={background || '#000000'} h={backgroundHeight || '45px'} />
          <Box pos='relative'>
             <Box
-               bgImage={profile}
+               bgImage={profile || defaultProfile}
                bgColor={background || '#000000'}
                borderWidth='4px'
                borderColor={background || '#000000'}

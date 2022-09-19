@@ -16,7 +16,7 @@ import {
    titleStyles,
    whiteBoxStyles,
 } from '../../../utils/CustomizeProfileStyles';
-import defaultProfile from '../../../assets/images/defaultProfile.jpg';
+import defaultProfile from '../../../assets/images/default_profile.webp';
 import { FaRegEdit } from 'react-icons/fa';
 import CustomMenuItem from '../../../utils/CustomMenuItem';
 
@@ -49,7 +49,7 @@ const User = ({
 
    const clickEdit = () => {
       document.getElementById('edit').click();
-   }; // if no profile image , i want user to go to file directly without choosing option.
+   }; // if no profile image , i want user to go to file directly without showing option.
 
    return (
       <Box {...whiteBoxStyles}>
@@ -101,7 +101,8 @@ const User = ({
                      <MenuList
                         mx='auto !imporant'
                         minW='0 !important'
-                        w='100px'
+                        p='.5rem'
+                        w='170px'
                         opacity={
                            !profileData?.profile
                               ? '0 !important'
