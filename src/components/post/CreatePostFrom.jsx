@@ -52,26 +52,6 @@ const CreatePostFrom = ({
       }
    }, [mdeTab]);
 
-   useEffect(() => {
-      const header = document.querySelector('.mde-header');
-
-      function addScrollPixel() {
-         if (header.scrollTop === 0) {
-            header.scrollTop = 1;
-         }
-
-         if (header.scrollHeight - header.scrollTop === header.clientHeight) {
-            header.scrollTop -= 1;
-         }
-      }
-
-      if (window.addEventListener) {
-         header.addEventListener('scroll', addScrollPixel, true);
-      } else if (window.attachEvent) {
-         header.attachEvent('scroll', addScrollPixel);
-      }
-   }, []);
-
    return (
       <Box mt='-3.5rem'>
          <Box maxW='768px' m='auto'>

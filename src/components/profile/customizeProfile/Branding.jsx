@@ -1,4 +1,4 @@
-import { Box, Input, Text } from '@chakra-ui/react';
+import { Box, Flex, Input, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import {
    InputborderColor,
@@ -38,6 +38,7 @@ const Branding = ({ backgroundRef, profileData }) => {
                <Text {...smallLabelStyles}>
                   Used for backgrounds, borders etc.
                </Text>
+
                <Box
                   w='100%'
                   pos='relative'
@@ -67,39 +68,23 @@ const Branding = ({ backgroundRef, profileData }) => {
                      <ChromePicker color={brandColor} onChange={handleChange} />
                   )}
 
-                  <Box
-                     bg={brandColor}
-                     height='33px'
-                     w='40px'
+                  <Flex
+                     h='40px'
+                     w='45px'
                      pos='absolute'
-                     left='.3rem'
-                     borderRadius='5px'
                      zIndex={2}
+                     ps='.3rem'
                      cursor='pointer'
-                     className='color-board'
-                  />
-
-                  {/* option 2 default input */}
-
-                  {/* <Input
-                     pos='absolute'
-                     top='0'
-                     left='0'
-                     type='color'
-                     className='color-input'
-                     w='90px'
-                     border='none'
-                     value={brandColor}
-                     cursor='pointer'
-                     zIndex={2}
-                     _focus={{
-                        background: 'none !important',
-                        borderColor: 'none !important',
-                        boxShadow: 'none !important',
-                     }}
-                     ref={backgroundRef}
-                     onChange={({ target }) => setBrandColor(target.value)}
-                  /> */}
+                     align='center'
+                  >
+                     <Box
+                        bg={brandColor}
+                        height='33px'
+                        w='100%'
+                        borderRadius='5px'
+                        className='color-board'
+                     />
+                  </Flex>
 
                   <Input
                      ref={backgroundRef}
@@ -117,3 +102,5 @@ const Branding = ({ backgroundRef, profileData }) => {
 };
 
 export default Branding;
+
+// I used color picker component instead of default color picker because default color picker style changed by the browser user used.
