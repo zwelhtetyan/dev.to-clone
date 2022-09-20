@@ -20,7 +20,7 @@ const customToolbarCommands = () => {
 
 const codeBlock = {
    name: 'code-block',
-   icon: () => <BsCodeSquare size={18} />,
+   icon: () => <BsCodeSquare size={18} style={{ position: 'absolute' }} />,
    execute: (opts) => {
       opts.textApi.replaceSelection('```\n Enter code here... \n```');
    },
@@ -66,7 +66,9 @@ const MDE = ({
       if (image) {
          document.querySelector('.mde-text').disabled = true;
          setUploadingImg(true);
-         setValue((prevVal) => prevVal.replace('🌌img_url', 'uploading...'));
+         setValue((prevVal) =>
+            prevVal.replace('![](img_url)', '![](uploading...)')
+         );
 
          const selectedImgPath = `images/${img.name}${nanoid()}`;
 
@@ -75,7 +77,7 @@ const MDE = ({
                document.querySelector('.mde-text').disabled = false;
 
                setValue((prevVal) =>
-                  prevVal.replace('uploading...', `![](${url})`)
+                  prevVal.replace('![](uploading...)', `![](${url})`)
                );
 
                //save uploaded MDE images
@@ -96,7 +98,7 @@ const MDE = ({
       name: 'image_url',
       icon: () => <MDEToolbarImgIcon onChange={mdeImgUploadHandler} />,
       execute: (opts) => {
-         opts.textApi.replaceSelection('🌌img_url');
+         opts.textApi.replaceSelection('![](img_url)');
       },
    };
 

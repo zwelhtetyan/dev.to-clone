@@ -32,6 +32,13 @@
             padding: 0;
             padding: 5px 10px;
             height: auto;
+            overflow: hidden;
+            width: 35px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
 
             &:hover {
                background-color: #e2e3f3;

@@ -226,7 +226,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
                      bg: 'rgb(0 0 0 / 4%)',
                   }}
                   onClick={() => setMoreInfo(true)}
-                  py='.5rem'
+                  py='.6rem'
                   height='auto'
                >
                   More info about @{profileData.name}

@@ -3,27 +3,30 @@ import React from 'react';
 import { BsCardImage } from 'react-icons/bs';
 
 const MDEToolbarImgIcon = ({ onChange }) => {
+   const handleClick = () => {
+      document.querySelector('.toolbar_img_command').click();
+   };
+
    return (
       <Box
+         onClick={handleClick}
          justify='center'
          m='0'
          cursor='pointer'
-         w='20px'
-         h='20px'
-         pos='relative'
+         w='35px'
+         h='30px'
+         pos='absolute'
          display='flex'
          alignItems='center'
          justifyContent='center'
       >
          <Input
-            pos='absolute'
+            className='toolbar_img_command'
             opacity={0}
-            w='21px'
-            h='26px'
+            visibility='hidden'
+            w='0'
+            h='0'
             type='file'
-            bg='pink'
-            cursor='pointer'
-            zIndex='2'
             accept='image/jpeg, image/png, image/jpg , image/webp, image/gif'
             onChange={onChange}
          />
