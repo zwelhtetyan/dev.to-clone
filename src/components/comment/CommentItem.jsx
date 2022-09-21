@@ -118,7 +118,7 @@ const CommentItem = ({
                            <Text as='span'>
                               {showEditedDate(createdAt, editedAt)
                                  ? `• Edited on ${dateFormat(editedAt)}`
-                                 : '• edited'}
+                                 : '• Edited'}
                            </Text>
                         )}
                      </Text>

@@ -1,13 +1,14 @@
 import { Box, Heading, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { titleRoute } from '../../helper/titleRoute';
 import ManangePost from './ManangePost';
 
-const DraftPostItem = ({ title, postId }) => {
+const DraftPostItem = ({ name, title, postId }) => {
    const navigate = useNavigate();
 
-   const handleClick = () => {
-      navigate(`/details/${postId}`);
+   const handleNavigate = () => {
+      navigate(`/${titleRoute(name, title, postId)}`);
    };
 
    return (
@@ -19,7 +20,7 @@ const DraftPostItem = ({ title, postId }) => {
          p={{ base: '.5rem', sm: '1rem' }}
          cursor='pointer'
          mb='.5rem'
-         onClick={handleClick}
+         onClick={handleNavigate}
       >
          <Text
             bg='#FCD34D'
@@ -37,7 +38,7 @@ const DraftPostItem = ({ title, postId }) => {
             w='100%'
             _hover={{ color: 'rgb(47 58 178)' }}
             fontSize={['1.2rem', '1.5rem']}
-            onClick={handleClick}
+            onClick={handleNavigate}
             color='rgb(23 23 23)'
          >
             {title}

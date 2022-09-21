@@ -3,15 +3,18 @@ import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { titleRoute } from '../../helper/titleRoute';
 import { setClickComment } from '../../store/scrollDiscussion';
 import LangTag from '../../utils/LangTag';
 
-const OtherPostItem = ({ title, tags, postId }) => {
+const OtherPostItem = ({ name, title, tags, postId }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
-   const handleNavigate = () => {
-      navigate(`/details/${postId}`, { replace: true });
+   const handleNavigate = (e) => {
+      e.stopPropagation();
+
+      navigate(`/${titleRoute(name, title, postId)}`);
       dispatch(setClickComment(false));
    };
 
@@ -28,7 +31,7 @@ const OtherPostItem = ({ title, tags, postId }) => {
             fontWeight={600}
             _hover={{ color: 'rgb(47 58 178)' }}
             cursor='pointer'
-            onClick={() => navigate(`/details/${postId}`)}
+            onClick={handleNavigate}
             color='rgb(23 23 23)'
          >
             {title}

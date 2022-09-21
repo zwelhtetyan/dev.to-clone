@@ -24,6 +24,7 @@ import { useDispatch } from 'react-redux';
 import { setClickComment } from '../../store/scrollDiscussion';
 import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
 import useClickReactToPost from '../../hooks/useClickReactToPost';
+import { titleRoute } from '../../helper/titleRoute';
 
 const PostItem = ({
    name,
@@ -60,12 +61,13 @@ const PostItem = ({
       e.stopPropagation();
 
       dispatch(setClickComment(true)); // if user click comment , it will start on where discussions exist 😉
-      navigate(`/details/${id}`);
+      navigate(`/${titleRoute(name, title, id)}`);
    };
 
    const handleNavigate = () => {
       dispatch(setClickComment(false));
-      navigate(`/details/${id}`);
+
+      navigate(`/${titleRoute(name, title, id)}`);
    };
 
    const handleViewProfile = (e) => {

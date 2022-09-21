@@ -44,7 +44,7 @@ const App = () => {
                <Route path='/' element={<Layout />}>
                   <Route index element={<Home />} />
                   <Route path='profile/:userIdToView' element={<Profile />} />
-                  <Route path='details/:id' element={<PostDetails />} />
+                  <Route path='/:user/:title' element={<PostDetails />} />
                   <Route path='create-account' element={<SignUp />} />
                   <Route path='login' element={<Login />} />
                   <Route path='signout-confirm' element={<SignOutConfirm />} />

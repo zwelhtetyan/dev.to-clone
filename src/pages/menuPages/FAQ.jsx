@@ -43,14 +43,13 @@ const FAQ = () => {
          </Box>
 
          <Title>How to add link in markdown?</Title>
-         <Text>
-            You can add url using the syntax below{' '}
-            <Box mb='1rem' overflow='auto' mt='.5rem'>
-               <Text as='pre' bg='#f9ff21' display='inline-block'>
-                  [example.com](https://example.com)
-               </Text>
-            </Box>
-         </Text>
+         <Text>You can add url using the syntax below </Text>
+
+         <Box mb='1rem' overflow='auto' mt='.5rem'>
+            <Text as='pre' bg='#f9ff21' display='inline-block'>
+               [example.com](https://example.com)
+            </Text>
+         </Box>
       </Card>
    );
 };

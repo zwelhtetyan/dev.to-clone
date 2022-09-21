@@ -21,7 +21,7 @@ const DisplayDate = ({ createdAt, isUpdated }) => {
                <Text fontSize='11px' color='#717171' as='span'>
                   •{' '}
                   <Text as='span' rounded='sm' px='3px'>
-                     updated
+                     Updated
                   </Text>
                </Text>
             )}

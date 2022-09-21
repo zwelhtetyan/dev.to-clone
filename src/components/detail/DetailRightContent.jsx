@@ -70,6 +70,7 @@ const DetailRightContent = ({
                {otherPosts.map((postData) => (
                   <OtherPostItem
                      key={nanoid()}
+                     name={postData.name}
                      title={postData.title}
                      tags={postData.tags}
                      postId={postData.id}

@@ -9,6 +9,7 @@ import { SecondaryBtn } from '../../utils/Buttons';
 import { saveArchive } from '../../lib/api';
 import { useAuth } from '../../context/auth';
 import { useState } from 'react';
+import { titleRoute } from '../../helper/titleRoute';
 
 const SavedPostItem = ({ postData, isArchive }) => {
    const navigate = useNavigate();
@@ -36,6 +37,10 @@ const SavedPostItem = ({ postData, isArchive }) => {
          });
    };
 
+   const handleNavigate = () => {
+      navigate(`/${titleRoute(postData.name, postData.title, postData.id)}`);
+   };
+
    return (
       <HStack as='article' justify='space-between'>
          <Flex mb='1.5rem' align='flex-start' flex='1'>
@@ -49,7 +54,7 @@ const SavedPostItem = ({ postData, isArchive }) => {
                   fontWeight={600}
                   _hover={{ color: 'rgb(47 58 178)' }}
                   cursor='pointer'
-                  onClick={() => navigate(`/details/${postData.id}`)}
+                  onClick={handleNavigate}
                >
                   {postData.title}
                </Text>

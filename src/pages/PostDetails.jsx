@@ -4,8 +4,12 @@ import { useSelector } from 'react-redux';
 import DetailElements from '../components/detail/DetailElements';
 
 const PostDetails = () => {
-   const { id } = useParams();
+   const { title } = useParams();
    const navigate = useNavigate();
+
+   // get postId from (title + postId)
+   const param = title.split('-');
+   const postId = param[param.length - 1];
 
    const {
       transformedData,
@@ -15,7 +19,9 @@ const PostDetails = () => {
 
    const profileData = useSelector((state) => state.profileData.profileData);
 
-   const postDetail = transformedData?.find((postData) => postData.id === id);
+   const postDetail = transformedData?.find(
+      (postData) => postData.id === postId
+   );
 
    const currentUserProfile = profileData?.find(
       (data) => data.id === postDetail?.userId
@@ -25,7 +31,7 @@ const PostDetails = () => {
       ?.filter(
          (postData) =>
             postData.userId === currentUserProfile?.id &&
-            postData.id !== id &&
+            postData.id !== postId &&
             !postData.draft
       )
       .sort((a, b) => (b.heart?.length || 0) - (a.heart?.length || 0))
@@ -46,7 +52,7 @@ const PostDetails = () => {
             );
          });
       }
-   }, [postDetail, navigate, id]);
+   }, [postDetail, navigate, title]);
 
    return (
       <DetailElements

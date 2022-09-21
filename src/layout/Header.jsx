@@ -29,7 +29,7 @@ const Header = () => {
          w='100%'
          h='56px'
          pos='fixed'
-         boxShadow='md'
+         boxShadow='0 1px 1px rgba(0, 0, 0, 0.1)'
          zIndex={1000}
          top='0'
          left='0'
