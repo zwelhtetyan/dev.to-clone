@@ -10,6 +10,7 @@ import { saveArchive } from '../../lib/api';
 import { useAuth } from '../../context/auth';
 import { useState } from 'react';
 import { titleRoute } from '../../helper/titleRoute';
+import useClickTag from '../../hooks/useClickTag';
 
 const SavedPostItem = ({ postData, isArchive }) => {
    const navigate = useNavigate();
@@ -40,6 +41,8 @@ const SavedPostItem = ({ postData, isArchive }) => {
    const handleNavigate = () => {
       navigate(`/${titleRoute(postData.name, postData.title, postData.id)}`);
    };
+
+   const handleClickTag = useClickTag();
 
    return (
       <HStack as='article' justify='space-between'>
@@ -77,7 +80,11 @@ const SavedPostItem = ({ postData, isArchive }) => {
                      <>
                         <Text ps='2px'>•</Text>
                         {postData.tags?.map((tag) => (
-                           <WrapItem key={nanoid()} color='rgb(64 64 64)'>
+                           <WrapItem
+                              key={nanoid()}
+                              color='rgb(64 64 64)'
+                              onClick={(e) => handleClickTag(e, tag.tagName)}
+                           >
                               <LangTag tag={tag} />
                            </WrapItem>
                         ))}

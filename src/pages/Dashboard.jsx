@@ -109,6 +109,7 @@ const Dashboard = () => {
             >
                <option value='posts'>Posts</option>
                <option value='drafts'>Drafts</option>
+               <option value='following_tags'>Following Tags</option>
                <option value='followers'>Followers</option>
                <option value='following_users'>Following users</option>
             </Select>

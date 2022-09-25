@@ -10,11 +10,10 @@ import { claculateWrittenComments } from '../helper/calculateTotal';
 import ProfileRightPart from '../components/profile/ProfileRightPart';
 
 const Profile = () => {
-   const [alreadyInProfile, setAlreadyInProfile] = useState(false);
    const location = useLocation();
 
    //scroll top
-   useEffect(() => window.scrollTo(0, 0), [alreadyInProfile, location]);
+   useEffect(() => window.scrollTo(0, 0), [location]);
 
    const { userIdToView } = useParams();
    const [moreInfo, setMoreInfo] = useState(false);
@@ -23,17 +22,13 @@ const Profile = () => {
       (state) => state.profileData
    );
 
-   const { transformedData, transfromedDataLoading, transformedDataErr } =
-      useSelector((state) => state.transformedData);
+   const { transformedData } = useSelector((state) => state.transformedData);
 
-   const loading = profileDataLoading || transfromedDataLoading;
-   const err = profileDataErr || transformedDataErr;
-
-   if (err) {
+   if (profileDataErr) {
       return <ErrorMessage offline={true} />;
    }
 
-   if (loading) {
+   if (profileDataLoading) {
       return <ProfileSkeleton />;
    }
 
@@ -46,7 +41,7 @@ const Profile = () => {
    let otherPosts = null;
    let totalCommentWritten = 0;
 
-   if (transformedData && !loading && !err) {
+   if (transformedData) {
       otherPosts = transformedData
          .filter(
             (postData) =>
@@ -112,7 +107,6 @@ const Profile = () => {
                   <ProfileRightPart
                      pinnedPosts={pinnedPosts}
                      otherPosts={otherPosts}
-                     setAlreadyInProfile={setAlreadyInProfile}
                   />
                </Flex>
             </Box>

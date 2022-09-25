@@ -24,6 +24,7 @@ import { dateFormat, showEditedDate } from '../../helper/calcTimestamp';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import useClickTag from '../../hooks/useClickTag';
 
 const MainContent = ({ postDetail }) => {
    const navigate = useNavigate();
@@ -31,6 +32,7 @@ const MainContent = ({ postDetail }) => {
    const discussionBoxRef = useRef();
 
    const { clickComment } = useSelector((state) => state.scrollDiscussion);
+   const handleClickTag = useClickTag();
 
    //scroll to
    useEffect(() => {
@@ -38,6 +40,7 @@ const MainContent = ({ postDetail }) => {
          window.pageYOffset +
          discussionBoxRef.current?.getBoundingClientRect().top -
          60;
+
       if (clickComment) {
          window.scrollTo({ top: scrollHeight });
       } else {
@@ -117,7 +120,7 @@ const MainContent = ({ postDetail }) => {
                                        ? `• Updated on ${dateFormat(
                                             postDetail.updatedAt
                                          )}`
-                                       : '• updated'}
+                                       : '• Updated'}
                                  </Text>
                               )}
                            </Text>
@@ -137,7 +140,10 @@ const MainContent = ({ postDetail }) => {
 
                <Wrap pt='.3rem' pb='1.5rem' spacing={2}>
                   {postDetail.tags.map((tag) => (
-                     <WrapItem key={nanoid()}>
+                     <WrapItem
+                        key={nanoid()}
+                        onClick={(e) => handleClickTag(e, tag.tagName)}
+                     >
                         <LangTag tag={tag} />
                      </WrapItem>
                   ))}

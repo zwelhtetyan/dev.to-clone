@@ -5,7 +5,7 @@ import { useAuth } from '../context/auth';
 import { updateProfileData } from '../lib/api';
 import { setLoginAlert } from '../store/loginAlert';
 
-const useClickFollow = (profileData, userId) => {
+const useFollowUser = (profileData, userId) => {
    const user = useAuth();
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -42,4 +42,4 @@ const useClickFollow = (profileData, userId) => {
    return { handleClickFollow, loading };
 };
 
-export default useClickFollow;
+export default useFollowUser;

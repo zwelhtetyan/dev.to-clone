@@ -19,8 +19,9 @@ const PostItemSkeleton = ({ firstItem }) => {
          boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
       >
          {firstItem && (
-            <Box h={{ base: '200px', md: '250px' }} mb='.5rem'></Box>
+            <Box h={{ base: '200px', md: '230px' }} mb='.5rem'></Box>
          )}
+
          <HStack>
             <SkeletonCircle size='10' />
             <SkeletonText mt={3} noOfLines={2} spacing='2' w='30%' />

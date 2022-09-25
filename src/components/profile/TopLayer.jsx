@@ -19,7 +19,7 @@ import personalWebsite from '../../assets/icons/personalWebsite.svg';
 import { useAuth } from '../../context/auth';
 import defaultProfile from '../../assets/images/default_profile.webp';
 import { joinOnDate } from '../../helper/calcTimestamp';
-import useClickFollow from '../../hooks/useClickFollow';
+import useFollowUser from '../../hooks/useFollowUser';
 
 const LinkIcon = ({ hoverColor, href, children, onClick }) => {
    return (
@@ -53,7 +53,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
    const user = useAuth();
    const userId = user?.userId;
 
-   const { handleClickFollow, loading } = useClickFollow(profileData, userId);
+   const { handleClickFollow, loading } = useFollowUser(profileData, userId);
 
    const alreadyFollow = profileData?.followers?.includes(userId);
 

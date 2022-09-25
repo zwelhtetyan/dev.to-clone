@@ -3,7 +3,7 @@ import { Box, Text } from '@chakra-ui/react';
 import { joinOnDate } from '../../helper/calcTimestamp';
 import { useNavigate } from 'react-router-dom';
 import { LightBtn, PrimaryBtn } from '../../utils/Buttons';
-import useClickFollow from '../../hooks/useClickFollow';
+import useClickFollow from '../../hooks/useFollowUser';
 import defaultProfile from '../../assets/images/default_profile.webp';
 
 const Content = ({ title, text, contentMb }) => {
@@ -31,6 +31,7 @@ const UserProfilePopup = ({
    followers,
    w,
    p,
+   m,
    contentMb,
    backgroundHeight,
    pos,
@@ -52,6 +53,7 @@ const UserProfilePopup = ({
       <Box
          w={w || '300px'}
          borderRadius={borderRadius}
+         m={m}
          pos={pos}
          zIndex={zIndex}
          display={display}

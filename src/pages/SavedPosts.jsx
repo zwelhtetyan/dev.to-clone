@@ -19,12 +19,12 @@ const SavedPosts = () => {
 
    // const [savedPosts, setSavedPosts] = useState([]);
    // const [archivedPosts, setArchivedPosts] = useState([]);
-   const [allTopics, setAllTopics] = useState([]);
-   const [selectedTopic, setSelectedTopic] = useState('All tags');
+   const [allTags, setAllTags] = useState([]);
+   const [selectedTagName, setSelectedTagName] = useState('All tags');
    const [searchTerm, setSearchTerm] = useState('');
 
    //scroll top
-   useEffect(() => window.scrollTo(0, 0), [selectedTopic]);
+   useEffect(() => window.scrollTo(0, 0), [selectedTagName]);
 
    const {
       transformedData,
@@ -65,26 +65,26 @@ const SavedPosts = () => {
 
          const currentPosts = query ? archivedPosts : savedPosts;
 
-         const allTopics = [{ topic: 'All tags', active: true }];
+         const allTags = [{ tagName: 'All tags', active: true }];
          currentPosts.forEach((postData) => {
             if (postData.tags.length !== 0) {
-               allTopics.push(...postData.tags);
+               allTags.push(...postData.tags);
             }
          });
 
-         const transform = new Set(allTopics.map((item) => item.topic));
-         const transformedTopics = [...transform].map((topic) =>
-            topic === 'All tags' ? { topic, active: true } : { topic }
+         const transform = new Set(allTags.map((item) => item.tagName));
+         const transformedTags = [...transform].map((tagName) =>
+            tagName === 'All tags' ? { tagName, active: true } : { tagName }
          );
 
-         setAllTopics(transformedTopics);
-         setSelectedTopic('All tags');
+         setAllTags(transformedTags);
+         setSelectedTagName('All tags');
       }
    }, [transformedData, query, userId]);
 
    /* option 2 (using state) 
       => setting data inside useEffect takes a while to get data
-      => if i create state and set the state inside useEffect , although loading is false but need to wait stateChange and compnent rerender finished
+      => if i create state and set the state inside useEffect , although loading is false but need to wait stateChange and compnent rerender time to finish
    */
 
    // useEffect(() => {
@@ -101,22 +101,22 @@ const SavedPosts = () => {
 
    //       const currentPosts = query ? archivedPosts : savedPosts;
 
-   //       const allTopics = [{ topic: 'All tags', active: true }];
+   //       const allTags = [{ tagName: 'All tags', active: true }];
    //       currentPosts.forEach((postData) => {
    //          if (postData.tags.length !== 0) {
-   //             allTopics.push(...postData.tags);
+   //             allTags.push(...postData.tags);
    //          }
    //       });
 
-   //       const transform = new Set(allTopics.map((item) => item.topic));
-   //       const transformedTopics = [...transform].map((topic) =>
-   //          topic === 'All tags' ? { topic, active: true } : { topic }
+   //       const transform = new Set(allTags.map((item) => item.tagName));
+   //       const transformedTags = [...transform].map((tagName) =>
+   //          tagName === 'All tags' ? { tagName, active: true } : { tagName }
    //       );
 
    //       setSavedPosts(savedPosts);
    //       setArchivedPosts(archivedPosts);
-   //       setAllTopics(transformedTopics);
-   //       setSelectedTopic('All tags');
+   //       setAllTags(transformedTags);
+   //       setSelectedTagName('All tags');
    //    }
    // }, [query, transformedData, userId]);
 
@@ -128,15 +128,15 @@ const SavedPosts = () => {
       return <ErrorMessage offline={true} />;
    }
 
-   const handleClickTopic = (topic) => {
-      const transformedTopics = allTopics.map((item) =>
-         item.topic === topic
+   const handleClickTag = (tagName) => {
+      const transformedTags = allTags.map((item) =>
+         item.tagName === tagName
             ? { ...item, active: true }
             : { ...item, active: false }
       );
 
-      setSelectedTopic(topic);
-      setAllTopics(transformedTopics);
+      setSelectedTagName(tagName);
+      setAllTags(transformedTags);
    };
 
    const handleSearch = ({ target }) => {
@@ -160,20 +160,20 @@ const SavedPosts = () => {
          <Header
             readingCount={savedPosts.length}
             archiveCount={archivedPosts.length}
-            allTopics={allTopics}
-            handleClickTopic={handleClickTopic}
-            selectedTopic={selectedTopic}
+            allTags={allTags}
+            handleClickTag={handleClickTag}
+            selectedTagName={selectedTagName}
             handleSearch={handleSearch}
             toggleViewArchive={toggleViewArchive}
          />
 
          <HStack mt='1rem' align='flex-start'>
-            <Left allTopics={allTopics} handleClickTopic={handleClickTopic} />
+            <Left allTags={allTags} handleClickTag={handleClickTag} />
 
             <Right
                savedPosts={savedPosts}
                archivedPosts={archivedPosts}
-               selectedTopic={selectedTopic}
+               selectedTagName={selectedTagName}
                searchTerm={searchTerm}
                loading={loading}
             />

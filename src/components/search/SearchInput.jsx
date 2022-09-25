@@ -1,52 +1,48 @@
-import { Box, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
-import { useRef } from 'react';
+import { Box, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { FiSearch } from 'react-icons/fi';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-const SearchInput = ({ w, display, mb }) => {
-   const searchInputRef = useRef();
-   const location = useLocation();
+const SearchInput = (
+   { w, display, mb, px, flex, placeholder, route, querySearchTerm },
+   ref
+) => {
    const navigate = useNavigate();
-
-   const queryParam = new URLSearchParams(location.search);
-   const querySearchTerm = queryParam.get('q');
 
    const handleSearch = (e) => {
       e.preventDefault();
-      const searchTerm = searchInputRef.current.value;
+      ref.current.blur();
 
-      if (!searchTerm) return;
+      const searchTerm = ref.current.value;
 
-      navigate(`/search?q=${searchTerm}`);
+      if (!searchTerm && route === 'search') return;
+
+      const queryName = route === 'search' ? 'spq' : 'stq'; // => searchPostQuery / searchTagQuery
+      navigate(`/${route}?${queryName}=${searchTerm}`);
    };
 
    useEffect(() => {
       if (!querySearchTerm) {
-         searchInputRef.current.value = '';
+         ref.current.value = '';
       } else {
-         searchInputRef.current.value = querySearchTerm;
+         ref.current.value = querySearchTerm;
       }
-   }, [querySearchTerm]);
+   }, [querySearchTerm, ref]);
 
    return (
       <Box
          as='form'
          onSubmit={handleSearch}
          display={display}
-         px='.5rem'
+         px={px || '.5rem'}
          mb={mb}
+         flex={flex}
       >
          <InputGroup h='39px' w={w || '100%'} borderColor='#00000033'>
-            <Input
-               placeholder='Search...'
-               ref={searchInputRef}
-               defaultValue={querySearchTerm}
-            />
+            <Input placeholder={placeholder || 'Search...'} ref={ref} />
             <InputRightElement children={<FiSearch size={23} color='gray' />} />
          </InputGroup>
       </Box>
    );
 };
-
-export default SearchInput;
+export default React.forwardRef(SearchInput);

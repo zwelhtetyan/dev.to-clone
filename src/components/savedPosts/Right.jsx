@@ -33,7 +33,7 @@ const NoFilteredPostMessage = () => {
 const Right = ({
    savedPosts,
    archivedPosts,
-   selectedTopic,
+   selectedTagName,
    searchTerm,
    loading,
 }) => {
@@ -49,14 +49,14 @@ const Right = ({
    currentPosts.forEach((postData) => {
       const tags = postData.tags;
 
-      if (selectedTopic === 'All tags') {
+      if (selectedTagName === 'All tags') {
          transformedSavedPosts = currentPosts;
          return;
       }
 
       if (
          tags.length !== 0 &&
-         tags.find((item) => item.topic === selectedTopic)
+         tags.find((item) => item.tagName === selectedTagName)
       ) {
          transformedSavedPosts.push(postData);
       }

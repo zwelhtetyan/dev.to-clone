@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Divider, HStack, Image, Text } from '@chakra-ui/react';
 import doc from '../../assets/icons/doc.svg';
 import commentLg from '../../assets/icons/commentLg.svg';
+import tagIcon from '../../assets/icons/tag.svg';
 
 const TechStack = ({ title, text }) => {
    return (
@@ -28,6 +29,8 @@ const ProfileLeftPart = ({
    totalCommentWritten,
 }) => {
    if (!profileData) return;
+
+   const totalFollowingTags = profileData.followingTags?.length || 0;
 
    return (
       <Box
@@ -62,17 +65,26 @@ const ProfileLeftPart = ({
             borderRadius='5px'
          >
             <HStack mb='.7rem'>
-               <Image src={doc} alt='doc_logo' />
+               <Image src={doc} alt='doc_icon' />
                <Text>
                   {publishedPosts} {publishedPosts > 0 ? 'posts' : 'post'}{' '}
                   published
                </Text>
             </HStack>
-            <HStack>
-               <Image src={commentLg} alt='comment_logo' />
+
+            <HStack mb='.7rem'>
+               <Image src={commentLg} alt='comment_icon' />
                <Text>
                   {totalCommentWritten}{' '}
                   {totalCommentWritten > 0 ? 'comments' : 'comment'} written
+               </Text>
+            </HStack>
+
+            <HStack>
+               <Image src={tagIcon} alt='tag_icon' />
+               <Text>
+                  {totalFollowingTags} {totalFollowingTags > 0 ? 'tags' : 'tag'}{' '}
+                  followed
                </Text>
             </HStack>
          </Box>

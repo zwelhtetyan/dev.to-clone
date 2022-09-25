@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import LangTag from '../../utils/LangTag';
 import { useDispatch } from 'react-redux';
 import { Box, Input, Wrap, WrapItem } from '@chakra-ui/react';
-import tagsData from './LangTagData.json';
+import tagSuggestions from './tagSuggestion.json';
 import { setTagsToStore } from '../../store/post/postData';
 import { nanoid } from '@reduxjs/toolkit';
 import { VscChromeClose } from 'react-icons/vsc';
@@ -10,7 +10,7 @@ import useClickOutside from '../../hooks/useClickOutside';
 
 const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    //states
-   const [tagData, setTagData] = useState(tagsData);
+   const [tagData, setTagData] = useState(tagSuggestions);
    const [filterTagName, setFilterTagName] = useState('');
    const [focusTagInput, setFocusTagInput] = useState(false);
    const [filteredTags, setFilteredTags] = useState(
@@ -36,7 +36,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
       }
 
       const searchedTags = tagData.filter((tag) =>
-         tag.topic.toLowerCase().includes(filterTagName.toLowerCase())
+         tag.tagName.toLowerCase().includes(filterTagName.toLowerCase())
       );
 
       return searchedTags;
@@ -47,8 +47,8 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
          <WrapItem key={nanoid()} pos='relative'>
             <LangTag
                tag={tag}
-               h='34px'
                onDeleteTag={() => handleDeleteTag(tag)}
+               showCloseIcon={true}
             >
                <VscChromeClose size={20} />
             </LangTag>
@@ -61,7 +61,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    const addToFilteredTags = (tag) => {
       setFilteredTags((prevArr) => [...prevArr, tag]);
       setTagData((prevArr) =>
-         prevArr.filter((item) => item.topic !== tag.topic)
+         prevArr.filter((item) => item.tagName !== tag.tagName)
       );
    };
 
@@ -75,7 +75,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
 
    const handleDeleteTag = (tag) => {
       setFilteredTags((prevArr) =>
-         prevArr.filter((item) => item.topic !== tag.topic)
+         prevArr.filter((item) => item.tagName !== tag.tagName)
       );
 
       if (tag.isCustomTag) {
@@ -88,18 +88,17 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
    // generating tag icon
    const suggestions = () => {
       if (tagsToShow()) {
-         const transformedTags = [
-            { topic: filterTagName, isCustomTag: true },
-            ...tagsToShow(),
-         ];
+         const alreadyInTag = filteredTags.find(
+            (tag) => tag.tagName === filterTagName
+         );
+
+         const transformedTags = alreadyInTag
+            ? [...tagsToShow()]
+            : [{ tagName: filterTagName, isCustomTag: true }, ...tagsToShow()];
 
          return transformedTags.map((tag) => (
             <WrapItem key={nanoid()}>
-               <LangTag
-                  onAddTag={() => handleAddLangTag(tag)}
-                  tag={tag}
-                  cursor='pointer'
-               />
+               <LangTag onAddTag={() => handleAddLangTag(tag)} tag={tag} />
             </WrapItem>
          ));
       }

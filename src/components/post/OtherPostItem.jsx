@@ -4,6 +4,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { titleRoute } from '../../helper/titleRoute';
+import useClickTag from '../../hooks/useClickTag';
 import { setClickComment } from '../../store/scrollDiscussion';
 import LangTag from '../../utils/LangTag';
 
@@ -17,6 +18,8 @@ const OtherPostItem = ({ name, title, tags, postId }) => {
       navigate(`/${titleRoute(name, title, postId)}`);
       dispatch(setClickComment(false));
    };
+
+   const handleClickTag = useClickTag();
 
    return (
       <Box
@@ -38,9 +41,12 @@ const OtherPostItem = ({ name, title, tags, postId }) => {
          </Text>
 
          <Wrap spacing='.3rem' pt='.3rem'>
-            {tags?.map((langtag) => (
-               <WrapItem key={nanoid()} onClick={(e) => e.stopPropagation()}>
-                  <LangTag tag={langtag} />
+            {tags?.map((tag) => (
+               <WrapItem
+                  key={nanoid()}
+                  onClick={(e) => handleClickTag(e, tag.tagName)}
+               >
+                  <LangTag tag={tag} />
                </WrapItem>
             ))}
          </Wrap>

@@ -73,11 +73,11 @@ export const SecondaryBtn = ({
    );
 };
 
-export const LightBtn = ({ children, onClick, disabled, w, bg }) => {
+export const LightBtn = ({ children, onClick, disabled, w, bg, m }) => {
    return (
       <Button
          w={w || '100%'}
-         m='.5rem 0'
+         m={m || '.5rem 0'}
          bg={bg || 'transparent'}
          border='2px solid #d6d6d7'
          _hover={{ bg: 'gray.100', borderColor: '#a3a3a3' }}

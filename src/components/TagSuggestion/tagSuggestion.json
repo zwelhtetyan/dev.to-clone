@@ -1,0 +1,139 @@
+[
+   {
+      "tagName": "javascript"
+   },
+   {
+      "tagName": "typescript"
+   },
+   {
+      "tagName": "react"
+   },
+   {
+      "tagName": "angular",
+      "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/angularjs/angularjs-original.svg"
+   },
+   {
+      "tagName": "nodejs"
+   },
+   {
+      "tagName": "express"
+   },
+   {
+      "tagName": "mongodb"
+   },
+   {
+      "tagName": "vue",
+      "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original.svg"
+   },
+   {
+      "tagName": "svelte"
+   },
+   {
+      "tagName": "go"
+   },
+   {
+      "tagName": "c"
+   },
+   {
+      "tagName": "csharp"
+   },
+   {
+      "tagName": "php"
+   },
+
+   {
+      "tagName": "python"
+   },
+   {
+      "tagName": "graphql",
+      "logo": "https://www.vectorlogo.zone/logos/graphql/graphql-icon.svg"
+   },
+   {
+      "tagName": "flutter"
+   },
+   {
+      "tagName": "postgresql"
+   },
+   {
+      "tagName": "firebase",
+      "logo": "https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg"
+   },
+   {
+      "tagName": "laraval",
+      "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/laravel/laravel-plain-wordmark.svg"
+   },
+   {
+      "tagName": "nextjs"
+   },
+   {
+      "tagName": "gatsby"
+   },
+   {
+      "tagName": "django",
+      "logo": "https://cdn.worldvectorlogo.com/logos/django.svg"
+   },
+   {
+      "tagName": "electron"
+   },
+   {
+      "tagName": "git"
+   },
+   {
+      "tagName": "html5"
+   },
+   {
+      "tagName": "css3"
+   },
+   {
+      "tagName": "swift"
+   },
+   {
+      "tagName": "ruby"
+   },
+   {
+      "tagName": "bootstrap"
+   },
+   {
+      "tagName": "tailwind",
+      "logo": "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg"
+   },
+   {
+      "tagName": "redux"
+   },
+
+   {
+      "tagName": "kotlin"
+   },
+   {
+      "tagName": "dart"
+   },
+   {
+      "tagName": "mysql"
+   },
+   {
+      "tagName": "redis"
+   },
+
+   {
+      "tagName": "sqlite"
+   },
+   {
+      "tagName": "docker"
+   },
+   {
+      "tagName": "dotnet",
+      "logo": "https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg"
+   },
+   {
+      "tagName": "figma"
+   },
+   {
+      "tagName": "nuxtjs"
+   },
+   {
+      "tagName": "unity"
+   },
+   {
+      "tagName": "linux"
+   }
+]

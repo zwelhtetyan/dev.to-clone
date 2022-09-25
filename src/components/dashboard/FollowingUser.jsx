@@ -9,7 +9,7 @@ const FollowingUser = () => {
    const user = useAuth();
    const { profileData } = useSelector((state) => state.profileData);
 
-   const followingUsers = profileData.filter((userData) =>
+   const followingUsers = profileData?.filter((userData) =>
       userData.followers?.includes(user.userId)
    );
 
@@ -20,7 +20,10 @@ const FollowingUser = () => {
    return (
       <Box
          display='grid'
-         gridTemplateColumns={{ sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
+         gridTemplateColumns={{
+            sm: 'repeat(2, minmax(0, 1fr))',
+            lg: 'repeat(3, minmax(0, 1fr))',
+         }}
          gap={{ sm: '.7rem' }}
       >
          {followingUsers.map((userData) => (

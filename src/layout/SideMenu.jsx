@@ -21,6 +21,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import AboutIcon from '../assets/icons/AboutIcon.svg';
 import ContactIcon from '../assets/icons/ContactIcon.svg';
+import TagIcon from '../assets/icons/TagIcon.svg';
 
 const SideMenu = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
@@ -114,6 +115,12 @@ const SideMenu = () => {
                         onClick={() => handleClickMenu('readinglist')}
                      />
                   )}
+
+                  <SideMenuItem
+                     icon={TagIcon}
+                     title='Tags'
+                     onClick={() => handleClickMenu('tags')}
+                  />
 
                   <SideMenuItem
                      icon={FAQIcon}

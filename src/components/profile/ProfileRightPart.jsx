@@ -9,7 +9,7 @@ import PostItem from '../post/PostItem';
 import { BsFillPinAngleFill } from 'react-icons/bs';
 import { PrimaryBtn } from '../../utils/Buttons';
 
-const ProfileRightPart = ({ pinnedPosts, otherPosts, setAlreadyInProfile }) => {
+const ProfileRightPart = ({ pinnedPosts, otherPosts }) => {
    const user = useAuth();
    const userId = user?.userId;
 
@@ -47,7 +47,6 @@ const ProfileRightPart = ({ pinnedPosts, otherPosts, setAlreadyInProfile }) => {
                      isUpdated={postData?.updated}
                      userId={postData.userId}
                      currentUserId={userId} // authenticated userId
-                     setAlreadyInProfile={setAlreadyInProfile}
                      totalDiscussion={calcTotalDiscussion(postData.comments)}
                      totalReaction={calculateReaction(
                         postData.heart,
@@ -76,7 +75,6 @@ const ProfileRightPart = ({ pinnedPosts, otherPosts, setAlreadyInProfile }) => {
                   isUpdated={postData?.updated}
                   userId={postData.userId}
                   currentUserId={userId} // authenticated userId
-                  setAlreadyInProfile={setAlreadyInProfile}
                   totalDiscussion={calcTotalDiscussion(postData.comments)}
                   totalReaction={calculateReaction(
                      postData.heart,

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Box, HStack, Image, Input, Spinner, Text } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import AddCvImg from '../AddCvImg';
-import AddLangTag from '../LangTag/AddLangTag';
+import AddLangTag from '../TagSuggestion/AddLangTag';
 import MDE from '../MDE';
 import logo from '../../assets/images/logo.png';
 import LeavePageAlert from '../LeavePageAlert';

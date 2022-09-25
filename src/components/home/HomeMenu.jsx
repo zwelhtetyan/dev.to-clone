@@ -9,6 +9,7 @@ import ReadingListIcon from '../../assets/icons/ReadingListIcon.svg';
 import FAQIcon from '../../assets/icons/FAQIcon.svg';
 import AboutIcon from '../../assets/icons/AboutIcon.svg';
 import ContactIcon from '../../assets/icons/ContactIcon.svg';
+import TagIcon from '../../assets/icons/TagIcon.svg';
 
 const HomeMenu = ({ transformedData, loading, err }) => {
    const user = useAuth();
@@ -59,6 +60,12 @@ const HomeMenu = ({ transformedData, loading, err }) => {
                onClick={() => navigate('/readinglist')}
             />
          )}
+
+         <SideMenuItem
+            icon={TagIcon}
+            title='Tags'
+            onClick={() => navigate('/tags')}
+         />
 
          <SideMenuItem
             icon={FAQIcon}

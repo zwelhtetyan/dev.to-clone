@@ -25,6 +25,8 @@ import { setClickComment } from '../../store/scrollDiscussion';
 import { RiBookmarkFill, RiBookmarkLine } from 'react-icons/ri';
 import useClickReactToPost from '../../hooks/useClickReactToPost';
 import { titleRoute } from '../../helper/titleRoute';
+import useClickTag from '../../hooks/useClickTag';
+import useClickSameRoute from '../../hooks/useClickSameRoute';
 
 const PostItem = ({
    name,
@@ -41,7 +43,6 @@ const PostItem = ({
    userId,
    currentUserId,
    currentUserProfile,
-   setAlreadyInProfile,
    totalDiscussion,
    totalReaction,
    saved,
@@ -64,6 +65,9 @@ const PostItem = ({
       navigate(`/${titleRoute(name, title, id)}`);
    };
 
+   const handleSameRoute = useClickSameRoute();
+   const handleClickTag = useClickTag();
+
    const handleNavigate = () => {
       dispatch(setClickComment(false));
 
@@ -75,9 +79,7 @@ const PostItem = ({
 
       navigate(`/profile/${userId}`);
 
-      if (setAlreadyInProfile) {
-         setAlreadyInProfile((val) => !val);
-      }
+      handleSameRoute();
    };
 
    const handleClickSave = (e) => {
@@ -201,7 +203,10 @@ const PostItem = ({
                {tags.length !== 0 && (
                   <Wrap spacing='.3rem' pt='.5rem' mt='0 !important'>
                      {tags?.map((tag) => (
-                        <WrapItem key={nanoid()}>
+                        <WrapItem
+                           key={nanoid()}
+                           onClick={(e) => handleClickTag(e, tag.tagName)}
+                        >
                            <LangTag tag={tag} />
                         </WrapItem>
                      ))}

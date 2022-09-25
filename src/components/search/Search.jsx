@@ -1,25 +1,24 @@
 import { Box, Heading, Text } from '@chakra-ui/react';
-import React from 'react';
+import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import {
    calcTotalDiscussion,
    calculateReaction,
 } from '../../helper/calculateTotal';
 import { getUserProfileData } from '../../helper/getUserProfileData';
+import useGetQuerySearchTerm from '../../hooks/useGetQuerySearchTerm';
 import ErrorMessage from '../../utils/ErrorMessage';
 import PostItem from '../post/PostItem';
 import PostItemSkeleton from '../skeletons/PostItemSkeleton';
 import SearchInput from './SearchInput';
 
 const Search = () => {
-   const location = useLocation();
    const user = useAuth();
+   const searchInputRef = useRef();
 
-   const queryParam = new URLSearchParams(location.search);
-   const querySearchTerm = queryParam.get('q') || '';
+   const querySearchTerm = useGetQuerySearchTerm('spq') || '';
 
    // scroll top
    useEffect(() => window.scrollTo(0, 0), [querySearchTerm]);
@@ -59,7 +58,13 @@ const Search = () => {
 
    return (
       <Box flex={1} maxW={{ base: '100%', md: '650px' }} w='100%'>
-         <SearchInput display={{ base: 'block', md: 'none' }} mb={5} />
+         <SearchInput
+            ref={searchInputRef}
+            querySearchTerm={querySearchTerm}
+            display={{ base: 'block', md: 'none' }}
+            mb={5}
+            route='search'
+         />
 
          {searchedPostData && searchedPostData.length !== 0 ? (
             <>

@@ -16,16 +16,16 @@ import { SecondaryBtn } from '../../utils/Buttons';
 const Header = ({
    readingCount,
    archiveCount,
-   allTopics,
-   selectedTopic,
-   handleClickTopic,
+   allTags,
+   selectedTagName,
+   handleClickTag,
    handleSearch,
    toggleViewArchive,
 }) => {
    const location = useLocation();
 
    const handleSelectOption = ({ target }) => {
-      handleClickTopic(target.value);
+      handleClickTag(target.value);
    };
 
    const queryParam = new URLSearchParams(location.search);
@@ -87,11 +87,11 @@ const Header = ({
                borderColor='#00000033'
                display={['block', 'block', 'none']}
                onChange={handleSelectOption}
-               value={selectedTopic}
+               value={selectedTagName}
             >
-               {allTopics.map((item) => (
-                  <option key={nanoid()} value={item.topic}>
-                     {item.topic}
+               {allTags.map((item) => (
+                  <option key={nanoid()} value={item.tagName}>
+                     {item.tagName}
                   </option>
                ))}
             </Select>

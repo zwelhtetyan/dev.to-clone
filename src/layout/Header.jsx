@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import logo from '../assets/images/logo.png';
 import { FiSearch } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
@@ -9,10 +9,14 @@ import { useAuth } from '../context/auth';
 import MainMenu from '../components/MainMenu';
 import { useSelector } from 'react-redux';
 import SearchInput from '../components/search/SearchInput';
+import useGetQuerySearchTerm from '../hooks/useGetQuerySearchTerm';
 
 const Header = () => {
    const navigate = useNavigate();
    const user = useAuth();
+   const searchInputRef = useRef();
+
+   const querySearchTerm = useGetQuerySearchTerm('spq');
 
    const profileData = useSelector((state) => state.profileData.profileData);
 
@@ -54,7 +58,13 @@ const Header = () => {
                   cursor='pointer'
                />
 
-               <SearchInput w='400px' display={{ base: 'none', md: 'block' }} />
+               <SearchInput
+                  ref={searchInputRef}
+                  querySearchTerm={querySearchTerm}
+                  w='400px'
+                  display={{ base: 'none', md: 'block' }}
+                  route='search'
+               />
             </Box>
 
             <Flex>

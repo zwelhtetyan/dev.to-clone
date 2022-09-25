@@ -29,6 +29,7 @@ const DetailRightContent = ({
          <UserProfilePopup
             w='100%'
             p='1rem'
+            m={{ base: '0', md: '1px' }}
             contentMb='1rem'
             borderRadius={{ base: '0', md: '5px' }}
             boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'

@@ -28,7 +28,7 @@ const activeLink = (isActive) => {
       : {};
 };
 
-const Layout = ({ title, count }) => {
+const MenuText = ({ title, count }) => {
    return (
       <HStack justify='space-between'>
          <Text>{title}</Text>
@@ -43,12 +43,16 @@ const Left = ({ totalPublishedPosts, totalDraftPosts }) => {
 
    const { profileData } = useSelector((state) => state.profileData);
 
-   const totalFollowingUsers = profileData.filter((userData) =>
+   const totalFollowingUsers = profileData?.filter((userData) =>
       userData.followers?.includes(user.userId)
    ).length;
 
    const totalFollowers =
       profileData.find((userData) => userData.id === user.userId).followers
+         ?.length || 0;
+
+   const totalFollowingTags =
+      profileData.find((userData) => userData.id === user.userId).followingTags
          ?.length || 0;
 
    return (
@@ -57,28 +61,35 @@ const Left = ({ totalPublishedPosts, totalDraftPosts }) => {
             to='/dashboard'
             style={() => activeLink(location.pathname === '/dashboard')}
          >
-            <Layout title='Posts' count={totalPublishedPosts} />
+            <MenuText title='Posts' count={totalPublishedPosts} />
          </MenuItem>
 
          <MenuItem
             to='/dashboard/drafts'
             style={({ isActive }) => activeLink(isActive)}
          >
-            <Layout title='Drafts' count={totalDraftPosts} />
+            <MenuText title='Drafts' count={totalDraftPosts} />
+         </MenuItem>
+
+         <MenuItem
+            to='/dashboard/following_tags'
+            style={({ isActive }) => activeLink(isActive)}
+         >
+            <MenuText title='Following tags' count={totalFollowingTags} />
          </MenuItem>
 
          <MenuItem
             to='/dashboard/followers'
             style={({ isActive }) => activeLink(isActive)}
          >
-            <Layout title='Followers' count={totalFollowers} />
+            <MenuText title='Followers' count={totalFollowers} />
          </MenuItem>
 
          <MenuItem
             to='/dashboard/following_users'
             style={({ isActive }) => activeLink(isActive)}
          >
-            <Layout title='Following users' count={totalFollowingUsers} />
+            <MenuText title='Following users' count={totalFollowingUsers} />
          </MenuItem>
       </Box>
    );

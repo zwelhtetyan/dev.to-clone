@@ -1,0 +1,155 @@
+[
+   {
+      "brandColor": "#F7DF1E",
+      "tagName": "javascript",
+      "description": "Once relegated to the browser as one of the 3 core technologies of the web, JavaScript can now be found almost anywhere you find code. JavaScript developers move fast and push software development forward; they can be as opinionated as the frameworks they use, so let's keep it clean here and make it a place to learn from each other!",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--QiqFhwmE--/c_limit,f_auto,fl_progressive,q_80,w_180/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/16/js-badge.png"
+   },
+   {
+      "brandColor": "#000000",
+      "tagName": "nextjs",
+      "description": "Next.js gives you hybrid static and server rendering, TypeScript support, smart bundling, route pre-fetching, and more. No config needed.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--j1I54v4f--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/89/next-js-badge.png"
+   },
+
+   {
+      "brandColor": "#008335",
+      "tagName": "beginners",
+      "description": "'A journey of a thousand miles begins with a single step.' - Chinese Proverb"
+   },
+   {
+      "brandColor": "#890606",
+      "tagName": "programming",
+      "description": "The magic behind computers. 💻 🪄"
+   },
+   {
+      "brandColor": "#562765",
+      "tagName": "webdev",
+      "description": "Because the internet..."
+   },
+   {
+      "brandColor": "#00d8ff",
+      "tagName": "react",
+      "description": "Official tag for Facebook's React JavaScript library for building user interfaces",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--1hWNUxma--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/26/react-sticker.png"
+   },
+   {
+      "brandColor": "#4584b6",
+      "tagName": "python",
+      "description": "import antigravity",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--pxZvef65--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/20/57795360-bec24f00-7713-11e9-9516-20f5f5d0f034.png"
+   },
+   {
+      "brandColor": "#06B500",
+      "tagName": "devops",
+      "description": "Content centering around the shifting left of responsibility, deconstruction of responsibility silos, and the automation of repetitive work tasks."
+   },
+   {
+      "brandColor": "#3178c6",
+      "tagName": "typescript",
+      "description": "Optional static type-checking for JavaScript."
+   },
+   {
+      "brandColor": "#6cc24a",
+      "tagName": "nodejs",
+      "description": "A JavaScript runtime built on Chrome's V8 JavaScript engine.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--FBYpUdfR--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/23/node-sticker.png"
+   },
+   {
+      "brandColor": "#1AD643",
+      "tagName": "discuss",
+      "description": "Craft a prompt and start a conversation!"
+   },
+   {
+      "brandColor": "#b52e31",
+      "tagName": "angular",
+      "description": "One of the world's most popular frontend JavaScript frameworks.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--6UNgy1SI--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/28/angular-sticker.png"
+   },
+   {
+      "brandColor": "#0db7ed",
+      "tagName": "docker",
+      "description": "Stories about Docker as a technology (containers, CLI, Engine) or company (Docker Hub, Docker Swarm).",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--kvZlOYQ8--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/87/docker-badge.png"
+   },
+
+   {
+      "brandColor": "#56A036",
+      "tagName": "android",
+      "description": "Brought to you by the good folks at Google...",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--04cD4O1A--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/85/android-badge.png"
+   },
+   {
+      "brandColor": "#009999",
+      "tagName": "datascience",
+      "description": "Data Science allows us to extract meaning from and interpret data."
+   },
+   {
+      "brandColor": "#7E4810",
+      "tagName": "java",
+      "description": "More than just a cup of coffee, Java is a high-level, class-based, object-oriented programming language that is designed to have as few implementation dependencies as possible.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--VVpK0dDK--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/19/57803385-45802780-7726-11e9-84d9-2e4c4ca8bcdb.png"
+   },
+   {
+      "brandColor": "#F54D27",
+      "tagName": "git",
+      "description": "Software for tracking changes in any set of files, usually used for coordinating work among programmers collaboratively developing source code during software development.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--hZuylUXF--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/22/git-sticker.png"
+   },
+   {
+      "brandColor": "#41B883",
+      "tagName": "vue",
+      "description": "Official tag for the Vue.js JavaScript Framework",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--wIYEaEaa--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/27/vue-sticker.png"
+   },
+   {
+      "brandColor": "#CC342D",
+      "tagName": "ruby",
+      "description": "This tag is for posts related to the Ruby language, including its libraries.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--kswIJaN---/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/17/57802960-3482e680-7725-11e9-9354-77712df6a949.png"
+   },
+   {
+      "brandColor": "#000000",
+      "tagName": "github",
+      "description": "Where the world builds software"
+   },
+   {
+      "brandColor": "#300373",
+      "tagName": "csharp",
+      "description": "Official tag for the C# programming language.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--x73YfqWW--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/33/csharp-badge.png"
+   },
+   {
+      "brandColor": "#FF3E00",
+      "tagName": "svelte",
+      "description": "Tag to discuss Svelte, a JavaScript component framework, which aims at being simple and efficient.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--RU_g_ikx--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/84/svelte-badge.png"
+   },
+   {
+      "brandColor": "#FFCB2E",
+      "tagName": "firebase",
+      "description": "Firebase helps you build and run successful apps. It offers products and solutions you can rely on through your app's journey.",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--kvZlOYQ8--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/87/docker-badge.png"
+   },
+   {
+      "brandColor": "#1cc7d0",
+      "tagName": "go",
+      "description": "A statically typed, compiled programming language designed at Google",
+      "logo": "https://res.cloudinary.com/practicaldev/image/fetch/s--NoO92O1q--/c_limit,f_auto,fl_progressive,q_80,w_64/https://dev-to-uploads.s3.amazonaws.com/uploads/badge/badge_image/34/gopher-badge.png"
+   },
+   {
+      "brandColor": "#7BCC7C",
+      "tagName": "mongodb",
+      "description": "a popular NoSQL database"
+   },
+   {
+      "brandColor": "#00758f",
+      "tagName": "sql",
+      "description": "Posts on tips and tricks, using and learning about SQL for database development and analysis."
+   },
+   {
+      "brandColor": "#113A62",
+      "tagName": "blockchain",
+      "description": "A decentralized, distributed, and oftentimes public, digital ledger consisting of records called blocks that are used to record transactions across many computers so that any involved block cannot be altered retroactively, without the alteration of all subsequent blocks."
+   }
+]

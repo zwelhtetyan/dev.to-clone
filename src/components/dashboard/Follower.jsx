@@ -11,10 +11,10 @@ const Follower = () => {
 
    const followerId =
       profileData
-         .find((userData) => userData.id === user.userId)
+         ?.find((userData) => userData.id === user.userId)
          .followers?.map((id) => id) || [];
 
-   const followers = profileData.filter((userData) =>
+   const followers = profileData?.filter((userData) =>
       followerId.includes(userData.id)
    );
 
@@ -25,7 +25,10 @@ const Follower = () => {
    return (
       <Box
          display='grid'
-         gridTemplateColumns={{ sm: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)' }}
+         gridTemplateColumns={{
+            sm: 'repeat(2, minmax(0, 1fr))',
+            lg: 'repeat(3, minmax(0, 1fr))',
+         }}
          gap={{ sm: '.7rem' }}
       >
          {followers.map((userData) => (
