@@ -34,7 +34,7 @@ const MainContent = ({ postDetail }) => {
    const { clickComment } = useSelector((state) => state.scrollDiscussion);
    const handleClickTag = useClickTag();
 
-   //scroll to
+   // scroll to
    useEffect(() => {
       const scrollHeight =
          window.pageYOffset +
@@ -42,7 +42,7 @@ const MainContent = ({ postDetail }) => {
          60;
 
       if (clickComment) {
-         window.scrollTo({ top: scrollHeight });
+         setTimeout(() => window.scrollTo({ top: scrollHeight }), 0);
       } else {
          window.scrollTo(0, 0);
       }
@@ -142,7 +142,11 @@ const MainContent = ({ postDetail }) => {
                   {postDetail.tags.map((tag) => (
                      <WrapItem
                         key={nanoid()}
-                        onClick={(e) => handleClickTag(e, tag.tagName)}
+                        onClick={(e) =>
+                           postDetail.draft
+                              ? () => {} // don't allow view tag if it's a draft
+                              : handleClickTag(e, tag.tagName)
+                        }
                      >
                         <LangTag tag={tag} />
                      </WrapItem>

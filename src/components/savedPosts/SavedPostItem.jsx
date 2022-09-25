@@ -11,11 +11,14 @@ import { useAuth } from '../../context/auth';
 import { useState } from 'react';
 import { titleRoute } from '../../helper/titleRoute';
 import useClickTag from '../../hooks/useClickTag';
+import { useDispatch } from 'react-redux';
+import { setClickComment } from '../../store/scrollDiscussion';
 
 const SavedPostItem = ({ postData, isArchive }) => {
    const navigate = useNavigate();
    const user = useAuth();
    const { userId } = user;
+   const dispatch = useDispatch();
 
    const [loading, setLoading] = useState(false);
 
@@ -40,6 +43,7 @@ const SavedPostItem = ({ postData, isArchive }) => {
 
    const handleNavigate = () => {
       navigate(`/${titleRoute(postData.name, postData.title, postData.id)}`);
+      dispatch(setClickComment(false));
    };
 
    const handleClickTag = useClickTag();

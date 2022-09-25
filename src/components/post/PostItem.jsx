@@ -66,7 +66,7 @@ const PostItem = ({
    };
 
    const handleSameRoute = useClickSameRoute();
-   const handleClickTag = useClickTag();
+   const handleClickTag = useClickTag(handleSameRoute);
 
    const handleNavigate = () => {
       dispatch(setClickComment(false));

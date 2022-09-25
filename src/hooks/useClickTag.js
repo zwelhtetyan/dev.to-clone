@@ -1,15 +1,13 @@
 import { useNavigate } from 'react-router-dom';
-import useClickSameRoute from './useClickSameRoute';
 
-const useClickTag = () => {
+const useClickTag = (handleSameRoute) => {
    const navigate = useNavigate();
-   const handleSameRoute = useClickSameRoute();
 
    const handleClickTag = (e, tagName) => {
       e.stopPropagation();
       navigate(`/tags/${tagName}`);
 
-      handleSameRoute();
+      handleSameRoute && handleSameRoute();
    };
 
    return handleClickTag;
