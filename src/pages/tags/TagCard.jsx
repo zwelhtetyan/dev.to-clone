@@ -71,9 +71,14 @@ const TagCard = ({
             {description}
          </Text>
 
-         <Text fontSize='15px' mt={3} mb={6} color='#717171'>
-            {publishedPosts} {publishedPosts > 1 ? 'posts' : 'post'} published
-         </Text>
+         {publishedPosts ? (
+            <Text fontSize='15px' mt={3} mb={6} color='#717171'>
+               {publishedPosts} {publishedPosts > 1 ? 'posts' : 'post'}{' '}
+               published
+            </Text>
+         ) : (
+            <Text py={7} />
+         )}
 
          {!profileDataLoading && !hideFollowBtn && (
             <>

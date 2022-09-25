@@ -7,14 +7,14 @@ const CustomAvatar = ({ profile, size, onClick }) => {
       <Box
          boxSize={size}
          backgroundImage={profile || defaultProfile}
-         borderRadius='full'
+         rounded='full'
          backgroundPosition='center'
          backgroundSize='cover'
          backgroundRepeat='no-repeat'
          cursor='pointer'
          transition='.3s'
          border='1.5px solid #E2E8F0'
-         _hover={{ filter: 'drop-shadow(0px 0px 1px rgb(59 73 223))' }}
+         _hover={{ boxShadow: '0 0 0 1px #E2E8F0' }}
          onClick={onClick}
       />
    );

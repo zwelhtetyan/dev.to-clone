@@ -256,7 +256,7 @@ const PostItem = ({
                      )}
 
                      {userId !== currentUserId && (
-                        <Box ms='1rem'>
+                        <Box ms='.5rem'>
                            <SecondaryBtn
                               onClick={handleClickSave}
                               disabled={updatingSave}

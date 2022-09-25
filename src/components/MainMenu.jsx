@@ -17,10 +17,9 @@ const MainMenu = ({ currentUserProfile }) => {
    return (
       <Menu autoSelect={false} isLazy>
          <MenuButton
-            _hover={{
-               filter: 'drop-shadow(0px 0px 2px rgb(59 73 223))',
-            }}
             transition='.3s'
+            rounded='full'
+            _hover={{ boxShadow: '0 0 0 1px #E2E8F0' }}
          >
             <CustomAvatar profile={currentUserProfile.profile} size='40px' />
          </MenuButton>
