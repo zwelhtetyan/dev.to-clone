@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Flex, Skeleton, SkeletonText, VStack } from '@chakra-ui/react';
+import { skeletonColor } from './skeletonColor';
 
 const ReactionBox = ({ m }) => {
    return (
@@ -13,8 +14,8 @@ const ReactionBox = ({ m }) => {
          borderRadius='5px'
          m={m}
       >
-         <Skeleton h='20px' w='30px' />
-         <SkeletonText noOfLines={1} w='150px' mx='auto' />
+         <Skeleton h='20px' w='30px' {...skeletonColor} />
+         <SkeletonText noOfLines={1} w='150px' mx='auto' {...skeletonColor} />
       </VStack>
    );
 };
@@ -23,7 +24,7 @@ const DashboardSkeleton = () => {
    return (
       <Box maxW='650px' flex='1' w='100%' mx='auto'>
          <Box mt={2} px='.5rem'>
-            <Skeleton height='25px' w='200px' mb='1.5rem' />
+            <Skeleton height='25px' w='200px' mb='1.5rem' {...skeletonColor} />
 
             <Flex direction={{ base: 'column', sm: 'row' }}>
                <ReactionBox m={{ base: '0 0 .5rem 0', sm: '0 .5rem 0 0' }} />

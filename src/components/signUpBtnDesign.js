@@ -1,7 +1,4 @@
-import github from '../assets/icons/github.svg';
-import twitter from '../assets/icons/twitter.svg';
-import facebook from '../assets/icons/facebook.svg';
-import google from '../assets/icons/google.svg';
+import { github, twitter, facebook, google } from '../assets/icons';
 import {
    FacebookAuthProvider,
    GithubAuthProvider,

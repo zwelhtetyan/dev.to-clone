@@ -39,7 +39,7 @@ const AllPost = ({ transformedData, loading, err }) => {
    const sort = queryParam.get('sort');
    const followingTags =
       profileData?.find((userData) => userData.id === user?.userId)
-         .followingTags || [];
+         ?.followingTags || [];
 
    // sorting posts =>  [relevant | latest | top]
    const currentPosts = sortPosts(sort, allPostData, followingTags);
@@ -56,11 +56,6 @@ const AllPost = ({ transformedData, loading, err }) => {
             {loading && !err && (
                <>
                   <PostItemSkeleton firstItem={true} />
-                  <PostItemSkeleton />
-                  <PostItemSkeleton />
-                  <PostItemSkeleton />
-                  <PostItemSkeleton />
-                  <PostItemSkeleton />
                   <PostItemSkeleton />
                   <PostItemSkeleton />
                   <PostItemSkeleton />

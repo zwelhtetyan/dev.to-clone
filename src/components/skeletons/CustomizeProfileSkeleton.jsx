@@ -1,6 +1,7 @@
 import { Box, Flex, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 import React from 'react';
 import { whiteBoxStyles } from '../../utils/CustomizeProfileStyles';
+import { skeletonColor } from './skeletonColor';
 
 const CustomizeProfileSkeleton = () => {
    return (
@@ -12,12 +13,30 @@ const CustomizeProfileSkeleton = () => {
             mx='.5rem'
             mb='1rem'
          >
-            <SkeletonCircle boxSize={'100px'} mx='auto' />
+            <SkeletonCircle boxSize={'100px'} mx='auto' {...skeletonColor} />
 
-            <Skeleton h='15px' w='150px' mb='.5rem' mt='1rem' />
-            <Skeleton borderRadius='5px' h='40px' w='100%' mb='1rem' />
-            <Skeleton h='15px' w='150px' mb='.5rem' />
-            <Skeleton borderRadius='5px' h='40px' w='100%' mb='.5rem' />
+            <Skeleton
+               h='15px'
+               w='150px'
+               mb='.5rem'
+               mt='1rem'
+               {...skeletonColor}
+            />
+            <Skeleton
+               borderRadius='5px'
+               h='40px'
+               w='100%'
+               mb='1rem'
+               {...skeletonColor}
+            />
+            <Skeleton h='15px' w='150px' mb='.5rem' {...skeletonColor} />
+            <Skeleton
+               borderRadius='5px'
+               h='40px'
+               w='100%'
+               mb='.5rem'
+               {...skeletonColor}
+            />
          </Box>
       </Flex>
    );

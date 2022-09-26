@@ -63,6 +63,7 @@ const LoginAlert = () => {
                      transform='rotate(-10deg)'
                      mt={2}
                      w={{ base: '60px', md: '90px' }}
+                     alt='logo'
                   />
                   <Text mt={3}>
                      We're a place where coders share, stay up-to-date and grow

@@ -1,5 +1,5 @@
 import React from 'react';
-import footerLogo from '../assets/icons/footerLogo.svg';
+import { footerLogo } from '../assets/icons';
 import { Image, Text, VStack } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 

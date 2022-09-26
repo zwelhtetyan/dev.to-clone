@@ -6,6 +6,7 @@ import {
    SkeletonText,
 } from '@chakra-ui/react';
 import React from 'react';
+import { skeletonColor } from './skeletonColor';
 
 const PostItemSkeleton = ({ firstItem }) => {
    return (
@@ -23,26 +24,42 @@ const PostItemSkeleton = ({ firstItem }) => {
          )}
 
          <HStack>
-            <SkeletonCircle size='10' />
-            <SkeletonText mt={3} noOfLines={2} spacing='2' w='30%' />
+            <SkeletonCircle size='10' {...skeletonColor} />
+            <SkeletonText
+               mt={3}
+               noOfLines={2}
+               spacing='2'
+               w='30%'
+               {...skeletonColor}
+            />
          </HStack>
 
          <Box ms={{ base: '0', md: '48px' }}>
-            <Skeleton h='15px' mt={2} />
+            <Skeleton h='15px' mt={2} {...skeletonColor} />
+
+            <Skeleton h='15px' w='50%' mt={2} {...skeletonColor} />
 
             <HStack justify='space-between' mt={2}>
                <HStack>
                   <HStack>
-                     <Skeleton noOfLines={1} w={['50px', '90px']} h='15px' />
+                     <Skeleton
+                        w={['50px', '90px']}
+                        h='15px'
+                        {...skeletonColor}
+                     />
                   </HStack>
                   <HStack>
-                     <Skeleton noOfLines={1} w={['50px', '90px']} h='15px' />
+                     <Skeleton
+                        w={['50px', '90px']}
+                        h='15px'
+                        {...skeletonColor}
+                     />
                   </HStack>
                </HStack>
 
                <HStack>
-                  <SkeletonText noOfLines={1} w='70px' />
-                  <Skeleton w='20px' h='20px' />
+                  <SkeletonText noOfLines={1} w='70px' {...skeletonColor} />
+                  <Skeleton w='20px' h='20px' {...skeletonColor} />
                </HStack>
             </HStack>
          </Box>

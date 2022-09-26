@@ -6,6 +6,7 @@ import {
    SkeletonText,
 } from '@chakra-ui/react';
 import React from 'react';
+import { skeletonColor } from './skeletonColor';
 
 const DetailSkeleton = () => {
    return (
@@ -18,11 +19,17 @@ const DetailSkeleton = () => {
          mt='.5rem'
       >
          <HStack>
-            <SkeletonCircle size='10' />
-            <SkeletonText mt='4' noOfLines={2} spacing='2' w='30%' />
+            <SkeletonCircle size='10' {...skeletonColor} />
+            <SkeletonText
+               mt='4'
+               noOfLines={2}
+               spacing='2'
+               w='30%'
+               {...skeletonColor}
+            />
          </HStack>
-         <Skeleton h='15px' mt={3} />
-         <Skeleton h='15px' mt={3} />
+         <Skeleton h='15px' mt={3} {...skeletonColor} />
+         <Skeleton h='15px' mt={3} {...skeletonColor} />
       </Box>
    );
 };

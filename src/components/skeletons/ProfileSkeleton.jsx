@@ -1,10 +1,11 @@
 import React from 'react';
 import { Box, Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import { skeletonColor } from './skeletonColor';
 
 const ProfileSkeleton = () => {
    return (
       <Box flex='1' w='100%'>
-         <Skeleton h={['7rem', '7rem', '9rem']} />
+         <Skeleton {...skeletonColor} h={['7rem', '7rem', '9rem']} />
 
          <Box mx={{ base: 'none', md: '.5rem' }}>
             <Box maxW='1000px' mx='auto'>
@@ -18,6 +19,7 @@ const ProfileSkeleton = () => {
                   textAlign={{ base: 'start', md: 'center' }}
                >
                   <SkeletonCircle
+                     {...skeletonColor}
                      boxSize={{ base: '60px', md: '120px' }}
                      pos='absolute'
                      top={{ base: '-30px', md: '-60px' }}
@@ -26,6 +28,7 @@ const ProfileSkeleton = () => {
                   />
 
                   <Skeleton
+                     {...skeletonColor}
                      h='20px'
                      mt={['2rem', '2rem', '4rem']}
                      maxW='220px'
@@ -33,6 +36,7 @@ const ProfileSkeleton = () => {
                   />
 
                   <Skeleton
+                     {...skeletonColor}
                      h='15px'
                      mt='.5rem'
                      maxW='600px'
@@ -40,6 +44,7 @@ const ProfileSkeleton = () => {
                   />
 
                   <Skeleton
+                     {...skeletonColor}
                      h='15px'
                      my='.5rem'
                      maxW='600px'

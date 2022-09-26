@@ -13,13 +13,11 @@ import {
 import { BsGithub, BsTwitter } from 'react-icons/bs';
 import { MdEmail } from 'react-icons/md';
 import { LightBtn, PrimaryBtn } from '../../utils/Buttons';
-import joinOn from '../../assets/icons/joinOn.svg';
-import location from '../../assets/icons/location.svg';
-import personalWebsite from '../../assets/icons/personalWebsite.svg';
 import { useAuth } from '../../context/auth';
 import defaultProfile from '../../assets/images/default_profile.webp';
 import { joinOnDate } from '../../helper/calcTimestamp';
 import useFollowUser from '../../hooks/useFollowUser';
+import { joinOn, location, personalWebsite } from '../../assets/icons';
 
 const LinkIcon = ({ hoverColor, href, children, onClick }) => {
    return (

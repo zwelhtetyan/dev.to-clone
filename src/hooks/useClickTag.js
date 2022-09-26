@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const useClickTag = (handleSameRoute) => {
+const useClickTag = (handleSameRoute, onClose) => {
    const navigate = useNavigate();
 
    const handleClickTag = (e, tagName) => {
@@ -8,6 +8,7 @@ const useClickTag = (handleSameRoute) => {
       navigate(`/tags/${tagName}`);
 
       handleSameRoute && handleSameRoute();
+      onClose && onClose();
    };
 
    return handleClickTag;

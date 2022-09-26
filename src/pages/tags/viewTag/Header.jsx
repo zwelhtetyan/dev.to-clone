@@ -31,7 +31,12 @@ const Header = ({
       >
          <HStack align='flex-start'>
             {logo && (
-               <Image src={logo} boxSize='64px' transform='rotate(-25deg)' />
+               <Image
+                  src={logo}
+                  boxSize='64px'
+                  transform='rotate(-25deg)'
+                  alt='tag_logo'
+               />
             )}
 
             <Box flex={1}>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Box, Button, Flex, Heading, HStack } from '@chakra-ui/react';
 import TagCard from './TagCard';
 import { nanoid } from '@reduxjs/toolkit';
@@ -6,18 +6,22 @@ import SearchInput from '../../components/search/SearchInput';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import useGetQuerySearchTerm from '../../hooks/useGetQuerySearchTerm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ErrorMessage from '../../utils/ErrorMessage';
-import { useEffect } from 'react';
-import { isPrebuiltTag } from '../../helper/isPrebuiltTag';
 import TagCardSkeleton from '../../components/skeletons/TagCardSkeleton';
+import { getPopularTags } from '../../helper/getPopularTags';
+import { useAuth } from '../../context/auth';
+import { setLoginAlert } from '../../store/loginAlert';
 
 const Tags = () => {
    // scroll top
    useEffect(() => window.scrollTo(0, 0), []);
 
-   const navigate = useNavigate();
+   const user = useAuth();
    const searchInputRef = useRef();
+
+   const navigate = useNavigate();
+   const dispatch = useDispatch();
 
    const querySearchTerm = useGetQuerySearchTerm('stq') || '';
 
@@ -35,46 +39,20 @@ const Tags = () => {
       return <ErrorMessage offline={true} />;
    }
 
-   let allTags = [];
-   if (transformedData) {
-      const avaliableTags = [];
+   const popularTags = getPopularTags(transformedData);
 
-      transformedData.forEach(
-         (postData) =>
-            !postData.draft &&
-            postData.tags.length &&
-            avaliableTags.push(...postData.tags)
-      );
-
-      allTags = avaliableTags.map(
-         (tag) =>
-            isPrebuiltTag(tag.tagName) || {
-               brandColor: '#3B49DF',
-               tagName: tag.tagName,
-            }
-      );
-
-      allTags = allTags.map((tag, idx, arr) => {
-         const count = arr.filter(
-            (item) => item.tagName === tag.tagName
-         ).length;
-
-         return { ...tag, publishedPosts: count };
-      });
-
-      // remove duplicate obj from an array
-      const getUniqueListBy = (arr, key) => {
-         return [...new Map(arr.map((item) => [item[key], item])).values()];
-      };
-
-      allTags = getUniqueListBy(allTags, 'tagName').sort(
-         (a, b) => b.publishedPosts - a.publishedPosts
-      );
-   }
-
-   const filteredTags = allTags
+   const filteredTags = popularTags
       .filter((tag) => tag.tagName.includes(querySearchTerm))
       .splice(0, 30); // limit top tags to 30;
+
+   const handleClickFollowingTags = () => {
+      if (!user) {
+         dispatch(setLoginAlert(true));
+         return;
+      }
+
+      navigate('/dashboard/following_tags');
+   };
 
    return (
       <Box flex='1' w='100%' maxW='1280px' px={{ base: '.5rem', md: '1rem' }}>
@@ -100,10 +78,7 @@ const Tags = () => {
                   flex='1'
                />
 
-               <Button
-                  fontWeight='400'
-                  onClick={() => navigate('/dashboard/following_tags')}
-               >
+               <Button fontWeight='400' onClick={handleClickFollowingTags}>
                   Following tags
                </Button>
             </HStack>

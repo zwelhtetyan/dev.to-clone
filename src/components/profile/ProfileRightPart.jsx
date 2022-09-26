@@ -1,4 +1,4 @@
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Button, Text } from '@chakra-ui/react';
 import React from 'react';
 import { useAuth } from '../../context/auth';
 import {
@@ -7,7 +7,6 @@ import {
 } from '../../helper/calculateTotal';
 import PostItem from '../post/PostItem';
 import { BsFillPinAngleFill } from 'react-icons/bs';
-import { PrimaryBtn } from '../../utils/Buttons';
 
 const ProfileRightPart = ({ pinnedPosts, otherPosts }) => {
    const user = useAuth();
@@ -23,15 +22,19 @@ const ProfileRightPart = ({ pinnedPosts, otherPosts }) => {
                p={{ base: '.7rem .7rem .3rem', md: '1rem 1rem .5rem' }}
             >
                <Box as='header'>
-                  <PrimaryBtn
+                  <Button
                      bg='rgb(59 73 223)'
+                     _hover={{ bg: 'rgb(59 73 223)' }}
                      m={{ base: '-2rem 0 0 0', md: '-2.5rem 0 0' }}
+                     _active={{ bg: 'rgb(59 73 223)' }}
+                     cursor='default'
+                     color='white'
                   >
                      <BsFillPinAngleFill size={19} />
                      <Text fontWeight={700} ms='.5rem'>
                         Pinned
                      </Text>
-                  </PrimaryBtn>
+                  </Button>
                </Box>
 
                {pinnedPosts.map((postData) => (

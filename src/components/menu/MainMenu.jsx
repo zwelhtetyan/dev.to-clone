@@ -8,8 +8,8 @@ import {
 } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import CustomAvatar from '../utils/CustomAvatar';
-import CustomMenuItem from '../utils/CustomMenuItem';
+import CustomAvatar from '../../utils/CustomAvatar';
+import CustomMenuItem from '../../utils/CustomMenuItem';
 
 const MainMenu = ({ currentUserProfile }) => {
    const navigate = useNavigate();

@@ -21,11 +21,7 @@ const Home = () => {
          flex='1'
       >
          {/* home menu */}
-         <HomeMenu
-            transformedData={transformedData}
-            loading={loading}
-            err={err}
-         />
+         <HomeMenu />
 
          {/* all post */}
          <AllPost

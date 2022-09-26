@@ -16,7 +16,11 @@ const LangTag = ({ children, tag, onAddTag, onDeleteTag, showCloseIcon }) => {
          cursor='pointer'
          _active={{ bg: 'white' }}
       >
-         {src !== '#' ? <Image src={getLogo(tag)} w='15px' /> : '#'}
+         {src !== '#' ? (
+            <Image src={getLogo(tag)} w='15px' alt='tag_icon' />
+         ) : (
+            '#'
+         )}
 
          <Text
             fontSize={{ base: '13px', md: '15px' }}

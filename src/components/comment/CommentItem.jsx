@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import { Box, Flex, HStack, Image, Text, VStack } from '@chakra-ui/react';
 import { ReactionButton } from '../../utils/Buttons';
-import heart from '../../assets/icons/heart.svg';
-import red_heart from '../../assets/icons/red_heart.svg';
-import comment from '../../assets/icons/comment.svg';
+import { heart, redHeart, comment, authorIcon } from '../../assets/icons';
 import { dateFormat, showEditedDate } from '../../helper/calcTimestamp';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import converter from '../../helper/converter';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { useNavigate } from 'react-router-dom';
-import authorIcon from '../../assets/icons/authorIcon.svg';
 import { useState } from 'react';
 import DiscussionBox from '../discussion/DiscussionBox';
 import useClickLikeToComment from '../../hooks/useClickLikeToComment';
@@ -168,7 +165,7 @@ const CommentItem = ({
             {!showDiscussionBox && (
                <HStack justify='flex-start'>
                   <ReactionButton
-                     icon={alreadyLiked ? red_heart : heart}
+                     icon={alreadyLiked ? redHeart : heart}
                      value={totalLike < 1 ? '' : totalLike}
                      text={
                         totalLike < 1 ? '' : totalLike === 1 ? 'like' : 'likes'

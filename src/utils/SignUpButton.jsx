@@ -17,7 +17,7 @@ const SignUpButton = ({ bg, logo, type, text, hoverBg, color, onClick }) => {
          transition='.3s'
          onClick={onClick}
       >
-         <Image src={logo} />
+         <Image src={logo} alt='icon' />
          <Text>
             {type} {text}
          </Text>

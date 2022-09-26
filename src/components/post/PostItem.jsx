@@ -11,8 +11,6 @@ import {
    WrapItem,
    Flex,
 } from '@chakra-ui/react';
-import heart from '../../assets/icons/heart.svg';
-import comment from '../../assets/icons/comment.svg';
 import { useNavigate } from 'react-router-dom';
 import { ReactionButton, SecondaryBtn } from '../../utils/Buttons';
 import CustomAvatar from '../../utils/CustomAvatar';
@@ -27,6 +25,7 @@ import useClickReactToPost from '../../hooks/useClickReactToPost';
 import { titleRoute } from '../../helper/titleRoute';
 import useClickTag from '../../hooks/useClickTag';
 import useClickSameRoute from '../../hooks/useClickSameRoute';
+import { heart, comment } from '../../assets/icons';
 
 const PostItem = ({
    name,

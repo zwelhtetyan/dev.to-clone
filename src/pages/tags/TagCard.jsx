@@ -111,6 +111,7 @@ const TagCard = ({
                pos='absolute'
                bottom='5px'
                right='5px'
+               alt='tag_logo'
             />
          )}
       </Box>

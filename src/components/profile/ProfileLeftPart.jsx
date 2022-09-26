@@ -1,8 +1,6 @@
 import React from 'react';
 import { Box, Divider, HStack, Image, Text } from '@chakra-ui/react';
-import doc from '../../assets/icons/doc.svg';
-import commentLg from '../../assets/icons/commentLg.svg';
-import tagIcon from '../../assets/icons/tag.svg';
+import { doc, commentLg, tag } from '../../assets/icons';
 
 const TechStack = ({ title, text }) => {
    return (
@@ -81,7 +79,7 @@ const ProfileLeftPart = ({
             </HStack>
 
             <HStack>
-               <Image src={tagIcon} alt='tag_icon' />
+               <Image src={tag} alt='tag_icon' />
                <Text>
                   {totalFollowingTags} {totalFollowingTags > 0 ? 'tags' : 'tag'}{' '}
                   followed
