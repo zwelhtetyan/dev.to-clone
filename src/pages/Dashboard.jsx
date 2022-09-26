@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Box, Flex, Heading, HStack, Select, Text } from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
@@ -28,7 +28,7 @@ const ReactionBox = ({ count, title, m }) => {
 
 const Dashboard = () => {
    //scroll top
-   useEffect(() => window.scrollTo(0, 0), []);
+   // useEffect(() => window.scrollTo(0, 0), []);
 
    const user = useAuth();
    const location = useLocation();

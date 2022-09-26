@@ -32,6 +32,7 @@ const FollowingTag = () => {
       <Box
          display='grid'
          gap={{ base: '.5rem', md: '1rem' }}
+         p={{ base: '.5rem', md: 0 }}
          gridTemplateColumns={{
             sm: 'repeat(2, minmax(0, 1fr))',
             xl: 'repeat(3, minmax(0, 1fr))',

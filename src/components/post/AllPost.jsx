@@ -37,9 +37,12 @@ const AllPost = ({ transformedData, loading, err }) => {
 
    const queryParam = new URLSearchParams(location.search);
    const sort = queryParam.get('sort');
+   const followingTags =
+      profileData?.find((userData) => userData.id === user?.userId)
+         .followingTags || [];
 
    // sorting posts =>  [relevant | latest | top]
-   const currentPosts = sortPosts(sort, allPostData);
+   const currentPosts = sortPosts(sort, allPostData, followingTags);
 
    return (
       <Box flex='2' maxW={{ base: '100%', md: '650px' }}>

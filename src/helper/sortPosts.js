@@ -1,7 +1,11 @@
 import { calculateReaction } from './calculateTotal';
 
-export const sortPosts = (sort, allPostData) => {
+export const sortPosts = (sort, allPostData, followingTags) => {
    let currentData = [];
+
+   const matchTag = (tags) => {
+      return tags?.some((tag) => followingTags?.includes(tag.tagName)) ? 1 : -1;
+   };
 
    switch (sort) {
       case 'latest':
@@ -15,7 +19,9 @@ export const sortPosts = (sort, allPostData) => {
          );
          break;
       default:
-         currentData = allPostData;
+         currentData = allPostData.sort(
+            (a, b) => matchTag(b.tags) - matchTag(a.tags)
+         );
    }
 
    return currentData;
