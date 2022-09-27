@@ -3,6 +3,7 @@ import React from 'react';
 import AllPost from '../components/post/AllPost';
 import { useSelector } from 'react-redux';
 import HomeMenu from '../components/home/HomeMenu';
+import HomeRight from '../components/home/HomeRight';
 
 const Home = () => {
    const {
@@ -29,6 +30,9 @@ const Home = () => {
             loading={loading}
             err={err}
          />
+
+         {/* homeRight */}
+         <HomeRight />
       </Flex>
    );
 };

@@ -2,7 +2,7 @@ import { Divider, Flex, Heading, Text, VStack } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import SignUpButton from '../utils/SignUpButton';
-import { signUpBtnDesigns } from '../components/signUpBtnDesign';
+import { signUpBtnDesigns } from '../utils/signUpBtnDesign';
 import { signInWithPopup } from 'firebase/auth';
 import { useAuth } from '../context/auth';
 import { auth } from '../config/firebase';
