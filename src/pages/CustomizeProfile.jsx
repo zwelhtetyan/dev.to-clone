@@ -24,6 +24,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import ErrorMessage from '../utils/ErrorMessage';
 import CustomizeProfileSkeleton from '../components/skeletons/CustomizeProfileSkeleton';
 import { useEffect } from 'react';
+import { checkUsername } from '../helper/checkUsername';
 
 const CustomizeProfile = () => {
    //scroll top
@@ -39,6 +40,7 @@ const CustomizeProfile = () => {
    );
 
    const nameRef = useRef();
+   const usernameRef = useRef();
    const emailRef = useRef();
    const websiteRef = useRef();
    const githubRef = useRef();
@@ -60,8 +62,13 @@ const CustomizeProfile = () => {
    }
 
    let currentUserProfile = null;
+   let authenticatedUsernames = [];
    if (profileData) {
       currentUserProfile = profileData.find((data) => data.id === user.userId);
+
+      authenticatedUsernames = profileData
+         .filter((userData) => userData.id !== user.userId)
+         .map((data) => data.username);
    }
 
    if (profileDataLoading) {
@@ -83,6 +90,7 @@ const CustomizeProfile = () => {
       e.preventDefault();
 
       const name = nameRef.current.value;
+      const username = usernameRef.current.value;
       const email = emailRef.current.value;
       const website = websiteRef.current.value;
       const github = githubRef.current.value;
@@ -100,6 +108,7 @@ const CustomizeProfile = () => {
 
       const newData = {
          name,
+         username,
          email,
          website,
          github,
@@ -115,6 +124,11 @@ const CustomizeProfile = () => {
          background,
       };
 
+      if (checkUsername(username, authenticatedUsernames) !== 'valid') {
+         usernameRef.current.focus();
+         return;
+      }
+
       setLoading(true);
 
       if (name) {
@@ -129,7 +143,7 @@ const CustomizeProfile = () => {
                updateProfileData({ ...newData, profile: url }, user.userId)
                   .then((_) => {
                      setLoading(false);
-                     navigate(`/${currentUserProfile.username}`);
+                     setTimeout(() => navigate(`/${username}`), 500);
                      console.log('prifile informations are updated');
                   })
                   .catch((err) => {
@@ -146,7 +160,7 @@ const CustomizeProfile = () => {
       updateProfileData(newData, user.userId)
          .then((_) => {
             setLoading(false);
-            navigate(`/${currentUserProfile.username}`);
+            setTimeout(() => navigate(`/${username}`), 500);
             console.log('prifile informations are updated');
          })
          .catch((err) => {
@@ -195,8 +209,10 @@ const CustomizeProfile = () => {
          >
             <User
                nameRef={nameRef}
+               usernameRef={usernameRef}
                emailRef={emailRef}
                profileData={currentUserProfile}
+               authenticatedUsernames={authenticatedUsernames}
                previewImgRef={previewImgRef}
                removeProfileImgHandler={removeProfileImgHandler}
             />

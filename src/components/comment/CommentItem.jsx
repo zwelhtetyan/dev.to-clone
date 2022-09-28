@@ -170,7 +170,7 @@ const CommentItem = ({
                      icon={alreadyLiked ? redHeart : heart}
                      value={totalLike < 1 ? '' : totalLike}
                      text={
-                        totalLike < 1 ? '' : totalLike === 1 ? 'like' : 'likes'
+                        totalLike < 1 ? '' : totalLike > 1 ? 'likes' : 'like'
                      }
                      disabled={updatingLike}
                      onClick={() => handleClickLike(comments, commentId)}

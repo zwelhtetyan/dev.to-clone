@@ -8,7 +8,7 @@ import HomeRight from '../components/home/HomeRight';
 const Home = () => {
    const {
       transformedData,
-      transfromedDataLoading: loading,
+      transformedDataLoading: loading,
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
 

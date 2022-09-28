@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
    transformedData: null,
-   transfromedDataLoading: false,
+   transformedDataLoading: false,
    transformedDataErr: false,
 };
 
@@ -15,7 +15,7 @@ const transformedDataSlice = createSlice({
       },
 
       setTransformedDataLoading: (state, action) => {
-         state.transfromedDataLoading = action.payload;
+         state.transformedDataLoading = action.payload;
       },
 
       setTransformedDataErr: (state, action) => {

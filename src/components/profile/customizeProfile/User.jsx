@@ -19,15 +19,19 @@ import {
 import defaultProfile from '../../../assets/images/default_profile.webp';
 import { FaRegEdit } from 'react-icons/fa';
 import CustomMenuItem from '../../../utils/CustomMenuItem';
+import { checkUsername } from '../../../helper/checkUsername';
 
 const User = ({
    nameRef,
    emailRef,
+   usernameRef,
    profileData,
+   authenticatedUsernames,
    previewImgRef,
    removeProfileImgHandler,
 }) => {
    const [previewImg, setPreviewImg] = useState('');
+   const [isValid, setIsValid] = useState('valid');
 
    const imagePreviewHandler = (e) => {
       const image = e.target.files[0];
@@ -50,6 +54,11 @@ const User = ({
    const clickEdit = () => {
       document.getElementById('edit').click();
    }; // if no profile image , i want user to go to file directly without showing option.
+
+   const isValidUsername = (username) => {
+      const status = checkUsername(username, authenticatedUsernames);
+      setIsValid(status);
+   };
 
    return (
       <Box {...whiteBoxStyles}>
@@ -119,7 +128,7 @@ const User = ({
                                  display='none'
                                  onChange={imagePreviewHandler}
                               />{' '}
-                              Edit
+                              Upload a photo
                            </label>
                         </CustomMenuItem>
 
@@ -128,7 +137,7 @@ const User = ({
                               removeProfileImgHandler(profileData.profile)
                            }
                         >
-                           Delete
+                           Remove photo
                         </CustomMenuItem>
                      </MenuList>
                   </Menu>
@@ -139,12 +148,28 @@ const User = ({
                <label style={labelStyles}>Name</label>
                <Input
                   defaultValue={profileData?.name}
-                  placeholder='First name'
+                  placeholder='Zwel'
                   type='text'
                   required
                   {...InputborderColor}
                   ref={nameRef}
                />
+            </Box>
+
+            <Box w='100%'>
+               <label style={labelStyles}>Username</label>
+               <Input
+                  defaultValue={profileData?.username}
+                  placeholder='zwelhtetyan'
+                  type='text'
+                  required
+                  {...InputborderColor}
+                  ref={usernameRef}
+                  onChange={({ target }) => isValidUsername(target.value)}
+               />
+               <Text color='red' fontSize='15'>
+                  {isValid === 'valid' ? '' : isValid}
+               </Text>
             </Box>
 
             <Box w='100%'>

@@ -25,7 +25,7 @@ const Search = () => {
 
    const {
       transformedData,
-      transfromedDataLoading: loading,
+      transformedDataLoading: loading,
       transformedDataErr: err,
    } = useSelector((state) => state.transformedData);
 

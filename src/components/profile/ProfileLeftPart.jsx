@@ -65,7 +65,7 @@ const ProfileLeftPart = ({
             <HStack mb='.7rem'>
                <Image src={doc} alt='doc_icon' />
                <Text>
-                  {publishedPosts} {publishedPosts > 0 ? 'posts' : 'post'}{' '}
+                  {publishedPosts} {publishedPosts > 1 ? 'posts' : 'post'}{' '}
                   published
                </Text>
             </HStack>
@@ -74,14 +74,14 @@ const ProfileLeftPart = ({
                <Image src={commentLg} alt='comment_icon' />
                <Text>
                   {totalCommentWritten}{' '}
-                  {totalCommentWritten > 0 ? 'comments' : 'comment'} written
+                  {totalCommentWritten > 1 ? 'comments' : 'comment'} written
                </Text>
             </HStack>
 
             <HStack>
                <Image src={tag} alt='tag_icon' />
                <Text>
-                  {totalFollowingTags} {totalFollowingTags > 0 ? 'tags' : 'tag'}{' '}
+                  {totalFollowingTags} {totalFollowingTags > 1 ? 'tags' : 'tag'}{' '}
                   followed
                </Text>
             </HStack>

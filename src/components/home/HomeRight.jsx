@@ -7,7 +7,7 @@ import { skeletonColor } from '../skeletons/skeletonColor';
 import HomeRightCard from './HomeRightCard';
 
 const HomeRight = () => {
-   const { transformedData, transfromedDataLoading } = useSelector(
+   const { transformedData, transformedDataLoading } = useSelector(
       (state) => state.transformedData
    );
 
@@ -17,7 +17,7 @@ const HomeRight = () => {
 
    return (
       <Box h='50vh' flex='1' ms='1rem' display={{ base: 'none', xl: 'block' }}>
-         {transfromedDataLoading && (
+         {transformedDataLoading && (
             <SkeletonText noOfLines={3} {...skeletonColor} />
          )}
 
