@@ -68,6 +68,7 @@ const AllPost = ({ transformedData, loading, err }) => {
                   isFirstItem={idx === 0}
                   key={postData.id}
                   name={postData.name}
+                  username={postData.username}
                   profile={postData.profile}
                   coverImg={postData.cvImg}
                   id={postData.id}

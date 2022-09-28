@@ -37,6 +37,7 @@ const DetailRightContent = ({
             background={currentUserProfile.background}
             profile={currentUserProfile.profile}
             name={currentUserProfile.name}
+            username={currentUserProfile.username}
             bio={currentUserProfile.bio}
             work={currentUserProfile.work}
             location={currentUserProfile.location}
@@ -62,7 +63,7 @@ const DetailRightContent = ({
                      as='span'
                      color='rgb(47 58 178)'
                      cursor='pointer'
-                     onClick={() => navigate(`/profile/${userId}`)}
+                     onClick={() => navigate(`/${currentUserProfile.username}`)}
                   >
                      {currentUserProfile.name}
                   </Text>
@@ -71,7 +72,7 @@ const DetailRightContent = ({
                {otherPosts.map((postData) => (
                   <OtherPostItem
                      key={nanoid()}
-                     name={postData.name}
+                     username={postData.username}
                      title={postData.title}
                      tags={postData.tags}
                      postId={postData.id}

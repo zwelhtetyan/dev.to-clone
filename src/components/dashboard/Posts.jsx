@@ -52,6 +52,7 @@ const Posts = () => {
                <PostItem
                   key={postData.id}
                   name={postData.name}
+                  username={postData.username}
                   profile={postData.profile}
                   id={postData.id}
                   createdAt={postData.createdAt}

@@ -42,7 +42,9 @@ const SavedPostItem = ({ postData, isArchive }) => {
    };
 
    const handleNavigate = () => {
-      navigate(`/${titleRoute(postData.name, postData.title, postData.id)}`);
+      navigate(
+         `/${titleRoute(postData.username, postData.title, postData.id)}`
+      );
       dispatch(setClickComment(false));
    };
 
@@ -54,7 +56,7 @@ const SavedPostItem = ({ postData, isArchive }) => {
             <CustomAvatar
                profile={postData.profile}
                size='40px'
-               onClick={() => navigate(`/profile/${postData.userId}`)}
+               onClick={() => navigate(`/${postData.username}`)}
             />
             <Box ms='.5rem' flex='1'>
                <Text
@@ -74,7 +76,7 @@ const SavedPostItem = ({ postData, isArchive }) => {
                   <Text
                      _hover={{ color: 'rgb(47 58 178)' }}
                      cursor='pointer'
-                     onClick={() => navigate(`/profile/${postData.userId}`)}
+                     onClick={() => navigate(`/${postData.username}`)}
                   >
                      {postData.name}
                   </Text>

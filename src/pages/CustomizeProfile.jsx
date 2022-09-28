@@ -129,7 +129,7 @@ const CustomizeProfile = () => {
                updateProfileData({ ...newData, profile: url }, user.userId)
                   .then((_) => {
                      setLoading(false);
-                     navigate(`/profile/${user.userId}`);
+                     navigate(`/${currentUserProfile.username}`);
                      console.log('prifile informations are updated');
                   })
                   .catch((err) => {
@@ -146,7 +146,7 @@ const CustomizeProfile = () => {
       updateProfileData(newData, user.userId)
          .then((_) => {
             setLoading(false);
-            navigate(`/profile/${user.userId}`);
+            navigate(`/${currentUserProfile.username}`);
             console.log('prifile informations are updated');
          })
          .catch((err) => {
@@ -178,7 +178,7 @@ const CustomizeProfile = () => {
                color='rgb(59 73 223)'
                as='span'
                cursor='pointer'
-               onClick={() => navigate(`/profile/${user.userId}`)}
+               onClick={() => navigate(`/${currentUserProfile.username}`)}
             >
                @{currentUserProfile?.name} 🤓
             </Text>

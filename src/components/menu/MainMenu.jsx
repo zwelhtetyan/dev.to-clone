@@ -31,7 +31,7 @@ const MainMenu = ({ currentUserProfile }) => {
             bg='white'
          >
             <CustomMenuItem
-               onClick={() => navigate(`/profile/${currentUserProfile.id}`)}
+               onClick={() => navigate(`/${currentUserProfile.username}`)}
             >
                <VStack>
                   <Text>{currentUserProfile.name}</Text>

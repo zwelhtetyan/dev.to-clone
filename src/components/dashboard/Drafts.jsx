@@ -45,7 +45,7 @@ const Drafts = () => {
             draftPosts.map((postData) => (
                <DraftPostItem
                   key={postData.id}
-                  name={postData.name}
+                  username={postData.username}
                   title={postData.title}
                   postId={postData.id}
                />

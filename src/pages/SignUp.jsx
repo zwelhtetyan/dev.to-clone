@@ -8,19 +8,24 @@ import { useAuth } from '../context/auth';
 import { auth } from '../config/firebase';
 import { createUser } from '../lib/api';
 import { useState } from 'react';
+import useGenerateUserName from '../hooks/useGenerateUserName';
+import { useSelector } from 'react-redux';
 
 const SignUp = ({ type }) => {
    //scroll top
    useEffect(() => window.scrollTo(0, 0), []);
 
    const navigate = useNavigate();
+   const getUsername = useGenerateUserName();
 
    const [signingIn, setSigningIn] = useState(false);
+
+   const { profileData } = useSelector((state) => state.profileData);
 
    const user = useAuth();
 
    if (!signingIn && user) {
-      return <Navigate to={`/profile/${user.userId}`} />;
+      return <Navigate to='/' />;
    }
 
    const signin = (provider) => {
@@ -28,9 +33,17 @@ const SignUp = ({ type }) => {
       signInWithPopup(auth, provider)
          .then((res) => {
             const userId = res.user.uid;
+            const authenticatedUser = profileData.find(
+               (userData) => userData.id === userId
+            );
+
+            const username = authenticatedUser
+               ? authenticatedUser.username
+               : getUsername(res.user.displayName, userId);
 
             const userData = {
                name: res.user.displayName,
+               username,
                profile: res.user.photoURL,
                createdAt: res.user.metadata.createdAt,
             };

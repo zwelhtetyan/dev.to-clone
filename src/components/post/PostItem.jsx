@@ -29,6 +29,7 @@ import { heart, comment } from '../../assets/icons';
 
 const PostItem = ({
    name,
+   username,
    profile,
    coverImg,
    createdAt,
@@ -61,7 +62,7 @@ const PostItem = ({
       e.stopPropagation();
 
       dispatch(setClickComment(true)); // if user click comment , it will start on where discussions exist 😉
-      navigate(`/${titleRoute(name, title, id)}`);
+      navigate(`/${titleRoute(username, title, id)}`);
    };
 
    const handleSameRoute = useClickSameRoute();
@@ -70,13 +71,13 @@ const PostItem = ({
    const handleNavigate = () => {
       dispatch(setClickComment(false));
 
-      navigate(`/${titleRoute(name, title, id)}`);
+      navigate(`/${titleRoute(username, title, id)}`);
    };
 
    const handleViewProfile = (e) => {
       e.stopPropagation();
 
-      navigate(`/profile/${userId}`);
+      navigate(`/${username}`);
 
       handleSameRoute();
    };
@@ -163,6 +164,7 @@ const PostItem = ({
                            background={currentUserProfile?.background}
                            profile={currentUserProfile?.profile}
                            name={currentUserProfile?.name}
+                           username={currentUserProfile?.username}
                            bio={currentUserProfile?.bio}
                            work={currentUserProfile?.work}
                            location={currentUserProfile?.location}

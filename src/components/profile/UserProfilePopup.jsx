@@ -21,6 +21,7 @@ const UserProfilePopup = ({
    background,
    profile,
    name,
+   username,
    bio,
    work,
    location,
@@ -80,7 +81,7 @@ const UserProfilePopup = ({
                top='-23px'
                left='1rem'
                cursor='pointer'
-               onClick={() => navigate(`/profile/${id}`)}
+               onClick={() => navigate(`/${username}`)}
             />
             <Box p={p || '.5rem .7rem'} pt='.2rem'>
                <Text
@@ -89,7 +90,7 @@ const UserProfilePopup = ({
                   fontWeight='600'
                   cursor='pointer'
                   _hover={{ color: 'rgb(47 58 178)' }}
-                  onClick={() => navigate(`/profile/${id}`)}
+                  onClick={() => navigate(`/${username}`)}
                >
                   {name}
                </Text>

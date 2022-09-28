@@ -13,14 +13,14 @@ import AuthContextProvider from './context/auth';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
    <React.StrictMode>
-      <AuthContextProvider>
-         <ChakraProvider theme={theme}>
-            <BrowserRouter>
-               <Provider store={store}>
+      <Provider store={store}>
+         <AuthContextProvider>
+            <ChakraProvider theme={theme}>
+               <BrowserRouter>
                   <App />
-               </Provider>
-            </BrowserRouter>
-         </ChakraProvider>
-      </AuthContextProvider>
+               </BrowserRouter>
+            </ChakraProvider>
+         </AuthContextProvider>
+      </Provider>
    </React.StrictMode>
 );

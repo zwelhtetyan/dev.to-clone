@@ -34,9 +34,9 @@ const Follower = () => {
          {followers.map((userData) => (
             <Card
                key={userData.id}
-               userId={userData.id}
-               profile={userData.profile}
                name={userData.name}
+               username={userData.username}
+               profile={userData.profile}
             />
          ))}
       </Box>

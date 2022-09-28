@@ -6,6 +6,7 @@ import {
    removeFromLocalStorage,
    saveToLocalStorage,
 } from '../helper/localStorage';
+import { useSelector } from 'react-redux';
 
 const AuthCtx = createContext({
    user: null,
@@ -14,12 +15,13 @@ const AuthCtx = createContext({
 const AuthContextProvider = ({ children }) => {
    const [user, setUser] = useState(getItemFromLocalStorage('user') || null);
 
+   const { profileData } = useSelector((state) => state.profileData);
+
    useEffect(() => {
       onAuthStateChanged(auth, (user) => {
          if (user !== null) {
             const newUser = {
                userId: user.uid,
-               createdAt: user.metadata.createdAt,
             };
 
             setUser(newUser);
@@ -28,10 +30,11 @@ const AuthContextProvider = ({ children }) => {
 
             return;
          }
+
          setUser(null);
          removeFromLocalStorage('user');
       });
-   }, []);
+   }, [profileData]);
 
    return <AuthCtx.Provider value={user}>{children}</AuthCtx.Provider>;
 };

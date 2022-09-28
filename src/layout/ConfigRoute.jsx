@@ -47,10 +47,10 @@ const ConfigRoute = () => {
       <Routes>
          <Route path='/' element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path='/:username' element={<Profile />} />
             <Route path='/:user/:title' element={<PostDetails />} />
             <Route path='create-account' element={<SignUp />} />
             <Route path='login' element={<Login />} />
-            <Route path='profile/:userIdToView' element={<Profile />} />
             <Route path='customize-profile' element={<CustomizeProfile />} />
             <Route path='signout-confirm' element={<SignOutConfirm />} />
 

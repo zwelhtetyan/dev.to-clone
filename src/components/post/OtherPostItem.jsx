@@ -8,14 +8,14 @@ import useClickTag from '../../hooks/useClickTag';
 import { setClickComment } from '../../store/scrollDiscussion';
 import LangTag from '../../utils/LangTag';
 
-const OtherPostItem = ({ name, title, tags, postId }) => {
+const OtherPostItem = ({ username, title, tags, postId }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
    const handleNavigate = (e) => {
       e.stopPropagation();
 
-      navigate(`/${titleRoute(name, title, postId)}`);
+      navigate(`/${titleRoute(username, title, postId)}`);
       dispatch(setClickComment(false));
    };
 

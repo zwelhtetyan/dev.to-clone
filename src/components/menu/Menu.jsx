@@ -113,7 +113,7 @@ const Menu = ({ onClose, heroPadding }) => {
             onClick={() => handleClickMenu('about')}
          />
 
-         <HStack justify='' my='3'>
+         <HStack justify='' my='3' color='rgb(64 64 64)'>
             <SocialLinkIcon href='https://twitter.com/zwelHtetYan2'>
                <GrTwitter size={22} />
             </SocialLinkIcon>

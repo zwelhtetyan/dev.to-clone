@@ -78,9 +78,7 @@ const MainContent = ({ postDetail }) => {
                      <CustomAvatar
                         profile={postDetail.profile}
                         size='40px'
-                        onClick={() =>
-                           navigate(`/profile/${postDetail.userId}`)
-                        }
+                        onClick={() => navigate(`/${postDetail.username}`)}
                      />
 
                      <Box flex='1' pt='3px'>
@@ -89,9 +87,7 @@ const MainContent = ({ postDetail }) => {
                            cursor='pointer'
                            lineHeight={1.25}
                            _hover={{ color: 'rgb(47 58 178)' }}
-                           onClick={() =>
-                              navigate(`/profile/${postDetail.userId}`)
-                           }
+                           onClick={() => navigate(`/${postDetail.username}`)}
                         >
                            {postDetail.name}
                         </Text>

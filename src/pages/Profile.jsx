@@ -13,7 +13,7 @@ const Profile = () => {
    //scroll top
    // useEffect(() => window.scrollTo(0, 0), [location]);
 
-   const { userIdToView } = useParams();
+   const { username } = useParams();
    const [moreInfo, setMoreInfo] = useState(false);
 
    const { profileData, profileDataLoading, profileDataErr } = useSelector(
@@ -31,8 +31,17 @@ const Profile = () => {
    }
 
    let currentUserProfile = null;
+   let userId;
    if (profileData) {
-      currentUserProfile = profileData.find((data) => data.id === userIdToView);
+      currentUserProfile = profileData.find(
+         (data) => data.username === username
+      );
+
+      userId = currentUserProfile?.id;
+   }
+
+   if (currentUserProfile === undefined) {
+      return <ErrorMessage urlNotFound={true} />;
    }
 
    let pinnedPosts = null;
@@ -43,27 +52,19 @@ const Profile = () => {
       otherPosts = transformedData
          .filter(
             (postData) =>
-               postData.userId === userIdToView &&
-               !postData.draft &&
-               !postData.pinned
+               postData.userId === userId && !postData.draft && !postData.pinned
          )
          .sort((a, b) => b.createdAt - a.createdAt);
 
       pinnedPosts = transformedData
-         .filter(
-            (postData) => postData.userId === userIdToView && postData.pinned
-         )
+         .filter((postData) => postData.userId === userId && postData.pinned)
          .sort((a, b) => b.createdAt - a.createdAt);
 
       totalCommentWritten = transformedData.reduce(
          (count, postItem) =>
-            count + claculateWrittenComments(postItem.comments, userIdToView),
+            count + claculateWrittenComments(postItem.comments, userId),
          0
       );
-   }
-
-   if (transformedData && currentUserProfile === undefined) {
-      return <ErrorMessage urlNotFound={true} />;
    }
 
    const totalPublishPosts =

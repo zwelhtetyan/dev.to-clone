@@ -2,11 +2,11 @@ import { Flex, Heading, Image } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const Card = ({ profile, name, userId }) => {
+const Card = ({ profile, name, username }) => {
    const navigate = useNavigate();
 
    const handleViewProfile = () => {
-      navigate(`/profile/${userId}`);
+      navigate(`/${username}`);
    };
 
    return (

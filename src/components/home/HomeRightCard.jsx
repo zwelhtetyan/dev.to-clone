@@ -70,7 +70,7 @@ const HomeRightCard = ({ tagName, transformedData }) => {
                <TopPostItem
                   key={nanoid()}
                   route={`/${titleRoute(
-                     topPost.name,
+                     topPost.username,
                      topPost.title,
                      topPost.id
                   )}`}

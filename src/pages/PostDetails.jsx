@@ -8,7 +8,7 @@ const PostDetails = () => {
    const navigate = useNavigate();
 
    // get postId from (title + postId)
-   const param = title.split('-');
+   const param = title.split('_');
    const postId = param[param.length - 1];
 
    const {

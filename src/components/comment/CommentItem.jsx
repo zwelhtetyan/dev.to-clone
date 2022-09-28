@@ -44,8 +44,8 @@ const CommentItem = ({
       postId
    );
 
-   const handleViewProfile = (userId) => {
-      navigate(`/profile/${userId}`);
+   const handleViewProfile = (username) => {
+      navigate(`/${username}`);
    };
 
    const totalLike = likes.length;
@@ -74,7 +74,7 @@ const CommentItem = ({
             <CustomAvatar
                size={avatarSize}
                profile={currentUserProfile.profile}
-               onClick={() => handleViewProfile(currentUserProfile.id)}
+               onClick={() => handleViewProfile(currentUserProfile.username)}
             />
 
             <Box
@@ -96,7 +96,9 @@ const CommentItem = ({
                         fontSize='15px'
                         fontWeight='900'
                         cursor='pointer'
-                        onClick={() => handleViewProfile(currentUserProfile.id)}
+                        onClick={() =>
+                           handleViewProfile(currentUserProfile.username)
+                        }
                      >
                         {currentUserProfile.name}
                      </Text>

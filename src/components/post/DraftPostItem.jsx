@@ -4,11 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { titleRoute } from '../../helper/titleRoute';
 import ManangePost from './ManangePost';
 
-const DraftPostItem = ({ name, title, postId }) => {
+const DraftPostItem = ({ username, title, postId }) => {
    const navigate = useNavigate();
 
    const handleNavigate = () => {
-      navigate(`/${titleRoute(name, title, postId)}`);
+      navigate(`/${titleRoute(username, title, postId)}`);
    };
 
    return (

@@ -40,6 +40,7 @@ const useTransformData = () => {
          return {
             ...postData,
             name: userInfo?.name,
+            username: userInfo.username,
             profile: userInfo?.profile,
          };
       });
