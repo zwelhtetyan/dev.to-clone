@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import logo from '../assets/images/logo.png';
 import { FiSearch } from 'react-icons/fi';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Box, Flex, HStack, Image } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import SideMenu from '../components/menu/SideMenu';
@@ -68,27 +68,30 @@ const Header = () => {
             </Box>
 
             <Flex>
-               <SecondaryBtn
-                  name='search_icon'
-                  display={{ base: 'block', md: 'none' }}
-                  m='0 .5rem 0 0'
-                  onClick={() => navigate('/search')}
-               >
-                  <FiSearch size={23} />
-               </SecondaryBtn>
+               <Link to='/search'>
+                  <SecondaryBtn
+                     name='search_icon'
+                     display={{ base: 'block', md: 'none' }}
+                     m='0 .5rem 0 0'
+                  >
+                     <FiSearch size={23} />
+                  </SecondaryBtn>
+               </Link>
 
                {!user && (
                   <>
-                     <SecondaryBtn
-                        display={{ base: 'none', md: 'block' }}
-                        onClick={() => navigate('/login')}
-                        m='0 .5rem 0 0'
-                     >
-                        Log in
-                     </SecondaryBtn>
-                     <PrimaryBtn onClick={() => navigate('/create-account')}>
-                        Create Account
-                     </PrimaryBtn>{' '}
+                     <Link to='/login'>
+                        <SecondaryBtn
+                           display={{ base: 'none', md: 'block' }}
+                           m='0 .5rem 0 0'
+                        >
+                           Log in
+                        </SecondaryBtn>
+                     </Link>
+
+                     <Link to='/create-account'>
+                        <PrimaryBtn>Create Account</PrimaryBtn>
+                     </Link>
                   </>
                )}
 

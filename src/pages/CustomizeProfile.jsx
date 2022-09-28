@@ -143,7 +143,7 @@ const CustomizeProfile = () => {
                updateProfileData({ ...newData, profile: url }, user.userId)
                   .then((_) => {
                      setLoading(false);
-                     setTimeout(() => navigate(`/${username}`), 500);
+                     setTimeout(() => navigate(`/${username}`), 300);
                      console.log('prifile informations are updated');
                   })
                   .catch((err) => {
@@ -160,7 +160,7 @@ const CustomizeProfile = () => {
       updateProfileData(newData, user.userId)
          .then((_) => {
             setLoading(false);
-            setTimeout(() => navigate(`/${username}`), 500);
+            setTimeout(() => navigate(`/${username}`), 300);
             console.log('prifile informations are updated');
          })
          .catch((err) => {
