@@ -1,4 +1,4 @@
-import { Box, Button, Image, Text } from '@chakra-ui/react';
+import { Box, Button, Image, Text, useColorModeValue } from '@chakra-ui/react';
 import { getLogo } from '../helper/getLogo';
 
 const LangTag = ({ children, tag, onAddTag, onDeleteTag, showCloseIcon }) => {
@@ -9,12 +9,19 @@ const LangTag = ({ children, tag, onAddTag, onDeleteTag, showCloseIcon }) => {
          height={{ base: '30px', md: '34px' }}
          p='0 .5rem'
          border='1px solid'
-         borderColor='gray.100'
-         _hover={{ borderColor: 'gray.300', bg: 'gray.100' }}
-         bg='white'
+         borderColor={useColorModeValue('gray.100', 'gray.700')}
+         _hover={{
+            borderColor: useColorModeValue('gray.300', 'gray.600'),
+            color: useColorModeValue(
+               'light.tagColorHover',
+               'dark.tagColorHover'
+            ),
+         }}
          borderRadius='5px'
+         bg='transparent'
+         color={useColorModeValue('light.linkColor', 'dark.linkColor')}
          cursor='pointer'
-         _active={{ bg: 'white' }}
+         _active={{ bg: 'transparent' }}
       >
          {src !== '#' ? (
             <Image src={getLogo(tag)} w='15px' alt='tag_icon' />

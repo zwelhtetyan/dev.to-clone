@@ -23,12 +23,12 @@ const ProfileRightPart = ({ pinnedPosts, otherPosts }) => {
             >
                <Box as='header'>
                   <Button
-                     bg='rgb(59 73 223)'
-                     _hover={{ bg: 'rgb(59 73 223)' }}
+                     bg='light.primary'
+                     _hover={{ bg: 'light.primary' }}
                      m={{ base: '-2rem 0 0 0', md: '-2.5rem 0 0' }}
-                     _active={{ bg: 'rgb(59 73 223)' }}
+                     _active={{ bg: 'light.primary' }}
                      cursor='default'
-                     color='white'
+                     color='dark.color'
                   >
                      <BsFillPinAngleFill size={19} />
                      <Text fontWeight={700} ms='.5rem'>

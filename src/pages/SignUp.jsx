@@ -1,4 +1,11 @@
-import { Divider, Flex, Heading, Text, VStack } from '@chakra-ui/react';
+import {
+   Divider,
+   Flex,
+   Heading,
+   Text,
+   useColorModeValue,
+   VStack,
+} from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import SignUpButton from '../utils/SignUpButton';
@@ -23,6 +30,13 @@ const SignUp = ({ type }) => {
    const { profileData } = useSelector((state) => state.profileData);
 
    const user = useAuth();
+
+   const cardBg = useColorModeValue('light.cardBg', 'dark.cardBg');
+   const color = useColorModeValue('light.primary', 'dark.primary');
+   const dividerColor = useColorModeValue(
+      'light.cardBorder',
+      'dark.cardBorder'
+   );
 
    if (!signingIn && user) {
       return <Navigate to='/' />;
@@ -63,8 +77,8 @@ const SignUp = ({ type }) => {
    return (
       <VStack mx='auto' justify='center' maxW='640px' flex='1'>
          <VStack
-            boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-            bg='rgb(255 255 255)'
+            bg={cardBg}
+            className='shadow'
             p={{ base: '2rem 1rem', sm: '3rem' }}
             textAlign='center'
             borderRadius='5px'
@@ -74,7 +88,7 @@ const SignUp = ({ type }) => {
             <Text mb='1rem !important'>
                <Text
                   as='span'
-                  color='rgb(59 73 223)'
+                  color={color}
                   cursor='pointer'
                   onClick={() => navigate('/')}
                >
@@ -94,12 +108,12 @@ const SignUp = ({ type }) => {
 
             {type !== 'login' && (
                <Flex w='100%' align='center' mt='1.5rem !important'>
-                  <Divider flex={1} bg='#7a7a7a' h='1.5px' />
+                  <Divider flex={1} bg={dividerColor} h='1.5px' />
                   <Text fontSize='14px' mx='1rem'>
                      Already have an account?{' '}
                      <Text
                         as='span'
-                        color='rgb(59 73 223)'
+                        color={color}
                         cursor='pointer'
                         onClick={() => navigate('/login')}
                      >
@@ -107,7 +121,7 @@ const SignUp = ({ type }) => {
                      </Text>
                      .
                   </Text>
-                  <Divider flex={1} bg='#7a7a7a' h='1.5px' />
+                  <Divider flex={1} bg={dividerColor} h='1.5px' />
                </Flex>
             )}
          </VStack>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Box, Text, Textarea, VStack } from '@chakra-ui/react';
 import {
-   InputborderColor,
-   smallLabelStyles,
    titleStyles,
-   whiteBoxStyles,
+   CustomizeProfileCard,
+   SmallLabel,
+   Label,
 } from '../../../utils/CustomizeProfileStyles';
 
 const Coding = ({
@@ -15,63 +15,56 @@ const Coding = ({
    profileData,
 }) => {
    return (
-      <Box {...whiteBoxStyles}>
+      <CustomizeProfileCard>
          <Text {...titleStyles}>Coding</Text>
 
          <VStack spacing={3}>
             <Box w='100%'>
-               <label>Currently learning</label>
-               <Text {...smallLabelStyles}>
+               <Label>Currently learning</Label>
+               <SmallLabel>
                   What are you learning right now? What are the new tools and
                   languages you're picking up right now?
-               </Text>
+               </SmallLabel>
                <Textarea
-                  {...InputborderColor}
                   ref={learningRef}
                   defaultValue={profileData?.learning}
                />
             </Box>
 
             <Box w='100%'>
-               <label>Skill / language</label>
-               <Text {...smallLabelStyles}>
+               <Label>Skill / language</Label>
+               <SmallLabel>
                   What tools and languages are you most experienced with? Are
                   you specialized or more of a generalist?
-               </Text>
+               </SmallLabel>
                <Textarea
                   placeholder='Any languages, frameworks, etc. to highlight?'
-                  {...InputborderColor}
                   ref={skillRef}
                   defaultValue={profileData?.skills}
                />
             </Box>
 
             <Box w='100%'>
-               <label>Currently hacking on</label>
-               <Text {...smallLabelStyles}>
+               <Label>Currently hacking on</Label>
+               <SmallLabel>
                   What projects are currently occupying most of your time?
-               </Text>
-               <Textarea
-                  {...InputborderColor}
-                  ref={hackingRef}
-                  defaultValue={profileData?.hacking}
-               />
+               </SmallLabel>
+               <Textarea ref={hackingRef} defaultValue={profileData?.hacking} />
             </Box>
 
             <Box w='100%'>
-               <label>Available for</label>
-               <Text {...smallLabelStyles}>
+               <Label>Available for</Label>
+               <SmallLabel>
                   What kinds of collaborations or discussions are you available
                   for? What's a good reason to say Hey! to you these days?
-               </Text>
+               </SmallLabel>
                <Textarea
-                  {...InputborderColor}
                   ref={avaliableRef}
                   defaultValue={profileData?.avaliable}
                />
             </Box>
          </VStack>
-      </Box>
+      </CustomizeProfileCard>
    );
 };
 

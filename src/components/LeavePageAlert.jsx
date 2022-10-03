@@ -1,17 +1,17 @@
 import {
    Box,
-   Button,
    Modal,
    ModalBody,
    ModalCloseButton,
    ModalContent,
    ModalHeader,
    ModalOverlay,
+   useColorModeValue,
    useDisclosure,
 } from '@chakra-ui/react';
 import { VscClose } from 'react-icons/vsc';
 import { useNavigate } from 'react-router-dom';
-import { SecondaryBtn } from '../utils/Buttons';
+import { BtnDefault, BtnRed, SecondaryBtn } from '../utils/Buttons';
 
 const LeavePageAlert = () => {
    const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,9 +32,16 @@ const LeavePageAlert = () => {
             size={{ base: 'full', md: '2xl' }}
          >
             <ModalOverlay />
-            <ModalContent>
+            <ModalContent
+               bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+               className='shadow'
+            >
                <ModalHeader
-                  borderBottom='1px solid rgb(23 23 23 / 10%)'
+                  borderBottom='1px solid'
+                  borderBottomColor={useColorModeValue(
+                     'light.cardBorder',
+                     'dark.cardBorder'
+                  )}
                   p='1rem'
                >
                   You have unsaved changes
@@ -44,14 +51,11 @@ const LeavePageAlert = () => {
                   You've made changes to your post. Do you want to navigate to
                   leave this page?
                   <Box mt={5} mb={3}>
-                     <Button
-                        colorScheme='red'
-                        mr={3}
-                        onClick={() => navigate(-1)}
-                     >
+                     <BtnRed mr={2} onClick={() => navigate(-1)}>
                         Leave the page
-                     </Button>
-                     <Button onClick={onClose}>Keep editing</Button>
+                     </BtnRed>
+
+                     <BtnDefault onClick={onClose}>Keep editing</BtnDefault>
                   </Box>
                </ModalBody>
             </ModalContent>

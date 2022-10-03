@@ -8,6 +8,7 @@ import ErrorMessage from '../utils/ErrorMessage';
 import ProfileSkeleton from '../components/skeletons/ProfileSkeleton';
 import { claculateWrittenComments } from '../helper/calculateTotal';
 import ProfileRightPart from '../components/profile/ProfileRightPart';
+import Error from './Error';
 
 const Profile = () => {
    //scroll top
@@ -40,8 +41,8 @@ const Profile = () => {
       userId = currentUserProfile?.id;
    }
 
-   if (currentUserProfile === undefined) {
-      return <ErrorMessage urlNotFound={true} />;
+   if (!currentUserProfile) {
+      return <Error />;
    }
 
    let pinnedPosts = null;
@@ -87,7 +88,6 @@ const Profile = () => {
                {/* bottom layer */}
                <Flex
                   mt='1rem'
-                  color='rgb(64 64 64)'
                   align='flex-start'
                   flexDir={{ base: 'column', md: 'row' }}
                >

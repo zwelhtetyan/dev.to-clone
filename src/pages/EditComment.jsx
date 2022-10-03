@@ -1,4 +1,4 @@
-import { Box, Heading, HStack } from '@chakra-ui/react';
+import { Box, Heading, HStack, useColorModeValue } from '@chakra-ui/react';
 import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 import { useEffect } from 'react';
@@ -16,6 +16,8 @@ const EditComment = () => {
    );
 
    const valueToEdit = currentCommentItem.value;
+
+   const cardBg = useColorModeValue('light.cardBg', 'dark.cardBg');
 
    if (!currentCommentItem) {
       return <Navigate to={-1} />;
@@ -61,8 +63,8 @@ const EditComment = () => {
             maxW='900px'
             w='100%'
             borderRadius={{ md: '5px' }}
-            bg='rgb(255 255 255)'
-            boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+            bg={cardBg}
+            className='shadow'
          >
             <Heading fontSize={['1.3rem', '1.7rem']} mb='1.5rem'>
                Editing comment

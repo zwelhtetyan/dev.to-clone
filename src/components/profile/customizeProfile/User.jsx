@@ -8,13 +8,13 @@ import {
    MenuButton,
    MenuList,
    Text,
+   useColorModeValue,
    VStack,
 } from '@chakra-ui/react';
 import {
-   InputborderColor,
-   labelStyles,
    titleStyles,
-   whiteBoxStyles,
+   CustomizeProfileCard,
+   Label,
 } from '../../../utils/CustomizeProfileStyles';
 import defaultProfile from '../../../assets/images/default_profile.webp';
 import { FaRegEdit } from 'react-icons/fa';
@@ -61,7 +61,7 @@ const User = ({
    };
 
    return (
-      <Box {...whiteBoxStyles}>
+      <CustomizeProfileCard>
          <Text {...titleStyles}>User</Text>
 
          <VStack spacing={3}>
@@ -80,6 +80,8 @@ const User = ({
                         <Box
                            boxSize='100px'
                            borderRadius='full'
+                           border='1px solid'
+                           borderColor={useColorModeValue('#E2E8F0', '#2a2a2a')}
                            backgroundImage={
                               previewImg ||
                               profileData?.profile ||
@@ -96,7 +98,7 @@ const User = ({
                               pos='absolute'
                               background='#000000a3'
                               bottom='-2px'
-                              color='white'
+                              color='light.cardBg'
                               px='.5rem'
                               borderRadius='5px'
                               fontSize='14px'
@@ -112,6 +114,7 @@ const User = ({
                         minW='0 !important'
                         p='.5rem'
                         w='170px'
+                        bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
                         opacity={
                            !profileData?.profile
                               ? '0 !important'
@@ -145,25 +148,23 @@ const User = ({
             </Flex>
 
             <Box w='100%'>
-               <label style={labelStyles}>Name</label>
+               <Label mb='.3rem'>Name</Label>
                <Input
                   defaultValue={profileData?.name}
                   placeholder='Zwel'
                   type='text'
                   required
-                  {...InputborderColor}
                   ref={nameRef}
                />
             </Box>
 
             <Box w='100%'>
-               <label style={labelStyles}>Username</label>
+               <Label mb='.3rem'>Username</Label>
                <Input
                   defaultValue={profileData?.username}
                   placeholder='zwelhtetyan'
                   type='text'
                   required
-                  {...InputborderColor}
                   ref={usernameRef}
                   onChange={({ target }) => isValidUsername(target.value)}
                />
@@ -173,17 +174,16 @@ const User = ({
             </Box>
 
             <Box w='100%'>
-               <label style={labelStyles}>Email address</label>
+               <Label mb='.3rem'>Email address</Label>
                <Input
                   defaultValue={profileData?.email}
                   placeholder='example@gmail.com'
                   type='email'
-                  {...InputborderColor}
                   ref={emailRef}
                />
             </Box>
          </VStack>
-      </Box>
+      </CustomizeProfileCard>
    );
 };
 

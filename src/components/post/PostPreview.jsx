@@ -15,7 +15,7 @@ const PostPreview = () => {
 
    return (
       <Box
-         h={{ base: 'calc(100vh - 125px)', md: 'calc(100vh - 150px)' }}
+         h={{ base: 'calc(100vh - 140px)', md: 'calc(100vh - 160px)' }}
          overflowY='auto'
          fontFamily='monospace'
          fontSize={{ base: '1rem', sm: '1.1rem' }}
@@ -31,13 +31,7 @@ const PostPreview = () => {
             />
          )}
 
-         {title ? (
-            <Heading my={2} color='rgb(23 23 23)'>
-               {title}
-            </Heading>
-         ) : (
-            <NoTitleMessage />
-         )}
+         {title ? <Heading my={2}>{title}</Heading> : <NoTitleMessage />}
 
          <Wrap pt='.3rem' pb='1.5rem' spacing={2} fontFamily='sans-serif'>
             {tags.map((tag) => (

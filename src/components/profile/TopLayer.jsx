@@ -8,6 +8,7 @@ import {
    Image,
    Link,
    Text,
+   useColorModeValue,
    Wrap,
 } from '@chakra-ui/react';
 import { BsGithub, BsTwitter } from 'react-icons/bs';
@@ -32,21 +33,6 @@ const LinkIcon = ({ hoverColor, href, children, onClick }) => {
    );
 };
 
-const Work = ({ title, text }) => {
-   return (
-      <Box
-         px={{ base: '0', md: '1rem' }}
-         flex={1}
-         textAlign={{ base: 'start', md: 'center' }}
-      >
-         <Text fontWeight={700} color='#717171'>
-            {title}
-         </Text>
-         <Text letterSpacing='.5px'>{text}</Text>
-      </Box>
-   );
-};
-
 const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
    const user = useAuth();
    const userId = user?.userId;
@@ -55,10 +41,50 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
 
    const alreadyFollow = profileData?.followers?.includes(userId);
 
+   const dividerColor = useColorModeValue(
+      'rgb(23 23 23 / 5%)',
+      'rgb(255 255 255 / 10%)'
+   );
+   const nameColor = useColorModeValue('#090909', '#f9f9f9');
+   const bioColor = useColorModeValue('#242424', '#efefef');
+   const socialColor = useColorModeValue('#717171', '#a3a3a3');
+   const ghostColor = useColorModeValue('light.ghostColor', 'dark.ghostColor');
+   const iconHoverColor = useColorModeValue(
+      'rgb(23, 23, 23)',
+      'rgb(250, 250, 250)'
+   );
+   const urlHover = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+   const colorTertiary = useColorModeValue(
+      'light.colorTertiary',
+      'dark.colorTertiary'
+   );
+
+   const borderColor = useColorModeValue('#d6d6d7', '#66686c');
+
+   const Work = ({ title, text }) => {
+      return (
+         <Box
+            px={{ base: '0', md: '1rem' }}
+            flex={1}
+            textAlign={{ base: 'start', md: 'center' }}
+         >
+            <Text fontWeight={700} color={colorTertiary}>
+               {title}
+            </Text>
+            <Text letterSpacing='.5px' color={ghostColor}>
+               {text}
+            </Text>
+         </Box>
+      );
+   };
+
    return (
       <Box
-         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-         bg='white'
+         className='shadowSecondary'
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
          mt='-3.5rem'
          borderRadius={['0', '0', '5px']}
          pos='relative'
@@ -87,7 +113,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
          <HStack justify='flex-end' mb={{ md: '1.5rem' }} h='40px'>
             {!alreadyFollow && (
                <PrimaryBtn
-                  bg='rgb(59 73 223)'
+                  bg='light.primary'
                   onClick={handleClickFollow}
                   disabled={loading}
                >
@@ -98,7 +124,6 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
             {alreadyFollow && (
                <LightBtn
                   w='100px'
-                  bg='white'
                   onClick={handleClickFollow}
                   disabled={loading}
                >
@@ -109,14 +134,14 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
 
          {profileData && (
             <Box>
-               <Heading fontSize={['1.5rem', '1.7rem']}>
+               <Heading fontSize={['1.5rem', '1.7rem']} color={nameColor}>
                   {profileData.name}
                </Heading>
 
                <Text
                   fontSize={{ md: '17px' }}
                   letterSpacing='.5px'
-                  color={profileData.bio ? 'black' : '#717171'}
+                  color={profileData.bio ? bioColor : ghostColor}
                   mt='.3rem'
                   maxW={{ base: '100%', md: '70%' }}
                   mx='auto'
@@ -130,9 +155,9 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
                   display='flex'
                   justifyContent={{ base: 'flex-start', md: 'center' }}
                   mt='1rem'
-                  color='#717171'
                   fontSize='15px'
                   spacing={3}
+                  color={socialColor}
                >
                   {profileData?.location && (
                      <HStack>
@@ -154,7 +179,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
                      <HStack cursor='pointer'>
                         <Image src={personalWebsite} alt='icon' />
                         <Link
-                           _hover={{ color: 'rgb(59 73 223)' }}
+                           _hover={{ color: urlHover }}
                            href={profileData.website}
                            target='blank'
                         >
@@ -165,7 +190,10 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
 
                   <HStack>
                      {profileData?.github && (
-                        <LinkIcon href={profileData.github} hoverColor='black'>
+                        <LinkIcon
+                           href={profileData.github}
+                           hoverColor={iconHoverColor}
+                        >
                            <BsGithub size={22} title='Github' />
                         </LinkIcon>
                      )}
@@ -181,7 +209,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
 
                      {profileData?.email && (
                         <LinkIcon
-                           hoverColor='black'
+                           hoverColor={iconHoverColor}
                            onClick={() =>
                               window.open(`mailto:${profileData.email}`)
                            }
@@ -196,7 +224,8 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
                   <Flex
                      flexDirection={{ base: 'column', md: 'row' }}
                      gap={2}
-                     borderTop='1px solid rgb(23 23 23 / 5%)'
+                     borderTop='1px solid'
+                     borderTopColor={dividerColor}
                      mt='2rem'
                      pt={['.5rem', '.5rem', '1rem']}
                   >
@@ -216,18 +245,14 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
                   mx='auto'
                   mt='5'
                   whiteSpace='normal'
-                  bg='white'
-                  _active={{ bg: 'white' }}
-                  boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
                   transition='.3s'
-                  _hover={{
-                     bg: 'rgb(0 0 0 / 4%)',
-                  }}
+                  border='2px solid'
+                  borderColor={borderColor}
                   onClick={() => setMoreInfo(true)}
-                  py='.6rem'
+                  py='.5rem'
                   height='auto'
                >
-                  More info about @{profileData.name}
+                  More info about @{profileData.username}
                </Button>
             </Box>
          )}

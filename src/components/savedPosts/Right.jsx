@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import SavedPostItem from './SavedPostItem';
 import { BsBookmark } from 'react-icons/bs';
 import SavedPostItemSkeleton from '../skeletons/SavedPostItemSkeleton';
@@ -9,10 +9,10 @@ const Container = ({ children }) => {
    return (
       <Box
          flex='1'
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+         className='shadow'
          p={['.5rem', '.5rem', '1rem']}
          borderRadius='5px'
-         bg='white'
-         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
          ms={{ base: '0 !important', md: '.5rem !important' }}
       >
          {children}
@@ -66,17 +66,25 @@ const Right = ({
       postData.title.toLowerCase().includes(searchTerm.toLowerCase())
    );
 
+   const titleColor = useColorModeValue('#3d3d3d', '#d6d6d7');
+   const discriptionColor = useColorModeValue('#717171', '#a3a3a3');
+
    if (!loading && currentPosts.length === 0) {
       return (
          <Container>
             <Box px='1rem' py={{ base: '3rem', sm: '7rem' }}>
-               <Text textAlign='center' fontWeight={600} fontSize='1.1rem'>
+               <Text
+                  textAlign='center'
+                  fontWeight={600}
+                  fontSize='1.1rem'
+                  color={titleColor}
+               >
                   Your {query ? 'archive' : 'reading'} list is empty
                </Text>
 
                {!query && (
                   <Text
-                     color='#717171'
+                     color={discriptionColor}
                      justifyContent='center'
                      display='flex'
                      alignItems='center'

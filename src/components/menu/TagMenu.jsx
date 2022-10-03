@@ -9,7 +9,7 @@ import SideMenuItem from '../../utils/SideMenuItem';
 import { settingIcon } from '../../assets/icons';
 import { getPopularTags } from '../../helper/getPopularTags';
 import { setLoginAlert } from '../../store/loginAlert';
-import { skeletonColor } from '../skeletons/skeletonColor';
+import useSkeletonColor from '../../hooks/useSkeletonColor';
 
 const TagMenu = ({ userId, onClose }) => {
    const navigate = useNavigate();
@@ -44,6 +44,8 @@ const TagMenu = ({ userId, onClose }) => {
       onClose && onClose();
       navigate('/dashboard/following_tags');
    };
+
+   const skeletonColor = useSkeletonColor();
 
    return (
       <Box>

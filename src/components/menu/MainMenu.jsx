@@ -1,10 +1,11 @@
 import {
+   Box,
    Menu,
    MenuButton,
    MenuDivider,
    MenuList,
    Text,
-   VStack,
+   useColorModeValue,
 } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,12 +15,27 @@ import CustomMenuItem from '../../utils/CustomMenuItem';
 const MainMenu = ({ currentUserProfile }) => {
    const navigate = useNavigate();
 
+   const linkColor = useColorModeValue('light.linkColor', 'dark.linkColor');
+   const dividerColor = useColorModeValue(
+      'rgb(23 23 23 / 24%)',
+      'rgb(255 255 255 / 45%)'
+   );
+   const headingHover = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+
    return (
       <Menu autoSelect={false} isLazy>
          <MenuButton
             transition='.3s'
             rounded='full'
-            _hover={{ boxShadow: '0 0 0 1px #E2E8F0' }}
+            _hover={{
+               boxShadow: useColorModeValue(
+                  '0 0 0 1px #E2E8F0',
+                  '0 0 0 1px #2a2a2a'
+               ),
+            }}
          >
             <CustomAvatar profile={currentUserProfile.profile} size='40px' />
          </MenuButton>
@@ -28,17 +44,20 @@ const MainMenu = ({ currentUserProfile }) => {
             p='.5rem'
             minW={{ base: '0 !important' }}
             w='250px'
-            bg='white'
+            bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
          >
             <CustomMenuItem
                onClick={() => navigate(`/${currentUserProfile.username}`)}
             >
-               <VStack>
+               <Box w='100%' color={linkColor} _hover={{ color: headingHover }}>
                   <Text>{currentUserProfile.name}</Text>
-               </VStack>
+                  <Text lineHeight={1} fontSize='15px'>
+                     @{currentUserProfile.username}
+                  </Text>
+               </Box>
             </CustomMenuItem>
 
-            <MenuDivider h='.5px' bg='#b5b5b5' borderBottom='none' />
+            <MenuDivider h='.5px' bg={dividerColor} borderBottom='none' />
 
             <CustomMenuItem onClick={() => navigate('/dashboard')}>
                Dashboard
@@ -53,7 +72,7 @@ const MainMenu = ({ currentUserProfile }) => {
                Apperance
             </CustomMenuItem>
 
-            <MenuDivider h='.5px' bg='#b5b5b5' borderBottom='none' />
+            <MenuDivider h='.5px' bg={dividerColor} borderBottom='none' />
 
             <CustomMenuItem onClick={() => navigate('/signout-confirm')}>
                Sign Out

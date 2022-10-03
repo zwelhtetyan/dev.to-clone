@@ -1,32 +1,10 @@
 import React from 'react';
-import { Box, HStack, Text } from '@chakra-ui/react';
+import { Box, HStack, Text, useColorModeValue } from '@chakra-ui/react';
 import { NavLink, useLocation } from 'react-router-dom';
 import styled from '@emotion/styled';
 import IconBadge from '../../../utils/IconBadge';
 import { useAuth } from '../../../context/auth';
 import { useSelector } from 'react-redux';
-
-const MenuItem = styled(NavLink)`
-   padding: 0.5rem;
-   display: block;
-   cursor: pointer;
-   border-radius: 5px;
-   margin-bottom: 4px;
-
-   &:hover {
-      background: rgb(59 73 223 / 10%);
-      color: rgb(47 58 178);
-   }
-`;
-
-const activeLink = (isActive) => {
-   return isActive
-      ? {
-           background: 'rgb(59 73 223 / 10%)',
-           color: 'rgb(47 58 178)',
-        }
-      : {};
-};
 
 const MenuText = ({ title, count }) => {
    return (
@@ -54,6 +32,37 @@ const Left = ({ totalPublishedPosts, totalDraftPosts }) => {
    const totalFollowingTags =
       profileData.find((userData) => userData.id === user.userId).followingTags
          ?.length || 0;
+
+   const bgColor = useColorModeValue(
+      'rgb(59 73 223 / 10%)',
+      'rgb(49 46 129 / 75%)'
+   );
+
+   const hoverColor = useColorModeValue('rgb(47 58 178)', 'rgb(165, 180, 252)');
+   const color = useColorModeValue('rgb(64, 64, 64)', 'rgb(212, 212, 212)');
+
+   const MenuItem = styled(NavLink)`
+      padding: 0.5rem;
+      display: block;
+      cursor: pointer;
+      border-radius: 5px;
+      margin-bottom: 4px;
+      color: ${color};
+
+      &:hover {
+         background: ${bgColor};
+         color: ${hoverColor};
+      }
+   `;
+
+   const activeLink = (isActive) => {
+      return isActive
+         ? {
+              background: bgColor,
+              color: hoverColor,
+           }
+         : {};
+   };
 
    return (
       <Box w='230px' display={{ base: 'none', md: 'block' }}>

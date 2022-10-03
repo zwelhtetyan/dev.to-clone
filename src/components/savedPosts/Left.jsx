@@ -8,8 +8,7 @@ const Left = ({ allTags, handleClickTag }) => {
       <Box w='230px' display={{ base: 'none', md: 'block' }}>
          {allTags.map((item) => (
             <SideMenuItem
-               bg={item.active && 'rgb(59 73 223 / 10%)'}
-               color={item.active && 'rgb(47 58 178)'}
+               isActive={item.active}
                key={nanoid()}
                title={
                   item.tagName === 'All tags'

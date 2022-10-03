@@ -1,10 +1,10 @@
 import { Box, Flex, Input, Text } from '@chakra-ui/react';
 import React, { useState } from 'react';
 import {
-   InputborderColor,
-   smallLabelStyles,
    titleStyles,
-   whiteBoxStyles,
+   CustomizeProfileCard,
+   SmallLabel,
+   Label,
 } from '../../../utils/CustomizeProfileStyles';
 import { ChromePicker } from 'react-color';
 import useClickOutside from '../../../hooks/useClickOutside';
@@ -29,15 +29,13 @@ const Branding = ({ backgroundRef, profileData }) => {
    ]);
 
    return (
-      <Box {...whiteBoxStyles}>
+      <CustomizeProfileCard>
          <Text {...titleStyles}>Branding</Text>
 
          <Box>
             <Box>
-               <label>Brand color</label>
-               <Text {...smallLabelStyles}>
-                  Used for backgrounds, borders etc.
-               </Text>
+               <Label>Brand color</Label>
+               <SmallLabel>Used for backgrounds, borders etc.</SmallLabel>
 
                <Box
                   w='100%'
@@ -62,8 +60,6 @@ const Branding = ({ backgroundRef, profileData }) => {
                      },
                   }}
                >
-                  {/* option 1 color picker component*/}
-
                   {showColorPicker && (
                      <ChromePicker color={brandColor} onChange={handleChange} />
                   )}
@@ -89,7 +85,6 @@ const Branding = ({ backgroundRef, profileData }) => {
                   <Input
                      ref={backgroundRef}
                      type='text'
-                     {...InputborderColor}
                      ps='55px'
                      value={brandColor}
                      onChange={({ target }) => setBrandColor(target.value)}
@@ -97,7 +92,7 @@ const Branding = ({ backgroundRef, profileData }) => {
                </Box>
             </Box>
          </Box>
-      </Box>
+      </CustomizeProfileCard>
    );
 };
 

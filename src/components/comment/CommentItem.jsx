@@ -1,7 +1,19 @@
 import React, { useEffect } from 'react';
-import { Box, Flex, HStack, Image, Text, VStack } from '@chakra-ui/react';
+import {
+   Box,
+   Flex,
+   HStack,
+   Text,
+   useColorModeValue,
+   VStack,
+} from '@chakra-ui/react';
 import { ReactionButton } from '../../utils/Buttons';
-import { heart, redHeart, comment, authorIcon } from '../../assets/icons';
+import {
+   HeartIcon,
+   RedHeart,
+   CommentIcon,
+   AuthorIcon,
+} from '../../assets/icons';
 import { dateFormat, showEditedDate } from '../../helper/calcTimestamp';
 import { htmlToJsx } from '../../helper/htmlToJsx';
 import converter from '../../helper/converter';
@@ -68,6 +80,15 @@ const CommentItem = ({
       }
    }, [showDiscussionBox, commentId]);
 
+   const reactionIconColor = useColorModeValue('#3d3d3d', '#d6d6d7');
+   const ghostColor = useColorModeValue('light.ghostColor', 'dark.ghostColor');
+   const colorHover = useColorModeValue('light.colorHover', 'dark.colorHover');
+   const colorTertiary = useColorModeValue(
+      'light.colorTertiary',
+      'dark.colorTertiary'
+   );
+   const replyToColor = useColorModeValue('#8f8f8f', 'dark.colorTertiary');
+
    return (
       <VStack mb={['.7rem', '1rem']} ps={ps} id={`comment${commentId}`}>
          <Flex align='flex-start' w='100%'>
@@ -78,12 +99,15 @@ const CommentItem = ({
             />
 
             <Box
-               boxShadow='0 0 0 1px rgb(23 23 23 / 13%)'
+               boxShadow={useColorModeValue(
+                  '0 0 0 1px rgb(23 23 23 / 13%)',
+                  '0 0 0 1px rgb(255 255 255 / 15%)'
+               )}
                p={{ base: '.5rem .7rem', sm: '.5rem 1rem' }}
                borderRadius='5px'
                _hover={{
-                  '.more-icon': { fill: 'black' },
-                  '.arrow-up': { color: 'black' },
+                  '.more-icon': { fill: reactionIconColor },
+                  '.arrow-up': { color: reactionIconColor },
                }}
                w='100%'
                flex='1'
@@ -96,22 +120,22 @@ const CommentItem = ({
                         fontSize='15px'
                         fontWeight='900'
                         cursor='pointer'
+                        color={ghostColor}
+                        _hover={{ color: colorHover }}
                         onClick={() =>
                            handleViewProfile(currentUserProfile.username)
                         }
                      >
                         {currentUserProfile.name}
                      </Text>
+
                      {authorId === userId && (
-                        <Image
-                           src={authorIcon}
-                           alt='author_icon'
-                           title='author'
-                        />
+                        <AuthorIcon fill={reactionIconColor} />
                      )}
 
                      {/* show Date */}
-                     <Text fontSize='12px' color='#717171'>
+                     <Text fontSize='12px' color={colorTertiary}>
+                        {' '}
                         • {dateFormat(createdAt)}{' '}
                         {edited && (
                            <Text as='span'>
@@ -142,8 +166,7 @@ const CommentItem = ({
                      <Text
                         as='div'
                         fontSize='13px'
-                        color='#717171'
-                        opacity='.7'
+                        color={replyToColor}
                         mt='-7px !important'
                         mb='.5rem !important'
                         fontFamily='sans-serif'
@@ -167,19 +190,26 @@ const CommentItem = ({
             {!showDiscussionBox && (
                <HStack justify='flex-start'>
                   <ReactionButton
-                     icon={alreadyLiked ? redHeart : heart}
                      value={totalLike < 1 ? '' : totalLike}
                      text={
                         totalLike < 1 ? '' : totalLike > 1 ? 'likes' : 'like'
                      }
                      disabled={updatingLike}
                      onClick={() => handleClickLike(comments, commentId)}
-                  />
+                  >
+                     {alreadyLiked ? (
+                        <RedHeart />
+                     ) : (
+                        <HeartIcon fill={reactionIconColor} />
+                     )}
+                  </ReactionButton>
+
                   <ReactionButton
-                     icon={comment}
                      text='reply'
                      onClick={handleshowDiscussionBox}
-                  />
+                  >
+                     <CommentIcon fill={reactionIconColor} />
+                  </ReactionButton>
                </HStack>
             )}
 

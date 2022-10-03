@@ -37,7 +37,12 @@ const FAQ = () => {
          <Text>Of course, You can add image url using the syntax below.</Text>
 
          <Box mb='1rem' overflow='auto' mt='.5rem'>
-            <Text as='pre' bg='#f9ff21' display='inline-block'>
+            <Text
+               as='pre'
+               bg='#f9ff21'
+               color='light.color'
+               display='inline-block'
+            >
                ![image description](https://example_image.png)
             </Text>
          </Box>

@@ -6,6 +6,7 @@ import {
    MenuList,
    Text,
    useClipboard,
+   useColorModeValue,
    useToast,
 } from '@chakra-ui/react';
 import React from 'react';
@@ -14,7 +15,7 @@ import { Option } from '../../assets/icons';
 import { isTouchDevice } from '../../helper/isTouchDevice';
 import CustomMenuItem from '../../utils/CustomMenuItem';
 
-const MoreOptionMenu = ({ iconStyles, postTitle }) => {
+const MoreOptionMenu = ({ iconStyles, postTitle, reactionIconColor }) => {
    const toast = useToast();
    const postURL = window.location.href;
 
@@ -32,7 +33,6 @@ const MoreOptionMenu = ({ iconStyles, postTitle }) => {
             duration: 1000,
             status: 'success',
             isClosable: true,
-            variant: 'subtle',
             id,
          });
       }
@@ -68,10 +68,14 @@ const MoreOptionMenu = ({ iconStyles, postTitle }) => {
 
    return (
       <Menu autoSelect={false} isLazy>
-         <MenuButton _hover={{ '.moreBtn': { bg: 'gray.200' } }}>
+         <MenuButton
+            _hover={{
+               '.moreBtn': { bg: useColorModeValue('gray.100', 'dark.cardBg') },
+            }}
+         >
             <IconButton
                as='div'
-               icon={<Option />}
+               icon={<Option fill={reactionIconColor} />}
                {...iconStyles}
                className='moreBtn'
             />
@@ -81,7 +85,7 @@ const MoreOptionMenu = ({ iconStyles, postTitle }) => {
             p='.5rem'
             minW={{ base: '0 !important' }}
             w='250px'
-            bg='white'
+            bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
          >
             <CustomMenuItem onClick={handleCopyLink}>
                <HStack justify='space-between' w='100%'>

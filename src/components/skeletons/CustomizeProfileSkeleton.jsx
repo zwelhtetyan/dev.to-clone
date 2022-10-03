@@ -1,18 +1,14 @@
-import { Box, Flex, Skeleton, SkeletonCircle } from '@chakra-ui/react';
+import { Flex, Skeleton, SkeletonCircle } from '@chakra-ui/react';
 import React from 'react';
-import { whiteBoxStyles } from '../../utils/CustomizeProfileStyles';
-import { skeletonColor } from './skeletonColor';
+import useSkeletonColor from '../../hooks/useSkeletonColor';
+import { CustomizeProfileCard } from '../../utils/CustomizeProfileStyles';
 
 const CustomizeProfileSkeleton = () => {
+   const skeletonColor = useSkeletonColor();
+
    return (
       <Flex justify='center' w='100%' flex='1' align='flex-start'>
-         <Box
-            {...whiteBoxStyles}
-            w='100%'
-            maxWidth='720px'
-            mx='.5rem'
-            mb='1rem'
-         >
+         <CustomizeProfileCard w='100%' maxWidth='720px' mx='.5rem' mb='1rem'>
             <SkeletonCircle boxSize={'100px'} mx='auto' {...skeletonColor} />
 
             <Skeleton
@@ -37,7 +33,7 @@ const CustomizeProfileSkeleton = () => {
                mb='.5rem'
                {...skeletonColor}
             />
-         </Box>
+         </CustomizeProfileCard>
       </Flex>
    );
 };

@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Flex, HStack, Text, WrapItem } from '@chakra-ui/react';
+import {
+   Box,
+   Flex,
+   HStack,
+   Text,
+   useColorModeValue,
+   WrapItem,
+} from '@chakra-ui/react';
 import CustomAvatar from '../../utils/CustomAvatar';
 import { useNavigate } from 'react-router-dom';
 import { dateFormat } from '../../helper/calcTimestamp';
@@ -50,6 +57,16 @@ const SavedPostItem = ({ postData, isArchive }) => {
 
    const handleClickTag = useClickTag();
 
+   const ghostColor = useColorModeValue('light.ghostColor', 'dark.ghostColor');
+   const headingHover = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+   const colorTertiary = useColorModeValue(
+      'light.colorTertiary',
+      'dark.colorTertiary'
+   );
+
    return (
       <HStack as='article' justify='space-between'>
          <Flex mb='1.5rem' align='flex-start' flex='1'>
@@ -61,34 +78,45 @@ const SavedPostItem = ({ postData, isArchive }) => {
             <Box ms='.5rem' flex='1'>
                <Text
                   fontWeight={600}
-                  _hover={{ color: 'rgb(47 58 178)' }}
+                  _hover={{ color: headingHover }}
                   cursor='pointer'
                   onClick={handleNavigate}
                >
                   {postData.title}
                </Text>
-               <HStack
+               <Flex
+                  justify='flex-start'
+                  align='center'
                   fontSize='13px'
-                  color='#717171'
-                  spacing='2px'
+                  gap='.5rem'
                   wrap='wrap'
                >
                   <Text
-                     _hover={{ color: 'rgb(47 58 178)' }}
+                     color={ghostColor}
+                     _hover={{ color: headingHover }}
                      cursor='pointer'
                      onClick={() => navigate(`/${postData.username}`)}
                   >
                      {postData.name}
                   </Text>
-                  <Text>• {dateFormat(postData.createdAt)}</Text>
-                  <Text>• {postData.readTime} min read</Text>
+
+                  <Text color={colorTertiary}>
+                     {' '}
+                     • {dateFormat(postData.createdAt)}
+                  </Text>
+
+                  <Text color={colorTertiary}>
+                     {' '}
+                     • {postData.readTime} min read
+                  </Text>
+
                   {postData.tags.length !== 0 && (
                      <>
                         <Text ps='2px'>•</Text>
+
                         {postData.tags?.map((tag) => (
                            <WrapItem
                               key={nanoid()}
-                              color='rgb(64 64 64)'
                               onClick={(e) => handleClickTag(e, tag.tagName)}
                            >
                               <LangTag tag={tag} />
@@ -96,7 +124,7 @@ const SavedPostItem = ({ postData, isArchive }) => {
                         ))}
                      </>
                   )}
-               </HStack>
+               </Flex>
             </Box>
          </Flex>
 

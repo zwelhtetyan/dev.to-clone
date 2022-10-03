@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react';
 import { Box } from '@chakra-ui/react';
-
 import useTransformData from './hooks/useTransformData';
 import LoginAlert from './components/LoginAlert';
 import FallbackSpinner from './utils/FallbackSpinner';

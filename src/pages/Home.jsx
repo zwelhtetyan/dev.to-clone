@@ -1,11 +1,19 @@
 import { Flex } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import AllPost from '../components/post/AllPost';
 import { useSelector } from 'react-redux';
 import HomeMenu from '../components/home/HomeMenu';
 import HomeRight from '../components/home/HomeRight';
 
 const Home = () => {
+   useEffect(() => {
+      const header = document.querySelector('.header');
+      const footer = document.querySelector('.footer');
+
+      header.style.display = 'flex';
+      footer.style.display = 'flex';
+   }, []);
+
    const {
       transformedData,
       transformedDataLoading: loading,

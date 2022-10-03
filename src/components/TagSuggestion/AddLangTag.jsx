@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import LangTag from '../../utils/LangTag';
 import { useDispatch } from 'react-redux';
-import { Box, Input, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box, Flex, Input, Wrap, WrapItem } from '@chakra-ui/react';
 import tagSuggestions from './tagSuggestion.json';
 import { setTagsToStore } from '../../store/post/postData';
 import { nanoid } from '@reduxjs/toolkit';
@@ -124,9 +124,7 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
                         className='tag-input'
                         ref={inputTagRef}
                         placeholder={tagInputPlaceHolder}
-                        borderColor='gray.100'
                         borderRadius='5px'
-                        _placeholder={{ color: '#525252' }}
                         value={filterTagName}
                         onChange={({ target }) =>
                            setFilterTagName(target.value)
@@ -137,20 +135,20 @@ const AddLangTag = ({ filteredTagsFromLocalStorage }) => {
             </Wrap>
          </Box>
 
-         <Wrap
+         <Flex
+            wrap='wrap'
+            gap='.5rem'
             display={showSuggestionBox}
             w='100%'
-            bg='white'
-            className='suggestion-box'
+            className='suggestion-box shadowSecondary'
             m='0 auto 1rem'
             p={3}
             overflow='auto'
-            border='1px solid rgb(214, 214, 215)'
             borderRadius='5px'
-            maxH='7.9rem'
+            maxH='6rem'
          >
             {suggestions()}
-         </Wrap>
+         </Flex>
       </>
    );
 };

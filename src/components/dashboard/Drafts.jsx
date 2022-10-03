@@ -29,7 +29,7 @@ const Drafts = () => {
       return (
          <NoDataMessage title='You have not saved any draft yet.'>
             <PrimaryBtn
-               bg='rgb(59 73 223)'
+               bg='light.primary'
                m='1rem 0 0 0'
                onClick={() => navigate('/create-post')}
             >

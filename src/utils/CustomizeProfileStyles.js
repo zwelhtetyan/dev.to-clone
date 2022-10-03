@@ -1,14 +1,18 @@
-export const InputborderColor = {
-   borderColor: '#cbd5e0',
-   _hover: { borderColor: 'rgb(163 163 163)' },
-};
+import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 
-export const whiteBoxStyles = {
-   bg: 'white',
-   borderRadius: '5px',
-   boxShadow: '0 0 0 1px rgb(23 23 23 / 10%)',
-   p: '1rem 1rem 2rem',
-   mb: '1.5rem',
+export const CustomizeProfileCard = ({ children, ...props }) => {
+   return (
+      <Box
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+         borderRadius='5px'
+         className='shadow'
+         p='1rem 1rem 1.5rem'
+         mb='1.5rem'
+         {...props}
+      >
+         {children}
+      </Box>
+   );
 };
 
 export const titleStyles = {
@@ -17,10 +21,20 @@ export const titleStyles = {
    mb: 3,
 };
 
-export const labelStyles = { marginBottom: '.3rem', display: 'block' };
+export const Label = ({ children, ...props }) => (
+   <Text as='label' display='block' {...props}>
+      {children}
+   </Text>
+);
 
-export const smallLabelStyles = {
-   mb: 3,
-   fontSize: '15px',
-   color: 'rgb(82 82 82)',
+export const SmallLabel = ({ children }) => {
+   return (
+      <Text
+         mb='3'
+         fontSize='15px'
+         color={useColorModeValue('light.colorTertiary', 'dark.colorTertiary')}
+      >
+         {children}
+      </Text>
+   );
 };

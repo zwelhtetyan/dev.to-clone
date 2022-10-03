@@ -1,41 +1,38 @@
 import React from 'react';
 import { Box, Input, Text, VStack } from '@chakra-ui/react';
 import {
-   InputborderColor,
-   labelStyles,
    titleStyles,
-   whiteBoxStyles,
+   CustomizeProfileCard,
+   Label,
 } from '../../../utils/CustomizeProfileStyles';
 
 const Work = ({ workRef, educationRef, profileData }) => {
    return (
-      <Box {...whiteBoxStyles}>
+      <CustomizeProfileCard>
          <Text {...titleStyles}>Work</Text>
 
          <VStack spacing={3}>
             <Box w='100%'>
-               <label style={labelStyles}>Work</label>
+               <Label mb='.3rem'>Work</Label>
                <Input
                   defaultValue={profileData?.work}
                   placeholder='What do you do?'
                   type='text'
-                  {...InputborderColor}
                   ref={workRef}
                />
             </Box>
 
             <Box w='100%'>
-               <label style={labelStyles}>Education</label>
+               <Label mb='.3rem'>Education</Label>
                <Input
                   defaultValue={profileData?.education}
                   placeholder='What did you go to school?'
                   type='text'
-                  {...InputborderColor}
                   ref={educationRef}
                />
             </Box>
          </VStack>
-      </Box>
+      </CustomizeProfileCard>
    );
 };
 

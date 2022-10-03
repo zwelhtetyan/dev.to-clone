@@ -1,5 +1,12 @@
 import React from 'react';
-import { Box, Heading, HStack, Image, Text } from '@chakra-ui/react';
+import {
+   Box,
+   Heading,
+   HStack,
+   Image,
+   Text,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import { LightBtn, PrimaryBtn } from '../../../utils/Buttons';
 import useFollowTag from '../../../hooks/useFollowTag';
 
@@ -23,9 +30,8 @@ const Header = ({
    return (
       <Box
          borderRadius={{ base: 0, md: '5px' }}
-         bg='white'
-         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-         color='rgb(23 23 23)'
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+         className='shadow'
          borderTop={`1rem solid ${brandColor}`}
          p={{ base: '.7rem', md: '1.5rem' }}
       >
@@ -63,7 +69,7 @@ const Header = ({
                            </LightBtn>
                         ) : (
                            <PrimaryBtn
-                              bg='rgb(59 73 223)'
+                              bg='light.primary'
                               disabled={followLoading}
                               onClick={handleClickFollow}
                            >

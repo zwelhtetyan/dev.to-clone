@@ -38,7 +38,7 @@ const SearchInput = (
          mb={mb}
          flex={flex}
       >
-         <InputGroup h='39px' w={w || '100%'} borderColor='#00000033'>
+         <InputGroup h='39px' w={w || '100%'}>
             <Input placeholder={placeholder || 'Search...'} ref={ref} />
             <InputRightElement children={<FiSearch size={23} color='gray' />} />
          </InputGroup>

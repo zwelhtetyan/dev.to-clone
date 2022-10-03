@@ -1,10 +1,9 @@
 import React from 'react';
 import { Box, Input, Text, Textarea, VStack } from '@chakra-ui/react';
 import {
-   InputborderColor,
-   labelStyles,
+   CustomizeProfileCard,
+   Label,
    titleStyles,
-   whiteBoxStyles,
 } from '../../../utils/CustomizeProfileStyles';
 
 const Basic = ({
@@ -16,66 +15,61 @@ const Basic = ({
    profileData,
 }) => {
    return (
-      <Box {...whiteBoxStyles}>
+      <CustomizeProfileCard>
          <Text {...titleStyles}>Basic</Text>
 
          <VStack spacing={3}>
             <Box w='100%'>
-               <label style={labelStyles}>Website URL</label>
+               <Label mb='.3rem'>Website URL</Label>
                <Input
                   defaultValue={profileData?.website}
                   placeholder='https://yoursite.com'
                   type='url'
-                  {...InputborderColor}
                   ref={websiteRef}
                />
             </Box>
 
             <Box w='100%'>
-               <label style={labelStyles}>Github</label>
+               <Label mb='.3rem'>Github</Label>
                <Input
                   defaultValue={profileData?.github}
                   placeholder='https://github.com/username'
                   type='url'
-                  {...InputborderColor}
                   ref={githubRef}
                />
             </Box>
 
             <Box w='100%'>
-               <label style={labelStyles}>Twitter</label>
+               <Label mb='.3rem'>Twitter</Label>
                <Input
                   defaultValue={profileData?.twitter}
                   placeholder='https://twitter.com/username'
                   type='url'
-                  {...InputborderColor}
                   ref={twitterRef}
                />
             </Box>
 
             <Box w='100%'>
-               <label style={labelStyles}>Location</label>
+               <Label mb='.3rem'>Location</Label>
                <Input
                   defaultValue={profileData?.location}
                   placeholder='Halifax, Nova Scotia'
                   type='text'
-                  {...InputborderColor}
                   ref={locationRef}
                />
             </Box>
 
             <Box w='100%'>
-               <label style={labelStyles}>Bio</label>
+               <Label mb='.3rem'>Bio</Label>
 
                <Textarea
                   defaultValue={profileData?.bio}
                   placeholder='A Short Bio...'
-                  {...InputborderColor}
                   ref={bioRef}
                />
             </Box>
          </VStack>
-      </Box>
+      </CustomizeProfileCard>
    );
 };
 

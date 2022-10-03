@@ -7,6 +7,7 @@ import {
    Spinner,
    Text,
    Tooltip,
+   useColorModeValue,
 } from '@chakra-ui/react';
 import { nanoid } from '@reduxjs/toolkit';
 import React, { useEffect, useState } from 'react';
@@ -50,11 +51,17 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
       removeImage(url).catch((err) => console.log(err));
    };
 
+   const borderColor = useColorModeValue('#d6d6d7', '#3d3d3d');
+   const spinnerColor = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+
    return (
       <Flex mb='1rem' justify='flex-start' align='center' flexWrap='wrap'>
          {uploading && (
             <HStack>
-               <Spinner color='blue' size='md' />
+               <Spinner color={spinnerColor} size='md' />
                <Text letterSpacing='1px'>Uploading...</Text>
             </HStack>
          )}
@@ -76,15 +83,14 @@ const AddCvImg = ({ cvImgFromLocalStorage, setUploadingImg }) => {
                <Tooltip
                   label='Use a ratio of 100:42 for best result.'
                   aria-label='A tooltip'
-                  bg='black'
                   borderRadius='3px'
                >
                   <Button
                      as='label'
-                     border='2px solid #d6d6d7'
+                     border='2px solid'
+                     borderColor={borderColor}
                      m='0'
                      p={2}
-                     bg='#F5F5F5'
                      fontWeight={400}
                      cursor='pointer'
                   >

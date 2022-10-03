@@ -6,9 +6,11 @@ import {
    SkeletonText,
 } from '@chakra-ui/react';
 import React from 'react';
-import { skeletonColor } from './skeletonColor';
+import useSkeletonColor from '../../hooks/useSkeletonColor';
 
 const SavedPostItemSkeleton = () => {
+   const skeletonColor = useSkeletonColor();
+
    return (
       <HStack py='1rem'>
          <HStack flex={1}>

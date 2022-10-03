@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import React, { useRef } from 'react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -42,6 +42,12 @@ const Search = () => {
          postData.name.toLowerCase().includes(querySearchTerm.toLowerCase())
    );
 
+   const searchTermColor = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+   const cardBg = useColorModeValue('light.cardBg', 'dark.cardBg');
+
    if (loading) {
       return (
          <Box flex='1' w='100%' maxW='650px'>
@@ -75,7 +81,7 @@ const Search = () => {
                      display={{ base: 'none', md: 'block' }}
                   >
                      Search results for '{' '}
-                     <Text as='span' color='rgb(47 58 178)'>
+                     <Text as='span' color={searchTermColor}>
                         {querySearchTerm}
                      </Text>{' '}
                      '
@@ -119,8 +125,8 @@ const Search = () => {
                p='5rem 1rem'
                textAlign='center'
                borderRadius='5px'
-               bg='white'
-               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+               bg={cardBg}
+               className='shadow'
             >
                No results match that query 🤔
             </Box>

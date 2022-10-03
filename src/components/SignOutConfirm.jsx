@@ -34,7 +34,7 @@ const SignOutConfirm = () => {
          >
             Are you sure you want to sign out?
          </Heading>
-         <PrimaryBtn bg='rgb(59 73 223)' onClick={handleSignOut}>
+         <PrimaryBtn bg='light.primary' onClick={handleSignOut}>
             Yes, sign out
          </PrimaryBtn>
       </VStack>

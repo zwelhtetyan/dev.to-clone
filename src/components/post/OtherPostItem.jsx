@@ -1,4 +1,4 @@
-import { Box, Text, Wrap, WrapItem } from '@chakra-ui/react';
+import { Box, Text, useColorModeValue, Wrap, WrapItem } from '@chakra-ui/react';
 import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -28,14 +28,20 @@ const OtherPostItem = ({ username, title, tags, postId }) => {
          px='1rem'
          onClick={handleNavigate}
          cursor='pointer'
-         _hover={{ bg: 'white' }}
+         _hover={{
+            bg: useColorModeValue('light.cardBg', 'dark.cardBg'),
+         }}
       >
          <Text
             fontWeight={600}
-            _hover={{ color: 'rgb(47 58 178)' }}
+            _hover={{
+               color: useColorModeValue(
+                  'light.headingHover',
+                  'dark.headingHover'
+               ),
+            }}
             cursor='pointer'
             onClick={handleNavigate}
-            color='rgb(23 23 23)'
          >
             {title}
          </Text>

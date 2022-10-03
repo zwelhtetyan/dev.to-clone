@@ -1,4 +1,4 @@
-import { Heading, Link, Text } from '@chakra-ui/react';
+import { Heading, Link, Text, useColorModeValue } from '@chakra-ui/react';
 import React, { useEffect } from 'react';
 import Card from './Card';
 
@@ -9,8 +9,13 @@ const Socials = ({ socialName, address, href, onClick }) => {
          <Link
             as='a'
             cursor='pointer'
-            color='rgb(59 73 223)'
-            _hover={{ color: 'rgb(47 58 178)' }}
+            color={useColorModeValue('light.primary', 'dark.primary')}
+            _hover={{
+               color: useColorModeValue(
+                  'light.headingHover',
+                  'dark.headingHover'
+               ),
+            }}
             href={href}
             onClick={onClick}
             target='blank'

@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Box, HStack, Image, Input, Spinner, Text } from '@chakra-ui/react';
+import {
+   Box,
+   HStack,
+   Image,
+   Input,
+   Spinner,
+   Text,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import AddCvImg from '../AddCvImg';
 import AddLangTag from '../TagSuggestion/AddLangTag';
@@ -53,7 +61,10 @@ const CreatePostFrom = ({
    }, [mdeTab]);
 
    return (
-      <Box mt='-3.5rem'>
+      <Box
+         mt='-3.5rem'
+         sx={{ 'input, textarea': { background: 'transparent !important' } }}
+      >
          <Box maxW='768px' m='auto'>
             {/* navbar */}
             <Box display='flex' mx={{ base: '.5rem', lg: '0rem' }}>
@@ -90,56 +101,59 @@ const CreatePostFrom = ({
             </Box>
 
             {/* body */}
-            <Box
-               align='start'
-               bg='white'
-               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-               borderRadius='5px'
-               mt={{ base: '.5rem', md: '1rem' }}
-               p={{ base: '.5rem', md: '1rem' }}
-            >
-               {mdeTab === 'write' && (
-                  <Box w='100%'>
-                     <AddCvImg
-                        cvImgFromLocalStorage={postData?.cvImg}
-                        setUploadingImg={setUploadingImg}
-                     />
-
-                     <Input
-                        variant='unstyled'
-                        placeholder='New post title here...'
-                        fontSize={{ base: '2rem', md: '2.5rem' }}
-                        fontWeight='700'
-                        value={postTitle}
-                        height='60px'
-                        className='title-input'
-                        _focus={{
-                           border: 'none !important',
-                           boxShadow: 'none !important',
-                        }}
-                        m='0'
-                        required
-                        onChange={({ target }) => setPostTitle(target.value)}
-                        _placeholder={{ color: '#525252' }}
-                     />
-                     {touch && !postTitle && <NoTitleMessage />}
-
-                     <AddLangTag
-                        filteredTagsFromLocalStorage={postData?.tags}
-                     />
-
-                     <Box w='100%' my='.5rem !important'>
-                        <MDE
-                           MDEValue={postData?.MDEValue}
-                           isSubmitting={publishing || savingDraft}
+            <Box height='calc(100vh - 110px)' overflow='auto'>
+               <Box
+                  align='start'
+                  bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+                  className='shadow'
+                  borderRadius='5px'
+                  mt={{ base: '.5rem', md: '1rem' }}
+                  p={{ base: '.5rem', md: '1rem' }}
+               >
+                  {mdeTab === 'write' && (
+                     <Box w='100%'>
+                        <AddCvImg
+                           cvImgFromLocalStorage={postData?.cvImg}
                            setUploadingImg={setUploadingImg}
-                           setUploadedMDEImg={setUploadedMDEImg}
                         />
-                     </Box>
-                  </Box>
-               )}
 
-               {mdeTab === 'preview' && <PostPreview />}
+                        <Input
+                           variant='unstyled'
+                           ps='.5rem'
+                           placeholder='New post title here...'
+                           bg='transparent !important'
+                           fontSize={{ base: '2rem', md: '2.5rem' }}
+                           fontWeight='700'
+                           value={postTitle}
+                           height='60px'
+                           _focus={{
+                              border: 'none !important',
+                              boxShadow: 'none !important',
+                           }}
+                           m='0'
+                           required
+                           onChange={({ target }) => setPostTitle(target.value)}
+                           _placeholder={{ color: '#525252' }}
+                        />
+                        {touch && !postTitle && <NoTitleMessage />}
+
+                        <AddLangTag
+                           filteredTagsFromLocalStorage={postData?.tags}
+                        />
+
+                        <Box w='100%' mt='.5rem !important'>
+                           <MDE
+                              MDEValue={postData?.MDEValue}
+                              isSubmitting={publishing || savingDraft}
+                              setUploadingImg={setUploadingImg}
+                              setUploadedMDEImg={setUploadedMDEImg}
+                           />
+                        </Box>
+                     </Box>
+                  )}
+
+                  {mdeTab === 'preview' && <PostPreview />}
+               </Box>
             </Box>
 
             {/* buttons container */}
@@ -151,7 +165,7 @@ const CreatePostFrom = ({
                pos='sticky'
                bottom='0'
                zIndex='1'
-               bg='#f5f5f5'
+               bg={useColorModeValue('light.bg', 'dark.bg')}
             >
                {!isToEdit && (
                   <SecondaryBtn
@@ -169,7 +183,7 @@ const CreatePostFrom = ({
                )}
 
                <PrimaryBtn
-                  bg='rgb(59 73 223)'
+                  bg='light.primary'
                   onClick={() =>
                      onSubmit(isToEdit ? eidtPostHandler : publishPostHandler)
                   }

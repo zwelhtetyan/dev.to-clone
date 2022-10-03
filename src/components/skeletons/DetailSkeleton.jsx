@@ -6,9 +6,11 @@ import {
    SkeletonText,
 } from '@chakra-ui/react';
 import React from 'react';
-import { skeletonColor } from './skeletonColor';
+import useSkeletonColor from '../../hooks/useSkeletonColor';
 
 const DetailSkeleton = () => {
+   const skeletonColor = useSkeletonColor();
+
    return (
       <Box
          bg='transparent'

@@ -1,20 +1,27 @@
 import React from 'react';
-import { HStack, Image, Text } from '@chakra-ui/react';
+import { HStack, Image, Text, useColorModeValue } from '@chakra-ui/react';
 import IconBadge from './IconBadge';
 
-const SideMenuItem = ({ icon, title, onClick, savedPostsCount, bg, color }) => {
+const SideMenuItem = ({ isActive, icon, title, onClick, savedPostsCount }) => {
+   const bgColor = useColorModeValue('light.secondary', 'dark.secondary');
+   const color = useColorModeValue('light.linkColor', 'dark.linkColor');
+   const activeColor = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+
    return (
       <HStack
          cursor='pointer'
          p='.5rem'
          borderRadius='5px'
          _hover={{
-            bg: 'rgb(59 73 223 / 10%)',
-            color: 'rgb(47 58 178)',
+            bg: useColorModeValue('light.secondary', 'dark.secondary'),
+            color: useColorModeValue('light.headingHover', 'dark.headingHover'),
          }}
          onClick={onClick}
-         bg={bg}
-         color={color}
+         bg={isActive && bgColor}
+         color={isActive ? activeColor : color}
          mb={1}
       >
          {icon && <Image src={icon} alt='menu_icon' />}

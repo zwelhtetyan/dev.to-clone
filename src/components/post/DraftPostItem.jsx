@@ -1,4 +1,4 @@
-import { Box, Heading, Text } from '@chakra-ui/react';
+import { Box, Heading, Text, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { titleRoute } from '../../helper/titleRoute';
@@ -13,9 +13,8 @@ const DraftPostItem = ({ username, title, postId }) => {
 
    return (
       <Box
-         bg='white'
-         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-         _hover={{ boxShadow: '0 0 0 1.5px rgb(23 23 23 / 10%)' }}
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+         className='shadow'
          borderRadius={{ base: '0', md: '5px' }}
          p={{ base: '.5rem', sm: '1rem' }}
          cursor='pointer'
@@ -23,7 +22,8 @@ const DraftPostItem = ({ username, title, postId }) => {
          onClick={handleNavigate}
       >
          <Text
-            bg='#FCD34D'
+            bg='#FBBF24'
+            color='dark.cardColor'
             px='5px'
             fontSize='13px'
             borderRadius='5px'
@@ -36,10 +36,14 @@ const DraftPostItem = ({ username, title, postId }) => {
             cursor='pointer'
             mt={2}
             w='100%'
-            _hover={{ color: 'rgb(47 58 178)' }}
+            _hover={{
+               color: useColorModeValue(
+                  'light.headingHover',
+                  'dark.headingHover'
+               ),
+            }}
             fontSize={['1.2rem', '1.5rem']}
             onClick={handleNavigate}
-            color='rgb(23 23 23)'
          >
             {title}
          </Heading>

@@ -1,8 +1,10 @@
 import { Skeleton } from '@chakra-ui/react';
 import React from 'react';
-import { skeletonColor } from './skeletonColor';
+import useSkeletonColor from '../../hooks/useSkeletonColor';
 
 const TagCardSkeleton = () => {
+   const skeletonColor = useSkeletonColor();
+
    return (
       <Skeleton
          borderRadius='5px'

@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import logo from '../assets/images/logo.png';
 import { FiSearch } from 'react-icons/fi';
 import { Link, useNavigate } from 'react-router-dom';
-import { Box, Flex, HStack, Image } from '@chakra-ui/react';
+import { Box, Flex, HStack, Image, useColorModeValue } from '@chakra-ui/react';
 import { PrimaryBtn, SecondaryBtn } from '../utils/Buttons';
 import SideMenu from '../components/menu/SideMenu';
 import { useAuth } from '../context/auth';
@@ -28,12 +28,16 @@ const Header = () => {
 
    return (
       <HStack
+         className='header'
          as='header'
-         bg='white'
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
          w='100%'
          h='56px'
          pos='fixed'
-         boxShadow='0 1px 1px rgba(0, 0, 0, 0.1)'
+         boxShadow={useColorModeValue(
+            '0 1px 1px rgba(0, 0, 0, 0.1)',
+            '0 1px 1px rgb(0, 0, 0)'
+         )}
          zIndex={1000}
          top='0'
          left='0'

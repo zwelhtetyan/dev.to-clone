@@ -1,5 +1,12 @@
 import React, { useEffect } from 'react';
-import { Box, Button, Flex, Heading, HStack } from '@chakra-ui/react';
+import {
+   Box,
+   Button,
+   Flex,
+   Heading,
+   HStack,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import TagCard from './TagCard';
 import { nanoid } from '@reduxjs/toolkit';
 import SearchInput from '../../components/search/SearchInput';
@@ -34,6 +41,8 @@ const Tags = () => {
    const { profileData, profileDataLoading } = useSelector(
       (state) => state.profileData
    );
+
+   const cardBg = useColorModeValue('light.cardBG', 'dark.cardBg');
 
    if (err) {
       return <ErrorMessage offline={true} />;
@@ -89,8 +98,8 @@ const Tags = () => {
                p='3rem .5rem'
                textAlign='center'
                w='100%'
-               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-               bg='white'
+               className='shadow'
+               bg={cardBg}
                borderRadius='5px'
             >
                No results match that query

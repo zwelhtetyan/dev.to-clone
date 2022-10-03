@@ -1,4 +1,9 @@
-import { Menu, MenuButton, MenuList } from '@chakra-ui/react';
+import {
+   Menu,
+   MenuButton,
+   MenuList,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import React from 'react';
 import { RiMoreLine } from 'react-icons/ri';
 import { useDispatch, useSelector } from 'react-redux';
@@ -99,6 +104,8 @@ const ManageComment = ({ commentId, postId, comments }) => {
       navigate('/delete-comment');
    };
 
+   const replyToColor = useColorModeValue('#8f8f8f', 'dark.colorTertiary');
+
    return (
       <Menu autoSelect={false} isLazy>
          <MenuButton
@@ -107,13 +114,18 @@ const ManageComment = ({ commentId, postId, comments }) => {
             h='24px'
             borderRadius='5px'
             _hover={{
-               bg: 'rgb(59 73 223 / 10%)',
-               color: 'rgb(47 58 178)',
+               bg: useColorModeValue('light.secondary', 'dark.secondary'),
+               color: useColorModeValue('light.primary', 'dark.primary'),
             }}
          >
-            <RiMoreLine size={20} color='#717171' className='more-icon' />
+            <RiMoreLine size={20} color={replyToColor} className='more-icon' />
          </MenuButton>
-         <MenuList minW='0' w='170px' p='.5rem'>
+         <MenuList
+            minW='0'
+            w='170px'
+            p='.5rem'
+            bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+         >
             <CustomMenuItem onClick={goToEdit}>Edit</CustomMenuItem>
             <CustomMenuItem onClick={goToDelete}>Delete</CustomMenuItem>
          </MenuList>

@@ -1,5 +1,13 @@
-import { Box, Button, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import {
+   Box,
+   Heading,
+   HStack,
+   Text,
+   useColorModeValue,
+   VStack,
+} from '@chakra-ui/react';
 import React from 'react';
+import { BtnDefault, BtnRed } from './Buttons';
 
 const DeleteConfirm = ({ title, onDismiss, onDelete, loading, type }) => {
    return (
@@ -7,12 +15,11 @@ const DeleteConfirm = ({ title, onDismiss, onDelete, loading, type }) => {
          <VStack
             py={['2rem', '3rem']}
             px={['.5rem', '.5rem', '2rem']}
-            bg='white'
             maxW='900px'
+            bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
             w='100%'
-            boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
             borderRadius={['0', '0', '5px']}
-            className='mde-preview'
+            className='mde-preview shadow'
          >
             <Heading
                fontSize='1.3rem'
@@ -21,14 +28,18 @@ const DeleteConfirm = ({ title, onDismiss, onDelete, loading, type }) => {
             >
                {title.length > 100 ? title.substring(0, 100) + '...' : title}
             </Heading>
+
             <Box
-               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+               className='shadowSecondary'
                my='1.5rem !important'
                w='100%'
                maxW='650px'
                p={{ base: '1rem .5rem', md: '1rem' }}
                borderRadius='5px'
-               bg='#FAFAFA'
+               bg={useColorModeValue(
+                  'light.cardSecondaryBg',
+                  'dark.cardSecondaryBg'
+               )}
             >
                <Text
                   fontSize={{ base: '1.1rem', md: '1.3rem' }}
@@ -42,14 +53,18 @@ const DeleteConfirm = ({ title, onDismiss, onDelete, loading, type }) => {
                </Text>
 
                <HStack mt='.7rem' justify='flex-end'>
-                  <Button onClick={onDismiss}>Dismiss</Button>
-                  <Button
+                  {/* <Button
                      colorScheme='red'
                      onClick={onDelete}
                      disabled={loading}
                   >
                      {loading ? 'Deleting' : 'Delete'}
-                  </Button>
+                  </Button> */}
+
+                  <BtnDefault onClick={onDismiss}>Dismiss</BtnDefault>
+                  <BtnRed onClick={onDelete} disabled={loading}>
+                     {loading ? 'Deleting' : 'Delete'}
+                  </BtnRed>
                </HStack>
             </Box>
          </VStack>

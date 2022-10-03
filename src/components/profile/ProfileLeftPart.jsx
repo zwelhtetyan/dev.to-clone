@@ -1,24 +1,13 @@
 import React from 'react';
-import { Box, Divider, HStack, Image, Text } from '@chakra-ui/react';
+import {
+   Box,
+   Divider,
+   HStack,
+   Image,
+   Text,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import { doc, commentLg, tag } from '../../assets/icons';
-
-const TechStack = ({ title, text }) => {
-   return (
-      <Box
-         boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'
-         bg='#FAFAFA'
-         p={{ base: '1rem .5rem', md: '1rem' }}
-         borderRadius='5px'
-         mb={{ base: 1, md: 3 }}
-      >
-         <Text fontWeight={700} fontSize='18px'>
-            {title}
-         </Text>
-         <Divider mt={3} mb={5} />
-         <Text>{text}</Text>
-      </Box>
-   );
-};
 
 const ProfileLeftPart = ({
    publishedPosts,
@@ -26,7 +15,36 @@ const ProfileLeftPart = ({
    display,
    totalCommentWritten,
 }) => {
-   if (!profileData) return;
+   const cardBg = useColorModeValue(
+      'light.cardSecondaryBg',
+      'dark.cardSecondaryBg'
+   );
+
+   const cardColor = useColorModeValue(
+      'light.cardSecondaryColor',
+      'dark.cardSecondaryColor'
+   );
+
+   const ghostColor = useColorModeValue('light.ghostColor', 'dark.ghostColor');
+
+   const TechStack = ({ title, text }) => {
+      return (
+         <Box
+            bg={cardBg}
+            color={cardColor}
+            p={{ base: '1rem .5rem', md: '1rem' }}
+            borderRadius='5px'
+            mb={{ base: 1, md: 3 }}
+            className='shadowSecondary'
+         >
+            <Text fontWeight={700} fontSize='18px' color={cardColor}>
+               {title}
+            </Text>
+            <Divider mt={3} mb={5} />
+            <Text color={ghostColor}>{text}</Text>
+         </Box>
+      );
+   };
 
    const totalFollowingTags = profileData.followingTags?.length || 0;
 
@@ -57,8 +75,9 @@ const ProfileLeftPart = ({
          )}
 
          <Box
-            boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'
-            bg='#FAFAFA'
+            className='shadowSecondary'
+            bg={cardBg}
+            color={cardColor}
             p={{ base: '1.5rem .5rem', md: '1.5rem 1rem' }}
             borderRadius='5px'
          >

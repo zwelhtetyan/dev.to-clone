@@ -1,9 +1,15 @@
 import React, { useRef, useState } from 'react';
-import { Box, Heading, Spinner, Text } from '@chakra-ui/react';
+import {
+   Box,
+   Heading,
+   Spinner,
+   Text,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/auth';
 import { PrimaryBtn } from '../utils/Buttons';
-import { whiteBoxStyles } from '../utils/CustomizeProfileStyles';
+import { CustomizeProfileCard } from '../utils/CustomizeProfileStyles';
 import {
    Basic,
    Work,
@@ -55,6 +61,8 @@ const CustomizeProfile = () => {
    const educationRef = useRef();
    const backgroundRef = useRef();
    const previewImgRef = useRef();
+
+   const nameColor = useColorModeValue('light.primary', 'dark.primary');
 
    if (!user) {
       navigate('/create-account');
@@ -189,7 +197,7 @@ const CustomizeProfile = () => {
          <Heading fontSize={{ base: '1.3rem', md: '1.5rem' }} ps='.5rem'>
             Profile for{' '}
             <Text
-               color='rgb(59 73 223)'
+               color={nameColor}
                as='span'
                cursor='pointer'
                onClick={() => navigate(`/${currentUserProfile.username}`)}
@@ -245,16 +253,15 @@ const CustomizeProfile = () => {
                profileData={currentUserProfile}
             />
 
-            <Box
-               {...whiteBoxStyles}
-               pb='1rem'
+            <CustomizeProfileCard
+               p='1rem'
                pos='sticky'
                bottom='0'
                zIndex='2'
                w='100%'
             >
                <PrimaryBtn
-                  bg='rgb(59 73 223)'
+                  bg='light.primary'
                   w='100%'
                   disabled={loading}
                   type='submit'
@@ -262,7 +269,7 @@ const CustomizeProfile = () => {
                   {loading && <Spinner size='sm' mr={3} />}
                   {loading ? 'Updating' : 'Update'} Profile Information.
                </PrimaryBtn>
-            </Box>
+            </CustomizeProfileCard>
          </Box>
       </Box>
    );

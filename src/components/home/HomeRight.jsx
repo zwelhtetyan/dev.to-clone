@@ -3,7 +3,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getPopularTags } from '../../helper/getPopularTags';
-import { skeletonColor } from '../skeletons/skeletonColor';
+import useSkeletonColor from '../../hooks/useSkeletonColor';
 import HomeRightCard from './HomeRightCard';
 
 const HomeRight = () => {
@@ -14,6 +14,8 @@ const HomeRight = () => {
    const popularTags = getPopularTags(transformedData)
       .map((tag) => tag.tagName)
       .slice(0, 3);
+
+   const skeletonColor = useSkeletonColor();
 
    return (
       <Box h='50vh' flex='1' ms='1rem' display={{ base: 'none', xl: 'block' }}>

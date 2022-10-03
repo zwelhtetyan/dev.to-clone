@@ -31,7 +31,7 @@ export const signUpBtnDesigns = [
       logo: google,
       text: 'Google',
       hoverBg: '#d9d9d9',
-      color: '#000',
+      color: 'light.color',
       signInMethod: googleProvider,
    },
    {

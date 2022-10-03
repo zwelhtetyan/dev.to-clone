@@ -27,7 +27,7 @@ const ErrorMessage = ({ offline, urlNotFound }) => {
                <Text>we're having issue fetching your data 😟</Text>
                <Text
                   fontSize='15px'
-                  color='rgb(59 73 223)'
+                  color='light.primary'
                   _hover={{ color: 'rgb(103 115 237 / 91%)' }}
                   cursor='pointer'
                   mt='1rem !important'

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import UserProfilePopup from '../profile/UserProfilePopup';
 import { nanoid } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
@@ -17,6 +17,16 @@ const DetailRightContent = ({
    const navigate = useNavigate();
    const user = useAuth();
 
+   const cardColor = useColorModeValue(
+      'light.cardSecondaryBg',
+      'dark.cardSecondaryBg'
+   );
+
+   const nameColor = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+
    return (
       <Box
          m={m}
@@ -30,9 +40,11 @@ const DetailRightContent = ({
             w='100%'
             p='1rem'
             m={{ base: '0', md: '1px' }}
-            contentMb='1rem'
             borderRadius={{ base: '0', md: '5px' }}
-            boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+            boxShadow={useColorModeValue(
+               '0 0 0 1px rgb(23 23 23 / 10%)',
+               '0 0 0 1px rgb(255 255 255 / 15%)'
+            )}
             backgroundHeight='50px'
             background={currentUserProfile.background}
             profile={currentUserProfile.profile}
@@ -51,17 +63,17 @@ const DetailRightContent = ({
          {otherPosts.length !== 0 && !isDraft && (
             <Box
                borderRadius={{ base: '0', md: '5px' }}
-               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+               className='shadow'
                mt='1rem'
                overflow='hidden'
-               bg='#fafafa'
+               bg={cardColor}
                py='.5rem'
             >
                <Text fontSize='1.3rem' mb='1rem' fontWeight={600} ms='1rem'>
                   More from{' '}
                   <Text
                      as='span'
-                     color='rgb(47 58 178)'
+                     color={nameColor}
                      cursor='pointer'
                      onClick={() => navigate(`/${currentUserProfile.username}`)}
                   >

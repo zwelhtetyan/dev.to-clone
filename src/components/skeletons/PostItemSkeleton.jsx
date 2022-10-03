@@ -6,9 +6,11 @@ import {
    SkeletonText,
 } from '@chakra-ui/react';
 import React from 'react';
-import { skeletonColor } from './skeletonColor';
+import useSkeletonColor from '../../hooks/useSkeletonColor';
 
 const PostItemSkeleton = ({ firstItem }) => {
+   const skeletonColor = useSkeletonColor();
+
    return (
       <Box
          bg='transparent'
@@ -17,7 +19,7 @@ const PostItemSkeleton = ({ firstItem }) => {
          borderRadius={{ base: '0', md: '5px' }}
          mb='.5rem'
          mx='auto'
-         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+         className='shadow'
       >
          {firstItem && (
             <Box h={{ base: '200px', md: '230px' }} mb='.5rem'></Box>

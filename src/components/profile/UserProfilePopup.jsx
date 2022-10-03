@@ -1,21 +1,10 @@
 import React from 'react';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 import { joinOnDate } from '../../helper/calcTimestamp';
 import { useNavigate } from 'react-router-dom';
 import { LightBtn, PrimaryBtn } from '../../utils/Buttons';
 import useClickFollow from '../../hooks/useFollowUser';
 import defaultProfile from '../../assets/images/default_profile.webp';
-
-const Content = ({ title, text, contentMb }) => {
-   return (
-      <Box mb={contentMb || '.3rem'}>
-         <Text textTransform='uppercase' fontSize='15' fontWeight='600'>
-            {title}
-         </Text>
-         <Text fontSize='15px'>{text}</Text>
-      </Box>
-   );
-};
 
 const UserProfilePopup = ({
    background,
@@ -33,13 +22,12 @@ const UserProfilePopup = ({
    w,
    p,
    m,
-   contentMb,
    backgroundHeight,
    pos,
    display,
    zIndex,
-   boxShadow,
    borderRadius,
+   boxShadow,
 }) => {
    const navigate = useNavigate();
 
@@ -50,6 +38,31 @@ const UserProfilePopup = ({
 
    const alreadyFollow = followers.includes(currentUserId);
 
+   const ghostColor = useColorModeValue('light.ghostColor', 'dark.ghostColor');
+   const base70 = useColorModeValue('light.base70', 'dark.base70');
+   const colorTertiary = useColorModeValue(
+      'light.colorTertiary',
+      'dark.colorTertiary'
+   );
+
+   const Content = ({ title, text }) => {
+      return (
+         <Box mb='.5rem'>
+            <Text
+               textTransform='uppercase'
+               fontSize='14px'
+               fontWeight='600'
+               color={colorTertiary}
+            >
+               {title}
+            </Text>
+            <Text fontSize='15px' color={ghostColor}>
+               {text}
+            </Text>
+         </Box>
+      );
+   };
+
    return (
       <Box
          w={w || '300px'}
@@ -59,7 +72,7 @@ const UserProfilePopup = ({
          zIndex={zIndex}
          display={display}
          className='profilePopup'
-         bg='#fafafa'
+         bg={useColorModeValue('light.cardSecondaryBg', 'dark.cardSecondaryBg')}
          boxShadow={boxShadow}
          overflow='hidden'
          transitionDelay='.5s'
@@ -89,7 +102,13 @@ const UserProfilePopup = ({
                   fontSize='1.3rem'
                   fontWeight='600'
                   cursor='pointer'
-                  _hover={{ color: 'rgb(47 58 178)' }}
+                  color={ghostColor}
+                  _hover={{
+                     color: useColorModeValue(
+                        'light.headingHover',
+                        'dark.headingHover'
+                     ),
+                  }}
                   onClick={() => navigate(`/${username}`)}
                >
                   {name}
@@ -99,7 +118,7 @@ const UserProfilePopup = ({
                   <PrimaryBtn
                      w='100%'
                      m='.5rem 0'
-                     bg='rgb(59 73 223)'
+                     bg='light.primary'
                      onClick={handleClickFollow}
                      disabled={loading}
                   >
@@ -108,47 +127,24 @@ const UserProfilePopup = ({
                )}
 
                {alreadyFollow && (
-                  <LightBtn
-                     bg='white'
-                     onClick={handleClickFollow}
-                     disabled={loading}
-                  >
+                  <LightBtn onClick={handleClickFollow} disabled={loading}>
                      Following
                   </LightBtn>
                )}
 
                <Text
-                  color='#575757'
+                  color={base70}
                   letterSpacing='.3px'
-                  mb='.5rem'
+                  mb='.7rem'
                   fontSize='16px'
                >
                   {bio}
                </Text>
-               {work && (
-                  <Content contentMb={contentMb} title='Work' text={work} />
-               )}
-               {location && (
-                  <Content
-                     contentMb={contentMb}
-                     title='Location'
-                     text={location}
-                  />
-               )}
-               {education && (
-                  <Content
-                     contentMb={contentMb}
-                     title='Education'
-                     text={education}
-                  />
-               )}
-               {joined && (
-                  <Content
-                     contentMb={contentMb}
-                     title='Joined'
-                     text={joinOnDate(joined)}
-                  />
-               )}
+
+               {work && <Content title='Work' text={work} />}
+               {location && <Content title='Location' text={location} />}
+               {education && <Content title='Education' text={education} />}
+               {joined && <Content title='Joined' text={joinOnDate(joined)} />}
             </Box>
          </Box>
       </Box>

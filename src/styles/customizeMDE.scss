@@ -4,13 +4,14 @@
    .mde-header {
       border: none;
       flex-wrap: nowrap;
+      overflow: hidden;
+
       overflow-x: auto;
 
       position: sticky;
       top: 0;
       z-index: 1;
 
-      background-color: #f9f9f9;
       height: 50px;
       display: flex;
       align-items: center;
@@ -39,12 +40,6 @@
             align-items: center;
             justify-content: center;
             position: relative;
-
-            &:hover {
-               background-color: #e2e3f3;
-               color: rgb(47, 58, 178);
-               border-radius: 5px;
-            }
          }
       }
 
@@ -54,7 +49,7 @@
    }
 
    .mde-text {
-      height: calc(100vh - 370px) !important;
+      height: calc(100vh - 380px) !important;
 
       &:disabled {
          background-color: #fafafa;
@@ -122,6 +117,8 @@
 
    .mde-text,
    .mde-preview {
+      font-size: 16px;
+
       min-height: 150px !important;
       height: auto !important;
    }

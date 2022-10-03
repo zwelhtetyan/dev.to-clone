@@ -3,6 +3,10 @@ import { useSelector } from 'react-redux';
 const useGenerateUserName = () => {
    const { profileData } = useSelector((state) => state.profileData);
 
+   const getRandomNumber = (min, max) => {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+   };
+
    const getUsername = (username, userId) => {
       const authenticatedUsernames = [
          ...new Set(
@@ -27,7 +31,7 @@ const useGenerateUserName = () => {
             return;
          }
 
-         createUniqueUsername(nameParam, +number + 1);
+         createUniqueUsername(nameParam, getRandomNumber(1, 999));
       };
 
       createUniqueUsername(username.toLowerCase().split(' ').join(''));

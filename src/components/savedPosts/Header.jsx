@@ -72,7 +72,6 @@ const Header = ({
                   h='39px'
                   w={{ base: '100%', md: '250px' }}
                   ms={{ base: '0 !important', md: '0.5rem !important' }}
-                  borderColor='#00000033'
                >
                   <Input placeholder='Search...' onChange={handleSearch} />
                   <InputRightElement
@@ -84,7 +83,6 @@ const Header = ({
 
          <Box mt={2}>
             <Select
-               borderColor='#00000033'
                display={['block', 'block', 'none']}
                onChange={handleSelectOption}
                value={selectedTagName}

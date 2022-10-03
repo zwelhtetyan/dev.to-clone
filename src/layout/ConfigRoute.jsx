@@ -19,6 +19,8 @@ const Search = lazy(() => import('../components/search/Search'));
 const Profile = lazy(() => import('../pages/Profile'));
 const CustomizeProfile = lazy(() => import('../pages/CustomizeProfile'));
 
+const Apperance = lazy(() => import('../pages/Apperance'));
+
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 const Posts = lazy(() => import('../components/dashboard/Posts'));
 const Drafts = lazy(() => import('../components/dashboard/Drafts'));
@@ -53,6 +55,7 @@ const ConfigRoute = () => {
             <Route path='login' element={<Login />} />
             <Route path='customize-profile' element={<CustomizeProfile />} />
             <Route path='signout-confirm' element={<SignOutConfirm />} />
+            <Route path='apperance' element={<Apperance />} />
 
             {/* dashboard routes */}
             <Route path='dashboard' element={<Dashboard />}>

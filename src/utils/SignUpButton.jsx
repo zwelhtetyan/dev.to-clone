@@ -5,7 +5,7 @@ const SignUpButton = ({ bg, logo, type, text, hoverBg, color, onClick }) => {
    return (
       <HStack
          bg={bg}
-         color={color || 'white'}
+         color={color || 'dark.color'}
          p='.7rem'
          borderRadius='5px'
          w='100%'

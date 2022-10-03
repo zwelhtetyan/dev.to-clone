@@ -1,4 +1,11 @@
-import { HStack, Menu, MenuButton, MenuList, Text } from '@chakra-ui/react';
+import {
+   HStack,
+   Menu,
+   MenuButton,
+   MenuList,
+   Text,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -80,10 +87,11 @@ const ManangePost = ({ postId, m }) => {
             borderRadius='5px'
             fontWeight='normal'
             fontSize='13px'
-            border='1px solid rgb(59 73 223)'
-            color='rgb(59 73 223)'
+            border='1px solid'
+            borderColor={useColorModeValue('light.primary', 'dark.primary')}
+            color={useColorModeValue('light.primary', 'dark.primary')}
             _hover={{
-               bg: 'rgb(59 73 223)',
+               bg: 'light.primary',
                color: 'white',
             }}
             onClick={(e) => e.stopPropagation()}
@@ -91,7 +99,12 @@ const ManangePost = ({ postId, m }) => {
          >
             {pinning ? 'Loading' : 'Manage'}
          </MenuButton>
-         <MenuList minW='0' w='180px' p='.5rem'>
+         <MenuList
+            minW='0'
+            w='180px'
+            p='.5rem'
+            bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+         >
             {!currentPostItem.draft && (
                <CustomMenuItem onClick={handlePinPost}>
                   <HStack w='100%'>

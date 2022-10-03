@@ -6,6 +6,7 @@ import {
    DrawerContent,
    DrawerHeader,
    DrawerOverlay,
+   useColorModeValue,
    useDisclosure,
 } from '@chakra-ui/react';
 import { SecondaryBtn } from '../../utils/Buttons';
@@ -27,7 +28,10 @@ const SideMenu = () => {
 
          <Drawer isOpen={isOpen} placement='left' onClose={onClose}>
             <DrawerOverlay />
-            <DrawerContent maxW='290px'>
+            <DrawerContent
+               maxW='290px'
+               bg={useColorModeValue('light.bg', 'dark.bg')}
+            >
                <DrawerHeader
                   padding='.9rem .5rem .5rem'
                   display='flex'
@@ -37,8 +41,14 @@ const SideMenu = () => {
                   <DrawerCloseButton
                      pos='static'
                      _hover={{
-                        bg: 'rgb(59 73 223 / 10%)',
-                        color: 'rgb(47 58 178)',
+                        bg: useColorModeValue(
+                           'light.secondary',
+                           'dark.secondary'
+                        ),
+                        color: useColorModeValue(
+                           'light.headingHover',
+                           'dark.headingHover'
+                        ),
                      }}
                   />
                </DrawerHeader>

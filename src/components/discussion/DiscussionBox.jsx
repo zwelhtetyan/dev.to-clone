@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, HStack, Spinner } from '@chakra-ui/react';
+import { Box, HStack, Spinner, useColorModeValue } from '@chakra-ui/react';
 import converter from '../../helper/converter';
 import { PrimaryBtn, SecondaryBtn } from '../../utils/Buttons';
 import MDE from '../MDE';
@@ -156,16 +156,25 @@ const DiscussionBox = ({
          });
    };
 
+   const shadow = useColorModeValue(
+      '0 0 0 1px rgb(212 212 212)',
+      '0 0 0 1px rgb(255 255 255 / 15%)'
+   );
+
+   const boxBoxShadow = useColorModeValue(
+      '0 0 0 2px rgb(59 73 223)',
+      '0 0 0 2px rgb(129 140 248) '
+   );
+
    return (
       <Box className='mde-preview'>
          {mdeTab === 'write' && (
             <Box
                borderRadius='5px'
                _focusWithin={{
-                  borderColor: 'rgb(59 73 223)',
-                  boxShadow: '0 0 0 1px rgb(59 73 233)',
+                  boxShadow: user && boxBoxShadow,
                }}
-               border='1px solid rgb(212 212 212)'
+               boxShadow={shadow}
                overflow='hidden'
                className='discussion-box mde-preview'
             >
@@ -185,7 +194,7 @@ const DiscussionBox = ({
                borderRadius='5px'
                padding='10px !important'
                className='mde-preview-content'
-               boxShadow='0 0 0 1px #d6d6d7'
+               boxShadow={shadow}
                fontSize={['1rem', '1.1rem']}
                sx={{ p: { marginBottom: '5px !important' } }}
             >
@@ -194,7 +203,7 @@ const DiscussionBox = ({
          )}
 
          {/* buttons */}
-         <HStack justify='flex-end' w='100%' mt='.3rem' id='hi'>
+         <HStack justify='flex-end' w='100%' mt='.5rem'>
             {showDismiss && (
                <SecondaryBtn
                   onClick={onDismiss}
@@ -217,7 +226,7 @@ const DiscussionBox = ({
 
             <PrimaryBtn
                onClick={handleSubmit}
-               bg='rgb(59 73 223)'
+               bg='light.primary'
                disabled={!hasValue || uploadingImg || submitting}
             >
                {submitting ? (

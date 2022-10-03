@@ -1,5 +1,13 @@
 import React from 'react';
-import { Box, Flex, Heading, HStack, Select, Text } from '@chakra-ui/react';
+import {
+   Box,
+   Flex,
+   Heading,
+   HStack,
+   Select,
+   Text,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import { useSelector } from 'react-redux';
 import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import Left from '../components/dashboard/layout/Left';
@@ -14,8 +22,8 @@ const ReactionBox = ({ count, title, m }) => {
       <Box
          flex='1'
          textAlign='center'
-         bg='rgb(250 250 250)'
-         boxShadow='0 0 0 1px rgb(23 23 23 / 5%)'
+         bg={useColorModeValue('light.cardSecondaryBg', 'dark.cardSecondaryBg')}
+         className='shadowSecondary'
          p='1rem'
          m={m}
          borderRadius='5px'
@@ -86,22 +94,23 @@ const Dashboard = () => {
          navigate('/dashboard');
          return;
       }
+
       if (pathname === 'following users') {
          navigate('/dashboard/following_users');
          return;
       }
+
       navigate(`/dashboard/${pathname}`);
    };
 
    return (
-      <Box w='100%' maxW='1260px' flex={1} p={{ md: '.5rem', xl: '1rem' }}>
+      <Box w='100%' maxW='1280px' flex={1} p={{ md: '.5rem', xl: '1rem' }}>
          <Box px={['.5rem', '.5rem', '0']} mb={3}>
-            <Heading fontSize={{ base: '1.5rem', md: '2rem' }}>
+            <Heading fontSize={{ base: '1.5rem', md: '1.8rem' }} mb='.5rem'>
                Dashboard 👻
             </Heading>
 
             <Select
-               borderColor='#00000033'
                display={['block', 'block', 'none']}
                mt='.5rem'
                onChange={handleSelect}

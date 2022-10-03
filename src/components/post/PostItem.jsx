@@ -10,6 +10,7 @@ import {
    Wrap,
    WrapItem,
    Flex,
+   useColorModeValue,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { ReactionButton, SecondaryBtn } from '../../utils/Buttons';
@@ -25,7 +26,7 @@ import useClickReactToPost from '../../hooks/useClickReactToPost';
 import { titleRoute } from '../../helper/titleRoute';
 import useClickTag from '../../hooks/useClickTag';
 import useClickSameRoute from '../../hooks/useClickSameRoute';
-import { heart, comment } from '../../assets/icons';
+import { CommentIcon, HeartIcon } from '../../assets/icons';
 
 const PostItem = ({
    name,
@@ -103,11 +104,24 @@ const PostItem = ({
    };
    /// showPopup logic end
 
+   const reactionIconColor = useColorModeValue('#3d3d3d', '#d6d6d7');
+   const colorHover = useColorModeValue('light.colorHover', 'dark.colorHover');
+   const ghostColor = useColorModeValue('light.ghostColor', 'dark.ghostColor');
+   const headingHover = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+   const colorTertiary = useColorModeValue(
+      'light.colorTertiary',
+      'dark.colorTertiary'
+   );
+
    return (
       <Box
-         bg='white'
-         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-         _hover={{ boxShadow: '0 0 0 1.5px rgb(23 23 23 / 10%)' }}
+         as='article'
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+         color={useColorModeValue('light.color', 'dark.color')}
+         className='shadow'
          borderRadius={{ base: `${baseRadius}` || 0, md: '5px' }}
          cursor='pointer'
          mb='.5rem'
@@ -154,8 +168,8 @@ const PostItem = ({
                            lineHeight={1.25}
                            fontSize={{ base: '15px', md: '16px' }}
                            onClick={handleViewProfile}
-                           color='#3d3d3d'
-                           _hover={{ color: '#090909' }}
+                           color={ghostColor}
+                           _hover={{ color: colorHover }}
                         >
                            {name}
                         </Text>
@@ -176,12 +190,19 @@ const PostItem = ({
                            pos='absolute'
                            zIndex={1}
                            display={showProfilePopup ? 'block' : 'none'}
-                           boxShadow='rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px'
+                           boxShadow={useColorModeValue(
+                              'rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px',
+                              '0 0 0 1px rgb(255 255 255 / 15%)'
+                           )}
                            borderRadius='5px'
                         />
                      </Box>
 
-                     <DisplayDate createdAt={createdAt} isUpdated={isUpdated} />
+                     <DisplayDate
+                        createdAt={createdAt}
+                        isUpdated={isUpdated}
+                        color={colorTertiary}
+                     />
                   </Box>
                </HStack>
             </HStack>
@@ -194,9 +215,8 @@ const PostItem = ({
                   cursor='pointer'
                   mt={2}
                   w='100%'
-                  _hover={{ color: 'rgb(47 58 178)' }}
+                  _hover={{ color: headingHover }}
                   fontSize={['1.1rem', '1.3rem']}
-                  color='rgb(23 23 23)'
                >
                   {title}
                </Heading>
@@ -224,17 +244,17 @@ const PostItem = ({
                      <HStack>
                         {totalReaction && (
                            <ReactionButton
-                              icon={heart}
                               value={totalReaction}
                               text={
                                  totalReaction > 1 ? 'Reactions' : 'Reaction'
                               }
-                           />
+                           >
+                              <HeartIcon fill={reactionIconColor} />
+                           </ReactionButton>
                         )}
 
                         <ReactionButton
                            onClick={handleClickComment}
-                           icon={comment}
                            value={totalDiscussion || ''}
                            text={
                               totalDiscussion === 1
@@ -243,12 +263,14 @@ const PostItem = ({
                                  ? 'Comments'
                                  : 'Add comment'
                            }
-                        />
+                        >
+                           <CommentIcon fill={reactionIconColor} />
+                        </ReactionButton>
                      </HStack>
                   </Box>
 
                   <Flex align='center'>
-                     <Text fontSize='13px' color='#717171'>
+                     <Text fontSize='13px' color={colorTertiary}>
                         {readTime} min read
                      </Text>
 
@@ -263,9 +285,15 @@ const PostItem = ({
                               disabled={updatingSave}
                            >
                               {alreadySaved ? (
-                                 <RiBookmarkFill size={19} />
+                                 <RiBookmarkFill
+                                    size={19}
+                                    color={colorTertiary}
+                                 />
                               ) : (
-                                 <RiBookmarkLine size={19} />
+                                 <RiBookmarkLine
+                                    size={19}
+                                    color={colorTertiary}
+                                 />
                               )}
                            </SecondaryBtn>
                         </Box>

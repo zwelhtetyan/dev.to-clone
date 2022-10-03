@@ -7,6 +7,7 @@ import {
    ModalHeader,
    ModalOverlay,
    Text,
+   useColorModeValue,
    useDisclosure,
    VStack,
 } from '@chakra-ui/react';
@@ -49,9 +50,16 @@ const LoginAlert = () => {
             size={{ base: 'full', md: '2xl' }}
          >
             <ModalOverlay />
-            <ModalContent>
+            <ModalContent
+               bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+               className='shadow'
+            >
                <ModalHeader
-                  borderBottom='1px solid rgb(23 23 23 / 10%)'
+                  borderBottom='1px solid'
+                  borderBottomColor={useColorModeValue(
+                     'light.cardBorder',
+                     'dark.cardBorder'
+                  )}
                   p='1rem'
                >
                   Log in to continue
@@ -65,14 +73,20 @@ const LoginAlert = () => {
                      w={{ base: '60px', md: '90px' }}
                      alt='logo'
                   />
-                  <Text mt={3}>
+                  <Text
+                     mt={5}
+                     color={useColorModeValue(
+                        'light.cardSecondaryColor',
+                        'dark.cardSecondaryColor'
+                     )}
+                  >
                      We're a place where coders share, stay up-to-date and grow
                      their careers.
                   </Text>
                   <VStack mt={5} mb={7}>
                      <PrimaryBtn
                         w='90%'
-                        bg='rgb(59 73 223)'
+                        bg='light.primary'
                         onClick={() => handleClick('login')}
                      >
                         Log in

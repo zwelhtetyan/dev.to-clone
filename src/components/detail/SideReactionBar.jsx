@@ -1,4 +1,4 @@
-import { Flex, IconButton } from '@chakra-ui/react';
+import { Flex, IconButton, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import useClickReactToPost from '../../hooks/useClickReactToPost';
 import { useAuth } from '../../context/auth';
@@ -46,9 +46,12 @@ const SideReactionBar = ({ postDetail }) => {
    const totalUnicorn = postDetail.unicorn?.length || 0;
    const totalSaved = postDetail.saved?.length || 0;
 
+   const reactionIconColor = useColorModeValue('#3d3d3d', '#d6d6d7');
+   const bg = useColorModeValue('rgb(255, 255, 255)', 'rgb(0, 0, 0)');
+
    return (
       <Flex
-         bg={{ base: 'white', md: 'transparent' }}
+         bg={{ base: bg, md: 'transparent' }}
          boxShadow={{ base: '0 -1px 5px rgba(0,0,0,0.2)', md: 'none' }}
          height={{ base: '3.5rem', md: 'auto' }}
          width={{ base: '100vw', md: '50px' }}
@@ -71,7 +74,13 @@ const SideReactionBar = ({ postDetail }) => {
             >
                <IconButton
                   disabled={updatingHeart}
-                  icon={alreadyHeart ? <AlreadyHearted /> : <Heart />}
+                  icon={
+                     alreadyHeart ? (
+                        <AlreadyHearted />
+                     ) : (
+                        <Heart fill={reactionIconColor} />
+                     )
+                  }
                   {...iconStyles}
                   border={alreadyHeart && '2px solid rgb(220 38 38)'}
                   bg={alreadyHeart ? 'rgb(220 38 38 / 10%)' : 'transparent'}
@@ -92,7 +101,13 @@ const SideReactionBar = ({ postDetail }) => {
             >
                <IconButton
                   disabled={updatingUnicorn}
-                  icon={alreadyUnicorned ? <AlreadyUnicorned /> : <Unicorn />}
+                  icon={
+                     alreadyUnicorned ? (
+                        <AlreadyUnicorned />
+                     ) : (
+                        <Unicorn fill={reactionIconColor} />
+                     )
+                  }
                   {...iconStyles}
                   border={alreadyUnicorned && '2px solid rgb(5 150 105)'}
                   bg={alreadyUnicorned ? 'rgb(5 150 105 / 10%)' : 'transparent'}
@@ -113,7 +128,13 @@ const SideReactionBar = ({ postDetail }) => {
             >
                <IconButton
                   disabled={updatingSave}
-                  icon={alreadySaved ? <AlreadySaved /> : <Save />}
+                  icon={
+                     alreadySaved ? (
+                        <AlreadySaved />
+                     ) : (
+                        <Save fill={reactionIconColor} />
+                     )
+                  }
                   {...iconStyles}
                   border={alreadySaved && '2px solid rgb(79 70 229)'}
                   bg={alreadySaved ? 'rgb(79 70 229 / 10%)' : 'transparent'}
@@ -130,6 +151,7 @@ const SideReactionBar = ({ postDetail }) => {
             <MoreOptionMenu
                iconStyles={iconStyles}
                postTitle={postDetail.title}
+               reactionIconColor={reactionIconColor}
             />
          </Flex>
       </Flex>

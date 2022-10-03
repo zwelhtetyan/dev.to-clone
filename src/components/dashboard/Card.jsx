@@ -1,4 +1,4 @@
-import { Flex, Heading, Image } from '@chakra-ui/react';
+import { Flex, Heading, Image, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,9 +11,9 @@ const Card = ({ profile, name, username }) => {
 
    return (
       <Flex
-         bg='white'
          w='100%'
-         boxShadow='0 0 0 1px rgba(23, 23, 23, .1)'
+         className='shadow'
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
          p={{ base: '.5rem', sm: '1rem', lg: '1.5rem' }}
          borderRadius='5px'
          align='center'
@@ -32,7 +32,7 @@ const Card = ({ profile, name, username }) => {
          />
          <Heading
             fontSize='1.2rem'
-            color='rgb(47 58 178)'
+            color={useColorModeValue('light.headingHover', 'dark.headingHover')}
             cursor='pointer'
             onClick={handleViewProfile}
          >

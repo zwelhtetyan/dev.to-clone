@@ -59,19 +59,16 @@ const Menu = ({ onClose, heroPadding }) => {
 
    const handleClickMenu = (route) => {
       onClose && onClose();
+
       navigate(`/${route}`);
    };
 
    return (
       <Box>
          {!user && (
-            <Box
-               boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
-               borderRadius='5px'
-               mb='.7rem'
-            >
+            <Box className='shadow' borderRadius='5px' mb='.7rem'>
                <Hero
-                  btnWidth='90%'
+                  btnWidth='100%'
                   onClose={onClose ? onClose : () => {}}
                   p={heroPadding}
                />
@@ -113,7 +110,7 @@ const Menu = ({ onClose, heroPadding }) => {
             onClick={() => handleClickMenu('about')}
          />
 
-         <HStack justify='' my='3' color='rgb(64 64 64)'>
+         <HStack justify='' my='3'>
             <SocialLinkIcon href='https://twitter.com/zwelHtetYan2'>
                <GrTwitter size={22} />
             </SocialLinkIcon>

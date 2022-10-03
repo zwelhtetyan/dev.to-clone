@@ -7,10 +7,10 @@ import {
    isLimitedDate,
 } from '../../helper/calcTimestamp';
 
-const DisplayDate = ({ createdAt, isUpdated }) => {
+const DisplayDate = ({ createdAt, isUpdated, color }) => {
    return (
       <>
-         <Text fontSize='12px' color='#717171'>
+         <Text fontSize='12px' color={color}>
             {dateFormat(createdAt)}{' '}
             {!isLimitedDate(createdAt) && (
                <Text as='span'>
@@ -18,7 +18,7 @@ const DisplayDate = ({ createdAt, isUpdated }) => {
                </Text>
             )}{' '}
             {isUpdated && (
-               <Text fontSize='11px' color='#717171' as='span'>
+               <Text fontSize='11px' as='span'>
                   •{' '}
                   <Text as='span' rounded='sm' px='3px'>
                      Updated

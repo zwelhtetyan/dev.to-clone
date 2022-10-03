@@ -35,7 +35,7 @@ const Posts = () => {
             title={`This is where you can manage your posts, but you haven't written anything yet.`}
          >
             <PrimaryBtn
-               bg='rgb(59 73 223)'
+               bg='light.primary'
                m='1rem 0 0 0'
                onClick={() => navigate('/create-post')}
             >

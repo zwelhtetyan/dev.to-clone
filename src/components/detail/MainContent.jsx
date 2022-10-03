@@ -7,6 +7,7 @@ import {
    HStack,
    Image,
    Text,
+   useColorModeValue,
    Wrap,
    WrapItem,
 } from '@chakra-ui/react';
@@ -50,12 +51,26 @@ const MainContent = ({ postDetail }) => {
 
    const isAuthor = user?.userId === postDetail?.userId;
 
+   const dividerColor = useColorModeValue(
+      'light.cardBorder',
+      'dark.cardBorder'
+   );
+   const headingHover = useColorModeValue(
+      'light.headingHover',
+      'dark.headingHover'
+   );
+   const ghostColor = useColorModeValue('light.ghostColor', 'dark.ghostColor');
+   const colorTertiary = useColorModeValue(
+      'light.colorTertiary',
+      'dark.colorTertiary'
+   );
+
    return (
       <Box
          m={{ base: '0', md: '1px' }}
-         bg='white'
-         boxShadow='0 0 0 1px rgb(23 23 23 / 10%)'
+         className='shadow'
          borderRadius={{ base: '0', md: '5px' }}
+         bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
       >
          {/* coverImgae */}
          {postDetail.cvImg && (
@@ -86,7 +101,8 @@ const MainContent = ({ postDetail }) => {
                            fontWeight={600}
                            cursor='pointer'
                            lineHeight={1.25}
-                           _hover={{ color: 'rgb(47 58 178)' }}
+                           color={ghostColor}
+                           _hover={{ color: headingHover }}
                            onClick={() => navigate(`/${postDetail.username}`)}
                         >
                            {postDetail.name}
@@ -105,7 +121,7 @@ const MainContent = ({ postDetail }) => {
                         )}
 
                         {postDetail.createdAt && (
-                           <Text fontSize='12px' color='#717171'>
+                           <Text fontSize='12px' color={colorTertiary}>
                               Posted on {dateFormat(postDetail.createdAt)}{' '}
                               {postDetail.updatedAt && (
                                  <Text as='span'>
@@ -130,9 +146,7 @@ const MainContent = ({ postDetail }) => {
                   )}
                </Flex>
 
-               <Heading my={2} color='rgb(23 23 23)'>
-                  {postDetail.title}
-               </Heading>
+               <Heading my={2}>{postDetail.title}</Heading>
 
                <Wrap pt='.3rem' pb='1.5rem' spacing={2}>
                   {postDetail.tags.map((tag) => (
@@ -158,7 +172,7 @@ const MainContent = ({ postDetail }) => {
                </Box>
 
                {!postDetail.draft && (
-                  <Divider mt={7} h='1px' background='#efefef' mx='auto' />
+                  <Divider mt={7} h='1px' bg={dividerColor} mx='auto' />
                )}
 
                {!postDetail.draft && (
