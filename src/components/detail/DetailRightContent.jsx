@@ -11,8 +11,8 @@ const DetailRightContent = ({
    otherPosts,
    userId,
    display,
-   isDraft,
    m,
+   trandingOnDevCommunity,
 }) => {
    const navigate = useNavigate();
    const user = useAuth();
@@ -26,6 +26,9 @@ const DetailRightContent = ({
       'light.headingHover',
       'dark.headingHover'
    );
+
+   const postsToShow =
+      otherPosts.length !== 0 ? otherPosts : trandingOnDevCommunity;
 
    return (
       <Box
@@ -60,38 +63,42 @@ const DetailRightContent = ({
             followers={currentUserProfile.followers || []}
          />
 
-         {otherPosts.length !== 0 && !isDraft && (
-            <Box
-               borderRadius={{ base: '0', md: '5px' }}
-               className='shadow'
-               mt='1rem'
-               overflow='hidden'
-               bg={cardColor}
-               py='.5rem'
-            >
-               <Text fontSize='1.3rem' mb='1rem' fontWeight={600} ms='1rem'>
-                  More from{' '}
-                  <Text
-                     as='span'
-                     color={nameColor}
-                     cursor='pointer'
-                     onClick={() => navigate(`/${currentUserProfile.username}`)}
-                  >
-                     {currentUserProfile.name}
-                  </Text>
+         <Box
+            borderRadius={{ base: '0', md: '5px' }}
+            className='shadow'
+            mt='1rem'
+            overflow='hidden'
+            bg={cardColor}
+            py='.5rem'
+         >
+            <Text fontSize='1.3rem' mb='1rem' fontWeight={600} ms='1rem'>
+               {otherPosts.length ? 'More from' : 'Trending on'}{' '}
+               <Text
+                  as='span'
+                  color={nameColor}
+                  cursor='pointer'
+                  onClick={() =>
+                     otherPosts.length
+                        ? navigate(`/${currentUserProfile.username}`)
+                        : navigate('/')
+                  }
+               >
+                  {otherPosts.length
+                     ? currentUserProfile.name
+                     : 'DEV Community 👩‍💻👨‍💻🔥'}
                </Text>
+            </Text>
 
-               {otherPosts.map((postData) => (
-                  <OtherPostItem
-                     key={nanoid()}
-                     username={postData.username}
-                     title={postData.title}
-                     tags={postData.tags}
-                     postId={postData.id}
-                  />
-               ))}
-            </Box>
-         )}
+            {postsToShow.map((postData) => (
+               <OtherPostItem
+                  key={nanoid()}
+                  username={postData.username}
+                  title={postData.title}
+                  tags={postData.tags}
+                  postId={postData.id}
+               />
+            ))}
+         </Box>
       </Box>
    );
 };

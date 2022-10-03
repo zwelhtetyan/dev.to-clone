@@ -15,6 +15,8 @@ import CustomMenuItem from '../../utils/CustomMenuItem';
 import { AiFillPushpin } from 'react-icons/ai';
 import { pinPost } from '../../lib/api';
 
+// I save all transformedData in localStorage because it navigate next page, so when reload the next page, I take them back from localStorage
+
 const ManangePost = ({ postId, m }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -29,7 +31,7 @@ const ManangePost = ({ postId, m }) => {
 
    const alreadyPinned = currentPostItem.pinned;
 
-   //helper func
+   // to edit || delete
    const setCurrentPostDataHandler = () => {
       const postData = {
          cvImg: currentPostItem.cvImg,

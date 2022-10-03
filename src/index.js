@@ -6,7 +6,6 @@ import App from './App';
 import store from './store/index';
 import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 import theme from './theme/theme';
-
 import AuthContextProvider from './context/auth';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

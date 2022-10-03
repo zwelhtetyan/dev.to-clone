@@ -63,6 +63,7 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
    );
 
    const borderColor = useColorModeValue('#d6d6d7', '#66686c');
+   const hoverBtnColor = useColorModeValue('#F6F6F6', '#1F1F1F');
 
    const Work = ({ title, text }) => {
       return (
@@ -244,11 +245,13 @@ const TopLayer = ({ profileData, moreInfo, setMoreInfo }) => {
                   w='100%'
                   mx='auto'
                   mt='5'
+                  bg='transparent'
                   whiteSpace='normal'
                   transition='.3s'
                   border='2px solid'
                   borderColor={borderColor}
                   onClick={() => setMoreInfo(true)}
+                  _hover={{ bg: hoverBtnColor }}
                   py='.5rem'
                   height='auto'
                >

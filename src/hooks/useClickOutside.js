@@ -7,8 +7,6 @@ const useClickOutside = (setState, classes) => {
 
          const classListArr = [...e.target.classList];
 
-         console.log(classListArr);
-
          const hasClass =
             classListArr.some((className) => classes.includes(className)) ||
             classListArr.length === 0;

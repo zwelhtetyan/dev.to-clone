@@ -88,7 +88,7 @@ const SavedPostItem = ({ postData, isArchive }) => {
                   justify='flex-start'
                   align='center'
                   fontSize='13px'
-                  gap='.5rem'
+                  gap='.2rem'
                   wrap='wrap'
                >
                   <Text

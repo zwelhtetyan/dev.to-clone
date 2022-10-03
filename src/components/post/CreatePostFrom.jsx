@@ -31,7 +31,6 @@ const CreatePostFrom = ({
    uploadingImg,
    setUploadingImg,
    toEdit,
-   setUploadedMDEImg,
 }) => {
    const naviagte = useNavigate();
 
@@ -146,7 +145,6 @@ const CreatePostFrom = ({
                               MDEValue={postData?.MDEValue}
                               isSubmitting={publishing || savingDraft}
                               setUploadingImg={setUploadingImg}
-                              setUploadedMDEImg={setUploadedMDEImg}
                            />
                         </Box>
                      </Box>

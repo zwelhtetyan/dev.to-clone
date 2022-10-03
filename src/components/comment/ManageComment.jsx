@@ -15,6 +15,8 @@ import {
 } from '../../store/comment/currentComments';
 import CustomMenuItem from '../../utils/CustomMenuItem';
 
+// I save all transformedData in localStorage because it navigate next page, so when reload the next page, I take them back from localStorage
+
 const ManageComment = ({ commentId, postId, comments }) => {
    const navigate = useNavigate();
    const dispatch = useDispatch();
@@ -24,6 +26,7 @@ const ManageComment = ({ commentId, postId, comments }) => {
    );
 
    //helper funcs
+   // to edit
    const setCurrentCommentItemHandler = () => {
       let commentItem;
 
@@ -41,7 +44,7 @@ const ManageComment = ({ commentId, postId, comments }) => {
          }
       });
 
-      dispatch(setcommentItem({ ...commentItem, postId }));
+      dispatch(setcommentItem({ ...commentItem, postId })); // also put postId to refrence when edit || delete
 
       saveToLocalStorage(
          'commentItemToManage',
@@ -117,8 +120,9 @@ const ManageComment = ({ commentId, postId, comments }) => {
                bg: useColorModeValue('light.secondary', 'dark.secondary'),
                color: useColorModeValue('light.primary', 'dark.primary'),
             }}
+            color={replyToColor}
          >
-            <RiMoreLine size={20} color={replyToColor} className='more-icon' />
+            <RiMoreLine size={20} className='more-icon' />
          </MenuButton>
          <MenuList
             minW='0'

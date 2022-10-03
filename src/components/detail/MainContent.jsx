@@ -111,6 +111,7 @@ const MainContent = ({ postDetail }) => {
                         {postDetail.draft && (
                            <Text
                               bg='#FCD34D'
+                              color='dark.cardColor'
                               px='5px'
                               fontSize='12px'
                               rounded='sm'
@@ -148,7 +149,7 @@ const MainContent = ({ postDetail }) => {
 
                <Heading my={2}>{postDetail.title}</Heading>
 
-               <Wrap pt='.3rem' pb='1.5rem' spacing={2}>
+               <Wrap pt='.3rem' pb='1.5rem' spacing='.3rem'>
                   {postDetail.tags.map((tag) => (
                      <WrapItem
                         key={nanoid()}

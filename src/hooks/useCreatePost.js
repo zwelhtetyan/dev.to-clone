@@ -47,7 +47,7 @@ const useCreatePost = (currentPostDataToEdit) => {
       dispatch(setTitleToStore(title));
    }, [title, dispatch]);
 
-   //set postData everytime postDataFromStore change
+   //set postData state everytime postData from store change
    useEffect(() => {
       const newData = {
          cvImg: postDataFromStore.cvImg,
@@ -94,12 +94,16 @@ const useCreatePost = (currentPostDataToEdit) => {
    const draftPostHandler = () => {
       setSavingDraft(true);
 
-      const searchParam = postData.draft ? -1 : '/dashboard/drafts';
+      const route = postData.draft ? -1 : '/dashboard/drafts';
 
-      draftPost({ ...postData, draft: true, id: postData.id || nanoid() })
+      draftPost({
+         ...postData,
+         draft: true,
+         id: postData.id || nanoid().replaceAll('_', '-'), // underscore must not include in postId because i split post url with underscore to get specific postId
+      })
          .then((_) => {
             setSavingDraft(false);
-            navigate(searchParam);
+            navigate(route);
             removeFromLocalStorage('postDataToPublish');
             removeFromLocalStorage('postDataToManage');
             console.log('drafted post successfully');

@@ -8,8 +8,6 @@ import ConfigRoute from './layout/ConfigRoute';
 const App = () => {
    useTransformData();
 
-   console.log('app render');
-
    return (
       <Box>
          <Suspense fallback={<FallbackSpinner />}>

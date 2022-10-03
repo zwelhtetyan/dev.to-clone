@@ -46,7 +46,7 @@ const OtherPostItem = ({ username, title, tags, postId }) => {
             {title}
          </Text>
 
-         <Wrap spacing='.3rem' pt='.3rem'>
+         <Wrap spacing='.2rem' pt='.3rem'>
             {tags?.map((tag) => (
                <WrapItem
                   key={nanoid()}

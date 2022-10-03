@@ -14,7 +14,6 @@ import {
    uploadBytes,
 } from 'firebase/storage';
 import { db, storage } from '../config/firebase';
-import converter from '../helper/converter';
 
 export const uploadImage = async (img, selectedImgPath) => {
    const cvImgRef = ref(storage, selectedImgPath);
@@ -41,9 +40,7 @@ export const createPost = async (postData) => {
       ...postData,
       createdAt: serverTimestamp(),
       comments: [],
-      readTime: Math.ceil(
-         converter().makeHtml(postData.MDEValue).split(' ').length / 200
-      ),
+      readTime: Math.ceil(postData.MDEValue.trim().split(/\s+/).length / 200),
    });
 };
 
@@ -57,9 +54,7 @@ export const editPost = async (postData) => {
    await updateDoc(docRef, {
       ...postData,
       updatedAt: serverTimestamp(),
-      readTime: Math.ceil(
-         converter().makeHtml(postData.MDEValue).split(' ').length / 200
-      ),
+      readTime: Math.ceil(postData.MDEValue.trim().split(/\s+/).length / 200),
    });
 };
 

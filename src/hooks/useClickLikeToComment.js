@@ -10,6 +10,9 @@ const useClickLikeToComment = (currentUserId, postId) => {
    const [updatingLike, setUpdatingLike] = useState(false);
 
    const handleClickLike = (comments, commentId) => {
+      // when click like multiple comment item quickly, previous comment array is not update yet
+      // so I put previous trnasformed comment arr to redux store and use them in the next time
+
       if (!currentUserId) {
          dispatch(setLoginAlert(true));
          return;

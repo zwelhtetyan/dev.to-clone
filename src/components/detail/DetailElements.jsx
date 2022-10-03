@@ -14,6 +14,7 @@ const DetailElements = ({
    loading,
    err,
    otherPosts,
+   trandingOnDevCommunity,
 }) => {
    return (
       <Box
@@ -46,7 +47,7 @@ const DetailElements = ({
                      userId={postDetail.userId}
                      display={{ base: 'block', xl: 'none' }}
                      m={{ base: '1.5rem 0', md: '1.5rem 1px 0' }}
-                     isDraft={postDetail.draft}
+                     trandingOnDevCommunity={trandingOnDevCommunity}
                   />
                </Box>
 
@@ -55,7 +56,7 @@ const DetailElements = ({
                   otherPosts={otherPosts}
                   userId={postDetail.userId}
                   display={{ base: 'none', xl: 'block' }}
-                  isDraft={postDetail.draft}
+                  trandingOnDevCommunity={trandingOnDevCommunity}
                />
             </Flex>
          )}

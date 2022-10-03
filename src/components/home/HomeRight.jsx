@@ -3,6 +3,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { getPopularTags } from '../../helper/getPopularTags';
+import { getTopPostsByTag } from '../../helper/getTopPostsByTag';
 import useSkeletonColor from '../../hooks/useSkeletonColor';
 import HomeRightCard from './HomeRightCard';
 
@@ -27,7 +28,7 @@ const HomeRight = () => {
             <HomeRightCard
                key={nanoid()}
                tagName={tagName}
-               transformedData={transformedData}
+               topPosts={getTopPostsByTag(tagName, transformedData)}
             />
          ))}
       </Box>

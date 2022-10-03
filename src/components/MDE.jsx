@@ -26,13 +26,7 @@ const codeBlock = {
    },
 };
 
-const MDE = ({
-   MDEValue,
-   setMDEValue,
-   isSubmitting,
-   setUploadingImg,
-   setUploadedMDEImg,
-}) => {
+const MDE = ({ MDEValue, setMDEValue, isSubmitting, setUploadingImg }) => {
    const [value, setValue] = useState(MDEValue || '');
    const [selectedTab, setSelectedTab] = useState('write');
 
@@ -79,12 +73,6 @@ const MDE = ({
                setValue((prevVal) =>
                   prevVal.replace('![](uploading...)', `![](${url})`)
                );
-
-               //save uploaded MDE images
-               setUploadedMDEImg((prevArr) => [
-                  ...prevArr,
-                  { MDEURL: `![](${url})`, url },
-               ]);
 
                setUploadingImg(false);
             })

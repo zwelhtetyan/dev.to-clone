@@ -4,14 +4,11 @@ import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import {
-   calcTotalDiscussion,
-   calculateReaction,
-} from '../../helper/calculateTotal';
+import { calcTotalDiscussion } from '../../helper/calculateTotal';
 import { titleRoute } from '../../helper/titleRoute';
 import { setClickComment } from '../../store/scrollDiscussion';
 
-const HomeRightCard = ({ tagName, transformedData }) => {
+const HomeRightCard = ({ tagName, topPosts }) => {
    const dispatch = useDispatch();
 
    const Item = styled(Link)`
@@ -41,24 +38,6 @@ const HomeRightCard = ({ tagName, transformedData }) => {
       );
    };
 
-   let allPostData = [];
-   if (transformedData) {
-      allPostData = transformedData.filter(
-         (postData) =>
-            !postData.draft &&
-            postData.tags.length &&
-            postData.tags.find((tag) => tag.tagName === tagName)
-      );
-   }
-
-   const currentPosts = allPostData
-      ?.sort(
-         (a, b) =>
-            calculateReaction(b.heart, b.unicorn, b.saved) -
-            calculateReaction(a.heart, a.unicorn, a.saved)
-      )
-      .slice(0, 3);
-
    return (
       <Box
          className='shadowSecondary'
@@ -78,7 +57,7 @@ const HomeRightCard = ({ tagName, transformedData }) => {
          </Text>
 
          <Box>
-            {currentPosts.map((topPost) => (
+            {topPosts.map((topPost) => (
                <TopPostItem
                   key={nanoid()}
                   route={`/${titleRoute(

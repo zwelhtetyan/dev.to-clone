@@ -10,13 +10,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Timestamp } from 'firebase/firestore';
 import { useAuth } from '../../context/auth';
 import { nanoid } from '@reduxjs/toolkit';
-import {
-   getItemFromLocalStorage,
-   removeFromLocalStorage,
-   saveToLocalStorage,
-} from '../../helper/localStorage';
+import { removeFromLocalStorage } from '../../helper/localStorage';
 import { setLoginAlert } from '../../store/loginAlert';
-import { removeUnnecessaryUploadedMDEImg } from '../../helper/removeUnnecessaryUploadedMDEImg';
 
 const DiscussionBox = ({
    postId,
@@ -36,17 +31,6 @@ const DiscussionBox = ({
    const [uploadingImg, setUploadingImg] = useState(false);
    const [mdeTab, setMdeTab] = useState('write');
    const [MDEValue, setMDEValue] = useState(valueToEdit || '');
-   const [uploadedMDEImgToPublishComment, setUploadedMDEImgToPublishComment] =
-      useState(getItemFromLocalStorage('uploadedMDEImgToPublishComment') || []);
-
-   useEffect(() => {
-      if (uploadedMDEImgToPublishComment.length) {
-         saveToLocalStorage(
-            'uploadedMDEImgToPublishComment',
-            JSON.stringify(uploadedMDEImgToPublishComment)
-         );
-      }
-   }, [uploadedMDEImgToPublishComment]);
 
    const comments = transformedData?.find(
       (data) => data.id === postId
@@ -86,18 +70,6 @@ const DiscussionBox = ({
             : (textbox.placeholder = 'Reply...')
       );
    }, [mdeTab]);
-
-   //remove unnecessary images
-   if (submitting) {
-      if (!valueToEdit && uploadedMDEImgToPublishComment.length) {
-         removeUnnecessaryUploadedMDEImg(
-            uploadedMDEImgToPublishComment,
-            MDEValue
-         );
-         setUploadedMDEImgToPublishComment([]);
-         removeFromLocalStorage('uploadedMDEImgToPublishComment');
-      }
-   }
 
    const handleSubmit = (e) => {
       e.preventDefault();
@@ -183,7 +155,6 @@ const DiscussionBox = ({
                   setMDEValue={setMDEValue}
                   isSubmitting={submitting}
                   setUploadingImg={setUploadingImg}
-                  setUploadedMDEImg={setUploadedMDEImgToPublishComment}
                />
             </Box>
          )}
