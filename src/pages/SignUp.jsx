@@ -47,7 +47,7 @@ const SignUp = ({ type }) => {
       signInWithPopup(auth, provider)
          .then((res) => {
             const userId = res.user.uid;
-            const authenticatedUser = profileData.find(
+            const authenticatedUser = profileData?.find(
                (userData) => userData.id === userId
             );
 

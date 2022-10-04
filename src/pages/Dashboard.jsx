@@ -51,7 +51,7 @@ const Dashboard = () => {
    } = useSelector((state) => state.transformedData);
 
    if (!user) {
-      return <Navigate to='/create-account' />;
+      return <Navigate to='/create-account' replace />;
    }
 
    let publishedPosts = null;

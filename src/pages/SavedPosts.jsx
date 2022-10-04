@@ -121,7 +121,7 @@ const SavedPosts = () => {
    // }, [query, transformedData, userId]);
 
    if (!user) {
-      return <Navigate to='/create-account' />;
+      return <Navigate to='/create-account' replace />;
    }
 
    if (err) {

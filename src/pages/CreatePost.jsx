@@ -24,7 +24,7 @@ const CreatePost = ({ currentPostDataToEdit }) => {
    } = useCreatePost(currentPostDataToEdit);
 
    if (!user) {
-      return <Navigate to='/create-account' />;
+      return <Navigate to='/create-account' replace />;
    }
 
    return (

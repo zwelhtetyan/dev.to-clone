@@ -21,6 +21,7 @@ const useGetData = (colName) => {
             if (snapshot.docs.length === 0) {
                setloading(false);
                setErr(true);
+
                return;
             }
 

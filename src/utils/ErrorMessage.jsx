@@ -23,17 +23,20 @@ const ErrorMessage = ({ offline, urlNotFound }) => {
 
          {urlNotFound && (
             <VStack>
-               <Text>something's wrong !</Text>
-               <Text>we're having issue fetching your data 😟</Text>
-               <Text
-                  fontSize='15px'
-                  color='light.primary'
-                  _hover={{ color: 'rgb(103 115 237 / 91%)' }}
-                  cursor='pointer'
-                  mt='1rem !important'
-                  onClick={() => navigate('/')}
-               >
-                  Back to home
+               <Text fontSize='1.2rem' fontWeight='bold'>
+                  This page doesn’t exist 😟 !
+               </Text>
+               <Text>
+                  Please check your URL or{' '}
+                  <Text
+                     as='span'
+                     color='light.primary'
+                     _hover={{ color: 'rgb(103 115 237 / 91%)' }}
+                     cursor='pointer'
+                     onClick={() => navigate('/')}
+                  >
+                     go back home
+                  </Text>
                </Text>
             </VStack>
          )}

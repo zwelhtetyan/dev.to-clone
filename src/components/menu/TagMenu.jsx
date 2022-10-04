@@ -1,4 +1,10 @@
-import { Box, HStack, Image, SkeletonText, Text } from '@chakra-ui/react';
+import {
+   Box,
+   HStack,
+   SkeletonText,
+   Text,
+   useColorModeValue,
+} from '@chakra-ui/react';
 import { nanoid } from '@reduxjs/toolkit';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import useClickTag from '../../hooks/useClickTag';
 import { SecondaryBtn } from '../../utils/Buttons';
 import SideMenuItem from '../../utils/SideMenuItem';
-import { settingIcon } from '../../assets/icons';
+import { SettingIcon } from '../../assets/icons';
 import { getPopularTags } from '../../helper/getPopularTags';
 import { setLoginAlert } from '../../store/loginAlert';
 import useSkeletonColor from '../../hooks/useSkeletonColor';
@@ -46,6 +52,7 @@ const TagMenu = ({ userId, onClose }) => {
    };
 
    const skeletonColor = useSkeletonColor();
+   const reactionIconColor = useColorModeValue('#3d3d3d', '#d6d6d7');
 
    return (
       <Box>
@@ -56,7 +63,7 @@ const TagMenu = ({ userId, onClose }) => {
 
             {isMyTag && (
                <SecondaryBtn onClick={handleClickCustomizeTag}>
-                  <Image src={settingIcon} alt='customize_tag_setting' />
+                  <SettingIcon fill={reactionIconColor} />
                </SecondaryBtn>
             )}
          </HStack>

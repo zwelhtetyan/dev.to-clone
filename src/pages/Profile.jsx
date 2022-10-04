@@ -1,6 +1,6 @@
 import { Box, Flex } from '@chakra-ui/react';
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import TopLayer from '../components/profile/TopLayer';
 import ProfileLeftPart from '../components/profile/ProfileLeftPart';
@@ -11,8 +11,10 @@ import ProfileRightPart from '../components/profile/ProfileRightPart';
 import Error from './Error';
 
 const Profile = () => {
-   //scroll top
-   // useEffect(() => window.scrollTo(0, 0), [location]);
+   // scroll top
+   const location = useLocation();
+
+   useEffect(() => window.scrollTo(0, 0), [location]);
 
    const { username } = useParams();
    const [moreInfo, setMoreInfo] = useState(false);
@@ -22,14 +24,6 @@ const Profile = () => {
    );
 
    const { transformedData } = useSelector((state) => state.transformedData);
-
-   if (profileDataErr) {
-      return <ErrorMessage offline={true} />;
-   }
-
-   if (profileDataLoading) {
-      return <ProfileSkeleton />;
-   }
 
    let currentUserProfile = null;
    let userId;
@@ -41,8 +35,16 @@ const Profile = () => {
       userId = currentUserProfile?.id;
    }
 
-   if (!currentUserProfile) {
+   if (profileDataErr) {
+      return <ErrorMessage offline={true} />;
+   }
+
+   if (!currentUserProfile && !profileDataLoading) {
       return <Error />;
+   }
+
+   if (profileDataLoading) {
+      return <ProfileSkeleton />;
    }
 
    let pinnedPosts = null;

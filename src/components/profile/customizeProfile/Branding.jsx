@@ -79,6 +79,7 @@ const Branding = ({ backgroundRef, profileData }) => {
                         w='100%'
                         borderRadius='5px'
                         className='color-board'
+                        border='.5px solid rgb(64 64 64)'
                      />
                   </Flex>
 

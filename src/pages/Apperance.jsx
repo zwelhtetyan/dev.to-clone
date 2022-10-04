@@ -1,3 +1,4 @@
+import React from 'react';
 import {
    Box,
    Flex,
@@ -9,10 +10,18 @@ import {
    useColorMode,
    useColorModeValue,
 } from '@chakra-ui/react';
-import React from 'react';
+import { useAuth } from '../context/auth';
+import { Navigate } from 'react-router-dom';
 
 const Apperance = () => {
    const { colorMode, setColorMode } = useColorMode();
+   const user = useAuth();
+
+   const cardBg = useColorModeValue('light.cardBg', 'dark.cardBg');
+
+   if (!user) {
+      return <Navigate to='/create-account' replace />;
+   }
 
    const ApperanceBox = ({ mode, mainBg, color, boxBg, textColor }) => {
       return (
@@ -89,7 +98,7 @@ const Apperance = () => {
          borderRadius={{ md: '5px' }}
       >
          <Box
-            bg={useColorModeValue('light.cardBg', 'dark.cardBg')}
+            bg={cardBg}
             className='shadow'
             height='20rem'
             w='768px'

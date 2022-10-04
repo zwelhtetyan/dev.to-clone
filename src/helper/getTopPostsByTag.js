@@ -1,10 +1,11 @@
 import { calculateReaction } from './calculateTotal';
 
-export const getTopPostsByTag = (tagName, transformedData) => {
+export const getTopPostsByTag = (tagName, transformedData, currentPostId) => {
    let allPostData = [];
    if (transformedData) {
       allPostData = transformedData.filter(
          (postData) =>
+            postData.id !== currentPostId &&
             !postData.draft &&
             postData.tags.length &&
             postData.tags.find((tag) => tag.tagName === tagName)

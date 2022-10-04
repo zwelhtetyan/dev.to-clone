@@ -67,7 +67,11 @@ const PostDetails = () => {
          err={err}
          currentUserProfile={currentUserProfile}
          otherPosts={otherPosts}
-         trandingOnDevCommunity={getTopPostsByTag(popularTags, transformedData)}
+         trandingOnDevCommunity={getTopPostsByTag(
+            popularTags,
+            transformedData,
+            postId
+         )}
       />
    );
 };

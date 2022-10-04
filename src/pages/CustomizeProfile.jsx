@@ -65,8 +65,7 @@ const CustomizeProfile = () => {
    const nameColor = useColorModeValue('light.primary', 'dark.primary');
 
    if (!user) {
-      navigate('/create-account');
-      return;
+      return <Navigate to='/create-account' replace />;
    }
 
    let currentUserProfile = null;
@@ -85,10 +84,6 @@ const CustomizeProfile = () => {
 
    if (!profileData && !profileDataLoading && profileDataErr) {
       return <ErrorMessage offline={true} />;
-   }
-
-   if (!user) {
-      return <Navigate to='/create-account' />;
    }
 
    const storage = getStorage();

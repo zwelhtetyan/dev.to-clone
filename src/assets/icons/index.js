@@ -12,7 +12,6 @@ import joinOn from './joinOn.svg';
 import location from './location.svg';
 import personalWebsite from './personalWebsite.svg';
 import readingListIcon from './readingListIcon.svg';
-import settingIcon from './settingIcon.svg';
 import tag from './tag.svg';
 import tagIcon from './tagIcon.svg';
 import twitter from './twitter.svg';
@@ -20,6 +19,7 @@ import twitter from './twitter.svg';
 import AuthorIcon from './AuthorIcon';
 import CommentIcon from './CommentIcon';
 import RedHeart from './RedHeart';
+import SettingIcon from './SettingIcon';
 import Option from './Option';
 import HeartIcon from './HeartIcon';
 import Heart from './Heart';
@@ -48,7 +48,7 @@ export {
    personalWebsite,
    readingListIcon,
    RedHeart,
-   settingIcon,
+   SettingIcon,
    tag,
    tagIcon,
    twitter,

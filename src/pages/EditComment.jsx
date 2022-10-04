@@ -15,13 +15,13 @@ const EditComment = () => {
       (state) => state.currentComments.commentItem
    );
 
-   const valueToEdit = currentCommentItem.value;
-
    const cardBg = useColorModeValue('light.cardBg', 'dark.cardBg');
 
    if (!currentCommentItem) {
       return <Navigate to={-1} />;
    }
+
+   const valueToEdit = currentCommentItem.value;
 
    const onDismiss = () => {
       navigate(-1);
