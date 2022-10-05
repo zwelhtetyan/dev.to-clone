@@ -147,7 +147,7 @@ const CustomizeProfile = () => {
                   .then((_) => {
                      setLoading(false);
                      setTimeout(() => navigate(`/${username}`), 300);
-                     console.log('prifile informations are updated');
+                     // console.log('prifile informations are updated');
                   })
                   .catch((err) => {
                      setLoading(false);
@@ -164,7 +164,7 @@ const CustomizeProfile = () => {
          .then((_) => {
             setLoading(false);
             setTimeout(() => navigate(`/${username}`), 300);
-            console.log('prifile informations are updated');
+            // console.log('prifile informations are updated');
          })
          .catch((err) => {
             setLoading(false);
@@ -179,7 +179,7 @@ const CustomizeProfile = () => {
       updateProfileData({ profile: '' }, user.userId)
          .then((_) => {
             setLoading(false);
-            console.log('prifile informations are updated');
+            // console.log('prifile informations are updated');
          })
          .catch((err) => {
             setLoading(false);

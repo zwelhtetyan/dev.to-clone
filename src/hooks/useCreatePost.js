@@ -83,7 +83,7 @@ const useCreatePost = (currentPostDataToEdit) => {
             navigate('/dashboard');
             removeFromLocalStorage('postDataToPublish');
             removeFromLocalStorage('postDataToManage');
-            console.log('created post successfully');
+            // console.log('created post successfully');
          })
          .catch((err) => {
             setPublishing(false);
@@ -106,7 +106,7 @@ const useCreatePost = (currentPostDataToEdit) => {
             navigate(route);
             removeFromLocalStorage('postDataToPublish');
             removeFromLocalStorage('postDataToManage');
-            console.log('drafted post successfully');
+            // console.log('drafted post successfully');
          })
          .catch((err) => {
             setSavingDraft(false);
@@ -122,7 +122,7 @@ const useCreatePost = (currentPostDataToEdit) => {
             setPublishing(false);
             navigate(-1);
             removeFromLocalStorage('postDataToManage');
-            console.log('edited post successfully');
+            // console.log('edited post successfully');
          })
          .catch((err) => {
             setPublishing(false);

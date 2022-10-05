@@ -30,7 +30,7 @@ const useFollowUser = (profileData, userId) => {
          updateProfileData({ followers: transformedFollowers }, profileData.id)
             .then((_) => {
                setLoading(false);
-               console.log('followed');
+               // console.log('followed');
             })
             .catch((err) => {
                setLoading(false);

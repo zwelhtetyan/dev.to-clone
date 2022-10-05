@@ -65,7 +65,8 @@ const SignUp = ({ type }) => {
             createUser(userId, userData).then((_) => {
                navigate(-1);
                // setSigningIn(false);  cause this component render again after creating user
-               console.log('created user successfully');
+
+               // console.log('created user successfully');
             });
          })
          .catch((err) => {

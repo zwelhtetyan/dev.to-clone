@@ -20,7 +20,7 @@ export const uploadImage = async (img, selectedImgPath) => {
    await uploadBytes(cvImgRef, img);
 
    const url = await getDownloadURL(cvImgRef);
-   console.log('image uploaded successfully');
+   // console.log('image uploaded successfully');
    return url;
 };
 
@@ -28,7 +28,7 @@ export const removeImage = async (url) => {
    const desertRef = ref(storage, url);
    await deleteObject(desertRef);
 
-   console.log('removed image');
+   // console.log('removed image');
 };
 
 export const createUser = async (userId, userData) => {
@@ -62,7 +62,9 @@ export const deletePost = async (postId) => {
    const docRef = doc(db, 'posts', postId);
 
    deleteDoc(docRef)
-      .then((_) => console.log('deleted post successfully'))
+      .then((_) => {
+         // console.log('deleted post successfully')
+      })
       .catch((err) => console.log(err));
 };
 

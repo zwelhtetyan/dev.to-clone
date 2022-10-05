@@ -60,7 +60,7 @@ const MoreOptionMenu = ({ iconStyles, postTitle, reactionIconColor }) => {
    const nativeShareVia = async () => {
       try {
          await navigator.share({ title: postTitle, url: postURL });
-         console.log('successfully share url');
+         // console.log('successfully share url');
       } catch (err) {
          console.log(err);
       }

@@ -120,7 +120,7 @@ const DiscussionBox = ({
             onDismiss && setTimeout(onDismiss, 100); // need new state value ('submitting = false') to disable || enable to MDE after state change
             setMdeTab('write');
             removeFromLocalStorage('commentItemToManage');
-            console.log('added comment successfully');
+            // console.log('added comment successfully');
          })
          .catch((err) => {
             setSubmitting(false);

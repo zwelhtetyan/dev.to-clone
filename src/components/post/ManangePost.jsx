@@ -70,7 +70,7 @@ const ManangePost = ({ postId, m }) => {
 
       pinPost(postId, isPinned)
          .then((_) => {
-            console.log('pinned post successfully');
+            // console.log('pinned post successfully');
 
             setPinning(false);
          })

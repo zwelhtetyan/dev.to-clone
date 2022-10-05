@@ -40,7 +40,7 @@ const SavedPostItem = ({ postData, isArchive }) => {
       saveArchive({ archived: transformedArchivedPosts }, postData.id)
          .then((_) => {
             setLoading(false);
-            console.log('archived');
+            // console.log('archived');
          })
          .catch((err) => {
             setLoading(false);

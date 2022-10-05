@@ -40,7 +40,7 @@ const DeleteComment = () => {
             onDismiss();
             removeFromLocalStorage('transformedComments');
             removeFromLocalStorage('commentItemToManage');
-            console.log('deleted comment successfully');
+            // console.log('deleted comment successfully');
          })
          .catch((err) => {
             console.log(err);

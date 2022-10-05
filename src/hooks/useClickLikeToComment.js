@@ -52,7 +52,7 @@ const useClickLikeToComment = (currentUserId, postId) => {
       updateComment(modifiedComments, postId)
          .then((_) => {
             setUpdatingLike(false);
-            console.log('updated like');
+            // console.log('updated like');
          })
          .catch((err) => {
             setUpdatingLike(false);

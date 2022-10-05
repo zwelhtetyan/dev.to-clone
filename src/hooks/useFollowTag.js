@@ -30,7 +30,7 @@ const useFollowTag = (profileData) => {
       updateProfileData({ followingTags: transformedFollowingTags }, userId)
          .then((_) => {
             setLoading(false);
-            console.log('followed tag successfully');
+            // console.log('followed tag successfully');
          })
          .catch((err) => {
             setLoading(false);

@@ -29,7 +29,7 @@ const AllComment = ({ postDetail }) => {
             <Box key={comment.commentId}>
                <CommentItem
                   avatarSize='30px'
-                  footerPs='36.5px'
+                  footerPs='37px'
                   comments={currentComments}
                   authorId={postDetail.userId}
                   currentUserId={user?.userId}
@@ -56,7 +56,7 @@ const AllComment = ({ postDetail }) => {
                         likes={item.likes}
                         ps='20px'
                         avatarSize='28px'
-                        footerPs='34.5px'
+                        footerPs='35px'
                         text={item.value}
                         createdAt={item.createdAt}
                         currentUserProfile={getUserProfileData(
