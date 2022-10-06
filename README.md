@@ -9,6 +9,8 @@ At first, I intended to make a **simple comment section** to practice **[react](
 ### Features: 
 
 - CRUD 🫠
+- Search posts by keywords or tags 🔍
+- View user profiles 🧐
 - Social authentication 🔒
 - Giving reactions to articles ❤️‍🔥
 - User profile 👻
