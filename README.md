@@ -8,7 +8,7 @@ At first, I intended to make a **simple comment section** to practice **[react](
 
 ### Features: 
 
-- CRUD 😆
+- CRUD 🫠
 - Social authentication 🔒
 - Giving reactions to articles ❤️‍🔥
 - User profile 👻
