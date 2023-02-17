@@ -4,7 +4,7 @@
 
 At first, I intended to make a **simple comment section** to practice **[react](https://reactjs.org/)** and **[firebase](https://firebase.google.com/)**. But while searching some inspirations on google, I found dev.to and I decided to clone it. 
 
-![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ysjm1uj8vgfe7cmoaphr.png)
+![Image description](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/td5aki966mwjlkz9mtde.png)
 
 ### Features: 
 
