@@ -50,6 +50,11 @@ const MainContent = ({ postDetail }) => {
     }
   }, [clickComment, postDetail.id]);
 
+  // syntax highlighting
+  useEffect(() => {
+    hljs.highlightAll();
+  }, []);
+
   const isAuthor = user?.userId === postDetail?.userId;
 
   const dividerColor = useColorModeValue("light.cardBorder", "dark.cardBorder");
@@ -62,12 +67,6 @@ const MainContent = ({ postDetail }) => {
     "light.colorTertiary",
     "dark.colorTertiary"
   );
-
-  useEffect(() => {
-    hljs.highlightAll();
-
-    console.log("hi");
-  }, []);
 
   return (
     <Box
