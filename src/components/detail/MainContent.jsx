@@ -53,7 +53,7 @@ const MainContent = ({ postDetail }) => {
   // syntax highlighting
   useEffect(() => {
     hljs.highlightAll();
-  }, []);
+  }, [postDetail.id]);
 
   const isAuthor = user?.userId === postDetail?.userId;
 

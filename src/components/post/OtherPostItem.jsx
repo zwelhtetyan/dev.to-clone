@@ -14,9 +14,9 @@ const OtherPostItem = ({ username, title, tags, postId, isLastElement }) => {
 
   const handleNavigate = (e) => {
     e.stopPropagation();
+    dispatch(setClickComment(false));
 
     navigate(`/${titleRoute(username, title, postId)}`);
-    dispatch(setClickComment(false));
   };
 
   const handleClickTag = useClickTag();
