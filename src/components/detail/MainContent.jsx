@@ -150,20 +150,22 @@ const MainContent = ({ postDetail }) => {
 
           <Heading my={2}>{postDetail.title}</Heading>
 
-          <Wrap pt=".3rem" pb="1.5rem" spacing=".3rem">
-            {postDetail.tags.map((tag) => (
-              <WrapItem
-                key={nanoid()}
-                onClick={(e) =>
-                  postDetail.draft
-                    ? () => {} // don't allow view tag if it's a draft
-                    : handleClickTag(e, tag.tagName)
-                }
-              >
-                <LangTag tag={tag} />
-              </WrapItem>
-            ))}
-          </Wrap>
+          {postDetail.tags.length > 0 && (
+            <Wrap pt=".3rem" pb="1.5rem" spacing=".3rem">
+              {postDetail.tags.map((tag) => (
+                <WrapItem
+                  key={nanoid()}
+                  onClick={(e) =>
+                    postDetail.draft
+                      ? () => {} // don't allow view tag if it's a draft
+                      : handleClickTag(e, tag.tagName)
+                  }
+                >
+                  <LangTag tag={tag} />
+                </WrapItem>
+              ))}
+            </Wrap>
+          )}
 
           <Box
             className="mde-preview-content"
