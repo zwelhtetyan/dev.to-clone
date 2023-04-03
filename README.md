@@ -20,6 +20,7 @@ At first, I intended to make a **simple comment section** to practice **[react](
 - Comments and nested replies 💬
 - Reading List 📚
 - Apperance 🎨 [ light and dark ]
+- Syntax highlight
 
 
 ### Tech Stacks: 
