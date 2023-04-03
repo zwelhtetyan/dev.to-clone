@@ -19,7 +19,7 @@
     background-color: #08090a !important;
   }
 
-  p code {
+  code:not(pre code) {
     // background-color: #d5d5d5;
     background-color: #ffc600;
     color: black;
