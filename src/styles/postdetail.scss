@@ -15,9 +15,14 @@
     margin-bottom: 0.2rem !important;
   }
 
-  pre,
-  p code {
+  pre {
     background-color: #08090a !important;
+  }
+
+  p code {
+    // background-color: #d5d5d5;
+    background-color: #ffc600;
+    color: black;
   }
 
   img {
