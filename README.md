@@ -8,28 +8,28 @@ At first, I intended to make a **simple comment section** to practice **[react](
 
 ### Features: 
 
-- CRUD 🫠
-- Search posts by keywords or tags 🔍
-- View user profiles 🧐
-- Social authentication 🔒
-- Giving reactions to articles ❤️‍🔥
-- User profile 👻
-- Customize profile 🫣
-- Dashboard 🫠
-- Top tags 🏷
-- Comments and nested replies 💬
-- Reading List 📚
-- Apperance 🎨 [ light and dark ]
-- Syntax highlight 🎨🔥
+- [x] CRUD 🫠
+- [x] Search posts by keywords or tags 🔍
+- [x] View user profiles 🧐
+- [x] Social authentication 🔒
+- [x] Giving reactions to articles ❤️‍🔥
+- [x] User profile 👻
+- [x] Customize profile 🫣
+- [x] Dashboard 🫠
+- [x] Top tags 🏷
+- [x] Comments and nested replies 💬
+- [x] Reading List 📚
+- [x] Apperance 🎨 [ light and dark ]
+- [x] Syntax highlight 🎨🔥
 
 
 ### Tech Stacks: 
 
-- [React](https://reactjs.org/)
-- [Chakra UI](https://chakra-ui.com/) 
-- [Redux toolkit](https://redux-toolkit.js.org/) 
-- [Firebase](https://firebase.google.com/) 
-- [React router](https://reactrouter.com/en/main) 
-- [React MDE](https://www.npmjs.com/package/react-mde) 
+- [x] [React](https://reactjs.org/)
+- [x] [Chakra UI](https://chakra-ui.com/) 
+- [x] [Redux toolkit](https://redux-toolkit.js.org/) 
+- [x] [Firebase](https://firebase.google.com/) 
+- [x] [React router](https://reactrouter.com/en/main) 
+- [x] [React MDE](https://www.npmjs.com/package/react-mde) 
 
 You can check out [here](https://dev-community-clone.vercel.app/zwel/I-cloned-dev.to-with-react,-firebase-and-more..._1uilShxfoXHsV0PUSppT) for more details.
